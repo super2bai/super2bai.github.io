@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html lang="">
 <head>
-    <title>
-    super2bai
-    
-</title>
+    <title> curator提供应用场景的封装 · super2bai </title>
     <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
@@ -19,6 +16,8 @@
 
 
 
+
+    <meta name="keywords" content="Zookeeper, Nlvi" />
 
 <link rel="stylesheet" href="/style/style.css">
 <script src="/script/jquery.min.js"></script>
@@ -193,179 +192,61 @@
         <main class="main" id="main">
             
     
-
-<section class="posts">
-    
-        
     <article class="post">
         <header class="post-header">
             <div class="post-time syuanpi riseIn-light back-1">
-                <span>October 20, 2017</span>
+                <span>October 30, 2017</span>
                 
             </div>
             <h1 class="post-title syuanpi riseIn-light back-2">
             
-                <a href="/2017/10/20/初步认识zookeeper/">初步认识zookeeper</a>
+                curator提供应用场景的封装
             
             </h1>
+            
+                
+                    <div class="post-tags syuanpi riseIn-light back-3">
+                    
+                        <a href="/tags/Zookeeper/">Zookeeper</a>
+                    
+                    </div>
+                
             
         </header>
         <div class="post-content syuanpi riseIn-light back-3">
             
-                
-                    <p><strong>初步认识zookeeper</strong></p>
-                    
+                <h3 id="curator提供应用场景的封装"><a href="#curator提供应用场景的封装" class="headerlink" title="curator提供应用场景的封装"></a>curator提供应用场景的封装</h3><a id="more"></a>&gt;<br><em> 针对Zookeeper能够实现的应用封装
+  </em> Master/leader选举<br>  <em> 分布式锁（读锁/写锁）
+  </em> 分布式队列<br>  <em> …
+</em> curator-reciples提供的API<br>  <em> LeaderLatch
+    </em> 阻塞<br>    <em> 都一起去抢，后续没抢到的等待
+  </em> LeaderSelector<br>    <em> 自动抢
+    </em> 带有序节点的选举过程，根据最小节点来获得优先权，用完以后释放，下一个节点继续去用<br><em> 对于网络抖动的处理
+  </em> 对于网络抖动，如果本次抢master的节点之前是master，那就继续用本地节点当master.<br>  * 客户端和服务端建立一个连接是建立一个session，如果出现网络不稳定或异常情况下，消息传输可能会出现丢包，如果出现丢包，客户端则认为session已经失效，实际上master并没有失效。<br><br>### 代码示例<br><br>#### Leader选举<br><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.bai.curator.scene;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.apache.curator.framework.CuratorFramework;</div><div class="line"><span class="keyword">import</span> org.apache.curator.framework.CuratorFrameworkFactory;</div><div class="line"><span class="keyword">import</span> org.apache.curator.framework.recipes.leader.LeaderSelector;</div><div class="line"><span class="keyword">import</span> org.apache.curator.framework.recipes.leader.LeaderSelectorListenerAdapter;</div><div class="line"><span class="keyword">import</span> org.apache.curator.retry.ExponentialBackoffRetry;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.concurrent.TimeUnit;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * Created by 2bai on 30/10/2017.</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MasterSelector</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> String CONNECTSTRING = <span class="string">""</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> String MASTER_PATH=<span class="string">"/curator_master_path"</span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        CuratorFramework curatorFramework = CuratorFrameworkFactory.builder().connectString(CONNECTSTRING).retryPolicy(<span class="keyword">new</span> ExponentialBackoffRetry(<span class="number">1000</span>,<span class="number">3</span>)).build();</div><div class="line">        LeaderSelector leaderSelector=<span class="keyword">new</span> LeaderSelector(curatorFramework, MASTER_PATH, <span class="keyword">new</span> LeaderSelectorListenerAdapter() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">takeLeadership</span><span class="params">(CuratorFramework curatorFramework)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">                System.out.println(<span class="string">"获得leader成功"</span>);</div><div class="line">                TimeUnit.SECONDS.sleep(<span class="number">2</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">        <span class="comment">//自动争抢</span></div><div class="line">        leaderSelector.autoRequeue();</div><div class="line">        <span class="comment">//开始选举</span></div><div class="line">        leaderSelector.start();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
             
-        
-            <p class="content-link">
-                <a href="/2017/10/20/初步认识zookeeper/#more">
-                    <span class="iconfont icon-right">Read More...</span>
-                </a>
-            </p>
         
         </div>
         
-    </article>
-    
-
-    
-        
-    <article class="post">
-        <header class="post-header">
-            <div class="post-time syuanpi riseIn-light back-1">
-                <span>October 19, 2017</span>
-                
-            </div>
-            <h1 class="post-title syuanpi riseIn-light back-2">
             
-                <a href="/2017/10/19/分布式基础知识/">分布式基础知识</a>
             
-            </h1>
-            
-        </header>
-        <div class="post-content syuanpi riseIn-light back-3">
-            
-                
-                    <h3 id="分布式环境的特点"><a href="#分布式环境的特点" class="headerlink" title="分布式环境的特点"></a>分布式环境的特点</h3>
-                    
-            
-        
-            <p class="content-link">
-                <a href="/2017/10/19/分布式基础知识/#more">
-                    <span class="iconfont icon-right">Read More...</span>
-                </a>
-            </p>
-        
-        </div>
         
     </article>
     
-
-    
         
-    <article class="post">
-        <header class="post-header">
-            <div class="post-time syuanpi riseIn-light back-1">
-                <span>October 18, 2017</span>
-                
-            </div>
-            <h1 class="post-title syuanpi riseIn-light back-2">
-            
-                <a href="/2017/10/18/spring-framework/">spring-framework</a>
-            
-            </h1>
-            
-        </header>
-        <div class="post-content syuanpi riseIn-light back-3">
-            
-                
-                    <h3 id="一、什么是IOC-DI"><a href="#一、什么是IOC-DI" class="headerlink" title="一、什么是IOC/DI"></a>一、什么是IOC/DI</h3>
-                    
-            
+    <nav class="article-page">
         
-            <p class="content-link">
-                <a href="/2017/10/18/spring-framework/#more">
-                    <span class="iconfont icon-right">Read More...</span>
-                </a>
-            </p>
         
-        </div>
+            <a href="/2017/10/30/Zookeeper的几个原理分析/" id="art-right" class="art-left">
+                <span class="prev-title"> 
+                    <i class="iconfont icon-left"></i>Zookeeper的几个原理分析
+                </span>
+            </a>
         
-    </article>
-    
-
-    
-        
-    <article class="post">
-        <header class="post-header">
-            <div class="post-time syuanpi riseIn-light back-1">
-                <span>October 17, 2017</span>
-                
-            </div>
-            <h1 class="post-title syuanpi riseIn-light back-2">
-            
-                <a href="/2017/10/17/hexo+github=blog/">hexo+github=blog</a>
-            
-            </h1>
-            
-        </header>
-        <div class="post-content syuanpi riseIn-light back-3">
-            
-                
-                    <h3 id="新建仓库"><a href="#新建仓库" class="headerlink" title="新建仓库"></a>新建仓库</h3><p>操作参考github手册，仓库名称为：<code>username.github.io</code></p>
-                    
-            
-        
-            <p class="content-link">
-                <a href="/2017/10/17/hexo+github=blog/#more">
-                    <span class="iconfont icon-right">Read More...</span>
-                </a>
-            </p>
-        
-        </div>
-        
-    </article>
-    
-
-    
-        
-    <article class="post">
-        <header class="post-header">
-            <div class="post-time syuanpi riseIn-light back-1">
-                <span>October 16, 2017</span>
-                
-            </div>
-            <h1 class="post-title syuanpi riseIn-light back-2">
-            
-                <a href="/2017/10/16/hello-world/">Hello World</a>
-            
-            </h1>
-            
-        </header>
-        <div class="post-content syuanpi riseIn-light back-3">
-            
-                
-                    <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-                    
-            
-        
-            <p class="content-link">
-                <a href="/2017/10/16/hello-world/#more">
-                    <span class="iconfont icon-right">Read More...</span>
-                </a>
-            </p>
-        
-        </div>
-        
-    </article>
-    
-
-    
-</section>
-    
-    <nav class="pagination">
-        <a class="extend prev" rel="prev" href="/">< Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
     </nav>
+
+        
+    
 
 
         </main>
@@ -433,6 +314,16 @@ $(document).ready(function(){
 })
 </script>
     </div>
+    
+        
+    <div class="post-toc">
+        <span class="title">文章目录</span>
+        <div class="toc-inner syuanpi back-1 fallIn-light">
+            <li class="title-link"><a href="javascript:;" class="toTop">curator提供应用场景的封装</a></li>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#curator提供应用场景的封装"><span class="toc-text">curator提供应用场景的封装</span></a></li></ol>
+        </div>
+    </div>
+
     
     <div class="backtop syuanpi dead toTop" id="backtop">
     <i class="iconfont icon-up"></i>
