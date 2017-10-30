@@ -215,12 +215,14 @@
         </header>
         <div class="post-content syuanpi riseIn-light back-3">
             
-                <a id="more"></a>
-<h3 id="针对Zookeeper能够实现的应用封装"><a href="#针对Zookeeper能够实现的应用封装" class="headerlink" title="针对Zookeeper能够实现的应用封装"></a>针对Zookeeper能够实现的应用封装</h3><ul>
+                <h3 id="针对Zookeeper能够实现的应用封装"><a href="#针对Zookeeper能够实现的应用封装" class="headerlink" title="针对Zookeeper能够实现的应用封装"></a>针对Zookeeper能够实现的应用封装</h3><ul>
 <li>Master/leader选举</li>
 <li>分布式锁（读锁/写锁）</li>
 <li>分布式队列</li>
-<li>…<h3 id="curator-reciples提供的API"><a href="#curator-reciples提供的API" class="headerlink" title="curator-reciples提供的API"></a>curator-reciples提供的API</h3></li>
+<li>…</li>
+</ul>
+<a id="more"></a>
+<h3 id="curator-reciples提供的API"><a href="#curator-reciples提供的API" class="headerlink" title="curator-reciples提供的API"></a>curator-reciples提供的API</h3><ul>
 <li>LeaderLatch<ul>
 <li>阻塞</li>
 <li>都一起去抢，后续没抢到的等待</li>
@@ -228,9 +230,11 @@
 </li>
 <li>LeaderSelector<ul>
 <li>自动抢</li>
-<li>带有序节点的选举过程，根据最小节点来获得优先权，用完以后释放，下一个节点继续去用<br>###对于网络抖动的处理</li>
+<li>带有序节点的选举过程，根据最小节点来获得优先权，用完以后释放，下一个节点继续去用</li>
 </ul>
 </li>
+</ul>
+<h3 id="对于网络抖动的处理"><a href="#对于网络抖动的处理" class="headerlink" title="对于网络抖动的处理"></a>对于网络抖动的处理</h3><ul>
 <li>对于网络抖动，如果本次抢master的节点之前是master，那就继续用本地节点当master.</li>
 <li>客户端和服务端建立一个连接是建立一个session，如果出现网络不稳定或异常情况下，消息传输可能会出现丢包，如果出现丢包，客户端则认为session已经失效，实际上master并没有失效。</li>
 </ul>
@@ -332,7 +336,7 @@ $(document).ready(function(){
         <span class="title">文章目录</span>
         <div class="toc-inner syuanpi back-1 fallIn-light">
             <li class="title-link"><a href="javascript:;" class="toTop">curator提供应用场景的封装</a></li>
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#针对Zookeeper能够实现的应用封装"><span class="toc-text">针对Zookeeper能够实现的应用封装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#curator-reciples提供的API"><span class="toc-text">curator-reciples提供的API</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代码示例"><span class="toc-text">代码示例</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Leader选举"><span class="toc-text">Leader选举</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#针对Zookeeper能够实现的应用封装"><span class="toc-text">针对Zookeeper能够实现的应用封装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#curator-reciples提供的API"><span class="toc-text">curator-reciples提供的API</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对于网络抖动的处理"><span class="toc-text">对于网络抖动的处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代码示例"><span class="toc-text">代码示例</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Leader选举"><span class="toc-text">Leader选举</span></a></li></ol></li></ol>
         </div>
     </div>
 
