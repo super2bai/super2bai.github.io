@@ -257,7 +257,7 @@
 <p>所有服务的启动时检查消费者</p>
 </blockquote>
 <ul>
-<li>dubbo:provider`<ul>
+<li>dubbo:provider<ul>
 <li><code>check</code>属性<ul>
 <li>false<ul>
 <li>没有服务消费者失败报错 </li>
@@ -357,6 +357,7 @@
 <th>连接方式</th>
 <th>传输协议</th>
 <th>传输方式</th>
+<th>序列化</th>
 <th>适用范围</th>
 <th>适用场景</th>
 </tr>
@@ -369,7 +370,7 @@
 <td>TCP</td>
 <td>NIO异步传输</td>
 <td>Hessian二进制序列化</td>
-<td>数据包较小(建议小于100K)，消费者比提供者个数多，单一消费者无法压满提供者，不要传输大文件或超大字符串\</td>
+<td>数据包较小(建议小于100K)，消费者比提供者个数多，单一消费者无法压满提供者，不要传输大文件或超大字符串</td>
 <td>常规远程服务方法调用</td>
 </tr>
 <tr>
@@ -380,6 +381,7 @@
 <td>同步传输</td>
 <td>Java标准二进制序列化</td>
 <td>数据包大小混合，消费者与提供者个数差不多，可传文件</td>
+<td></td>
 </tr>
 <tr>
 <td style="text-align:center">hessian://</td>
@@ -388,7 +390,7 @@
 <td>HTTP</td>
 <td>同步传输</td>
 <td>Hessian二进制序列化</td>
-<td>数据包较大，提供者比消费者个数多，提供者压力较大，可传文件 \</td>
+<td>数据包较大，提供者比消费者个数多，提供者压力较大，可传文件</td>
 <td>页面传输，文件传输，或与原生hessian服务互操作</td>
 </tr>
 <tr>
@@ -399,6 +401,7 @@
 <td>同步传输</td>
 <td>SOAP文本序列化</td>
 <td>系统集成，跨语言调用</td>
+<td></td>
 </tr>
 <tr>
 <td style="text-align:center">http://</td>
@@ -407,8 +410,8 @@
 <td>HTTP</td>
 <td>同步传输</td>
 <td>表单序列化</td>
-<td>数据包大小混合，提供者比消费者个数多，可用浏览器查看，可用表单或URL传入参数，暂不支持传文件\</td>
-<td>需同事给应用程序和浏览器JS使用的服务</td>
+<td>数据包大小混合，提供者比消费者个数多，可用浏览器查看，可用表单或URL传入参数，暂不支持传文件</td>
+<td>需同时给应用程序和浏览器JS使用的服务</td>
 </tr>
 </tbody>
 </table>
@@ -435,8 +438,8 @@
 <h3 id="主机绑定"><a href="#主机绑定" class="headerlink" title="主机绑定"></a>主机绑定</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * package com.alibaba.dubbo.config;</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * 主机绑定的过程（取主机的地址）</span></div><div class="line"><span class="comment"> * 地址只能绑定一个</span></div><div class="line"><span class="comment"> * 1.通过&lt;dubbo:protocol host=""/&gt;配置的地址去找</span></div><div class="line"><span class="comment"> * 2.通过InetAddress.getLocalHost().getHostAddress();</span></div><div class="line"><span class="comment"> * 3.通过socket连接到注册中心的地址。再获取连接以后的本地地址</span></div><div class="line"><span class="comment"> * 4.getLocalHost() 网络接口</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="comment">// 如果没通过环境变量设置bind ip，则继续按优先级查找</span></div><div class="line"><span class="keyword">if</span> (hostToBind == <span class="keyword">null</span> || hostToBind.length() == <span class="number">0</span>) &#123;</div><div class="line">    <span class="comment">//&lt;dubbo:protocol host=""/&gt;配置的host内容</span></div><div class="line">    hostToBind = protocolConfig.getHost();</div><div class="line">    <span class="keyword">if</span> (provider != <span class="keyword">null</span> &amp;&amp; (hostToBind == <span class="keyword">null</span> || hostToBind.length() == <span class="number">0</span>)) &#123;</div><div class="line">        hostToBind = provider.getHost();</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//如果是否为合法的host</span></div><div class="line">    <span class="keyword">if</span> (isInvalidLocalHost(hostToBind)) &#123;</div><div class="line">        anyhost = <span class="keyword">true</span>;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            <span class="comment">//换种方式拿host</span></div><div class="line">            hostToBind = InetAddress.getLocalHost().getHostAddress();</div><div class="line">        &#125; <span class="keyword">catch</span> (UnknownHostException e) &#123;</div><div class="line">            logger.warn(e.getMessage(), e);</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//再次判断拿到的host是否合法</span></div><div class="line">        <span class="keyword">if</span> (isInvalidLocalHost(hostToBind)) &#123;</div><div class="line">            <span class="comment">//注册中心的URL</span></div><div class="line">            <span class="keyword">if</span> (registryURLs != <span class="keyword">null</span> &amp;&amp; registryURLs.size() &gt; <span class="number">0</span>) &#123;</div><div class="line">                <span class="keyword">for</span> (URL registryURL : registryURLs) &#123;</div><div class="line">                    <span class="keyword">try</span> &#123;</div><div class="line">                        Socket socket = <span class="keyword">new</span> Socket();</div><div class="line">                        <span class="keyword">try</span> &#123;</div><div class="line">                            <span class="comment">//通过socket去连注册中心的地址</span></div><div class="line">                            SocketAddress addr = <span class="keyword">new</span> InetSocketAddress(registryURL.getHost(), registryURL.getPort());</div><div class="line">                            socket.connect(addr, <span class="number">1000</span>);</div><div class="line">                            <span class="comment">//拿到socket连接的本地地址作为URL</span></div><div class="line">                            hostToBind = socket.getLocalAddress().getHostAddress();</div><div class="line">                            <span class="keyword">break</span>;</div><div class="line">                        &#125; <span class="keyword">finally</span> &#123;</div><div class="line">                            <span class="keyword">try</span> &#123;</div><div class="line">                                socket.close();</div><div class="line">                            &#125; <span class="keyword">catch</span> (Throwable e) &#123;</div><div class="line">                            &#125;</div><div class="line">                        &#125;</div><div class="line">                    &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">                        logger.warn(e.getMessage(), e);</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            <span class="comment">//上述操作都没有拿到</span></div><div class="line">            <span class="keyword">if</span> (isInvalidLocalHost(hostToBind)) &#123;</div><div class="line">                hostToBind = getLocalHost();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="dubbo服务只订阅"><a href="#dubbo服务只订阅" class="headerlink" title="dubbo服务只订阅"></a>dubbo服务只订阅</h3><blockquote>
 <p> 所有的服务都只共用一个注册中心，其中一个服务正在开发，有问题，但注册到注册中心了。就会影响消费者不能正常运行。</p>
-<p>需要连注册中心使用服务，但又不能注册该服务。</p>
-<p>只订阅服务，不提供服务。</p>
+<p> 需要连注册中心使用服务，但又不能注册该服务。</p>
+<p> 只订阅服务，不提供服务。</p>
 </blockquote>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dubbo:registry</span> <span class="attr">register</span>=<span class="string">"false"</span> <span class="attr">...</span>/&gt;</span></div></pre></td></tr></table></figure>
 <h3 id="dubbo服务只注册"><a href="#dubbo服务只注册" class="headerlink" title="dubbo服务只注册"></a>dubbo服务只注册</h3><blockquote>
