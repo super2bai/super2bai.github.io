@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="">
 <head>
-    <title> dubbo服务最佳实践 · super2bai </title>
+    <title> Dubbo主干源码分析 · super2bai </title>
     <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
@@ -195,12 +195,12 @@
     <article class="post">
         <header class="post-header">
             <div class="post-time syuanpi riseIn-light back-1">
-                <span>November 9, 2017</span>
+                <span>November 10, 2017</span>
                 
             </div>
             <h1 class="post-title syuanpi riseIn-light back-2">
             
-                dubbo服务最佳实践
+                Dubbo主干源码分析
             
             </h1>
             
@@ -215,59 +215,238 @@
         </header>
         <div class="post-content syuanpi riseIn-light back-3">
             
-                <h3 id="服务最佳实践"><a href="#服务最佳实践" class="headerlink" title="服务最佳实践"></a>服务最佳实践</h3><a id="more"></a>
-<h4 id="分包"><a href="#分包" class="headerlink" title="分包"></a>分包</h4><ul>
-<li>服务接口、请求服务模型、异常信息都放在api里面<ul>
-<li>符合重用发布等价原则，共同重用原则</li>
-</ul>
-</li>
-<li>api里面放去spring的引用配置。也可以放在模块的包目录下<ul>
-<li>com.bai.order/<em>*</em>-reference.xml</li>
-</ul>
-</li>
-</ul>
-<h4 id="粒度"><a href="#粒度" class="headerlink" title="粒度"></a>粒度</h4><ul>
-<li>尽可能把接口设置成粗力度，每个服务方法代表一个独立的功能，而不是某个功能的步骤。否则就会涉及到分布式事务</li>
-<li>服务接口建议以业务场景为单位划分。并对相近业务做抽象，防止接口暴增</li>
-<li>不建议使用过于抽象的通用接口T&lt;泛型&gt;<ul>
-<li>接口没有明确的语义，带来后期的维护</li>
-</ul>
-</li>
-</ul>
-<h4 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h4><ul>
-<li>每个接口都应该定义版本，为后续的兼容性提供前瞻性的考虑<ul>
-<li>version(maven-snapshot)没有做环境隔离会有问题</li>
-</ul>
-</li>
-<li>建议使用两位版本号，因为第三位版本号表示兼容性升级，只有不兼容时才需要变更服务版本</li>
-<li>当接口做不兼容升级的时候，先升级一半或者一台提供者为新版本，再将消费全部升级新版本，然后再将剩下的一半提供者升级新版本<ul>
-<li>预发布环境</li>
-</ul>
-</li>
-</ul>
-<h3 id="推荐用法-配置"><a href="#推荐用法-配置" class="headerlink" title="推荐用法(配置)"></a>推荐用法(配置)</h3><ul>
-<li>在provider端尽可能配置consumer端的属性<ul>
-<li>timeout、retires、线程池大小、loadBalance等</li>
-</ul>
-</li>
-<li>配置管理员信息<ul>
-<li>application上面配置的owner</li>
-<li>建议配置2个人以上</li>
-<li>因为owner都能够在监控中心看到</li>
-</ul>
-</li>
-</ul>
-<h3 id="配置dubbo缓存文件"><a href="#配置dubbo缓存文件" class="headerlink" title="配置dubbo缓存文件"></a>配置dubbo缓存文件</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dubbo:registry</span> <span class="attr">file</span>=<span class="string">".."</span> /&gt;</span></div></pre></td></tr></table></figure>
-<blockquote>
-<p>如果注册中心挂掉了(临时不可用)，可以从缓存文件中找。进一步保证可用性。</p>
+                <h3 id="模块介绍"><a href="#模块介绍" class="headerlink" title="模块介绍"></a>模块介绍</h3><a id="more"></a>
 <ul>
-<li>缓存内容<ul>
-<li>注册中心的列表</li>
-<li>服务提供者列表</li>
+<li>dubbo-admin:<ul>
+<li>控制台</li>
+</ul>
+</li>
+<li>dubbo-cluster<ul>
+<li>集群</li>
+<li>负载均衡<ul>
+<li>loadbalance<ul>
+<li>AbstractLoadBalance</li>
+<li>ConsistentHashLoadBalance</li>
+<li>LeastActiveLoadBalance</li>
+<li>RandomLoadBalance</li>
+<li>RoundRobinLoadBalance</li>
 </ul>
 </li>
 </ul>
-</blockquote>
+</li>
+</ul>
+</li>
+<li>dubbo-common<ul>
+<li>公共的逻辑模块<ul>
+<li>工具类<ul>
+<li>json</li>
+<li>log</li>
+<li>…</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>dubbo-config<ul>
+<li>配置层<ul>
+<li>spring配置的集成</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>dubbo-container<ul>
+<li>容器</li>
+</ul>
+</li>
+<li>dubbo-demo<ul>
+<li>演示案例</li>
+</ul>
+</li>
+<li>dubbo-filter<ul>
+<li>过滤器<ul>
+<li>验证</li>
+<li>缓存</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>dubbo-maven<ul>
+<li>​</li>
+</ul>
+</li>
+<li>dubbo-monitor<ul>
+<li>监测中心</li>
+</ul>
+</li>
+<li>dubbo-registry<ul>
+<li>注册中心<ul>
+<li>multicase</li>
+<li>redis</li>
+<li>zookeeper</li>
+<li>…</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>dubbo-remoting<ul>
+<li>远程通讯协议<ul>
+<li>grizzly</li>
+<li>http</li>
+<li>mima</li>
+<li>netty</li>
+<li>netty4</li>
+<li>p2p</li>
+<li>zookeeper</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>dubbo-rpc<ul>
+<li>远程传输协议<ul>
+<li>dubbo协议的实现</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>dubbo-simple<ul>
+<li>简单的监控中心</li>
+</ul>
+</li>
+<li>dubbo-test<ul>
+<li>​</li>
+</ul>
+</li>
+<li>dubbo-lite<ul>
+<li>hessian序列化协议的一个包<ul>
+<li>dubbo对hessian做了改造，不是原生的hessian协议。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="入口"><a href="#入口" class="headerlink" title="入口"></a>入口</h3><ul>
+<li>基于App.java中的main方法去运行，main方法基于spring容器去启动。所以先到<code>dubbo-config</code>中找到<code>dubbo-config-spring</code>。</li>
+<li>使用dubbo时，都是基于自定义的dubbo配置。相当于对spring配置的一个扩展。需要自定义配置时使用的两个接口<ul>
+<li>NamespaceHandler<ul>
+<li>注册BeanDefinitionParser，利用它来解析</li>
+</ul>
+</li>
+<li>BeanDefinitionParser<ul>
+<li>解析配置文件的元素</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>resources/spring.handlers<ul>
+<li>做spring扩展，默认加载。</li>
+<li>spring会默认加载jar包下/META-INF/spring.handlers  找到对应的NamespaceHandler</li>
+<li>com.alibaba.dubbo.config.spring.schema.DubboNamespaceHandler#init</li>
+</ul>
+</li>
+<li>Main.main(args)—container.start()—context.start—init—DubboBeanDefinitionParser<ul>
+<li>解析<ul>
+<li>application</li>
+<li>module</li>
+<li>registry</li>
+<li>monitor</li>
+<li>provider</li>
+<li>consumer</li>
+<li>protocol</li>
+<li>service</li>
+<li>reference</li>
+<li>annotation</li>
+</ul>
+</li>
+<li>单独处理<ul>
+<li>ProtocolConfig</li>
+<li>ServiceBean</li>
+<li>ProviderConfig</li>
+<li>ConsumerConfig</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><code>com.alibaba.dubbo.config.spring.ServiceBean</code>实现了</p>
+<ul>
+<li>InitializingBean<ul>
+<li>当spring容器初始化后，触发afterPropertiesSet方法</li>
+</ul>
+</li>
+<li>DisposableBean<ul>
+<li>Bean被销毁时，调用destroy方法</li>
+</ul>
+</li>
+<li>ApplicationContextAware<ul>
+<li>Bean注入成功以后，注入一个ApplicationContext对象，获取spring上下文</li>
+</ul>
+</li>
+<li>ApplicationListener<ul>
+<li>spring容器启动后，会触发事件通知</li>
+</ul>
+</li>
+<li>BeanNameAware<ul>
+<li>Bean初始化完成后，可以获得bean相关属性</li>
+</ul>
+</li>
+</ul>
+<p><code>afterPropertiesSet</code>方法</p>
+<ul>
+<li>检查<code>Provider</code>、<code>Application</code>、<code>Module</code>、<code>Registry</code>、<code>Monitor</code>、<code>Protocol</code>、<code>Path</code>是否为空，如果为空，则赋值。</li>
+<li>判断是否延迟，不延迟则发布服务export—doExport<ul>
+<li>获得注册中心的配置、多协议发布<ul>
+<li><code>com.alibaba.dubbo.config.ServiceConfig#doExportUrls</code></li>
+<li><code>List&lt;URL&gt; registryURLs = loadRegistries(true);</code></li>
+</ul>
+</li>
+<li>如果协议名称没有配置，则采用dubbo协议<ul>
+<li><code>com.alibaba.dubbo.config.ServiceConfig#doExportUrlsFor1Protocol</code></li>
+</ul>
+</li>
+<li>获得host</li>
+<li>获得port<ul>
+<li><code>com.alibaba.dubbo.config.ServiceConfig#findConfigedPorts</code></li>
+<li>解析环境变量配置的port</li>
+<li>取协议的默认端口(dubbo默认20880)</li>
+<li>都没有，则随机生成</li>
+</ul>
+</li>
+<li>用Map<string, string="">来存储配置信息<ul>
+<li>dubboVersion</li>
+<li>timestamp</li>
+<li>pid</li>
+<li>application</li>
+<li>module</li>
+<li>provider</li>
+<li>…</li>
+</ul>
+</string,></li>
+<li>根据<code>name</code>、<code>host</code>、<code>port</code>、<code>path</code>、<code>map</code>生成发布服务的URL</li>
+<li>如果register不为空，则将服务注册</li>
+<li>通过<code>protocol.export</code>发布服务<ul>
+<li><code>com.alibaba.dubbo.rpc.protocol.dubbo.DubboProtocol#export</code></li>
+<li>openServer—发布服务的URL存放到serverMap<ul>
+<li><code>com.alibaba.dubbo.rpc.protocol.dubbo.DubboProtocol#createServer</code></li>
+<li><code>ExchangeServer</code>为协议层的API</li>
+<li><code>server = Exchangers.bind(url, requestHandler);</code><ul>
+<li><code>com.alibaba.dubbo.remoting.exchange.support.header.HeaderExchanger#bind</code></li>
+<li><code>Transporters.bind</code>绑定传输协议<ul>
+<li>Grizzly</li>
+<li>Mina</li>
+<li>Netty</li>
+<li>Netty4</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 
             
         
@@ -281,16 +460,10 @@
         
     <nav class="article-page">
         
-            <a href="/2017/11/10/Dubbo主干源码分析/" id="art-left" class="art-right">
-                <span class="next-title">
-                    Dubbo主干源码分析<i class="iconfont icon-right"></i> 
-                </span>
-            </a>
         
-        
-            <a href="/2017/11/04/dubbo-配置详解/" id="art-right" class="art-left">
+            <a href="/2017/11/09/dubbo服务最佳实践/" id="art-right" class="art-left">
                 <span class="prev-title"> 
-                    <i class="iconfont icon-left"></i>dubbo 配置详解
+                    <i class="iconfont icon-left"></i>dubbo服务最佳实践
                 </span>
             </a>
         
@@ -380,8 +553,8 @@ $(document).ready(function(){
     <div class="post-toc">
         <span class="title">文章目录</span>
         <div class="toc-inner syuanpi back-1 fallIn-light">
-            <li class="title-link"><a href="javascript:;" class="toTop">dubbo服务最佳实践</a></li>
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#服务最佳实践"><span class="toc-text">服务最佳实践</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#分包"><span class="toc-text">分包</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#粒度"><span class="toc-text">粒度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#版本"><span class="toc-text">版本</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#推荐用法-配置"><span class="toc-text">推荐用法(配置)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置dubbo缓存文件"><span class="toc-text">配置dubbo缓存文件</span></a></li></ol>
+            <li class="title-link"><a href="javascript:;" class="toTop">Dubbo主干源码分析</a></li>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#模块介绍"><span class="toc-text">模块介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#入口"><span class="toc-text">入口</span></a></li></ol>
         </div>
     </div>
 
