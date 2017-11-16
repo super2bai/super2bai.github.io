@@ -215,7 +215,8 @@
         </header>
         <div class="post-content syuanpi riseIn-light back-3">
             
-                <h3 id="分布式事务产生背景"><a href="#分布式事务产生背景" class="headerlink" title="分布式事务产生背景"></a>分布式事务产生背景</h3><blockquote>
+                <h3 id="分布式事务产生背景"><a href="#分布式事务产生背景" class="headerlink" title="分布式事务产生背景"></a>分布式事务产生背景</h3><a id="more"></a>
+<blockquote>
 <p> 一般情况下，讲分布式事务都是说数据库的事务(database transaction)。后来一些非数据库的事务也借鉴了此概念。</p>
 <p> <strong>事务</strong>：运行在数据库上的逻辑单元，一切命令SQL具有原子性的操作特点(要么完全成功的执行，要么完全撤销不执行)。</p>
 </blockquote>
@@ -281,6 +282,7 @@
 <li>resouces manager</li>
 <li>资源管理器</li>
 <li>一般情况下是数据库或者是文件系统</li>
+<li>XA定义的接口</li>
 </ul>
 </li>
 <li>TM<ul>
@@ -294,7 +296,6 @@
 <p> 2PC（two -phase-commit）, 用来保证分布式事务的完整性。</p>
 </blockquote>
 <p><strong>阶段一：提交事务请求（投票）</strong></p>
-<p>TM给每一个AP发</p>
 <ul>
 <li>TM向所有的AP发送prepare请求(事务内容，事务的预提交，相当于把耗时的操作先执行)，询问是否可以执行事务的提交操作，并等待各个AP的响应</li>
 <li>执行事务<ul>
@@ -370,7 +371,106 @@
 </ul>
 </li>
 </ul>
-<h3 id="互联网行业分布式事务解决方案"><a href="#互联网行业分布式事务解决方案" class="headerlink" title="互联网行业分布式事务解决方案"></a>互联网行业分布式事务解决方案</h3>
+<h3 id="互联网行业分布式事务解决方案"><a href="#互联网行业分布式事务解决方案" class="headerlink" title="互联网行业分布式事务解决方案"></a>互联网行业分布式事务解决方案</h3><p><strong>柔性事务</strong>：相对于强一致性的ACID刚性事务</p>
+<ul>
+<li>最终一致性<ul>
+<li>eBay模式<ul>
+<li>BASE理论<ul>
+<li>无需保证数据在某一点的强一致性，保证最终一致性</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>TCC事务</li>
+<li>补偿机制</li>
+</ul>
+<p><strong>消息重复消费解决方案</strong></p>
+<ul>
+<li>幂等校验<ul>
+<li>数据库mq_reciver,key为消息的唯一值<ul>
+<li>发送消息在数据库里插入</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>日志表、状态判断<ul>
+<li>记录消费表<ul>
+<li>msgId、status</li>
+<li>处理后更改status</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>保证最终一致性的模式</strong></p>
+<ul>
+<li>查询模式<ul>
+<li>提供接口，返回当前操作是否成功的状态<ul>
+<li><a href="https://help.aliyun.com/document_detail/48726.html" target="_blank" rel="external">阿里GTS</a></li>
+</ul>
+</li>
+<li>衰减查询</li>
+</ul>
+</li>
+<li>补偿模式<ul>
+<li>即在事务链中的任何一个正向事务操作，都必须存在一个完全符合回滚规则的可逆事务。<ul>
+<li>自动恢复<ul>
+<li>A调B，失败了。自动重试。</li>
+<li>衰减查询后的结果一直是失败的，自动对原有操作做回滚。</li>
+</ul>
+</li>
+<li>通知运营<ul>
+<li>自动恢复不了，成本较大，通过运营系统人工补偿</li>
+</ul>
+</li>
+<li>通知技术<ul>
+<li>监控、预警</li>
+<li>修复数据</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>TCC事务模型（支付宝的DTS事务架构）<ul>
+<li>放宽了数据库强一致性约束，保证数据最终一致性的方案</li>
+<li>三个阶段<ul>
+<li>TRYING—lock(尝试执行业务)<ul>
+<li>完成所有业务检查(一致性)</li>
+<li>预留必须业务资源(准隔离性)</li>
+</ul>
+</li>
+<li>CONFIRMING—commit(确认执行任务)<ul>
+<li>真正执行业务</li>
+<li>不做任何业务检查</li>
+<li>只使用Try阶段预留的业务资源</li>
+<li>Confirm操作满足幂等性</li>
+</ul>
+</li>
+<li>CANCELING—rollback(取消执行业务)<ul>
+<li>释放Try阶段预留的业务资源</li>
+<li>Cancel操作满足幂等性</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>开源框架(可以整合dubbo)<ul>
+<li><a href="https://github.com/changmingxie/tcc-transaction" target="_blank" rel="external">tcc-transation</a></li>
+<li><a href="https://github.com/liuyangming/ByteTCC" target="_blank" rel="external">bytetcc</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>最大努力通知型<ul>
+<li>同步</li>
+<li>异步</li>
+<li>查询掉单</li>
+</ul>
+</li>
+</ul>
+
             
         
         </div>
