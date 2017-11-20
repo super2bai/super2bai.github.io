@@ -447,6 +447,94 @@
 </ul>
 </li>
 </ul>
+<hr>
+<h3 id="SPI机制"><a href="#SPI机制" class="headerlink" title="SPI机制"></a>SPI机制</h3><p><code>External Libraries</code>—<code>dubbo-2.5.3.jar</code>—<code>META-INF</code>—<code>dubbo.internal</code>—<code>com.alibaba.dubbo.rpc.Protocol</code>配置的是协议的实现(Key-Value)。</p>
+<p>Netty的SPI机制就相当于一个插件化的支持。</p>
+<p>原生SPI通过serviceLoader一次性加载，而在上述文件中会根据<code>name</code>加载。</p>
+<h4 id="如何实现"><a href="#如何实现" class="headerlink" title="如何实现"></a>如何实现</h4><ul>
+<li>创建类<code>MyProtocol</code>实现<code>com.alibaba.dubbo.rpc.Protocol</code>接口及方法<ul>
+<li><code>int getDefaultPort()</code></li>
+<li><code>&lt;T&gt; Exporter&lt;T&gt; export(Invoker&lt;T&gt; invoker) throws RpcException;</code></li>
+<li><code>&lt;T&gt; Invoker&lt;T&gt; refer(Class&lt;T&gt; type, URL url) throws RpcException;</code></li>
+<li><code>void destroy();</code></li>
+</ul>
+</li>
+<li><code>META-INF/services/</code>—<code>META-INF/dubbo/</code>—<code>META-INF/dubbo/internal/</code>这几个文件夹皆可<ul>
+<li>创建<code>com.alibaba.dubbo.rpc.Protocol</code>文件 </li>
+<li>写入<code>myprotocol=com.bai.dubbo.demo.MyProtocol</code></li>
+</ul>
+</li>
+<li><code>App</code>类内<code>Protocol protocol=ExtensionLoader.getExtensionLoader(Protocol.class).getExtension(&quot;myprotocol&quot;);</code></li>
+<li>可以获得到自定义端口</li>
+</ul>
+<h4 id="dubbo源码"><a href="#dubbo源码" class="headerlink" title="dubbo源码"></a>dubbo源码</h4><p><code>com.alibaba.dubbo.config.ServiceConfig#doExportUrlsFor1Protocol</code></p>
+<p><strong><code>Exporter&lt;?&gt; exporter = protocol.export(invoker);</code></strong></p>
+<p>会通过动态代理的方式生成动态类<code>ProtocolAdaptive</code>。</p>
+<p><code>com.alibaba.dubbo.common.extension.Adaptive</code></p>
+<p>每一个扩展里都有一个自适配的Adaptive，如果没有配置自定义协议，则采用dubbo协议。</p>
+<p>Adaptive注解可以放在类上也可以放在方法上。</p>
+<p>通过扩展去调用方法,会有getAdaptive方法，在协议里有自适配的Adaptive。</p>
+<p><code>com.alibaba.dubbo.common.extension.ExtensionLoader</code></p>
+<p><strong><code>getExtensionLoader</code></strong></p>
+<ul>
+<li>判断类是否为null，为null报错</li>
+<li>判断是否为接口，不是接口报错</li>
+<li>判断带SPI注解，没带SPI注解报错</li>
+<li>每个定义的SPI的接口都会构建一个ExtensionLoader实例，存储在<code>ConcurrentMap&lt;Class&lt;?&gt;, ExtensionLoader&lt;?&gt;&gt; EXTENSION_LOADERS</code></li>
+<li>从<code>EXTENSION_LOADERS</code>里取类对应的ExtensionLoader实例，如果为<code>null</code>，则<code>new</code>一个，再存储到<code>EXTENSION_LOADERS</code>里</li>
+</ul>
+<p><strong>带参构造</strong></p>
+<ul>
+<li>找到一个适配的Extension</li>
+</ul>
+<p><strong><code>getAdaptiveExtension</code></strong></p>
+<p><strong><code>createAdaptiveExtension</code></strong></p>
+<p>A类内有成员变量B类，B类继承了C类。通过SPI扩展时，如何判断需要注入的是B还是C。此方法会生成一个Adaptive。</p>
+<ul>
+<li>ProtocolFilterWrapper<ul>
+<li>根据invoker的url的协议判断该协议是该注册还是该发布<ul>
+<li>registry<ul>
+<li>RegitstryProtocol</li>
+</ul>
+</li>
+<li>dubbo<ul>
+<li>DubboProtocol</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>ProtocolListenerWrapper</li>
+</ul>
+<p><strong><code>loadFile</code></strong></p>
+<p>启动初始化时，会填充ExtensionLoader类的一些缓存数据(cacheXXX)，从目录中(<code>META-INF/services/</code>—<code>META-INF/dubbo/</code>—<code>META-INF/dubbo/internal/</code>)读取，通过ClassLoader去加载。</p>
+<p>com.alibaba.dubbo.rpc.Protocol里的内容加载到缓存(cahedNames)里,然后根据name找到class，再去通过ClassLoader实例化(new Instance()).</p>
+<p><strong>服务消费</strong></p>
+<p>根据dubbo内配置的dubboReference加载spring配置。</p>
+<p><code>com.alibaba.dubbo.config.spring.ReferenceBean#afterPropertiesSet</code></p>
+<p>最后会调用<code>getObject</code>方法。跳转到<code>com.alibaba.dubbo.config.ReferenceConfig#init</code>。判断—生成参数—createProxy</p>
+<ul>
+<li>一个JVM内，会通过本地方式调用，否则用远程方式调用。</li>
+<li><code>com.alibaba.dubbo.rpc.Invoker</code>  ,通过它去调用具体的服务</li>
+<li><code>refprotocol.refer</code><ul>
+<li><code>com.alibaba.dubbo.registry.integration.RegistryProtocol#refer</code><ul>
+<li>通过<code>proxyFactory.getInvoker</code>调用</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h3><p><strong>dubbo核心设计</strong></p>
+<ul>
+<li>exporter</li>
+<li>invoker</li>
+<li>protocol</li>
+<li>SPI</li>
+</ul>
+<p><strong>dubbo和dubbox有什么区别</strong></p>
+<p>dubbox是当当的架构师在dubbo的基础上做了升级后的开源框架</p>
+<p>序列化—<code>kryo</code>—比hessian序列化更好</p>
 
             
         
@@ -560,7 +648,7 @@ $(document).ready(function(){
         <span class="title">文章目录</span>
         <div class="toc-inner syuanpi back-1 fallIn-light">
             <li class="title-link"><a href="javascript:;" class="toTop">Dubbo主干源码分析</a></li>
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#模块介绍"><span class="toc-text">模块介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#入口"><span class="toc-text">入口</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#模块介绍"><span class="toc-text">模块介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#入口"><span class="toc-text">入口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SPI机制"><span class="toc-text">SPI机制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#如何实现"><span class="toc-text">如何实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#dubbo源码"><span class="toc-text">dubbo源码</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#补充"><span class="toc-text">补充</span></a></li></ol>
         </div>
     </div>
 
