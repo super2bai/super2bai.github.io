@@ -59,7 +59,7 @@
     <div class="tagcloud-mask"></div>  
 <div class="tagcloud" id="tagcloud">
     <div class="tagcloud-inner">
-        <a href="/tags/Dubbo/" style="font-size: 14px;">Dubbo</a> <a href="/tags/GitHub-Pages/" style="font-size: 14px;">GitHub Pages</a> <a href="/tags/Spring/" style="font-size: 14px;">Spring</a> <a href="/tags/Zookeeper/" style="font-size: 14px;">Zookeeper</a> <a href="/tags/分布式/" style="font-size: 14px;">分布式</a>
+        <a href="/tags/Dubbo/" style="font-size: 14px;">Dubbo</a> <a href="/tags/GitHub-Pages/" style="font-size: 14px;">GitHub Pages</a> <a href="/tags/NIO/" style="font-size: 14px;">NIO</a> <a href="/tags/Spring/" style="font-size: 14px;">Spring</a> <a href="/tags/Zookeeper/" style="font-size: 14px;">Zookeeper</a> <a href="/tags/分布式/" style="font-size: 14px;">分布式</a>
     </div>
 </div>
     <header class="header" id="header">
@@ -159,7 +159,7 @@
                     </div>
                     <div class="mobile-nav-tagcloud">
                         <div class="mobile-tagcloud-inner">
-                            <a href="/tags/Dubbo/" style="font-size: 14px;">Dubbo</a> <a href="/tags/GitHub-Pages/" style="font-size: 14px;">GitHub Pages</a> <a href="/tags/Spring/" style="font-size: 14px;">Spring</a> <a href="/tags/Zookeeper/" style="font-size: 14px;">Zookeeper</a> <a href="/tags/分布式/" style="font-size: 14px;">分布式</a>
+                            <a href="/tags/Dubbo/" style="font-size: 14px;">Dubbo</a> <a href="/tags/GitHub-Pages/" style="font-size: 14px;">GitHub Pages</a> <a href="/tags/NIO/" style="font-size: 14px;">NIO</a> <a href="/tags/Spring/" style="font-size: 14px;">Spring</a> <a href="/tags/Zookeeper/" style="font-size: 14px;">Zookeeper</a> <a href="/tags/分布式/" style="font-size: 14px;">分布式</a>
                         </div>
                     </div>
                 </div>
@@ -510,8 +510,21 @@
 <li>ProtocolListenerWrapper</li>
 </ul>
 <p><strong><code>loadFile</code></strong></p>
-<p>启动初始化时，会填充ExtensionLoader类的一些缓存数据(cacheXXX)，从目录中(<code>META-INF/services/</code>—<code>META-INF/dubbo/</code>—<code>META-INF/dubbo/internal/</code>)读取，通过ClassLoader去加载。</p>
-<p>com.alibaba.dubbo.rpc.Protocol里的内容加载到缓存(cahedNames)里,然后根据name找到class，再去通过ClassLoader实例化(new Instance()).</p>
+<ul>
+<li>启动初始化时，会填充ExtensionLoader类的一些缓存数据(cacheXXX)，从目录中(<code>META-INF/services/</code>—<code>META-INF/dubbo/</code>—<code>META-INF/dubbo/internal/</code>)读取，通过ClassLoader去加载。</li>
+<li>逐行读取com.alibaba.dubbo.rpc.Protocol里的内容，<ul>
+<li>有<code>@Adaptive</code>，则将此类作为Protocol协议的适配，加载到缓存(cahedNames)里,然后根据name找到class，再去通过ClassLoader实例化(new Instance())</li>
+<li>没有<code>@Adaptive</code>，适配类通过javassist修改字节码生成。<ul>
+<li>判断实现类是否存在入参为接口的构造器（就是DubbboProtocol类是否还有入参为Protocol的构造器），有的话作为包装类缓存到此ExtensionLoader的Set<class<?>&gt;集合中，这个其实是个装饰模式</class<?></li>
+</ul>
+</li>
+<li>既不是适配对象也不是wrapped对象，那就是扩展点的具体实现对象，查找<code>@Activate</code><ul>
+<li>有，缓存到cachedActivates</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <p><strong>服务消费</strong></p>
 <p>根据dubbo内配置的dubboReference加载spring配置。</p>
 <p><code>com.alibaba.dubbo.config.spring.ReferenceBean#afterPropertiesSet</code></p>
@@ -537,6 +550,35 @@
 <p><strong>dubbo和dubbox有什么区别</strong></p>
 <p>dubbox是当当的架构师在dubbo的基础上做了升级后的开源框架</p>
 <p>序列化—<code>kryo</code>—比hessian序列化更好</p>
+<p><strong>dubbo执行代码的编译</strong></p>
+<ul>
+<li>利用JDk工具类变异</li>
+<li>利用javassist根据源代码生成字节码</li>
+</ul>
+<p><strong>ObjectFactory是如何根据类型和名字来获取对象的</strong></p>
+<ul>
+<li>ExtensionFactory    <ul>
+<li>AdaptiveExtensionFactory<ul>
+<li>持有所有ExtensionFactory对象的集合</li>
+</ul>
+</li>
+<li>SpiExtensionFactory<ul>
+<li>优先查找</li>
+<li>获取要被注入的对象，就是要获取dubbo spi扩展的实现，所以传入的参数类型必须是接口类型并且接口上打上了@SPI注解，返回的是一个设配类对象。</li>
+</ul>
+</li>
+<li>SpringExtensionFactory<ul>
+<li>SpiExtensionFactory获取结果为null再在此查找</li>
+<li>Dubbo利用spring的扩展机制跟spring做了很好的融合。在发布或者去引用一个服务的时候，会把spring的容器添加到SpringExtensionFactory工厂集合中去， 当SpiExtensionFactory没有获取到对象的时候会遍历SpringExtensionFactory中的spring容器来获取要注入的对象</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p> ObjectFactory也是基于dubbo的spi扩展机制的。</p>
+<p>它跟Compiler接口一样设配类注解@Adaptive是打在类AdaptiveExtensionFactory上的。</p>
+</blockquote>
 
             
         
