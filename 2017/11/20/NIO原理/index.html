@@ -334,7 +334,7 @@
 </ul>
 <h3 id="Java-NIO"><a href="#Java-NIO" class="headerlink" title="Java NIO"></a><a href="http://gee.cs.oswego.edu/dl/cpjslides/nio.pdf" target="_blank" rel="external">Java NIO</a></h3><ul>
 <li>Java 1.4</li>
-<li>面向块</li>
+<li>面向Block</li>
 </ul>
 <h4 id="核心对象"><a href="#核心对象" class="headerlink" title="核心对象"></a>核心对象</h4><ul>
 <li>缓冲区Buffer</li>
@@ -630,12 +630,75 @@
 <h3 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h3><h4 id="selector-wakeUp"><a href="#selector-wakeUp" class="headerlink" title="selector.wakeUp()"></a><code>selector.wakeUp()</code></h4><blockquote>
 <p>个线程调用select()方法后阻塞了，即使没有通道已经就绪，也有办法让其从select()方法返回。只要让其它线程在第一个线程调用select()方法的那个对象上调用Selector.wakeup()方法即可。阻塞在select()方法上的线程会立马返回。</p>
 <p>如果有其它线程调用了wakeup()方法，但当前没有线程阻塞在select()方法上，下个调用select()方法的线程会立即“醒来（wake up）”。</p>
+<p>wakeup()是通过pipe发送一个字节来唤醒poll().</p>
 </blockquote>
 <h4 id="selector-close"><a href="#selector-close" class="headerlink" title="selector.close()"></a><code>selector.close()</code></h4><blockquote>
 <p>用完Selector后调用其close()方法会关闭该Selector，且使注册到该Selector上的所有SelectionKey实例无效。通道本身并不会关闭。</p>
 </blockquote>
 <h4 id="查找native方法源码"><a href="#查找native方法源码" class="headerlink" title="查找native方法源码"></a>查找native方法源码</h4><p>一般，从JDK目录下的native目录(可能跟OS平台相关)根据包名路径去找相关的Class名.c文件即可找到对应的native方法。</p>
 <p>如果间接调用了hotspot的实现(jvm会以动态库的形式被加载，prims定义了hotspot与其它模块的接口及实现)，那么从share/vm/prims/jvm.cpp文件可找到JVM_XXX函数的实现。</p>
+<h4 id="NIO-amp-AIO-对比"><a href="#NIO-amp-AIO-对比" class="headerlink" title="NIO &amp; AIO 对比"></a>NIO &amp; AIO 对比</h4><table>
+<thead>
+<tr>
+<th>属性</th>
+<th>同步阻塞IO(BIO)</th>
+<th>伪异步IO</th>
+<th>非阻塞IO(NIO)</th>
+<th>异步IO(AIO)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>客户端数：IO线程数</td>
+<td>1:1</td>
+<td>M:N(M&gt;N)</td>
+<td>M:1</td>
+<td>M:0</td>
+</tr>
+<tr>
+<td>阻塞类型</td>
+<td>阻塞</td>
+<td>阻塞</td>
+<td>非阻塞</td>
+<td>非阻塞</td>
+</tr>
+<tr>
+<td>同步</td>
+<td>同步</td>
+<td>同步</td>
+<td>同步(多路复用)</td>
+<td>异步</td>
+</tr>
+<tr>
+<td>API使用难度</td>
+<td>简单</td>
+<td>简单</td>
+<td>复杂</td>
+<td>复杂</td>
+</tr>
+<tr>
+<td>调试难度</td>
+<td>简单</td>
+<td>简单</td>
+<td>复杂</td>
+<td>复杂</td>
+</tr>
+<tr>
+<td>可靠性</td>
+<td>非常差</td>
+<td>差</td>
+<td>高</td>
+<td>高</td>
+</tr>
+<tr>
+<td>吞吐量</td>
+<td>低</td>
+<td>中</td>
+<td>高</td>
+<td>高</td>
+</tr>
+</tbody>
+</table>
 <h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4><p><a href="http://grepcode.com/snapshot/repository.grepcode.com/java/root/jdk/openjdk/6-b14/" target="_blank" rel="external">grepcode-openjdk</a></p>
 <p><a href="http://hg.openjdk.java.net/" target="_blank" rel="external">hg.openjdk.java.net</a></p>
 <h4 id="eclipse插件"><a href="#eclipse插件" class="headerlink" title="eclipse插件"></a>eclipse插件</h4><p><a href="http://marketplace.eclipse.org/content/java-source-attacher" target="_blank" rel="external">Java Source Attacher</a></p>
@@ -651,6 +714,12 @@
     
         
     <nav class="article-page">
+        
+            <a href="/2017/11/23/AIO概述/" id="art-left" class="art-right">
+                <span class="next-title">
+                    AIO概述<i class="iconfont icon-right"></i> 
+                </span>
+            </a>
         
         
             <a href="/2017/11/11/分布式事务解决方案/" id="art-right" class="art-left">
@@ -753,7 +822,7 @@ $(document).ready(function(){
         <span class="title">文章目录</span>
         <div class="toc-inner syuanpi back-1 fallIn-light">
             <li class="title-link"><a href="javascript:;" class="toTop">NIO原理</a></li>
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#概念"><span class="toc-text">概念</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#阻塞Block和非阻塞Non-Block"><span class="toc-text">阻塞Block和非阻塞Non-Block</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#同步Synchronization和异步Asynchronous"><span class="toc-text">同步Synchronization和异步Asynchronous</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#选择器Selector"><span class="toc-text">选择器Selector</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NIO和IO如何影响应用程序的设计"><span class="toc-text">NIO和IO如何影响应用程序的设计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#API调用"><span class="toc-text">API调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Java-NIO"><span class="toc-text">Java NIO</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#核心对象"><span class="toc-text">核心对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#缓冲区Buffer"><span class="toc-text">缓冲区Buffer</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#深入剖析Buffer"><span class="toc-text">深入剖析Buffer</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#缓冲区的分配"><span class="toc-text">缓冲区的分配</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#缓冲区分片"><span class="toc-text">缓冲区分片</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#只读缓冲区"><span class="toc-text">只读缓冲区</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#通道Channel"><span class="toc-text">通道Channel</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#使用NIO读取数据"><span class="toc-text">使用NIO读取数据</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#使用NIO写入数据"><span class="toc-text">使用NIO写入数据</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#反应堆Reactor"><span class="toc-text">反应堆Reactor</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#阻塞I-O通信模型"><span class="toc-text">阻塞I/O通信模型</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Java-NIO原理及通信模型"><span class="toc-text">Java NIO原理及通信模型</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#选择器Seletor"><span class="toc-text">选择器Seletor</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#源码分析"><span class="toc-text">源码分析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Selector-open"><span class="toc-text">Selector.open()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ServerSocketChannel-open"><span class="toc-text">ServerSocketChannel.open()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#server-configureBlocking-false"><span class="toc-text">server.configureBlocking(false);</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#server-socket"><span class="toc-text">server.socket();</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#socket-bind"><span class="toc-text">socket.bind</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#server-register"><span class="toc-text">server.register</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#implRegister"><span class="toc-text">implRegister</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#interestOps"><span class="toc-text">interestOps</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#selector-select"><span class="toc-text">selector.select()</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其它"><span class="toc-text">其它</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#selector-wakeUp"><span class="toc-text">selector.wakeUp()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#selector-close"><span class="toc-text">selector.close()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查找native方法源码"><span class="toc-text">查找native方法源码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#参考资料"><span class="toc-text">参考资料</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#eclipse插件"><span class="toc-text">eclipse插件</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#概念"><span class="toc-text">概念</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#阻塞Block和非阻塞Non-Block"><span class="toc-text">阻塞Block和非阻塞Non-Block</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#同步Synchronization和异步Asynchronous"><span class="toc-text">同步Synchronization和异步Asynchronous</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#选择器Selector"><span class="toc-text">选择器Selector</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NIO和IO如何影响应用程序的设计"><span class="toc-text">NIO和IO如何影响应用程序的设计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#API调用"><span class="toc-text">API调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Java-NIO"><span class="toc-text">Java NIO</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#核心对象"><span class="toc-text">核心对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#缓冲区Buffer"><span class="toc-text">缓冲区Buffer</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#深入剖析Buffer"><span class="toc-text">深入剖析Buffer</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#缓冲区的分配"><span class="toc-text">缓冲区的分配</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#缓冲区分片"><span class="toc-text">缓冲区分片</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#只读缓冲区"><span class="toc-text">只读缓冲区</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#通道Channel"><span class="toc-text">通道Channel</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#使用NIO读取数据"><span class="toc-text">使用NIO读取数据</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#使用NIO写入数据"><span class="toc-text">使用NIO写入数据</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#反应堆Reactor"><span class="toc-text">反应堆Reactor</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#阻塞I-O通信模型"><span class="toc-text">阻塞I/O通信模型</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Java-NIO原理及通信模型"><span class="toc-text">Java NIO原理及通信模型</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#选择器Seletor"><span class="toc-text">选择器Seletor</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#源码分析"><span class="toc-text">源码分析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Selector-open"><span class="toc-text">Selector.open()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ServerSocketChannel-open"><span class="toc-text">ServerSocketChannel.open()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#server-configureBlocking-false"><span class="toc-text">server.configureBlocking(false);</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#server-socket"><span class="toc-text">server.socket();</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#socket-bind"><span class="toc-text">socket.bind</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#server-register"><span class="toc-text">server.register</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#implRegister"><span class="toc-text">implRegister</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#interestOps"><span class="toc-text">interestOps</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#selector-select"><span class="toc-text">selector.select()</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其它"><span class="toc-text">其它</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#selector-wakeUp"><span class="toc-text">selector.wakeUp()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#selector-close"><span class="toc-text">selector.close()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查找native方法源码"><span class="toc-text">查找native方法源码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#NIO-amp-AIO-对比"><span class="toc-text">NIO & AIO 对比</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#参考资料"><span class="toc-text">参考资料</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#eclipse插件"><span class="toc-text">eclipse插件</span></a></li></ol></li></ol>
         </div>
     </div>
 
