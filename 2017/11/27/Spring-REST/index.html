@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html lang="">
 <head>
-    <title>
-    super2bai
-    
-</title>
+    <title> Spring REST · super2bai </title>
     <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
@@ -19,6 +16,8 @@
 
 
 
+
+    <meta name="keywords" content="Spring, Nlvi" />
 
 <link rel="stylesheet" href="/style/style.css">
 <script src="/script/jquery.min.js"></script>
@@ -195,10 +194,6 @@
         <main class="main" id="main">
             
     
-
-<section class="posts">
-    
-        
     <article class="post">
         <header class="post-header">
             <div class="post-time syuanpi riseIn-light back-1">
@@ -207,15 +202,22 @@
             </div>
             <h1 class="post-title syuanpi riseIn-light back-2">
             
-                <a href="/2017/11/27/Spring-REST/">Spring REST</a>
+                Spring REST
             
             </h1>
+            
+                
+                    <div class="post-tags syuanpi riseIn-light back-3">
+                    
+                        <a href="/tags/Spring/">Spring</a>
+                    
+                    </div>
+                
             
         </header>
         <div class="post-content syuanpi riseIn-light back-3">
             
-                
-                    <h3 id="理论"><a href="#理论" class="headerlink" title="理论"></a>理论</h3><p><a href="https://en.wikipedia.org/wiki/Representational_state_transfer" target="_blank" rel="external">Representational state transfer</a></p>
+                <h3 id="理论"><a href="#理论" class="headerlink" title="理论"></a>理论</h3><p><a href="https://en.wikipedia.org/wiki/Representational_state_transfer" target="_blank" rel="external">Representational state transfer</a></p>
 <blockquote>
 <p><strong>Representational state transfer</strong> (<strong>REST</strong>) or <strong>RESTful</strong> <a href="https://en.wikipedia.org/wiki/Web_service" target="_blank" rel="external">web services</a> are a way of providing interoperability between computer systems on the <a href="https://en.wikipedia.org/wiki/Internet" target="_blank" rel="external">Internet</a>. REST-compliant Web services allow requesting systems to access and manipulate textual representations of <a href="https://en.wikipedia.org/wiki/Web_resource" target="_blank" rel="external">Web resources</a> using a uniform and predefined set of <a href="https://en.wikipedia.org/wiki/Stateless_protocol" target="_blank" rel="external">stateless</a> operations. Other forms of Web services exist, which expose their own arbitrary sets of operations such as <a href="https://en.wikipedia.org/wiki/Web_Services_Description_Language" target="_blank" rel="external">WSDL</a> and <a href="https://en.wikipedia.org/wiki/SOAP" target="_blank" rel="external">SOAP</a>.<a href="https://en.wikipedia.org/wiki/Representational_state_transfer#cite_note-1" target="_blank" rel="external">[1]</a> </p>
 </blockquote>
@@ -396,317 +398,29 @@
 <h4 id="WebMvcConfig"><a href="#WebMvcConfig" class="headerlink" title="WebMvcConfig"></a><code>WebMvcConfig</code></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.bai.restonwebwebmvc.config;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">import</span> com.bai.restonwebwebmvc.http.message.PropertiesPersonHttpMessageConverter;</div><div class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</div><div class="line"><span class="keyword">import</span> org.springframework.http.converter.HttpMessageConverter;</div><div class="line"><span class="keyword">import</span> org.springframework.web.servlet.config.annotation.WebMvcConfigurer;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.List;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * <span class="doctag">@author</span> 2bai</span></div><div class="line"><span class="comment"> * <span class="doctag">@date</span> 2017.11.28</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebMvcConfig</span> <span class="keyword">implements</span> <span class="title">WebMvcConfigurer</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">extendMessageConverters</span><span class="params">(List&lt;HttpMessageConverter&lt;?&gt;&gt; converters)</span> </span>&#123;</div><div class="line">        converters.add(<span class="keyword">new</span> PropertiesPersonHttpMessageConverter());</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h4 id="PersonRestController"><a href="#PersonRestController" class="headerlink" title="PersonRestController"></a><code>PersonRestController</code></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.bai.restonwebwebmvc.controller;</div><div class="line"></div><div class="line"><span class="keyword">import</span> com.bai.restonwebwebmvc.domain.Person;</div><div class="line"><span class="keyword">import</span> org.springframework.http.MediaType;</div><div class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.*;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * &#123;<span class="doctag">@link</span> &#125; &#123;<span class="doctag">@link</span> org.springframework.web.bind.annotation.RestController&#125;</span></div><div class="line"><span class="comment"> * <span class="doctag">@author</span> 2bai</span></div><div class="line"><span class="comment"> * <span class="doctag">@date</span> 2017.11.28</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="meta">@RestController</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PersonRestController</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line"><span class="comment">     * required = false,参数不强制传输</span></div><div class="line"><span class="comment">     * <span class="doctag">@param</span> id</span></div><div class="line"><span class="comment">     * <span class="doctag">@param</span> name</span></div><div class="line"><span class="comment">     * <span class="doctag">@return</span></span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/person/&#123;id&#125;"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> Person <span class="title">person</span><span class="params">(@PathVariable Long id, @RequestParam(required = <span class="keyword">false</span>)</span> String name )</span>&#123;</div><div class="line">        Person person=<span class="keyword">new</span> Person();</div><div class="line">        person.setId(id);</div><div class="line">        person.setName(name);</div><div class="line">        <span class="keyword">return</span> person;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line"><span class="comment">     * value    : 路径</span></div><div class="line"><span class="comment">     * consumes ：请求类型 Content-Type</span></div><div class="line"><span class="comment">     * produces ：响应类型 Accept</span></div><div class="line"><span class="comment">     * input :</span></div><div class="line"><span class="comment">     * &#123;</span></div><div class="line"><span class="comment">        "id": 1,</span></div><div class="line"><span class="comment">        "name": "2bai"</span></div><div class="line"><span class="comment">       &#125;</span></div><div class="line"><span class="comment">       output:</span></div><div class="line"><span class="comment">        #Written By Application Server</span></div><div class="line"><span class="comment">        #Tue Nov 28 16:22:48 CST 2017</span></div><div class="line"><span class="comment">        person.name=2bai</span></div><div class="line"><span class="comment">        person.id=1</span></div><div class="line"><span class="comment"></span></div><div class="line"><span class="comment">     * <span class="doctag">@param</span> person</span></div><div class="line"><span class="comment">     * <span class="doctag">@return</span></span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <span class="meta">@PostMapping</span>(value=<span class="string">"/person/json/to/properties"</span>,</div><div class="line">            consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,</div><div class="line">            produces = <span class="string">"application/properties+person"</span></div><div class="line">    )</div><div class="line">    <span class="function"><span class="keyword">public</span> Person <span class="title">personJsonToProperties</span><span class="params">(@RequestBody Person person)</span></span>&#123;</div><div class="line">        <span class="comment">//@RequestBody读取的是JSON格式</span></div><div class="line">        <span class="comment">//响应的格式是proerties</span></div><div class="line"></div><div class="line">        <span class="keyword">return</span> person;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">/**</span></div><div class="line"><span class="comment">     * value    : 路径</span></div><div class="line"><span class="comment">     * consumes ：请求类型 Content-Type</span></div><div class="line"><span class="comment">     * produces ：响应类型 Accept</span></div><div class="line"><span class="comment">     * input :</span></div><div class="line"><span class="comment">     person.name=2bai</span></div><div class="line"><span class="comment">     person.id=1</span></div><div class="line"><span class="comment">     output:</span></div><div class="line"><span class="comment">     &#123;</span></div><div class="line"><span class="comment">     "id": 1,</span></div><div class="line"><span class="comment">     "name": "2bai"</span></div><div class="line"><span class="comment">     &#125;</span></div><div class="line"><span class="comment">     * <span class="doctag">@param</span> person</span></div><div class="line"><span class="comment">     * <span class="doctag">@return</span></span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <span class="meta">@PostMapping</span>(value=<span class="string">"/person/properties/to/json"</span>,</div><div class="line">            consumes = <span class="string">"application/properties+person"</span>,</div><div class="line">            produces = MediaType.APPLICATION_JSON_UTF8_VALUE</div><div class="line">    )</div><div class="line">    <span class="function"><span class="keyword">public</span> Person <span class="title">personPropertiesToJson</span><span class="params">(@RequestBody Person person)</span></span>&#123;</div><div class="line">        <span class="comment">//@RequestBody读取的是proerties</span></div><div class="line">        <span class="comment">//响应的格式是JSON格式</span></div><div class="line">        <span class="keyword">return</span> person;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
-                
             
         
         </div>
         
-    </article>
-    
-
-    
-        
-    <article class="post">
-        <header class="post-header">
-            <div class="post-time syuanpi riseIn-light back-1">
-                <span>November 23, 2017</span>
-                
-            </div>
-            <h1 class="post-title syuanpi riseIn-light back-2">
             
-                <a href="/2017/11/23/AIO概述/">AIO概述</a>
             
-            </h1>
-            
-        </header>
-        <div class="post-content syuanpi riseIn-light back-3">
-            
-                
-                    <h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3>
-                    
-            
-        
-            <p class="content-link">
-                <a href="/2017/11/23/AIO概述/#more">
-                    <span class="iconfont icon-right">Read More...</span>
-                </a>
-            </p>
-        
-        </div>
         
     </article>
     
-
-    
         
-    <article class="post">
-        <header class="post-header">
-            <div class="post-time syuanpi riseIn-light back-1">
-                <span>November 20, 2017</span>
-                
-            </div>
-            <h1 class="post-title syuanpi riseIn-light back-2">
-            
-                <a href="/2017/11/20/NIO原理/">NIO原理</a>
-            
-            </h1>
-            
-        </header>
-        <div class="post-content syuanpi riseIn-light back-3">
-            
-                
-                    <h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3>
-                    
-            
+    <nav class="article-page">
         
-            <p class="content-link">
-                <a href="/2017/11/20/NIO原理/#more">
-                    <span class="iconfont icon-right">Read More...</span>
-                </a>
-            </p>
         
-        </div>
+            <a href="/2017/11/23/AIO概述/" id="art-right" class="art-left">
+                <span class="prev-title"> 
+                    <i class="iconfont icon-left"></i>AIO概述
+                </span>
+            </a>
         
-    </article>
-    
-
-    
-        
-    <article class="post">
-        <header class="post-header">
-            <div class="post-time syuanpi riseIn-light back-1">
-                <span>November 11, 2017</span>
-                
-            </div>
-            <h1 class="post-title syuanpi riseIn-light back-2">
-            
-                <a href="/2017/11/11/分布式事务解决方案/">分布式事务解决方案</a>
-            
-            </h1>
-            
-        </header>
-        <div class="post-content syuanpi riseIn-light back-3">
-            
-                
-                    <h3 id="分布式事务产生背景"><a href="#分布式事务产生背景" class="headerlink" title="分布式事务产生背景"></a>分布式事务产生背景</h3>
-                    
-            
-        
-            <p class="content-link">
-                <a href="/2017/11/11/分布式事务解决方案/#more">
-                    <span class="iconfont icon-right">Read More...</span>
-                </a>
-            </p>
-        
-        </div>
-        
-    </article>
-    
-
-    
-        
-    <article class="post">
-        <header class="post-header">
-            <div class="post-time syuanpi riseIn-light back-1">
-                <span>November 10, 2017</span>
-                
-            </div>
-            <h1 class="post-title syuanpi riseIn-light back-2">
-            
-                <a href="/2017/11/10/Dubbo主干源码分析/">Dubbo主干源码分析</a>
-            
-            </h1>
-            
-        </header>
-        <div class="post-content syuanpi riseIn-light back-3">
-            
-                
-                    <h3 id="模块介绍"><a href="#模块介绍" class="headerlink" title="模块介绍"></a>模块介绍</h3>
-                    
-            
-        
-            <p class="content-link">
-                <a href="/2017/11/10/Dubbo主干源码分析/#more">
-                    <span class="iconfont icon-right">Read More...</span>
-                </a>
-            </p>
-        
-        </div>
-        
-    </article>
-    
-
-    
-        
-    <article class="post">
-        <header class="post-header">
-            <div class="post-time syuanpi riseIn-light back-1">
-                <span>November 9, 2017</span>
-                
-            </div>
-            <h1 class="post-title syuanpi riseIn-light back-2">
-            
-                <a href="/2017/11/09/dubbo服务最佳实践/">dubbo服务最佳实践</a>
-            
-            </h1>
-            
-        </header>
-        <div class="post-content syuanpi riseIn-light back-3">
-            
-                
-                    <h3 id="服务最佳实践"><a href="#服务最佳实践" class="headerlink" title="服务最佳实践"></a>服务最佳实践</h3>
-                    
-            
-        
-            <p class="content-link">
-                <a href="/2017/11/09/dubbo服务最佳实践/#more">
-                    <span class="iconfont icon-right">Read More...</span>
-                </a>
-            </p>
-        
-        </div>
-        
-    </article>
-    
-
-    
-        
-    <article class="post">
-        <header class="post-header">
-            <div class="post-time syuanpi riseIn-light back-1">
-                <span>November 4, 2017</span>
-                
-            </div>
-            <h1 class="post-title syuanpi riseIn-light back-2">
-            
-                <a href="/2017/11/04/dubbo-配置详解/">dubbo配置详解</a>
-            
-            </h1>
-            
-        </header>
-        <div class="post-content syuanpi riseIn-light back-3">
-            
-                
-                    <h3 id="启动服务检查"><a href="#启动服务检查" class="headerlink" title="启动服务检查"></a>启动服务检查</h3>
-                    
-            
-        
-            <p class="content-link">
-                <a href="/2017/11/04/dubbo-配置详解/#more">
-                    <span class="iconfont icon-right">Read More...</span>
-                </a>
-            </p>
-        
-        </div>
-        
-    </article>
-    
-
-    
-        
-    <article class="post">
-        <header class="post-header">
-            <div class="post-time syuanpi riseIn-light back-1">
-                <span>November 1, 2017</span>
-                
-            </div>
-            <h1 class="post-title syuanpi riseIn-light back-2">
-            
-                <a href="/2017/11/01/初步认识Dubbo/">初步认识Dubbo</a>
-            
-            </h1>
-            
-        </header>
-        <div class="post-content syuanpi riseIn-light back-3">
-            
-                
-                    <h3 id="技术演变"><a href="#技术演变" class="headerlink" title="技术演变"></a>技术演变</h3>
-                    
-            
-        
-            <p class="content-link">
-                <a href="/2017/11/01/初步认识Dubbo/#more">
-                    <span class="iconfont icon-right">Read More...</span>
-                </a>
-            </p>
-        
-        </div>
-        
-    </article>
-    
-
-    
-        
-    <article class="post">
-        <header class="post-header">
-            <div class="post-time syuanpi riseIn-light back-1">
-                <span>October 31, 2017</span>
-                
-            </div>
-            <h1 class="post-title syuanpi riseIn-light back-2">
-            
-                <a href="/2017/10/31/ZAB协议/">ZAB协议</a>
-            
-            </h1>
-            
-        </header>
-        <div class="post-content syuanpi riseIn-light back-3">
-            
-                
-                    <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3>
-                    
-            
-        
-            <p class="content-link">
-                <a href="/2017/10/31/ZAB协议/#more">
-                    <span class="iconfont icon-right">Read More...</span>
-                </a>
-            </p>
-        
-        </div>
-        
-    </article>
-    
-
-    
-        
-    <article class="post">
-        <header class="post-header">
-            <div class="post-time syuanpi riseIn-light back-1">
-                <span>October 30, 2017</span>
-                
-            </div>
-            <h1 class="post-title syuanpi riseIn-light back-2">
-            
-                <a href="/2017/10/30/Zookeeper的几个原理分析/">Zookeeper的几个原理分析</a>
-            
-            </h1>
-            
-        </header>
-        <div class="post-content syuanpi riseIn-light back-3">
-            
-                
-                    <h4 id="Zookeeper的集群角色"><a href="#Zookeeper的集群角色" class="headerlink" title="Zookeeper的集群角色"></a>Zookeeper的集群角色</h4>
-                    
-            
-        
-            <p class="content-link">
-                <a href="/2017/10/30/Zookeeper的几个原理分析/#more">
-                    <span class="iconfont icon-right">Read More...</span>
-                </a>
-            </p>
-        
-        </div>
-        
-    </article>
-    
-
-    
-</section>
-    
-    <nav class="pagination">
-        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next ></a>
     </nav>
+
+        
+    
 
 
         </main>
@@ -791,6 +505,16 @@ $(document).ready(function(){
 })
 </script>
     </div>
+    
+        
+    <div class="post-toc">
+        <span class="title">文章目录</span>
+        <div class="toc-inner syuanpi back-1 fallIn-light">
+            <li class="title-link"><a href="javascript:;" class="toTop">Spring REST</a></li>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#理论"><span class="toc-text">理论</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代码示例"><span class="toc-text">代码示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自描述消息"><span class="toc-text">自描述消息</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#按照xml格式返回"><span class="toc-text">按照xml格式返回</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#问题及解答"><span class="toc-text">问题及解答</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#源码导读"><span class="toc-text">源码导读</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#EnableWebMvc"><span class="toc-text">@EnableWebMvc</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#扩展自描述消息"><span class="toc-text">扩展自描述消息</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#一次失败的试验"><span class="toc-text">一次失败的试验</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#这次是成功的"><span class="toc-text">这次是成功的</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#添加扩展"><span class="toc-text">添加扩展</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#调整顺序"><span class="toc-text">调整顺序</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代码示例-完整版"><span class="toc-text">代码示例-完整版</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Person"><span class="toc-text">Person</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PropertiesPersonHttpMessageConverter"><span class="toc-text">PropertiesPersonHttpMessageConverter</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#WebMvcConfig"><span class="toc-text">WebMvcConfig</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PersonRestController"><span class="toc-text">PersonRestController</span></a></li></ol></li></ol>
+        </div>
+    </div>
+
     
     <div class="backtop syuanpi dead toTop" id="backtop">
     <i class="iconfont icon-up"></i>
