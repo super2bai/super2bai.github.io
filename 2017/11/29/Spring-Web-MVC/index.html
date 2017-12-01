@@ -82,7 +82,7 @@
         
             <li class="menu-item">
                 <a href="/">
-                    <span>キジ</span>
+                    <span>Article</span>
                     
                     
                 </a>
@@ -92,7 +92,7 @@
         
             <li class="menu-item">
                 <a href="/archives">
-                    <span>アーカイブ</span>
+                    <span>Archives</span>
                     
                     
                 </a>
@@ -102,7 +102,7 @@
         
             <li class="menu-item">
                 <a href="javascript:;" id="tags">
-                    <span>タグ</span>
+                    <span>Tags</span>
                     
                     
                 </a>
@@ -112,7 +112,7 @@
         
             <li class="menu-item">
                 <a href="/about">
-                    <span>ついて</span>
+                    <span>About</span>
                     
                     
                 </a>
@@ -131,7 +131,7 @@
             
                 <div class="mobile-nav-item">
                     <a href="/">
-                        <span>キジ</span>
+                        <span>Article</span>
                         
                         
                     </a>
@@ -141,7 +141,7 @@
             
                 <div class="mobile-nav-item">
                     <a href="/archives">
-                        <span>アーカイブ</span>
+                        <span>Archives</span>
                         
                         
                     </a>
@@ -152,7 +152,7 @@
                 <div class="mobile-nav-item inner-cloud">
                     <div class="mobile-nav-tag">
                         <a href="javascript:;" id="mobile-tags">
-                            <span>タグ</span>
+                            <span>Tags</span>
                             
                             
                         </a>
@@ -168,7 +168,7 @@
             
                 <div class="mobile-nav-item">
                     <a href="/about">
-                        <span>ついて</span>
+                        <span>About</span>
                         
                         
                     </a>
@@ -458,7 +458,8 @@
 <h3 id="问题及回答-1"><a href="#问题及回答-1" class="headerlink" title="问题及回答"></a>问题及回答</h3><p>Q：遇到新问题如何查文档</p>
 <p>A：在能定位错误范围的前提下，尽量不Google，找规范文档。解决问题后，读相关资料，不要为了解决问题而解决，而是要尽量扩充知识面，积累知识。</p>
 <p>Q：怎么处理异常比较优雅</p>
-<p>A：采用ExceptionHandler，代码层面易于理解，例如：<code>@ExceptionHandler(NoHandlerFoundException.class)</code></p>
+<p>A：采用ExceptionHandler，代码层面易于理解。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.bai.springwebmvc.controller;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.springframework.http.HttpStatus;</div><div class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.ControllerAdvice;</div><div class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.ExceptionHandler;</div><div class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.ResponseBody;</div><div class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RestControllerAdvice;</div><div class="line"><span class="keyword">import</span> org.springframework.web.servlet.NoHandlerFoundException;</div><div class="line"></div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</div><div class="line"><span class="keyword">import</span> java.util.HashMap;</div><div class="line"><span class="keyword">import</span> java.util.Map;</div><div class="line"></div><div class="line"><span class="meta">@RestControllerAdvice</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RestControllerAdvicer</span> </span>&#123;</div><div class="line">	<span class="comment">//多个Exception中间用","分隔</span></div><div class="line">    <span class="meta">@ExceptionHandler</span>(&#123;NoHandlerFoundException.class,IllegalAccessException.class&#125;)</div><div class="line">    <span class="function"><span class="keyword">public</span>  Object <span class="title">pageNotFound</span><span class="params">(HttpStatus status,HttpServletRequest request, Throwable throwable)</span></span>&#123;</div><div class="line">        Map&lt;String,Object&gt; errors =<span class="keyword">new</span> HashMap&lt;&gt;();</div><div class="line">        errors.put(<span class="string">"statusCode"</span>,request.getAttribute(<span class="string">"javax.servlet.error.status_code"</span>));</div><div class="line">        errors.put(<span class="string">"requestUri"</span>,request.getAttribute(<span class="string">"javax.servlet.error.request_uri"</span>));</div><div class="line">        <span class="keyword">return</span> errors;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@ExceptionHandler</span>(NullPointerException.class)</div><div class="line">    <span class="function"><span class="keyword">public</span>  Object <span class="title">handleNPE</span><span class="params">( Throwable throwable)</span></span>&#123;</div><div class="line"></div><div class="line">        <span class="keyword">return</span> throwable.getMessage();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
             
         
