@@ -301,7 +301,7 @@
 <p><strong>如何装配</strong></p>
 <p>在启动类(xxxApplication,@SpringBootApplication) 继承WebMvcConfigurerAdapter(此类已经逐渐被淘汰)，重写addInterceptors方法，通过registry.addInterceptor方法将自定义拦截器装配。</p>
 <p><strong>处理顺序</strong></p>
-<p>proHandle(true) -&gt; HandlerMethod(因为采用了@GetMapping，其它场景可能会有不同)执行(Method#invoke) -&gt; postHandle -&gt; afterCompletion</p>
+<p>preHandle(true) -&gt; HandlerMethod(因为采用了@GetMapping，其它场景可能会有不同)执行(Method#invoke) -&gt; postHandle -&gt; afterCompletion</p>
 <h3 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a><a href="https://docs.spring.io/spring/docs/5.0.2.RELEASE/spring-framework-reference/web.html#mvc-exceptionhandlers" target="_blank" rel="external">异常处理</a></h3><ul>
 <li>Servlet标准</li>
 <li>Spring Web MVC</li>
