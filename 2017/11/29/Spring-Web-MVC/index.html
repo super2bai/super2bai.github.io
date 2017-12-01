@@ -313,7 +313,6 @@
 <li>处理状态码<error-code></error-code></li>
 <li>处理异常类型<exception-type></exception-type></li>
 <li>处理服务<location></location></li>
-<li>不足</li>
 <li>优点<ul>
 <li>统一处理，业界标准</li>
 </ul>
@@ -454,7 +453,19 @@
 </li>
 <li>LocaleResolver/LocaleContextResolver</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver`</div></pre></td></tr></table></figure>
+<p><code>org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver</code></p>
+<h4 id="代码示例-1"><a href="#代码示例-1" class="headerlink" title="代码示例"></a>代码示例</h4><ul>
+<li>修改application.properties</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">spring.messages.basename=META-INF/locale/messages</div></pre></td></tr></table></figure>
+<ul>
+<li>在上面的文件夹下添加文件</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#文件路径META-INF/locale/messages/messages.properties</div><div class="line">home.welcome = welcome</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#文件路径META-INF/locale/messages/messages_zh_cn.properties</div><div class="line">home.welcome = 欢迎</div></pre></td></tr></table></figure>
+<ul>
+<li>访问localhost:8080,页面会根据浏览器的设置返回对应语言的文字</li>
+</ul>
 <h3 id="问题及回答-1"><a href="#问题及回答-1" class="headerlink" title="问题及回答"></a>问题及回答</h3><p>Q：遇到新问题如何查文档</p>
 <p>A：在能定位错误范围的前提下，尽量不Google，找规范文档。解决问题后，读相关资料，不要为了解决问题而解决，而是要尽量扩充知识面，积累知识。</p>
 <p>Q：怎么处理异常比较优雅</p>
@@ -574,7 +585,7 @@ $(document).ready(function(){
         <span class="title">文章目录</span>
         <div class="toc-inner syuanpi back-1 fallIn-light">
             <li class="title-link"><a href="javascript:;" class="toTop">Spring Web MVC</a></li>
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Spring-Web-MVC"><span class="toc-text">Spring Web MVC</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#映射处理"><span class="toc-text">映射处理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#RestController-Controller-ResponseBody"><span class="toc-text">@RestController=@Controller+@ResponseBody</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#问题及回答"><span class="toc-text">问题及回答</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#补充"><span class="toc-text">补充</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#异常处理"><span class="toc-text">异常处理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#理解web-xml错误页面"><span class="toc-text">理解web.xml错误页面</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#传统的Servlet-web-xml错误页面"><span class="toc-text">传统的Servlet web.xml错误页面</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Spring-Web-MVC-异常处理"><span class="toc-text">Spring Web MVC 异常处理</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Spring-Boot错误处理页面"><span class="toc-text">Spring Boot错误处理页面</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#视图技术"><span class="toc-text">视图技术</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#View"><span class="toc-text">View</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ViewResolver"><span class="toc-text">ViewResolver</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Spring-Boot接续完整的页面路径"><span class="toc-text">Spring Boot接续完整的页面路径</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ContentNegotiatingViewResolver"><span class="toc-text">ContentNegotiatingViewResolver</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#代码示例"><span class="toc-text">代码示例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#国际化-i18N"><span class="toc-text">国际化(i18N)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#问题及回答-1"><span class="toc-text">问题及回答</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Spring-Web-MVC"><span class="toc-text">Spring Web MVC</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#映射处理"><span class="toc-text">映射处理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#RestController-Controller-ResponseBody"><span class="toc-text">@RestController=@Controller+@ResponseBody</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#问题及回答"><span class="toc-text">问题及回答</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#补充"><span class="toc-text">补充</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#异常处理"><span class="toc-text">异常处理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#理解web-xml错误页面"><span class="toc-text">理解web.xml错误页面</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#传统的Servlet-web-xml错误页面"><span class="toc-text">传统的Servlet web.xml错误页面</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Spring-Web-MVC-异常处理"><span class="toc-text">Spring Web MVC 异常处理</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Spring-Boot错误处理页面"><span class="toc-text">Spring Boot错误处理页面</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#视图技术"><span class="toc-text">视图技术</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#View"><span class="toc-text">View</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ViewResolver"><span class="toc-text">ViewResolver</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Spring-Boot接续完整的页面路径"><span class="toc-text">Spring Boot接续完整的页面路径</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ContentNegotiatingViewResolver"><span class="toc-text">ContentNegotiatingViewResolver</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#代码示例"><span class="toc-text">代码示例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#国际化-i18N"><span class="toc-text">国际化(i18N)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#代码示例-1"><span class="toc-text">代码示例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#问题及回答-1"><span class="toc-text">问题及回答</span></a></li></ol>
         </div>
     </div>
 
