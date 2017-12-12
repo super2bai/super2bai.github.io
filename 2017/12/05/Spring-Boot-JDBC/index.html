@@ -364,7 +364,7 @@
 <li>级别越高性能越差</li>
 </ul>
 <p>Spring JDBC Transaction实现重写了JDBC API：</p>
-<p><code>org.springframework.transaction.annotation.Isolation</code>  -&gt;<code>org.springframework.transaction.TransactionDefinition</code> -&gt;</p>
+<p><code>org.springframework.transaction.annotation.Isolation</code> -&gt;<code>org.springframework.transaction.TransactionDefinition</code> -&gt;</p>
 <p><code>java.sql.Connection</code></p>
 <p>通过AOP的方式代理了Connection，自动提交模式关闭，经过一系列操作后，方法执行完毕，再提交事务。</p>
 <h5 id="Transaction执行代理-TransactionInterceptor"><a href="#Transaction执行代理-TransactionInterceptor" class="headerlink" title="@Transaction执行代理-TransactionInterceptor"></a>@Transaction执行代理-<code>TransactionInterceptor</code></h5><p><code>org.springframework.transaction.annotation.Transactional</code></p>
@@ -385,7 +385,6 @@
 <ul>
 <li><code>org.springframework.transaction.annotation.Propagation</code><ul>
 <li><code>REQUIRED</code><ul>
-<li>需要事务传播</li>
 <li>默认</li>
 <li>无：新建；有：加入当前事务</li>
 </ul>
