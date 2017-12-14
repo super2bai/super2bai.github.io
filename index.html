@@ -215,79 +215,15 @@
         <div class="post-content syuanpi riseIn-light back-3">
             
                 
-                    <h3 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h3><ul>
-<li>Bean Validation（JSR-303）：介绍 Java Bean 验证、核心 API、实现框架 Hibernate Validator</li>
-<li>Apache commons-validator ：介绍最传统 Apache 通用验证器框架，如：长度、邮件等方式</li>
-<li>Spring Validator：介绍 Spring 内置验证器 API、以及自定义实现</li>
-</ul>
-<hr>
-<h3 id="Bean-Validation-1-1-JSR-303"><a href="#Bean-Validation-1-1-JSR-303" class="headerlink" title="Bean Validation 1.1 JSR-303"></a>Bean Validation 1.1 JSR-303</h3><h4 id="Maven依赖"><a href="#Maven依赖" class="headerlink" title="Maven依赖"></a>Maven依赖</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-validation<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
-<blockquote>
-<p>命名规则(Since Spring Boot 1.4)：Spring Boot大多数情况采用<code>starter</code>(启动器，包含一些自动装配的Spring组建)，官方的命名规则：<code>spring-boot-starter-{name}</code>。非官方采用<code>{name}-spring-boot-starter</code></p>
-</blockquote>
-<h3 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> javax.validation.constraints.Max;</div><div class="line"><span class="keyword">import</span> javax.validation.constraints.NotNull;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</div><div class="line">    <span class="meta">@Max</span>(value=<span class="number">10000</span>)</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> id;</div><div class="line">    <span class="meta">@NotNull</span></div><div class="line">    <span class="keyword">private</span> String name;</div><div class="line">    <span class="keyword">private</span> String cardNumber;</div><div class="line"></div><div class="line">    <span class="comment">//ignore getter and setter</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> com.bai.springbootvalidation.domain.User;</div><div class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.PostMapping;</div><div class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestBody;</div><div class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RestController;</div><div class="line"><span class="keyword">import</span> javax.validation.Valid;</div><div class="line"></div><div class="line"><span class="meta">@RestController</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserController</span> </span>&#123;</div><div class="line">    </div><div class="line">    <span class="meta">@PostMapping</span>(<span class="string">"/user/save"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> User <span class="title">save</span><span class="params">(@Valid @RequestBody User user)</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> user;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><strong>请求时，当id&gt;10000或name为null时，会报错。</strong></p>
-<ul>
-<li>优点<ul>
-<li>节省代码。</li>
-</ul>
-</li>
-<li>其它方式<ul>
-<li>API方式<ul>
-<li><code>Assert.hasText(user.getName(),&quot;名称不能为空&quot;);</code></li>
-<li>不能为空，必须有文字</li>
-<li>返回500</li>
-</ul>
-</li>
-<li>JVM断言<ul>
-<li><code>assert user.getId() &lt;= 10000;</code></li>
-<li>返回400</li>
-</ul>
-</li>
-<li>缺点<ul>
-<li>耦合了业务逻辑，虽然可以通过<code>HandlerInterceptor</code>或<code>Filter</code>做拦截，但是也是非常不优雅的。</li>
-<li>还可以通过AOP方式，也可以提升代码的可读性。</li>
-<li>以上方式都不是统一的标准</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="自定义Bean-Validation"><a href="#自定义Bean-Validation" class="headerlink" title="自定义Bean Validation"></a>自定义Bean Validation</h3><p>通过员工的卡号来校验，需要通过工号的前缀和后缀来判断。前缀必须以<code>2BAI-</code>开头。后缀必须以<code>数字</code>结尾。需要通过Bean Validation校验。</p>
-<h4 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h4><ul>
-<li>复制成熟 Bean Validation Annotation的模式</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Target</span>(FIELD)</div><div class="line"><span class="meta">@Retention</span>(RUNTIME)</div><div class="line"><span class="meta">@Documented</span></div><div class="line"><span class="meta">@Constraint</span>(validatedBy = &#123;&#125;)</div><div class="line"><span class="keyword">public</span> <span class="meta">@interface</span> ValidCardNumber &#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>参考和理解@Constraint</li>
-<li>实现ConstraintValidator 接口</li>
-<li>将实现ConstraintValidator 接口 定义到@Constraint#validatedBy</li>
-<li>给@ValidCardNumber 添加 message 参数</li>
-</ul>
-<h3 id="补充内容"><a href="#补充内容" class="headerlink" title="补充内容"></a>补充内容</h3><ul>
-<li><code>org.springframework.util.StringUtils.delimitedListToStringArray</code>来分割字符串取代<code>Split</code><ul>
-<li>该方法使用了正则表达式</li>
-<li>其次是空指针NPE保护不够</li>
-<li>如果在依赖中没有<code>StringUtils.delimitedListToStringArray</code>，可以使用<code>JDK</code>里的<code>StringTokenizer</code>(不足：类似于枚举<code>Enumeration</code>)或<code>org.apache.commons.lang3.StringUtils</code></li>
-</ul>
-</li>
-<li>采用三方类库时，尽量用一套类库，不要A库用一点，B库用一点。</li>
-</ul>
-<h3 id="Q-amp-A"><a href="#Q-amp-A" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h3><p>Q：JSON校验如何办？</p>
-<p>A：尝试变成 Bean 的方式。</p>
-<p>Q：实际中很多参数都要校验，这样写会增加很多类</p>
-<p>A：确实会增加部分工作量，大多数场景，不需要自定义，除非很特殊情况。Bean Validation 的主要缺点，单元测试不方便。需要拿到Annotation，然后构造参数去测试。</p>
-<p>Q：如果前端固定表单的话，这种校验方式很好。但是灵活性不够，如果表单是动态的话，如何校验呢？</p>
-<p>A：表单字段与 Form 对象绑定即可，再走 Bean Validation 逻辑。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">""</span> <span class="attr">method</span>=<span class="string">"POST"</span> <span class="attr">command</span>=<span class="string">"form"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">value</span>=<span class="string">"$&#123;form.name&#125;"</span> /&gt;</span></div><div class="line">  ...</div><div class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">value</span>=<span class="string">"$&#123;form.age&#125;"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>也可以通过责任链模式（Pipeline），一个接一个验证：</p>
-<p>field 1-&gt; field 2 -&gt; field 3 -&gt; compute -&gt; result</p>
-<p>Q：如何自定义，返回格式？如何最佳实现？</p>
-<p>A：可以通过REST来实现，比如 XML 或者 JSON 的格式（视图）。</p>
-
-                
+                    <h3 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h3>
+                    
             
+        
+            <p class="content-link">
+                <a href="/2017/12/12/Spring-Boot验证/#more">
+                    <span class="iconfont icon-right">Read More...</span>
+                </a>
+            </p>
         
         </div>
         
