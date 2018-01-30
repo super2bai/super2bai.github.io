@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="">
 <head>
-    <title> dubbo服务最佳实践 · super2bai </title>
+    <title> WalkUp攻略-亚洲 · super2bai </title>
     <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
@@ -17,7 +17,7 @@
 
 
 
-    <meta name="keywords" content="Dubbo, Nlvi" />
+    <meta name="keywords" content="waklup, Nlvi" />
 
 <link rel="stylesheet" href="/style/style.css">
 <script src="/script/jquery.min.js"></script>
@@ -197,19 +197,19 @@
     <article class="post">
         <header class="post-header">
             <div class="post-time syuanpi riseIn-light back-1">
-                <span>November 9, 2017</span>
+                <span>January 30, 2018</span>
                 
             </div>
             <h1 class="post-title syuanpi riseIn-light back-2">
             
-                dubbo服务最佳实践
+                WalkUp攻略-亚洲
             
             </h1>
             
                 
                     <div class="post-tags syuanpi riseIn-light back-3">
                     
-                        <a href="/tags/Dubbo/">Dubbo</a>
+                        <a href="/tags/waklup/">waklup</a>
                     
                     </div>
                 
@@ -217,59 +217,70 @@
         </header>
         <div class="post-content syuanpi riseIn-light back-3">
             
-                <h3 id="服务最佳实践"><a href="#服务最佳实践" class="headerlink" title="服务最佳实践"></a>服务最佳实践</h3><a id="more"></a>
-<h4 id="分包"><a href="#分包" class="headerlink" title="分包"></a>分包</h4><ul>
-<li>服务接口、请求服务模型、异常信息都放在api里面<ul>
-<li>符合重用发布等价原则，共同重用原则</li>
-</ul>
-</li>
-<li>api里面放去spring的引用配置。也可以放在模块的包目录下<ul>
-<li>com.bai.order/<em>*</em>-reference.xml</li>
-</ul>
-</li>
-</ul>
-<h4 id="粒度"><a href="#粒度" class="headerlink" title="粒度"></a>粒度</h4><ul>
-<li>尽可能把接口设置成粗力度，每个服务方法代表一个独立的功能，而不是某个功能的步骤。否则就会涉及到分布式事务</li>
-<li>服务接口建议以业务场景为单位划分。并对相近业务做抽象，防止接口暴增</li>
-<li>不建议使用过于抽象的通用接口T&lt;泛型&gt;<ul>
-<li>接口没有明确的语义，带来后期的维护</li>
-</ul>
-</li>
-</ul>
-<h4 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h4><ul>
-<li>每个接口都应该定义版本，为后续的兼容性提供前瞻性的考虑<ul>
-<li>version(maven-snapshot)没有做环境隔离会有问题</li>
-</ul>
-</li>
-<li>建议使用两位版本号，因为第三位版本号表示兼容性升级，只有不兼容时才需要变更服务版本</li>
-<li>当接口做不兼容升级的时候，先升级一半或者一台提供者为新版本，再将消费全部升级新版本，然后再将剩下的一半提供者升级新版本<ul>
-<li>预发布环境</li>
-</ul>
-</li>
-</ul>
-<h3 id="推荐用法-配置"><a href="#推荐用法-配置" class="headerlink" title="推荐用法(配置)"></a>推荐用法(配置)</h3><ul>
-<li>在provider端尽可能配置consumer端的属性<ul>
-<li>timeout、retires、线程池大小、loadBalance等</li>
-</ul>
-</li>
-<li>配置管理员信息<ul>
-<li>application上面配置的owner</li>
-<li>建议配置2个人以上</li>
-<li>因为owner都能够在监控中心看到</li>
-</ul>
-</li>
-</ul>
-<h3 id="配置dubbo缓存文件"><a href="#配置dubbo缓存文件" class="headerlink" title="配置dubbo缓存文件"></a>配置dubbo缓存文件</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dubbo:registry</span> <span class="attr">file</span>=<span class="string">".."</span> /&gt;</span></div></pre></td></tr></table></figure>
-<blockquote>
-<p>如果注册中心挂掉了(临时不可用)，可以从缓存文件中找。进一步保证可用性。</p>
-<ul>
-<li>缓存内容<ul>
-<li>注册中心的列表</li>
-<li>服务提供者列表</li>
-</ul>
-</li>
-</ul>
+                <blockquote>
+<p>以下为<strong>亚洲篇</strong>签证攻略。<br>越南前面的国家没有记录，抱歉。</p>
 </blockquote>
+<a id="more"></a>
+<h3 id="越南"><a href="#越南" class="headerlink" title="越南"></a>越南</h3><p>越南的古时称谓—安南</p>
+<p>越南曾是哪个国家的殖民地—法国</p>
+<p>越南人喜欢戴绿色帽子吗—是</p>
+<p>越南是多民族国家吗—是</p>
+<p>越南三宝之一—香水</p>
+<h3 id="柬埔寨"><a href="#柬埔寨" class="headerlink" title="柬埔寨"></a>柬埔寨</h3><p>柬埔寨的名胜景点中最著名的是哪个—吴哥窟</p>
+<p>哪位担任过柬埔寨国王—西哈莫尼</p>
+<p>柬埔寨有王室吗—有</p>
+<p>柬埔寨是多民族国家,主要民族是哪个民族—高棉族</p>
+<p>柬埔寨在公元几世纪建立了统一的王国—公元1世纪</p>
+<h3 id="泰国"><a href="#泰国" class="headerlink" title="泰国"></a>泰国</h3><p>大多数泰国人信封什么佛—四面佛</p>
+<p>泰国民间会不会重男轻女—不会</p>
+<p>泰国古时叫什么—暹罗国</p>
+<p>人妖平均寿命不超过多少岁—40岁</p>
+<p>泰国常年温度不低于多少度—18</p>
+<h3 id="缅甸"><a href="#缅甸" class="headerlink" title="缅甸"></a>缅甸</h3><p>缅甸最大的城市在哪里—仰光</p>
+<p>缅甸曾是哪个国家的殖民地—英国</p>
+<p>缅甸人机会不能在几月份结婚—12月</p>
+<p>在缅甸会机会抚摸孩子的头吗—会</p>
+<p>缅甸男士常穿的民族服饰是什么—笼基</p>
+<h3 id="尼泊尔"><a href="#尼泊尔" class="headerlink" title="尼泊尔"></a>尼泊尔</h3><p>在尼泊尔购买满百年的股东是否能带回国—不能</p>
+<p>尼泊尔是三大宗教中哪个宗教的发源地—佛教</p>
+<p>尼泊尔是什么类型的国家—农业国</p>
+<p>尼瓦尔族的女人在7至9岁时要与一种见过结婚,这种婚姻叫什么—果实婚</p>
+<p>尼泊尔有空军吗—没有</p>
+<h3 id="印度"><a href="#印度" class="headerlink" title="印度"></a>印度</h3><p>第一个帝国式政权时哪个印度王朝建立的?—孔雀王朝</p>
+<p>最后一个殖民印度的国家时哪个国家?—英国</p>
+<p>印度的圣河叫什么—恒河</p>
+<p>印度钟姓制度中代表僧侣贵族的姓氏是什么—婆罗门</p>
+<p>印度是世界人口第几大国—第二大国</p>
+<h3 id="巴基斯坦"><a href="#巴基斯坦" class="headerlink" title="巴基斯坦"></a>巴基斯坦</h3><p>巴基斯坦人口最多的民族是—旁遮普人</p>
+<p>巴基斯坦第一大城市—卡拉奇</p>
+<p>出于礼貌,在巴基斯坦吃饭一定要使用右手吗—是</p>
+<p>巴基斯坦是一夫多妻制国家吗—是</p>
+<p>伊斯兰堡是哪一年正式迁都成为新首都的—1967年迁都</p>
+<h3 id="阿富汗"><a href="#阿富汗" class="headerlink" title="阿富汗"></a>阿富汗</h3><p>基地组织和塔利班早期成立的目的是什么—反抗前苏联入侵</p>
+<p>对塔利班组织的另一个称呼是什么—伊斯兰学生军</p>
+<p>美国对阿富汗的复仇战争是哪年开始的—2002年</p>
+<p>前苏联曾对阿富汗发动过侵略战争吗—发动过</p>
+<p>911事件是阿富汗哪个武装组织发动的—基地组织</p>
+<h3 id="伊朗"><a href="#伊朗" class="headerlink" title="伊朗"></a>伊朗</h3><p>伊朗是政教合一的国家吗—是</p>
+<p>伊朗的周末在哪天—周五</p>
+<p>伊朗国旗上一共写着几句真主伟大—22</p>
+<p>伊朗的前身曾是哪个古文明帝国—古波斯帝国</p>
+<p>成吉思汗之孙在伊朗建立的王国叫什么—伊利汗国</p>
+<h3 id="阿联酋"><a href="#阿联酋" class="headerlink" title="阿联酋"></a>阿联酋</h3><p>迪拜的政府机构几点下班—下午2点</p>
+<p>迪拜市内公交车里可以吃东西吗—不可以</p>
+<p>世界最高的摩天大楼迪拜塔有多高—828米</p>
+<p>迪拜的帆船酒店是几星级酒店—七星级酒店</p>
+<p>迪拜的帆船酒店里有没有水下套房—没有</p>
+<h3 id="沙特阿拉伯"><a href="#沙特阿拉伯" class="headerlink" title="沙特阿拉伯"></a>沙特阿拉伯</h3><p>沙特阿拉伯是沙漠国家，沙漠占国土面积的百分之多少—0.9</p>
+<p>伊斯兰教创始人默罕默德的诞生地在哪个城市—麦加</p>
+<p>沙特阿拉伯夏季炎热干燥，最高气温可达多少度—50</p>
+<p>沙特阿拉伯是世界上最大的大麦进口国吗—是</p>
+<p>沙特阿拉伯拥有全球已勘探石油总量的百分之多少—0.24</p>
+<h3 id="伊拉克"><a href="#伊拉克" class="headerlink" title="伊拉克"></a>伊拉克</h3><p>古巴比伦是四大文明古国之一吗—是</p>
+<p>伊拉克有哪个古文明遗址—古巴比伦文明</p>
+<p>古时住在这里的苏美尔人发明了了什么文字—楔形文字</p>
+<p>伊拉克的国旗上的文字是什么意思—真主至大</p>
+<p>伊拉克有过宵禁制度吗—有</p>
 
             
         
@@ -283,16 +294,16 @@
         
     <nav class="article-page">
         
-            <a href="/2017/11/10/Dubbo主干源码分析/" id="art-left" class="art-right">
+            <a href="/2018/01/30/WalkUp攻略-欧洲/" id="art-left" class="art-right">
                 <span class="next-title">
-                    Dubbo主干源码分析<i class="iconfont icon-right"></i> 
+                    WalkUp攻略-欧洲<i class="iconfont icon-right"></i> 
                 </span>
             </a>
         
         
-            <a href="/2017/11/04/dubbo-配置详解/" id="art-right" class="art-left">
+            <a href="/2018/01/30/Java内存区域/" id="art-right" class="art-left">
                 <span class="prev-title"> 
-                    <i class="iconfont icon-left"></i>dubbo配置详解
+                    <i class="iconfont icon-left"></i>Java内存区域
                 </span>
             </a>
         
@@ -389,8 +400,8 @@ $(document).ready(function(){
     <div class="post-toc">
         <span class="title">文章目录</span>
         <div class="toc-inner syuanpi back-1 fallIn-light">
-            <li class="title-link"><a href="javascript:;" class="toTop">dubbo服务最佳实践</a></li>
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#服务最佳实践"><span class="toc-text">服务最佳实践</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#分包"><span class="toc-text">分包</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#粒度"><span class="toc-text">粒度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#版本"><span class="toc-text">版本</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#推荐用法-配置"><span class="toc-text">推荐用法(配置)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置dubbo缓存文件"><span class="toc-text">配置dubbo缓存文件</span></a></li></ol>
+            <li class="title-link"><a href="javascript:;" class="toTop">WalkUp攻略-亚洲</a></li>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#越南"><span class="toc-text">越南</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#柬埔寨"><span class="toc-text">柬埔寨</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#泰国"><span class="toc-text">泰国</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#缅甸"><span class="toc-text">缅甸</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#尼泊尔"><span class="toc-text">尼泊尔</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#印度"><span class="toc-text">印度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#巴基斯坦"><span class="toc-text">巴基斯坦</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#阿富汗"><span class="toc-text">阿富汗</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#伊朗"><span class="toc-text">伊朗</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#阿联酋"><span class="toc-text">阿联酋</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#沙特阿拉伯"><span class="toc-text">沙特阿拉伯</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#伊拉克"><span class="toc-text">伊拉克</span></a></li></ol>
         </div>
     </div>
 
