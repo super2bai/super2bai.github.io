@@ -82,7 +82,7 @@
         
             <li class="menu-item">
                 <a href="/">
-                    <span>Article</span>
+                    <span>記事</span>
                     
                     
                 </a>
@@ -92,7 +92,7 @@
         
             <li class="menu-item">
                 <a href="/archives">
-                    <span>Archives</span>
+                    <span>歸檔</span>
                     
                     
                 </a>
@@ -102,7 +102,7 @@
         
             <li class="menu-item">
                 <a href="javascript:;" id="tags">
-                    <span>Tags</span>
+                    <span>標籤</span>
                     
                     
                 </a>
@@ -112,7 +112,7 @@
         
             <li class="menu-item">
                 <a href="/about">
-                    <span>About</span>
+                    <span>關於</span>
                     
                     
                 </a>
@@ -131,7 +131,7 @@
             
                 <div class="mobile-nav-item">
                     <a href="/">
-                        <span>Article</span>
+                        <span>記事</span>
                         
                         
                     </a>
@@ -141,7 +141,7 @@
             
                 <div class="mobile-nav-item">
                     <a href="/archives">
-                        <span>Archives</span>
+                        <span>歸檔</span>
                         
                         
                     </a>
@@ -152,7 +152,7 @@
                 <div class="mobile-nav-item inner-cloud">
                     <div class="mobile-nav-tag">
                         <a href="javascript:;" id="mobile-tags">
-                            <span>Tags</span>
+                            <span>標籤</span>
                             
                             
                         </a>
@@ -168,7 +168,7 @@
             
                 <div class="mobile-nav-item">
                     <a href="/about">
-                        <span>About</span>
+                        <span>關於</span>
                         
                         
                     </a>
@@ -217,11 +217,15 @@
         </header>
         <div class="post-content syuanpi riseIn-light back-3">
             
-                <blockquote>
+                <h3 id="为什么要懂"><a href="#为什么要懂" class="headerlink" title="为什么要懂"></a>为什么要懂</h3><p>对Java程序员来说，有虚拟机的自动内存管理机制，不容易出现内存泄漏和内存溢出问题，一旦出现这种问题，如果不了解虚拟机是怎样使用内存的，那么排查错误将异常艰难。</p>
+<blockquote>
 <p>一个 Java 源程序文件，会被编译为字节码文件（以 class 为扩展名），每个java程序都需要运行在自己的JVM上，然后告知 JVM 程序的运行入口，再被 JVM 通过字节码解释器加载运行。</p>
+</blockquote>
+<p><img src="https://wx2.sinaimg.cn/mw690/8c564d2agy1fpcsetuc1hj206f0b974e.jpg" alt="Markdown"></p>
+<blockquote>
 <p>概括地说来，JVM初始运行的时候都会分配好<strong>Method Area（方法区）</strong>和<strong>Heap（堆）</strong>，而JVM 每遇到一个线程，就为其分配一个<strong>Program Counter Register（程序计数器）</strong>, <strong>VM Stack（虚拟机栈）和Native Method Stack （本地方法栈），</strong>当线程终止时，三者（虚拟机栈，本地方法栈和程序计数器）所占用的内存空间也会被释放掉。这也是为什么我把内存区域分为线程共享和非线程共享的原因，非线程共享的那三个区域的生命周期与所属线程相同，而线程共享的区域与JAVA程序运行的生命周期相同，所以这也是系统垃圾回收的场所只发生在线程共享的区域（实际上对大部分虚拟机来说知发生在Heap上）的原因。</p>
 </blockquote>
-<a id="more"></a>
+<p><img src="https://wx3.sinaimg.cn/mw690/8c564d2agy1fpct5xgwnij20d60bk3zd.jpg" alt="Markdown"></p>
 <h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><ul>
 <li>Java虚拟机所管理的内存<ul>
 <li>程序计数器</li>
@@ -236,8 +240,7 @@
 </li>
 <li>直接内存(堆外内存)</li>
 </ul>
-<p><img src="http://i1.bvimg.com/629313/f0f4d14ee6914dfc.png" alt="Markdown"></p>
-<p><img src="http://i2.bvimg.com/629313/393e3d0de9b715b0.png" alt="Markdown"></p>
+<p><img src="https://wx3.sinaimg.cn/mw690/8c564d2agy1fpct15p36oj20fd0i2q3q.jpg" alt="Markdown"></p>
 <h3 id="运行时数据"><a href="#运行时数据" class="headerlink" title="运行时数据"></a>运行时数据</h3><h4 id="程序计数器-Program-Counter-Register"><a href="#程序计数器-Program-Counter-Register" class="headerlink" title="程序计数器 Program Counter Register"></a>程序计数器 Program Counter Register</h4><ul>
 <li>字节码的行号指示器</li>
 <li>“线程私有”的内存</li>
@@ -258,6 +261,7 @@
 </ul>
 </li>
 </ul>
+<p><img src="https://wx4.sinaimg.cn/mw690/8c564d2agy1fpctc32wwxj20f40auglo.jpg" alt="Markdown"></p>
 <h4 id="Java虚拟机栈-Java-Virtual-Machine-Stacks"><a href="#Java虚拟机栈-Java-Virtual-Machine-Stacks" class="headerlink" title="Java虚拟机栈 Java Virtual Machine Stacks"></a>Java虚拟机栈 Java Virtual Machine Stacks</h4><ul>
 <li>线程私有</li>
 <li>为虚拟机执行Java方法服务</li>
@@ -271,7 +275,7 @@
 </ul>
 <hr>
 <p><strong>栈帧(Stack Frame)</strong>：每个方法在执行的同时都会创建一个栈帧(Stack Frame)，用于<strong>存储局部变量表、操作数栈(Operand Stack，记录出栈、入栈的操作)、动态链接、方法出口等</strong>信息。每一个方法从调用直至执行完成的过程，就对应着一个栈帧在虚拟机中入栈到出栈的过程。</p>
-<p><img src="http://i4.bvimg.com/629313/91696f2b3afce6bd.png" alt="Markdown"></p>
+<p><img src="https://wx1.sinaimg.cn/mw690/8c564d2agy1fpctohrcqwg20cy094t8m.gif" alt="Markdown"></p>
 <p><strong>局部变量表</strong>：存放编译器可知的各种基本数据类型、对象引用和returnAddress类型。所需内存空间在编译期间完成分配，运行时不会改变。</p>
 <blockquote>
 <ul>
@@ -315,6 +319,7 @@
 </ul>
 </li>
 </ul>
+<p><a href="https://www.artima.com/insidejvm/ed2/jvm8.html" target="_blank" rel="external">参考资料</a></p>
 <h4 id="本地方法栈-Native-Method-Stack"><a href="#本地方法栈-Native-Method-Stack" class="headerlink" title="本地方法栈 Native Method Stack"></a>本地方法栈 Native Method Stack</h4><ul>
 <li>与虚拟机栈类似</li>
 </ul>
@@ -352,6 +357,7 @@
 <li>内存回收目标主要是针对常量池的回收和对类型的卸载</li>
 <li>当方法区无法满足内存分配需求时，抛出OutOfMemoryError异常</li>
 </ul>
+<p><img src="https://wx4.sinaimg.cn/mw690/8c564d2agy1fpcttlyoamj20cs07ljrj.jpg" alt="Markdown"></p>
 <h4 id="运行时常量池-Runtime-Constant-Pool"><a href="#运行时常量池-Runtime-Constant-Pool" class="headerlink" title="运行时常量池 Runtime Constant Pool"></a>运行时常量池 Runtime Constant Pool</h4><ul>
 <li>方法区的一部分</li>
 <li>存放编译器生成的各种字面量和符号引用，将在类加载后进入方法区的运行时常量池中存放</li>
@@ -373,7 +379,7 @@
 <li>常量池Constant Pool Table</li>
 </ul>
 </blockquote>
-<p>关于常量池的其它资料：<a href="http://www.cnblogs.com/DreamSea/archive/2011/11/20/2256396.html" target="_blank" rel="external">Java常量池详解</a></p>
+<p><a href="http://www.cnblogs.com/DreamSea/archive/2011/11/20/2256396.html" target="_blank" rel="external">参考资料</a></p>
 <h3 id="直接内存Direct-Memory"><a href="#直接内存Direct-Memory" class="headerlink" title="直接内存Direct Memory"></a>直接内存Direct Memory</h3><ul>
 <li>JVM管理的内存区域之外的</li>
 <li>不受Java堆大小的限制</li>
@@ -523,11 +529,11 @@
     </div>
     <div class="theme">
         <span>
-            Powered by
+            動力來自
             <a href="http://hexo.io/" target="_blank">Hexo </a>
         </span>
         <span>
-            Theme
+            樣式
             <a href="https://github.com/ColMugX/hexo-theme-Nlvi"> Nlvi </a>
         </span>
     </div>
@@ -575,7 +581,7 @@ $(document).ready(function(){
         <span class="title">文章目录</span>
         <div class="toc-inner syuanpi back-1 fallIn-light">
             <li class="title-link"><a href="javascript:;" class="toTop">Java内存区域</a></li>
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#概念"><span class="toc-text">概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#运行时数据"><span class="toc-text">运行时数据</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#程序计数器-Program-Counter-Register"><span class="toc-text">程序计数器 Program Counter Register</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Java虚拟机栈-Java-Virtual-Machine-Stacks"><span class="toc-text">Java虚拟机栈 Java Virtual Machine Stacks</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#本地方法栈-Native-Method-Stack"><span class="toc-text">本地方法栈 Native Method Stack</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Java堆-Heap"><span class="toc-text">Java堆 Heap</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#方法区-Method-Area"><span class="toc-text">方法区 Method Area</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#运行时常量池-Runtime-Constant-Pool"><span class="toc-text">运行时常量池 Runtime Constant Pool</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#直接内存Direct-Memory"><span class="toc-text">直接内存Direct Memory</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实例"><span class="toc-text">实例</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#JVM执行步骤"><span class="toc-text">JVM执行步骤</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考资料"><span class="toc-text">参考资料</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么要懂"><span class="toc-text">为什么要懂</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#概念"><span class="toc-text">概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#运行时数据"><span class="toc-text">运行时数据</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#程序计数器-Program-Counter-Register"><span class="toc-text">程序计数器 Program Counter Register</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Java虚拟机栈-Java-Virtual-Machine-Stacks"><span class="toc-text">Java虚拟机栈 Java Virtual Machine Stacks</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#本地方法栈-Native-Method-Stack"><span class="toc-text">本地方法栈 Native Method Stack</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Java堆-Heap"><span class="toc-text">Java堆 Heap</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#方法区-Method-Area"><span class="toc-text">方法区 Method Area</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#运行时常量池-Runtime-Constant-Pool"><span class="toc-text">运行时常量池 Runtime Constant Pool</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#直接内存Direct-Memory"><span class="toc-text">直接内存Direct Memory</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实例"><span class="toc-text">实例</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#JVM执行步骤"><span class="toc-text">JVM执行步骤</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考资料"><span class="toc-text">参考资料</span></a></li></ol>
         </div>
     </div>
 
