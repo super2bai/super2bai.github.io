@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <title> Java内存区域 · super2bai </title>
+    <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="browsermode" content="application">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="super2bai">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="msapplication-navbutton-color" content="#666666">
+<meta name= "format-detection" content="telephone=no" />
+<meta name="keywords" content="nlvi, Nlvi" />
+
+
+
+
+
+    <meta name="keywords" content="JVM, Nlvi" />
+
+<link rel="stylesheet" href="/style/style.css">
+<script src="/script/jquery.min.js"></script>
+<script>
+    var CONFIG = {
+        title: "super2bai",
+        author: "super2bai",
+        lightbox: true,
+        animate: true
+    }
+</script>
+
+
+
+    <link rel="stylesheet" href="/lightbox/css/lightbox.min.css">
+
+
+
+
+    <link rel="stylesheet" href="/syuanpi/syuanpi.min.css">
+
+
+
+
+
+
+
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</head>
+<body>
+    <div class="progress">
+    <div class="progress-inner"></div>
+</div>
+    <div class="body">
+    <div class="tagcloud-mask"></div>  
+<div class="tagcloud" id="tagcloud">
+    <div class="tagcloud-inner">
+        <a href="/tags/Dubbo/" style="font-size: 14px;">Dubbo</a> <a href="/tags/GitHub-Pages/" style="font-size: 14px;">GitHub Pages</a> <a href="/tags/IO/" style="font-size: 14px;">IO</a> <a href="/tags/JVM/" style="font-size: 14px;">JVM</a> <a href="/tags/Spring/" style="font-size: 14px;">Spring</a> <a href="/tags/Zookeeper/" style="font-size: 14px;">Zookeeper</a> <a href="/tags/walkup/" style="font-size: 14px;">walkup</a> <a href="/tags/分布式/" style="font-size: 14px;">分布式</a>
+    </div>
+</div>
+    <header class="header" id="header">
+    <div class="title syuanpi tvIn">
+    <div class="table">
+        <div class="connect">
+            <div class="connect-inner">
+                <span><a href="/">super2bai</a></span>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <nav class="main-nav syuanpi tvIn">
+<div class="table">
+
+    <ul class="menu">
+        
+        
+        
+            <li class="menu-item">
+                <a href="/">
+                    <span>Article</span>
+                    
+                    
+                </a>
+            </li>
+        
+        
+        
+            <li class="menu-item">
+                <a href="/archives">
+                    <span>Archives</span>
+                    
+                    
+                </a>
+            </li>
+        
+        
+        
+            <li class="menu-item">
+                <a href="javascript:;" id="tags">
+                    <span>Tags</span>
+                    
+                    
+                </a>
+            </li>
+        
+        
+        
+            <li class="menu-item">
+                <a href="/about">
+                    <span>About</span>
+                    
+                    
+                </a>
+            </li>
+        
+        
+    </ul>
+
+</div>
+</nav>
+</header>
+<div class="mobile-header">
+    <div class="mobile-header-body">
+        <div class="mobile-header-list">
+            
+            
+                <div class="mobile-nav-item">
+                    <a href="/">
+                        <span>Article</span>
+                        
+                        
+                    </a>
+                </div>
+            
+            
+            
+                <div class="mobile-nav-item">
+                    <a href="/archives">
+                        <span>Archives</span>
+                        
+                        
+                    </a>
+                </div>
+            
+            
+            
+                <div class="mobile-nav-item inner-cloud">
+                    <div class="mobile-nav-tag">
+                        <a href="javascript:;" id="mobile-tags">
+                            <span>Tags</span>
+                            
+                            
+                        </a>
+                    </div>
+                    <div class="mobile-nav-tagcloud">
+                        <div class="mobile-tagcloud-inner">
+                            <a href="/tags/Dubbo/" style="font-size: 14px;">Dubbo</a> <a href="/tags/GitHub-Pages/" style="font-size: 14px;">GitHub Pages</a> <a href="/tags/IO/" style="font-size: 14px;">IO</a> <a href="/tags/JVM/" style="font-size: 14px;">JVM</a> <a href="/tags/Spring/" style="font-size: 14px;">Spring</a> <a href="/tags/Zookeeper/" style="font-size: 14px;">Zookeeper</a> <a href="/tags/walkup/" style="font-size: 14px;">walkup</a> <a href="/tags/分布式/" style="font-size: 14px;">分布式</a>
+                        </div>
+                    </div>
+                </div>
+            
+            
+            
+                <div class="mobile-nav-item">
+                    <a href="/about">
+                        <span>About</span>
+                        
+                        
+                    </a>
+                </div>
+            
+            
+        </div>
+    </div>
+    <div class="mobile-header-nav">
+        <div class="mobile-header-item" id="mobile-left">
+            <div class="header-menu-item">
+                <span class="header-menu-line"></span>
+            </div>
+        </div>
+        <h1 class="mobile-header-title">
+            <a href="/">super2bai</a>
+        </h1>
+        <div class="mobile-header-item"></div>
+    </div>
+</div>
+
+    <div class="container">
+        <main class="main" id="main">
+            
+    
+    <article class="post">
+        <header class="post-header">
+            <div class="post-time syuanpi riseIn-light back-1">
+                <span>January 30, 2018</span>
+                
+            </div>
+            <h1 class="post-title syuanpi riseIn-light back-2">
+            
+                Java内存区域
+            
+            </h1>
+            
+                
+                    <div class="post-tags syuanpi riseIn-light back-3">
+                    
+                        <a href="/tags/JVM/">JVM</a>
+                    
+                    </div>
+                
+            
+        </header>
+        <div class="post-content syuanpi riseIn-light back-3">
+            
+                <h3 id="为什么要懂"><a href="#为什么要懂" class="headerlink" title="为什么要懂"></a>为什么要懂</h3><p>对Java程序员来说，有虚拟机的自动内存管理机制，不容易出现内存泄漏和内存溢出问题，一旦出现这种问题，如果不了解虚拟机是怎样使用内存的，那么排查错误将异常艰难。</p>
+<a id="more"></a>
+<blockquote>
+<p>一个 Java 源程序文件，会被编译为字节码文件（以 class 为扩展名），每个java程序都需要运行在自己的JVM上，然后告知 JVM 程序的运行入口，再被 JVM 通过字节码解释器加载运行。</p>
+</blockquote>
+<p><img src="https://wx2.sinaimg.cn/mw690/8c564d2agy1fpcsetuc1hj206f0b974e.jpg" alt="Markdown"></p>
+<blockquote>
+<p>概括地说来，JVM初始运行的时候都会分配好<strong>Method Area（方法区）</strong>和<strong>Heap（堆）</strong>，而JVM 每遇到一个线程，就为其分配一个<strong>Program Counter Register（程序计数器）</strong>, <strong>VM Stack（虚拟机栈）和Native Method Stack （本地方法栈），</strong>当线程终止时，三者（虚拟机栈，本地方法栈和程序计数器）所占用的内存空间也会被释放掉。这也是为什么我把内存区域分为线程共享和非线程共享的原因，非线程共享的那三个区域的生命周期与所属线程相同，而线程共享的区域与JAVA程序运行的生命周期相同，所以这也是系统垃圾回收的场所只发生在线程共享的区域（实际上对大部分虚拟机来说知发生在Heap上）的原因。</p>
+</blockquote>
+<p><img src="https://wx3.sinaimg.cn/mw690/8c564d2agy1fpct5xgwnij20d60bk3zd.jpg" alt="Markdown"></p>
+<h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><ul>
+<li>Java虚拟机所管理的内存<ul>
+<li>程序计数器</li>
+<li>Java虚拟机栈</li>
+<li>本地方法栈</li>
+<li>Java堆</li>
+<li>方法区<ul>
+<li>运行时常量池</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>直接内存(堆外内存)</li>
+</ul>
+<p><img src="https://wx3.sinaimg.cn/mw690/8c564d2agy1fpct15p36oj20fd0i2q3q.jpg" alt="Markdown"></p>
+<h3 id="运行时数据"><a href="#运行时数据" class="headerlink" title="运行时数据"></a>运行时数据</h3><h4 id="程序计数器-Program-Counter-Register"><a href="#程序计数器-Program-Counter-Register" class="headerlink" title="程序计数器 Program Counter Register"></a>程序计数器 Program Counter Register</h4><ul>
+<li>字节码的行号指示器</li>
+<li>“线程私有”的内存</li>
+<li>没有规定任何OutOfMemoryError情况的区域</li>
+</ul>
+<p><strong>当前线程所执行的字节码的行号指示器</strong>。在虚拟机的概念模型里，字节码解释器工作时就时通过改变这个计数器的值来选取下一条需要执行的字节码指令（分支、循环、跳转、异常处理、线程恢复等基础功能都需要依赖这个计数器来完成）。</p>
+<p>Java虚拟机的多线程是通过线程轮流切换并分配处理执行时间的方式来实现的，在任何一个确定的时刻，一个处理器都只会执行一条线程中的指令。因此，为了线程切换后能恢复到正确的执行位置，每条线程都需要有一个独立的程序计数器，线程独立存储，互不影响。</p>
+<ul>
+<li>计数器的内容<ul>
+<li>线程执行Java方法<ul>
+<li>正在执行的虚拟机字节码指令的地址</li>
+</ul>
+</li>
+<li>线程执行Native方法<ul>
+<li>Undefined</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://wx4.sinaimg.cn/mw690/8c564d2agy1fpctc32wwxj20f40auglo.jpg" alt="Markdown"></p>
+<h4 id="Java虚拟机栈-Java-Virtual-Machine-Stacks"><a href="#Java虚拟机栈-Java-Virtual-Machine-Stacks" class="headerlink" title="Java虚拟机栈 Java Virtual Machine Stacks"></a>Java虚拟机栈 Java Virtual Machine Stacks</h4><ul>
+<li>线程私有</li>
+<li>为虚拟机执行Java方法服务</li>
+</ul>
+<p><strong>Java方法执行的内存模型</strong>。</p>
+<hr>
+<p>Java指令的构成：</p>
+<ul>
+<li>操作码(方法本身)，保存在Stack中</li>
+<li>操作数(方法内部变量)，简单类型保存在Stack中，对象类型在Stack保存地址，在Heap保存值</li>
+</ul>
+<hr>
+<p><strong>栈帧(Stack Frame)</strong>：每个方法在执行的同时都会创建一个栈帧(Stack Frame)，用于<strong>存储局部变量表、操作数栈(Operand Stack，记录出栈、入栈的操作)、动态链接、方法出口等</strong>信息。每一个方法从调用直至执行完成的过程，就对应着一个栈帧在虚拟机中入栈到出栈的过程。</p>
+<p><img src="https://wx1.sinaimg.cn/mw690/8c564d2agy1fpctohrcqwg20cy094t8m.gif" alt="Markdown"></p>
+<p><strong>局部变量表</strong>：存放编译器可知的各种基本数据类型、对象引用和returnAddress类型。所需内存空间在编译期间完成分配，运行时不会改变。</p>
+<blockquote>
+<ul>
+<li>各种基本数据类型<ul>
+<li>boolean</li>
+<li>byte</li>
+<li>char</li>
+<li>short</li>
+<li>int</li>
+<li>float</li>
+<li>long</li>
+<li>double</li>
+</ul>
+</li>
+</ul>
+<p>其中，64位长度的long和double会占用2个局部变量空间(Slot)，其余的只占用1个。</p>
+<ul>
+<li>对象引用<ul>
+<li>reference类型</li>
+<li>不等同对象本身</li>
+<li>可能是一个指向对象起始地址的引用指针</li>
+<li>也可能是指向一个代表对象的句柄或其它与此对象相关的位置</li>
+</ul>
+</li>
+<li>returnAddress<ul>
+<li>指向一条字节码执行的地址</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<ul>
+<li>Java虚拟机规范中，对此区域规定了两种异常情况<ul>
+<li>如果线程请求的栈深度大于虚拟机所允许的深度<ul>
+<li>StackOverflowError异常</li>
+</ul>
+</li>
+<li>如果虚拟机栈可以动态扩展，扩展时无法申请到足够的内存<ul>
+<li>OutOfMemoryError异常</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><a href="https://www.artima.com/insidejvm/ed2/jvm8.html" target="_blank" rel="external">参考资料</a></p>
+<h4 id="本地方法栈-Native-Method-Stack"><a href="#本地方法栈-Native-Method-Stack" class="headerlink" title="本地方法栈 Native Method Stack"></a>本地方法栈 Native Method Stack</h4><ul>
+<li>与虚拟机栈类似</li>
+</ul>
+<ul>
+<li>为虚拟机执行native方法服务</li>
+<li>虚拟机规范中没有强制规定使用的语言、使用方式与数据结构</li>
+<li>异常<ul>
+<li>StackOverflowError异常</li>
+<li>OutOfMemoryError异常</li>
+</ul>
+</li>
+</ul>
+<h4 id="Java堆-Heap"><a href="#Java堆-Heap" class="headerlink" title="Java堆 Heap"></a>Java堆 Heap</h4><ul>
+<li>线程共享</li>
+<li>虚拟机启动时创建</li>
+<li>存放对象实例<ul>
+<li>包括对象的属性值、属性类型、对象本身的类型标记等，对象的方法以栈帧的形式保存在Stack中</li>
+<li>对象在Heap分配好后，需要在Stack中保存一个4字节的Heap内存地址，用来定位该对象实例在Heap中的位置</li>
+</ul>
+</li>
+<li>也称GC堆，因为是垃圾收集器管理的主要区域</li>
+<li>可以处于物理上不连续的内存空间中，只要逻辑上是连续的即可</li>
+<li>大小通过<code>-Xmx</code>和<code>-Xms</code>控制</li>
+<li>如果在堆中没有内存完成实例分配，并且堆也无法再扩展时，抛出OutOfMemoryError异常。</li>
+</ul>
+<p>从<strong>内存回收</strong>角度来看：由于现在收集器基本都采用分代收集算法，可分为<code>新生代</code>和<code>老年代</code>。细致划分为：<code>Eden空间</code>、<code>From Survivor空间</code>、<code>To Survivro空间</code>等。</p>
+<p>从<strong>内存分配</strong>角度来看：可能划分出过个线程私有的分配缓冲区(Thread Local Allocation Buffer,TLAB)，进一步划分是为了更好地回收内存，或者更快的分配内存。</p>
+<h4 id="方法区-Method-Area"><a href="#方法区-Method-Area" class="headerlink" title="方法区 Method Area"></a>方法区 Method Area</h4><ul>
+<li>线程共享</li>
+<li>存储已被虚拟机加载的类信息、常量、静态变量、即时编译器编译后的代码等数据。</li>
+<li>Java虚拟机规范中描述为堆的一个逻辑部分，别名为Non-Heap(非堆)</li>
+<li>不需要连续的内存</li>
+<li>可以选择固定大小或者可扩展</li>
+<li>可以选择不实现垃圾收集</li>
+<li>内存回收目标主要是针对常量池的回收和对类型的卸载</li>
+<li>当方法区无法满足内存分配需求时，抛出OutOfMemoryError异常</li>
+</ul>
+<p><img src="https://wx4.sinaimg.cn/mw690/8c564d2agy1fpcttlyoamj20cs07ljrj.jpg" alt="Markdown"></p>
+<h4 id="运行时常量池-Runtime-Constant-Pool"><a href="#运行时常量池-Runtime-Constant-Pool" class="headerlink" title="运行时常量池 Runtime Constant Pool"></a>运行时常量池 Runtime Constant Pool</h4><ul>
+<li>方法区的一部分</li>
+<li>存放编译器生成的各种字面量和符号引用，将在类加载后进入方法区的运行时常量池中存放</li>
+<li>一般来说，还会存放翻译出来的直接引用</li>
+<li>具备动态性（和Class文件常量池比）<ul>
+<li>编译期和运行期(<code>String.intern()方法</code>)均可放入常量</li>
+</ul>
+</li>
+<li>JVM规范没有细节要求</li>
+<li>无法再申请到内存时会抛出OutOfMemoryError异常</li>
+</ul>
+<blockquote>
+<p>Class文件中的内容：</p>
+<ul>
+<li>类的版本</li>
+<li>字段</li>
+<li>方法</li>
+<li>接口</li>
+<li>常量池Constant Pool Table</li>
+</ul>
+</blockquote>
+<p><a href="http://www.cnblogs.com/DreamSea/archive/2011/11/20/2256396.html" target="_blank" rel="external">参考资料</a></p>
+<h3 id="直接内存Direct-Memory"><a href="#直接内存Direct-Memory" class="headerlink" title="直接内存Direct Memory"></a>直接内存Direct Memory</h3><ul>
+<li>JVM管理的内存区域之外的</li>
+<li>不受Java堆大小的限制</li>
+<li>受<strong>本机总内存大小</strong>（RAM以及SWAP区或者分页文件）及<strong>处理器寻址空间</strong>的限制</li>
+<li>在设置-Xmx参数时要注意直接内存<ul>
+<li>各个内存区域总和<code>&lt;</code>物理内存限制（物理的和操作系统及的限制）</li>
+<li>大于会导致动态扩展时可能会出现OutOfMemoryError异常</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>JDK1.4新增NIO，引入了基于(Channel)与缓冲区(Buffer)的IO方式，NIO使用Native函数直接分配堆外内存，通过存储在Java堆中的DirectByteBufffer对象作为这块内存的引用进行操作。</p>
+<p>一些场景中显著提高性能</p>
+<p>避免了在Java堆和Native堆中来回复制数据</p>
+</blockquote>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JVMShowcase</span> </span>&#123;  </div><div class="line">  <span class="comment">//静态类常量,  </span></div><div class="line">  <span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">static</span> String ClASS_CONST = <span class="string">"I'm a Const"</span>;  </div><div class="line">  <span class="comment">//私有实例变量  </span></div><div class="line">  <span class="keyword">private</span> <span class="keyword">int</span> instanceVar=<span class="number">15</span>;  </div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;  </div><div class="line">    <span class="comment">//调用静态方法  </span></div><div class="line">    runStaticMethod();  </div><div class="line">    <span class="comment">//调用非静态方法  </span></div><div class="line">    JVMShowcase showcase=<span class="keyword">new</span> JVMShowcase();  </div><div class="line">    showcase.runNonStaticMethod(<span class="number">100</span>);  </div><div class="line">  &#125;  </div><div class="line">  <span class="comment">//常规静态方法  </span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">runStaticMethod</span><span class="params">()</span></span>&#123;  </div><div class="line">    <span class="keyword">return</span> ClASS_CONST;  </div><div class="line">  &#125;  </div><div class="line">  <span class="comment">//非静态方法  </span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">runNonStaticMethod</span><span class="params">(<span class="keyword">int</span> parameter)</span></span>&#123;  </div><div class="line">    <span class="keyword">int</span> methodVar=<span class="keyword">this</span>.instanceVar * parameter;  </div><div class="line">    <span class="keyword">return</span> methodVar;  </div><div class="line">  &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="JVM执行步骤"><a href="#JVM执行步骤" class="headerlink" title="JVM执行步骤"></a>JVM执行步骤</h4><ul>
+<li>JVM向操作系统申请指定空闲内存<ul>
+<li>操作系统分配出指定内存，返回给JVM内存段的起始地址、终止地址</li>
+<li>JVM准备加载类文件</li>
+</ul>
+</li>
+<li>分配Java内存<ul>
+<li>分配Heap内存</li>
+<li>。。。</li>
+</ul>
+</li>
+<li>文件检查、分析class文件<ul>
+<li>有错误立即返回</li>
+</ul>
+</li>
+<li>加载类<ul>
+<li>JVM默认使用bootstrap加载器，加载rt.jar包下所有类到堆内存的Method Area</li>
+<li>加载用户类（如上文中的<code>JVMShow</code>类），方法区中：<ul>
+<li>main方法的符号引用</li>
+<li>runStaticMethod方法的符号引用</li>
+</ul>
+</li>
+<li>此时，Heap是空的，Stack是空的<ul>
+<li>没有新建对象和执行线程</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>执行方法<ul>
+<li>启动新线程，执行main方法</li>
+<li>方法区中：<ul>
+<li>main方法的符号引用</li>
+<li>runStaticMethod方法的符号引用</li>
+<li>CLASS_CONST(runStaticMethod方法内部第一次被访问时产生)</li>
+</ul>
+</li>
+<li>堆中(<code>JVMShowcase showcase=new JVMShowcase(); 被执行</code>)：<ul>
+<li>两个object？？？<ul>
+<li>JVMShowcase的父类</li>
+</ul>
+</li>
+<li>showcase对象</li>
+</ul>
+</li>
+<li>栈中有三个栈帧：<ul>
+<li>runNonStaticMethod</li>
+<li>runStaticMethod</li>
+<li>main</li>
+</ul>
+</li>
+<li>程序计数器<ul>
+<li>指向下一条要执行的语句</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>释放内存<ul>
+<li>程序运行结束后，向操作系统释放内存。</li>
+</ul>
+</li>
+</ul>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p><a href="https://www.journaldev.com/2856/java-jvm-memory-model-memory-management-in-java" target="_blank" rel="external">Java (JVM) Memory Model</a></p>
+<p><a href="https://howtodoinjava.com/core-java/garbage-collection/jvm-memory-model-structure-and-components/" target="_blank" rel="external">JVM Memory Model / Structure and Components</a></p>
+<p><a href="http://tutorials.jenkov.com/java-concurrency/java-memory-model.html" target="_blank" rel="external">Java Memory Model</a></p>
+<p><a href="https://www.cnblogs.com/wangjzh/p/5258254.html" target="_blank" rel="external">深入理解JVM之JVM内存区域与内存分配</a></p>
+
+            
+        
+        </div>
+        
+            
+            
+        
+    </article>
+    
+        
+    <nav class="article-page">
+        
+            <a href="/2018/01/30/WalkUp攻略-亚洲/" id="art-left" class="art-right">
+                <span class="next-title">
+                    WalkUp攻略-亚洲<i class="iconfont icon-right"></i> 
+                </span>
+            </a>
+        
+        
+            <a href="/2018/01/22/Mac-编译openJDk9/" id="art-right" class="art-left">
+                <span class="prev-title"> 
+                    <i class="iconfont icon-left"></i>Mac 编译openJDk9
+                </span>
+            </a>
+        
+    </nav>
+
+        
+    
+
+
+        </main>
+        <footer class="footer syuanpi fadeIn" id="footer">
+    <hr>
+    <div class="footer-wrapper">
+        <div class="left">
+            <div class="contact-icon">
+    
+    
+    
+    
+    
+    
+    
+    
+        
+            <a href="https://github.com/super2bai" class="iconfont icon-github" title="github"></a>
+        
+        
+        
+        
+        
+        
+        
+    
+</div>
+        </div>
+        <div class="right">
+            <div class="copyright">
+    <div class="info">
+        <span>&copy;</span>
+        <span>2017 ~ 2018</span>
+        <span>❤</span>
+        <span>super2bai</span>
+    </div>
+    <div class="theme">
+        <span>
+            Powered by
+            <a href="http://hexo.io/" target="_blank">Hexo </a>
+        </span>
+        <span>
+            Theme
+            <a href="https://github.com/ColMugX/hexo-theme-Nlvi"> Nlvi </a>
+        </span>
+    </div>
+    
+    <div class="visit_count">
+        <i class="iconfont icon-visit"></i>
+        <span id="busuanzi_value_site_uv"></span>
+        <i class="iconfont icon-people"></i>
+        <span id="busuanzi_value_site_pv"></span>
+    </div>
+    
+</div>
+        </div>
+    </div>
+</footer>
+    </div>
+    <script src="/script/nlvi.js"></script>
+<script src="/script/search.js"></script>
+
+    <script src="/lightbox/js/lightbox.min.js"></script>
+
+<script>
+$(document).ready(function(){
+    document.body.addEventListener('touchstart', function () {});
+    $('.progress').hide();
+    $('.body').show();
+    Nlvi.tagcloud();
+    Nlvi.mobileHeader();
+    Nlvi.back2top();
+    Nlvi.smoothScroll();
+    Nlvi.onView();
+    Nlvi.showToc();
+    Nlvi.showComments();
+    Nlvi.showReward();
+    Nlvi.picPos();
+
+    !CONFIG.animate && Nlvi.offAnimate();
+    CONFIG.lightbox && Nlvi.onPicBox();
+})
+</script>
+    </div>
+    
+        
+    <div class="post-toc">
+        <span class="title">文章目录</span>
+        <div class="toc-inner syuanpi back-1 fallIn-light">
+            <li class="title-link"><a href="javascript:;" class="toTop">Java内存区域</a></li>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么要懂"><span class="toc-text">为什么要懂</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#概念"><span class="toc-text">概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#运行时数据"><span class="toc-text">运行时数据</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#程序计数器-Program-Counter-Register"><span class="toc-text">程序计数器 Program Counter Register</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Java虚拟机栈-Java-Virtual-Machine-Stacks"><span class="toc-text">Java虚拟机栈 Java Virtual Machine Stacks</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#本地方法栈-Native-Method-Stack"><span class="toc-text">本地方法栈 Native Method Stack</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Java堆-Heap"><span class="toc-text">Java堆 Heap</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#方法区-Method-Area"><span class="toc-text">方法区 Method Area</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#运行时常量池-Runtime-Constant-Pool"><span class="toc-text">运行时常量池 Runtime Constant Pool</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#直接内存Direct-Memory"><span class="toc-text">直接内存Direct Memory</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实例"><span class="toc-text">实例</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#JVM执行步骤"><span class="toc-text">JVM执行步骤</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考资料"><span class="toc-text">参考资料</span></a></li></ol>
+        </div>
+    </div>
+
+    
+    <div class="backtop syuanpi dead toTop" id="backtop">
+    <i class="iconfont icon-up"></i>
+    <span style="text-align:center;font-family:Georgia;"><span style="font-family:Georgia;" id="scrollpercent">1</span>%</span>
+</div>
+    
+</body>
+</html>
