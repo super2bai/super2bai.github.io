@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="">
 <head>
-    <title> HopSpot虚拟机对象探秘 · super2bai </title>
+    <title> JVM中对象的创建 · super2bai </title>
     <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
@@ -202,7 +202,7 @@
             </div>
             <h1 class="post-title syuanpi riseIn-light back-2">
             
-                HopSpot虚拟机对象探秘
+                JVM中对象的创建
             
             </h1>
             
@@ -231,7 +231,7 @@
 <p>创建对象(例如克隆、反序列化)通常仅仅是一个<code>new</code>关键字而已。对应在JVM中，对象(普通Java对象，不包含数组和Class对象等)的创建是怎样的？</p>
 </blockquote>
 <h4 id="类加载检查"><a href="#类加载检查" class="headerlink" title="类加载检查"></a>类加载检查</h4><ul>
-<li>参数是否能在<strong>常量池中定位到</strong>一个类的符号的引用</li>
+<li>参数是否能在<strong>常量池中定位到</strong>一个类的符号引用</li>
 <li>这个符号引用代表的类<strong>是否已经被加载、解析和初始化过</strong><ul>
 <li>无：执行相应的类加载过程</li>
 </ul>
@@ -239,9 +239,19 @@
 </ul>
 <h4 id="分配内存"><a href="#分配内存" class="headerlink" title="分配内存"></a>分配内存</h4><ul>
 <li>对象所需内存的大小在类加载后便可完全确定</li>
-<li>从Java堆中划分出确定大小的内存</li>
+<li>为新生对象分配空间：从Java堆中划分出确定大小的内存</li>
 </ul>
-<h5 id="分配方式"><a href="#分配方式" class="headerlink" title="分配方式"></a>分配方式</h5><blockquote>
+<h5 id="分配方式"><a href="#分配方式" class="headerlink" title="分配方式"></a>分配方式</h5><ul>
+<li>指针碰撞Bump the Pointer</li>
+</ul>
+<blockquote>
+<p><strong>Java堆中内存是绝对规整的</strong>，用过的内存在一边，空间内存在另外一边，中间用指针作为分界点的指示器，分配内存就是仅仅把指针向空闲内存挪动一段与对象大小相等的距离。</p>
+</blockquote>
+<ul>
+<li>空闲列表Free List</li>
+</ul>
+<blockquote>
+<p><strong>Java堆中内存是不规整的</strong>，已使用的内存和空闲内存相互交错，虚拟机需维护一个列表，记录哪些内存块是可用的，在分配的时候从列表中找到一块足够大的空间划分给对象实例，并更新列表上的记录。</p>
 <p>分配方式的选择：垃圾收集器是否带有压缩整理功能（决定Java堆是否规整）</p>
 <ul>
 <li>Serial、ParNew等带Compact过程的收集器<ul>
@@ -254,23 +264,11 @@
 </li>
 </ul>
 </blockquote>
-<ul>
-<li>指针碰撞Bump the Pointer</li>
-</ul>
-<blockquote>
-<p>Java堆中内存是<strong>绝对规整的</strong>，用过的内存在一边，空间内存在另外一边，中间用指针作为分界点的指示器，分配内存就是仅仅把指针向空闲内存挪动一段与对象大小相等的距离。</p>
-</blockquote>
-<ul>
-<li>空闲列表Free List</li>
-</ul>
-<blockquote>
-<p>Java堆中内存是<strong>不规整的</strong>，已使用的内存和空闲内存相互交错，虚拟机需维护一个列表，记录哪些内存块是可用的，在分配的时候从列表中找到一块足够大的空间划分给对象实例，并更新列表上的记录。</p>
-</blockquote>
 <h5 id="并发情况下对象创建非线程安全的问题"><a href="#并发情况下对象创建非线程安全的问题" class="headerlink" title="并发情况下对象创建非线程安全的问题"></a>并发情况下对象创建非线程安全的问题</h5><blockquote>
 <p>对象创建行为非常频繁，并发情况下可能出现：正在给对象A分配内存，指针还没来得及修改，对象B又同时使用了原来的指针来分配内存。</p>
 </blockquote>
 <ul>
-<li>对分配内存的操作进行同步处理<ul>
+<li>对分配内存的动作进行同步处理<ul>
 <li>虚拟机采用<strong>CAS+失败重试</strong>方法保证更新操作的原子性</li>
 </ul>
 </li>
@@ -320,15 +318,7 @@
 </ul>
 </blockquote>
 <p>由字节码中是否跟随invokespecial指令所决定是否执行<init>方法，把对象按照程序员的意愿进行初始化，这样一个真正可用的对象才算完全产生出来。</init></p>
-<h3 id="对象的内存布局"><a href="#对象的内存布局" class="headerlink" title="对象的内存布局"></a>对象的内存布局</h3><ul>
-<li>在HotSpot中，对象在内存中存储的布局<ul>
-<li>对象头Header</li>
-<li>实例数据Instance Data</li>
-<li>对齐填充Padding</li>
-</ul>
-</li>
-</ul>
-<h3 id="对象的访问定位"><a href="#对象的访问定位" class="headerlink" title="对象的访问定位"></a>对象的访问定位</h3>
+
             
         
         </div>
@@ -447,8 +437,8 @@ $(document).ready(function(){
     <div class="post-toc">
         <span class="title">文章目录</span>
         <div class="toc-inner syuanpi back-1 fallIn-light">
-            <li class="title-link"><a href="javascript:;" class="toTop">HopSpot虚拟机对象探秘</a></li>
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#对象的创建"><span class="toc-text">对象的创建</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#类加载检查"><span class="toc-text">类加载检查</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#分配内存"><span class="toc-text">分配内存</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#分配方式"><span class="toc-text">分配方式</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#并发情况下对象创建非线程安全的问题"><span class="toc-text">并发情况下对象创建非线程安全的问题</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#内存空间初始化为零值-不包括对象头"><span class="toc-text">内存空间初始化为零值(不包括对象头)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#对对象的对象头Object-Header进行设置"><span class="toc-text">对对象的对象头Object Header进行设置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#可选：执行方法"><span class="toc-text">可选：执行方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对象的内存布局"><span class="toc-text">对象的内存布局</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对象的访问定位"><span class="toc-text">对象的访问定位</span></a></li></ol></li></ol>
+            <li class="title-link"><a href="javascript:;" class="toTop">JVM中对象的创建</a></li>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#对象的创建"><span class="toc-text">对象的创建</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#类加载检查"><span class="toc-text">类加载检查</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#分配内存"><span class="toc-text">分配内存</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#分配方式"><span class="toc-text">分配方式</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#并发情况下对象创建非线程安全的问题"><span class="toc-text">并发情况下对象创建非线程安全的问题</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#内存空间初始化为零值-不包括对象头"><span class="toc-text">内存空间初始化为零值(不包括对象头)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#对对象的对象头Object-Header进行设置"><span class="toc-text">对对象的对象头Object Header进行设置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#可选：执行方法"><span class="toc-text">可选：执行方法</span></a></li></ol></li></ol></li></ol>
         </div>
     </div>
 
