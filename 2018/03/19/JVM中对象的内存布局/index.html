@@ -1,11 +1,7 @@
 <!DOCTYPE html>
 <html lang="">
 <head>
-    <title>
-  
-    Archives · super2bai
-  
-</title>
+    <title> JVM中对象的内存布局 · super2bai </title>
     <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
@@ -20,6 +16,8 @@
 
 
 
+
+    <meta name="keywords" content="JVM, Nlvi" />
 
 <link rel="stylesheet" href="/style/style.css">
 <script src="/script/jquery.min.js"></script>
@@ -196,207 +194,182 @@
         <main class="main" id="main">
             
     
-    <div class="archive syuanpi riseIn-light" id="archive">
-        
-            <h1 class="archive-title">Total</h1>
-            <span class="archive-num">36 Posts In Total</span>
-        
-        <div class="archive-list">
-            <ul>
-        
+    <article class="post">
+        <header class="post-header">
+            <div class="post-time syuanpi riseIn-light back-1">
+                <span>March 19, 2018</span>
+                
+            </div>
+            <h1 class="post-title syuanpi riseIn-light back-2">
+            
+                JVM中对象的内存布局
+            
+            </h1>
             
                 
-                
-                
+                    <div class="post-tags syuanpi riseIn-light back-3">
                     
-                     
-                        <h2 class="archive-year"> 2017 </h2>
+                        <a href="/tags/JVM/">JVM</a>
                     
+                    </div>
                 
             
+        </header>
+        <div class="post-content syuanpi riseIn-light back-3">
             
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    12-10
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/2017/12/10/Spring-Boot验证/">Spring Boot验证</a>
-                </span>
-            </li>
+                <ul>
+<li>在HotSpot中，对象在内存中存储的布局<ul>
+<li>对象头Header<ul>
+<li>对象自身的运行时数据</li>
+<li>类型指针</li>
+</ul>
+</li>
+<li>实例数据Instance Data</li>
+<li>对齐填充Padding</li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+<h3 id="对象头Header"><a href="#对象头Header" class="headerlink" title="对象头Header"></a>对象头Header</h3><h4 id="对象自身的运行时数据-Mark-Word"><a href="#对象自身的运行时数据-Mark-Word" class="headerlink" title="对象自身的运行时数据(Mark Word)"></a>对象自身的运行时数据(Mark Word)</h4><ul>
+<li>包含内容<ul>
+<li>哈希码(HashCode)</li>
+<li>GC分代年龄</li>
+<li>锁状态标志</li>
+<li>线程持有的锁</li>
+<li>偏向线程ID</li>
+<li>偏向时间戳</li>
+<li>…</li>
+</ul>
+</li>
+<li>长度<ul>
+<li>32bit(32位虚拟机)</li>
+<li>64bit(未开启指针压缩的64位虚拟机)</li>
+</ul>
+</li>
+<li>非固定的数据结构<ul>
+<li>原因<ul>
+<li>对象头信息是与对象自身定义的数据无关的额外存储成本</li>
+<li>考虑虚拟机的空间效率</li>
+</ul>
+</li>
+<li>目的<ul>
+<li>为了在极小的空间存储尽量多的信息</li>
+</ul>
+</li>
+<li>根据对象的状态复用自己的存储空间</li>
+</ul>
+</li>
+</ul>
+<h5 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h5><ul>
+<li>在32位HotSpot虚拟机中，如果对象处于未被锁定的状态下<ul>
+<li>25bit-&gt;对象哈希码</li>
+<li>4bit-&gt;对象分代年龄</li>
+<li>2bit-&gt;锁标志位</li>
+<li>1bit-&gt;固定位0</li>
+</ul>
+</li>
+<li>其它状态下(轻量级锁定、重量级锁定、GC标记、可偏向)下对象存储内容</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>存储内容</th>
+<th>标志位</th>
+<th>状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>对象哈希码、对象分代年龄</td>
+<td>01</td>
+<td>未锁定</td>
+</tr>
+<tr>
+<td>指向锁记录的指针</td>
+<td>00</td>
+<td>轻量级锁定</td>
+</tr>
+<tr>
+<td>指向重量级锁的指针</td>
+<td>10</td>
+<td>膨胀(重量级锁定)</td>
+</tr>
+<tr>
+<td>空，不需要记录信息</td>
+<td>11</td>
+<td>GC标记</td>
+</tr>
+<tr>
+<td>偏向线程ID、偏向时间戳、对象分代年龄</td>
+<td>01</td>
+<td>可偏向</td>
+</tr>
+</tbody>
+</table>
+<h4 id="类型指针"><a href="#类型指针" class="headerlink" title="类型指针"></a>类型指针</h4><blockquote>
+<p>对象指向它的类元数据的指针，虚拟机通过这个指针来确定这个对象是哪个类的实例。</p>
+<ul>
+<li>注意<ul>
+<li>查找对象的元数据信息不一定要经过对象本身。</li>
+<li>如果对象是一个Java数组，那在对象头中还必须有一块用于记录数组长度的数据<ul>
+<li>虚拟机可以通过普通Java对象的元数据信息确定Java对象的大小，但无法从数组的元数据中确定数组的大小</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h3 id="实例数据Instance-Data"><a href="#实例数据Instance-Data" class="headerlink" title="实例数据Instance Data"></a>实例数据Instance Data</h3><blockquote>
+<p>对象真正存储的有效信息，也是在程序代码中所定义的各种类型的字段内容。</p>
+<p>无论是从父类继承下来的，还是在子类中定义的，都需要记录。</p>
+<ul>
+<li>影响存储顺序的原因<ul>
+<li>虚拟机分配策略参数(FieldsAllocationStyle)</li>
+<li>字段在Java远吗中定义的顺序</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h4 id="HotSpot虚拟机默认的分配策略"><a href="#HotSpot虚拟机默认的分配策略" class="headerlink" title="HotSpot虚拟机默认的分配策略"></a>HotSpot虚拟机默认的分配策略</h4><blockquote>
+<p>相同宽度的字段总是被分配到一起</p>
+</blockquote>
+<ul>
+<li><code>longs</code>/<code>doubles</code></li>
+<li><code>ints</code></li>
+<li><code>shorts</code>/<code>chars</code></li>
+<li><code>bytes</code>/<code>boolean</code></li>
+<li><code>oops(Ordinary Object Pointers)</code></li>
+</ul>
+<p>在此前提下，在父类中定义的变量会出现在子类之前。</p>
+<p>如果CompactFields参数值为<code>true</code>(默认为<code>true</code>)，那么子类中较窄的变量也可能会插入到父类变量的空隙之中。<del>此段不是很理解，需要查资料。</del></p>
+<h3 id="对齐填充"><a href="#对齐填充" class="headerlink" title="对齐填充"></a>对齐填充</h3><p><strong>不是必然存在，无特别含义，仅仅是占位符</strong></p>
+<blockquote>
+<p>由于HotSpot VM的自动内存管理系统要求对象起始地址(对象的大小)必须是8字节的整数倍。<del>原因呢？还得查资料</del>而对象头部分正好是8字节的倍数(1或2倍)，因此，当对象实例数据部分没有对齐时，就需要通过对齐填充来补全。</p>
+</blockquote>
 
+            
         
-            
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    12-05
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/2017/12/05/Spring-Boot-JDBC/">Spring Boot JDBC</a>
-                </span>
-            </li>
-
-        
-            
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    12-01
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/2017/12/01/Spring-Boot初体验/">Spring Boot初体验</a>
-                </span>
-            </li>
-
-        
-            
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    11-29
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/2017/11/29/Spring-Web-MVC/">Spring Web MVC</a>
-                </span>
-            </li>
-
-        
-            
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    11-27
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/2017/11/27/Spring-REST/">Spring REST</a>
-                </span>
-            </li>
-
-        
-            
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    11-23
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/2017/11/23/AIO概述/">AIO概述</a>
-                </span>
-            </li>
-
-        
-            
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    11-20
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/2017/11/20/NIO原理/">NIO原理</a>
-                </span>
-            </li>
-
-        
-            
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    11-11
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/2017/11/11/分布式事务解决方案/">分布式事务解决方案</a>
-                </span>
-            </li>
-
-        
-            
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    11-10
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/2017/11/10/Dubbo主干源码分析/">Dubbo主干源码分析</a>
-                </span>
-            </li>
-
-        
-            
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    11-09
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/2017/11/09/dubbo服务最佳实践/">dubbo服务最佳实践</a>
-                </span>
-            </li>
-
-        
-            </ul>
         </div>
-    </div>
+        
+            
+            
+        
+    </article>
     
-    <nav class="pagination">
-        <span class="page-number current">1</span><a class="page-number" href="/archives/2017/page/2/">2</a><a class="page-number" href="/archives/2017/page/3/">3</a><a class="extend next" rel="next" href="/archives/2017/page/2/">Next ></a>
+        
+    <nav class="article-page">
+        
+        
+            <a href="/2018/03/15/WalkUp攻略-非洲/" id="art-right" class="art-left">
+                <span class="prev-title"> 
+                    <i class="iconfont icon-left"></i>WalkUp攻略-非洲
+                </span>
+            </a>
+        
     </nav>
 
+        
+    
 
 
         </main>
@@ -481,6 +454,16 @@ $(document).ready(function(){
 })
 </script>
     </div>
+    
+        
+    <div class="post-toc">
+        <span class="title">文章目录</span>
+        <div class="toc-inner syuanpi back-1 fallIn-light">
+            <li class="title-link"><a href="javascript:;" class="toTop">JVM中对象的内存布局</a></li>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#对象头Header"><span class="toc-text">对象头Header</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#对象自身的运行时数据-Mark-Word"><span class="toc-text">对象自身的运行时数据(Mark Word)</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#实例"><span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#类型指针"><span class="toc-text">类型指针</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实例数据Instance-Data"><span class="toc-text">实例数据Instance Data</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#HotSpot虚拟机默认的分配策略"><span class="toc-text">HotSpot虚拟机默认的分配策略</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对齐填充"><span class="toc-text">对齐填充</span></a></li></ol>
+        </div>
+    </div>
+
     
     <div class="backtop syuanpi dead toTop" id="backtop">
     <i class="iconfont icon-up"></i>
