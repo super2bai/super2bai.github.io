@@ -1,11 +1,7 @@
 <!DOCTYPE html>
 <html lang="">
 <head>
-    <title>
-  
-    Archives · super2bai
-  
-</title>
+    <title> JVM对象的访问定位 · super2bai </title>
     <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
@@ -20,6 +16,8 @@
 
 
 
+
+    <meta name="keywords" content="JVM, Nlvi" />
 
 <link rel="stylesheet" href="/style/style.css">
 <script src="/script/jquery.min.js"></script>
@@ -196,189 +194,69 @@
         <main class="main" id="main">
             
     
-    <div class="archive syuanpi riseIn-light" id="archive">
-        
-            <h1 class="archive-title">Total</h1>
-            <span class="archive-num">37 Posts In Total</span>
-        
-        <div class="archive-list">
-            <ul>
-        
+    <article class="post">
+        <header class="post-header">
+            <div class="post-time syuanpi riseIn-light back-1">
+                <span>March 20, 2018</span>
+                
+            </div>
+            <h1 class="post-title syuanpi riseIn-light back-2">
+            
+                JVM对象的访问定位
+            
+            </h1>
             
                 
-                
-                
+                    <div class="post-tags syuanpi riseIn-light back-3">
                     
-                     
-                        <h2 class="archive-year"> 2018 </h2>
+                        <a href="/tags/JVM/">JVM</a>
                     
+                    </div>
                 
             
+        </header>
+        <div class="post-content syuanpi riseIn-light back-3">
             
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    03-20
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/2018/03/20/JVM对象的访问定位/">JVM对象的访问定位</a>
-                </span>
-            </li>
+                <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>核心内容：如何找对象</p>
+<p>方式：句柄、直接指针</p>
+<a id="more"></a>
+<h3 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h3><p>Java程序通过<strong>栈上的<code>reference</code>数据</strong>来操作堆上的具体对象。</p>
+<p><code>reference</code>类型在Java虚拟机规范中只规定了<strong>一个指向对象的引用</strong>，并没有定义这个引用应该通过何种方式去定位、访问堆中的对象的具体位置，所以<strong>对象访问方式也是取决于虚拟机实现</strong>而定的。</p>
+<h3 id="句柄"><a href="#句柄" class="headerlink" title="句柄"></a>句柄</h3><p><img src="https://wx4.sinaimg.cn/mw690/8c564d2agy1fpjmzwd02kj20gw0bbmxs.jpg" alt="句柄方式"></p>
+<blockquote>
+<p>优点：reference中存储的是稳定的句柄地址。</p>
+<p>在对象被移动(垃圾收集时移动对象时非常普遍的行为)时，只会改变句柄中的实例数据指针，而reference本身不需要修改。</p>
+</blockquote>
+<h3 id="直接指针"><a href="#直接指针" class="headerlink" title="直接指针"></a>直接指针</h3><p><img src="https://wx4.sinaimg.cn/mw690/8c564d2agy1fpjn61pzxnj20gw0bbmxp.jpg" alt="直接指针"></p>
+<blockquote>
+<p>优点：速度更快，它节省了一次指针定位的时间开销。</p>
+<p>由于对象的访问在Java中非常频繁，因此这类开销积少成多后也是一项非常可观的执行成本。</p>
+<p>HotSpot使用直接指针来访问对象。</p>
+</blockquote>
 
+            
         
-            
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    03-20
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/2018/03/20/JVM中对象的内存布局/">JVM中对象的内存布局</a>
-                </span>
-            </li>
-
-        
-            
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    03-15
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/2018/03/15/WalkUp攻略-非洲/">WalkUp攻略-非洲</a>
-                </span>
-            </li>
-
-        
-            
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    01-31
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/2018/01/31/JVM中对象的创建/">JVM中对象的创建</a>
-                </span>
-            </li>
-
-        
-            
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    01-30
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/2018/01/30/WalkUp攻略-南极洲/">WalkUp攻略-南极洲</a>
-                </span>
-            </li>
-
-        
-            
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    01-30
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/2018/01/30/WalkUp攻略-欧洲/">WalkUp攻略-欧洲</a>
-                </span>
-            </li>
-
-        
-            
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    01-30
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/2018/01/30/WalkUp攻略-亚洲/">WalkUp攻略-亚洲</a>
-                </span>
-            </li>
-
-        
-            
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    01-30
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/2018/01/30/Java内存区域/">Java内存区域</a>
-                </span>
-            </li>
-
-        
-            
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    01-22
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/2018/01/22/Mac-编译openJDk9/">Mac 编译openJDk9</a>
-                </span>
-            </li>
-
-        
-            </ul>
         </div>
-    </div>
+        
+            
+            
+        
+    </article>
     
-    <nav class="pagination">
-        <span class="page-number current">1</span>
+        
+    <nav class="article-page">
+        
+        
+            <a href="/2018/03/20/JVM中对象的内存布局/" id="art-right" class="art-left">
+                <span class="prev-title"> 
+                    <i class="iconfont icon-left"></i>JVM中对象的内存布局
+                </span>
+            </a>
+        
     </nav>
 
+        
+    
 
 
         </main>
@@ -463,6 +341,16 @@ $(document).ready(function(){
 })
 </script>
     </div>
+    
+        
+    <div class="post-toc">
+        <span class="title">文章目录</span>
+        <div class="toc-inner syuanpi back-1 fallIn-light">
+            <li class="title-link"><a href="javascript:;" class="toTop">JVM对象的访问定位</a></li>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#概述"><span class="toc-text">概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#操作"><span class="toc-text">操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#句柄"><span class="toc-text">句柄</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#直接指针"><span class="toc-text">直接指针</span></a></li></ol>
+        </div>
+    </div>
+
     
     <div class="backtop syuanpi dead toTop" id="backtop">
     <i class="iconfont icon-up"></i>
