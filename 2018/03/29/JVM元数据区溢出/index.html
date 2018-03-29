@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <title> JVM元数据区溢出 · super2bai </title>
+    <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="browsermode" content="application">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="super2bai">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="msapplication-navbutton-color" content="#666666">
+<meta name= "format-detection" content="telephone=no" />
+<meta name="keywords" content="nlvi, Nlvi" />
+
+
+
+
+
+    <meta name="keywords" content="JVM, Nlvi" />
+
+<link rel="stylesheet" href="/style/style.css">
+<script src="/script/jquery.min.js"></script>
+<script>
+    var CONFIG = {
+        title: "super2bai",
+        author: "super2bai",
+        lightbox: true,
+        animate: true
+    }
+</script>
+
+
+
+    <link rel="stylesheet" href="/lightbox/css/lightbox.min.css">
+
+
+
+
+    <link rel="stylesheet" href="/syuanpi/syuanpi.min.css">
+
+
+
+
+
+
+
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</head>
+<body>
+    <div class="progress">
+    <div class="progress-inner"></div>
+</div>
+    <div class="body">
+    <div class="tagcloud-mask"></div>  
+<div class="tagcloud" id="tagcloud">
+    <div class="tagcloud-inner">
+        <a href="/tags/Dubbo/" style="font-size: 14px;">Dubbo</a> <a href="/tags/GitHub-Pages/" style="font-size: 14px;">GitHub Pages</a> <a href="/tags/IO/" style="font-size: 14px;">IO</a> <a href="/tags/JVM/" style="font-size: 14px;">JVM</a> <a href="/tags/Spring/" style="font-size: 14px;">Spring</a> <a href="/tags/Zookeeper/" style="font-size: 14px;">Zookeeper</a> <a href="/tags/walkup/" style="font-size: 14px;">walkup</a> <a href="/tags/分布式/" style="font-size: 14px;">分布式</a>
+    </div>
+</div>
+    <header class="header" id="header">
+    <div class="title syuanpi tvIn">
+    <div class="table">
+        <div class="connect">
+            <div class="connect-inner">
+                <span><a href="/">super2bai</a></span>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <nav class="main-nav syuanpi tvIn">
+<div class="table">
+
+    <ul class="menu">
+        
+        
+        
+            <li class="menu-item">
+                <a href="/">
+                    <span>Article</span>
+                    
+                    
+                </a>
+            </li>
+        
+        
+        
+            <li class="menu-item">
+                <a href="/archives">
+                    <span>Archives</span>
+                    
+                    
+                </a>
+            </li>
+        
+        
+        
+            <li class="menu-item">
+                <a href="javascript:;" id="tags">
+                    <span>Tags</span>
+                    
+                    
+                </a>
+            </li>
+        
+        
+        
+            <li class="menu-item">
+                <a href="/about">
+                    <span>About</span>
+                    
+                    
+                </a>
+            </li>
+        
+        
+    </ul>
+
+</div>
+</nav>
+</header>
+<div class="mobile-header">
+    <div class="mobile-header-body">
+        <div class="mobile-header-list">
+            
+            
+                <div class="mobile-nav-item">
+                    <a href="/">
+                        <span>Article</span>
+                        
+                        
+                    </a>
+                </div>
+            
+            
+            
+                <div class="mobile-nav-item">
+                    <a href="/archives">
+                        <span>Archives</span>
+                        
+                        
+                    </a>
+                </div>
+            
+            
+            
+                <div class="mobile-nav-item inner-cloud">
+                    <div class="mobile-nav-tag">
+                        <a href="javascript:;" id="mobile-tags">
+                            <span>Tags</span>
+                            
+                            
+                        </a>
+                    </div>
+                    <div class="mobile-nav-tagcloud">
+                        <div class="mobile-tagcloud-inner">
+                            <a href="/tags/Dubbo/" style="font-size: 14px;">Dubbo</a> <a href="/tags/GitHub-Pages/" style="font-size: 14px;">GitHub Pages</a> <a href="/tags/IO/" style="font-size: 14px;">IO</a> <a href="/tags/JVM/" style="font-size: 14px;">JVM</a> <a href="/tags/Spring/" style="font-size: 14px;">Spring</a> <a href="/tags/Zookeeper/" style="font-size: 14px;">Zookeeper</a> <a href="/tags/walkup/" style="font-size: 14px;">walkup</a> <a href="/tags/分布式/" style="font-size: 14px;">分布式</a>
+                        </div>
+                    </div>
+                </div>
+            
+            
+            
+                <div class="mobile-nav-item">
+                    <a href="/about">
+                        <span>About</span>
+                        
+                        
+                    </a>
+                </div>
+            
+            
+        </div>
+    </div>
+    <div class="mobile-header-nav">
+        <div class="mobile-header-item" id="mobile-left">
+            <div class="header-menu-item">
+                <span class="header-menu-line"></span>
+            </div>
+        </div>
+        <h1 class="mobile-header-title">
+            <a href="/">super2bai</a>
+        </h1>
+        <div class="mobile-header-item"></div>
+    </div>
+</div>
+
+    <div class="container">
+        <main class="main" id="main">
+            
+    
+    <article class="post">
+        <header class="post-header">
+            <div class="post-time syuanpi riseIn-light back-1">
+                <span>March 29, 2018</span>
+                
+            </div>
+            <h1 class="post-title syuanpi riseIn-light back-2">
+            
+                JVM元数据区溢出
+            
+            </h1>
+            
+                
+                    <div class="post-tags syuanpi riseIn-light back-3">
+                    
+                        <a href="/tags/JVM/">JVM</a>
+                    
+                    </div>
+                
+            
+        </header>
+        <div class="post-content syuanpi riseIn-light back-3">
+            
+                <h3 id="常量池"><a href="#常量池" class="headerlink" title="常量池"></a>常量池</h3><h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><p><code>String.intern()</code>是一个<code>Native</code>方法。</p>
+<a id="more"></a>
+<blockquote>
+<p>如果字符串常量池中已经包含一个等于此String对象的字符串，则返回代表池中这个字符串的String对象；否则，将此String对象包含的字符串添加到常量池中，并且返回此String对象的引用。</p>
+</blockquote>
+<h4 id="不同版本下常量池位置"><a href="#不同版本下常量池位置" class="headerlink" title="不同版本下常量池位置"></a>不同版本下常量池位置</h4><p><code>JDK1.6</code>方法区</p>
+<p><code>JDK1.7</code>堆内存，<a href="http://www.oracle.com/technetwork/java/javase/jdk7-relnotes-418459.html" target="_blank" rel="external">官方文档</a></p>
+<blockquote>
+<p><strong>Area:</strong> HotSpot<br><strong>Synopsis:</strong> In JDK 7, interned strings are no longer allocated in the permanent generation of the Java heap, but are instead allocated in the main part of the Java heap (known as the young and old generations), along with the other objects created by the application. This change will result in more data residing in the main Java heap, and less data in the permanent generation, and thus may require heap sizes to be adjusted. Most applications will see only relatively small differences in heap usage due to this change, but larger applications that load many classes or make heavy use of the <code>String.intern()</code> method will see more significant differences.<br><strong>RFE:</strong> <a href="http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=6962931" target="_blank" rel="external">6962931</a></p>
+</blockquote>
+<p><code>JDK1.8</code>元空间，和堆相独立，本地内存,<a href="https://blogs.oracle.com/poonam/about-g1-garbage-collector%2c-permanent-generation-and-metaspace" target="_blank" rel="external">About G1 Garbage Collector, Permanent Generation and Metaspace</a></p>
+<h4 id="元数据区泄漏实例"><a href="#元数据区泄漏实例" class="headerlink" title="元数据区泄漏实例"></a>元数据区泄漏实例</h4><h5 id="ClassLoader"><a href="#ClassLoader" class="headerlink" title="ClassLoader"></a>ClassLoader</h5><ul>
+<li>接口类<code>ClassA</code></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.super2bai.jvm.metaspace;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ClassA</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">method</span><span class="params">(String input)</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>实现类<code>ClassAImpl</code></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.super2bai.jvm.metaspace;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassAImpl</span> <span class="keyword">implements</span> <span class="title">ClassA</span></span>&#123;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">(String input)</span> </span>&#123;</div><div class="line">		<span class="comment">// TODO Auto-generated method stub	</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>Handler类<code>ClassAInvocationHandler</code></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.super2bai.jvm.metaspace;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.lang.reflect.InvocationHandler;</div><div class="line"><span class="keyword">import</span> java.lang.reflect.Method;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassAInvocationHandler</span>  <span class="keyword">implements</span> <span class="title">InvocationHandler</span></span>&#123;</div><div class="line">	<span class="keyword">private</span> Object classAImpl;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">ClassAInvocationHandler</span><span class="params">(Object impl)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.classAImpl=impl;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable </span>&#123;</div><div class="line">		<span class="keyword">return</span> method.invoke(classAImpl, args);</div><div class="line">	&#125;	</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>入口类<code>ClassMetadataLeakSimulator</code></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.super2bai.jvm.metaspace;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.lang.reflect.Proxy;</div><div class="line"><span class="keyword">import</span> java.net.URL;</div><div class="line"><span class="keyword">import</span> java.net.URLClassLoader;</div><div class="line"><span class="keyword">import</span> java.util.HashMap;</div><div class="line"><span class="keyword">import</span> java.util.Map;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassMetadataLeakSimulator</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> Map&lt;String, ClassA&gt; classLeakingMap = <span class="keyword">new</span> HashMap&lt;&gt;();</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		<span class="keyword">int</span> i = <span class="number">0</span>;</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			<span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</div><div class="line">				String fictiousClassloaderJAR = <span class="string">"file:"</span> + (i++) + <span class="string">".jar"</span>;</div><div class="line">				URL[] fictiousClassloaderURL=<span class="keyword">new</span> URL[]&#123;<span class="keyword">new</span> URL(fictiousClassloaderJAR)&#125;;</div><div class="line">				URLClassLoader newClassLoader=<span class="keyword">new</span> URLClassLoader(fictiousClassloaderURL);</div><div class="line">				ClassA t=(ClassA)Proxy.newProxyInstance(newClassLoader, <span class="keyword">new</span> Class&lt;?&gt;[]&#123;ClassA.class&#125;, <span class="keyword">new</span> ClassAInvocationHandler(<span class="keyword">new</span> ClassAImpl()));</div><div class="line">				classLeakingMap.put(fictiousClassloaderJAR, t);</div><div class="line">			&#125;</div><div class="line">		&#125; <span class="keyword">catch</span> (Throwable t) &#123;</div><div class="line">			t.printStackTrace();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>JVM参数</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">-verbose:gc -XX:MaxMetaspaceSize=<span class="number">20</span>M -XX:MetaspaceSize=<span class="number">10</span>M</div></pre></td></tr></table></figure>
+<ul>
+<li>运行结果：<code>java.lang.OutOfMemoryError: Metaspace</code></li>
+</ul>
+<p><img src="https://wx1.sinaimg.cn/mw690/8c564d2aly1fptht4b1dsj21kc0zeh0d.jpg" alt="JVM-1.8-metaspace溢出"></p>
+<h5 id="CGLib"><a href="#CGLib" class="headerlink" title="CGLib"></a>CGLib</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.super2bai.jvm.metaspace.cglib;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.lang.reflect.Method;</div><div class="line"><span class="keyword">import</span> org.springframework.cglib.proxy.Enhancer;</div><div class="line"><span class="keyword">import</span> org.springframework.cglib.proxy.MethodInterceptor;</div><div class="line"><span class="keyword">import</span> org.springframework.cglib.proxy.MethodProxy;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MetaspaceOOM</span> </span>&#123;</div><div class="line">	<span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">OOMObject</span> </span>&#123;</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		<span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</div><div class="line">			Enhancer enhancer = <span class="keyword">new</span> Enhancer();</div><div class="line">			enhancer.setSuperclass(OOMObject.class);</div><div class="line">			enhancer.setUseCache(<span class="keyword">false</span>);</div><div class="line">			enhancer.setCallback(<span class="keyword">new</span> MethodInterceptor() &#123;</div><div class="line"></div><div class="line">				<span class="meta">@Override</span></div><div class="line">				<span class="function"><span class="keyword">public</span> Object <span class="title">intercept</span><span class="params">(Object obj, Method method, Object[] args, MethodProxy proxy)</span> <span class="keyword">throws</span> Throwable </span>&#123;</div><div class="line">					<span class="keyword">return</span> proxy.invoke(obj, args);</div><div class="line">				&#125;</div><div class="line">			&#125;);</div><div class="line">			enhancer.create();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>JVM参数</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">-verbose:class -XX:MetaspaceSize=3M -XX:MaxMetaspaceSize=3M -XX:+TraceClassLoading -XX:+TraceClassUnloading</div></pre></td></tr></table></figure>
+<ul>
+<li>运行结果</li>
+</ul>
+<p><img src="https://wx1.sinaimg.cn/mw690/8c564d2aly1fptug8ir9jj21ka10ywt8.jpg" alt="CGLib"></p>
+<h4 id="有意思的实例"><a href="#有意思的实例" class="headerlink" title="有意思的实例"></a>有意思的实例</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.super2bai.jvm;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RuntimeConstantPoolOOM</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		<span class="comment">// true</span></div><div class="line">		String str1 = <span class="keyword">new</span> StringBuilder(<span class="string">"计算机"</span>).append(<span class="string">"软件"</span>).toString();</div><div class="line">		System.out.println(<span class="string">"str1.intern()==str1 : "</span> + (str1.intern() == str1));</div><div class="line">		</div><div class="line">		<span class="comment">// false</span></div><div class="line">		String str2 = <span class="keyword">new</span> StringBuilder(<span class="string">"ja"</span>).append(<span class="string">"va"</span>).toString();</div><div class="line">		System.out.println(<span class="string">"str2.intern()==str2 : "</span> + (str2.intern() == str2));</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li><code>JDK1.7</code>和<code>JDK1.8</code>中运行，会得到一个<code>true</code>和<code>一个false</code>。</li>
+<li>因为<code>JDK1.7+</code>的<code>intern()</code>实现不会再复制实例，只是在常量池中记录首次出现的实例引用，因此<code>intern()</code>返回的引用和由<code>StringBuilder</code>创建的那个字符串实例是同一个。</li>
+<li><code>str2</code>比较返回<code>false</code>是因为<code>java</code>这个字符串在执行<code>StringBuilder.toString()</code>之前已经出现过，字符串常量池中已经有它的引用了，不符合“首次出现”的原则，而“计算机软件”这个字符串则是首次出现的，因此返回true。</li>
+</ul>
+</blockquote>
+<p><strong>关于第三点，有个疑问。如果是第一次出现，则结果为true。不是第一次出现，结果为false。 拼接了ja和va，比较结果一直都是false。那么问题来了，既然不是首次出现，那java这词是什么时候进入到的常量池。为什么要进入。</strong></p>
+<p>具体可参考此篇文章，写的比较不错。</p>
+<p><a href="https://www.jianshu.com/p/b98851899f37" target="_blank" rel="external">关于String.intern()的一个疑惑</a></p>
+<p>此处不再赘述。</p>
+<h3 id="收获"><a href="#收获" class="headerlink" title="收获"></a>收获</h3><p>不介绍版本就讨论JVM都是耍流氓的行为。</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://book.douban.com/subject/24722612/" target="_blank" rel="external">《深入理解JVM》</a></p>
+<p><a href="http://java-performance.info/string-intern-in-java-6-7-8/" target="_blank" rel="external">String.intern in Java 6, 7 and 8 – string pooling</a></p>
+<p><a href="https://www.jianshu.com/p/b98851899f37" target="_blank" rel="external">关于String.intern()的一个疑惑</a></p>
+<p><a href="https://www.zhihu.com/question/51102308/answer/124441115" target="_blank" rel="external">如何理解《深入理解java虚拟机》第二版中对String.intern()方法的讲解中所举的例子？</a></p>
+<p><a href="http://tangxman.github.io/2015/07/27/the-difference-of-java-string-pool/" target="_blank" rel="external">Java中几种常量池的区分</a></p>
+
+            
+        
+        </div>
+        
+            
+            
+        
+    </article>
+    
+        
+    <nav class="article-page">
+        
+        
+            <a href="/2018/03/21/JVM虚拟机栈和本地方法栈溢出/" id="art-right" class="art-left">
+                <span class="prev-title"> 
+                    <i class="iconfont icon-left"></i>JVM虚拟机栈和本地方法栈溢出
+                </span>
+            </a>
+        
+    </nav>
+
+        
+    
+
+
+        </main>
+        <footer class="footer syuanpi fadeIn" id="footer">
+    <hr>
+    <div class="footer-wrapper">
+        <div class="left">
+            <div class="contact-icon">
+    
+    
+    
+    
+    
+    
+    
+    
+        
+            <a href="https://github.com/super2bai" class="iconfont icon-github" title="github"></a>
+        
+        
+        
+        
+        
+        
+        
+    
+</div>
+        </div>
+        <div class="right">
+            <div class="copyright">
+    <div class="info">
+        <span>&copy;</span>
+        <span>2017 ~ 2018</span>
+        <span>❤</span>
+        <span>super2bai</span>
+    </div>
+    <div class="theme">
+        <span>
+            Powered by
+            <a href="http://hexo.io/" target="_blank">Hexo </a>
+        </span>
+        <span>
+            Theme
+            <a href="https://github.com/ColMugX/hexo-theme-Nlvi"> Nlvi </a>
+        </span>
+    </div>
+    
+    <div class="visit_count">
+        <i class="iconfont icon-visit"></i>
+        <span id="busuanzi_value_site_uv"></span>
+        <i class="iconfont icon-people"></i>
+        <span id="busuanzi_value_site_pv"></span>
+    </div>
+    
+</div>
+        </div>
+    </div>
+</footer>
+    </div>
+    <script src="/script/nlvi.js"></script>
+<script src="/script/search.js"></script>
+
+    <script src="/lightbox/js/lightbox.min.js"></script>
+
+<script>
+$(document).ready(function(){
+    document.body.addEventListener('touchstart', function () {});
+    $('.progress').hide();
+    $('.body').show();
+    Nlvi.tagcloud();
+    Nlvi.mobileHeader();
+    Nlvi.back2top();
+    Nlvi.smoothScroll();
+    Nlvi.onView();
+    Nlvi.showToc();
+    Nlvi.showComments();
+    Nlvi.showReward();
+    Nlvi.picPos();
+
+    !CONFIG.animate && Nlvi.offAnimate();
+    CONFIG.lightbox && Nlvi.onPicBox();
+})
+</script>
+    </div>
+    
+        
+    <div class="post-toc">
+        <span class="title">文章目录</span>
+        <div class="toc-inner syuanpi back-1 fallIn-light">
+            <li class="title-link"><a href="javascript:;" class="toTop">JVM元数据区溢出</a></li>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#常量池"><span class="toc-text">常量池</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#概念"><span class="toc-text">概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#不同版本下常量池位置"><span class="toc-text">不同版本下常量池位置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#元数据区泄漏实例"><span class="toc-text">元数据区泄漏实例</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#ClassLoader"><span class="toc-text">ClassLoader</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#CGLib"><span class="toc-text">CGLib</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#有意思的实例"><span class="toc-text">有意思的实例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#收获"><span class="toc-text">收获</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考"><span class="toc-text">参考</span></a></li></ol>
+        </div>
+    </div>
+
+    
+    <div class="backtop syuanpi dead toTop" id="backtop">
+    <i class="iconfont icon-up"></i>
+    <span style="text-align:center;font-family:Georgia;"><span style="font-family:Georgia;" id="scrollpercent">1</span>%</span>
+</div>
+    
+</body>
+</html>
