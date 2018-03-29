@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <title> Mac 编译openJDk9 · super2bai </title>
+    <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="browsermode" content="application">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="super2bai">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="msapplication-navbutton-color" content="#666666">
+<meta name= "format-detection" content="telephone=no" />
+<meta name="keywords" content="nlvi, Nlvi" />
+
+
+
+
+
+    <meta name="keywords" content="JVM, Nlvi" />
+
+<link rel="stylesheet" href="/style/style.css">
+<script src="/script/jquery.min.js"></script>
+<script>
+    var CONFIG = {
+        title: "super2bai",
+        author: "super2bai",
+        lightbox: true,
+        animate: true
+    }
+</script>
+
+
+
+    <link rel="stylesheet" href="/lightbox/css/lightbox.min.css">
+
+
+
+
+    <link rel="stylesheet" href="/syuanpi/syuanpi.min.css">
+
+
+
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-116557847-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</head>
+<body>
+    <div class="progress">
+    <div class="progress-inner"></div>
+</div>
+    <div class="body">
+    <div class="tagcloud-mask"></div>  
+<div class="tagcloud" id="tagcloud">
+    <div class="tagcloud-inner">
+        <a href="/tags/Dubbo/" style="font-size: 14px;">Dubbo</a> <a href="/tags/GitHub-Pages/" style="font-size: 14px;">GitHub Pages</a> <a href="/tags/IO/" style="font-size: 14px;">IO</a> <a href="/tags/JVM/" style="font-size: 14px;">JVM</a> <a href="/tags/Spring/" style="font-size: 14px;">Spring</a> <a href="/tags/Zookeeper/" style="font-size: 14px;">Zookeeper</a> <a href="/tags/walkup/" style="font-size: 14px;">walkup</a> <a href="/tags/分布式/" style="font-size: 14px;">分布式</a>
+    </div>
+</div>
+    <header class="header" id="header">
+    <div class="title syuanpi tvIn">
+    <div class="table">
+        <div class="connect">
+            <div class="connect-inner">
+                <span><a href="/">super2bai</a></span>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <nav class="main-nav syuanpi tvIn">
+<div class="table">
+
+    <ul class="menu">
+        
+        
+        
+            <li class="menu-item">
+                <a href="/">
+                    <span>Article</span>
+                    
+                    
+                </a>
+            </li>
+        
+        
+        
+            <li class="menu-item">
+                <a href="/archives">
+                    <span>Archives</span>
+                    
+                    
+                </a>
+            </li>
+        
+        
+        
+            <li class="menu-item">
+                <a href="javascript:;" id="tags">
+                    <span>Tags</span>
+                    
+                    
+                </a>
+            </li>
+        
+        
+        
+            <li class="menu-item">
+                <a href="/about">
+                    <span>About</span>
+                    
+                    
+                </a>
+            </li>
+        
+        
+    </ul>
+
+</div>
+</nav>
+</header>
+<div class="mobile-header">
+    <div class="mobile-header-body">
+        <div class="mobile-header-list">
+            
+            
+                <div class="mobile-nav-item">
+                    <a href="/">
+                        <span>Article</span>
+                        
+                        
+                    </a>
+                </div>
+            
+            
+            
+                <div class="mobile-nav-item">
+                    <a href="/archives">
+                        <span>Archives</span>
+                        
+                        
+                    </a>
+                </div>
+            
+            
+            
+                <div class="mobile-nav-item inner-cloud">
+                    <div class="mobile-nav-tag">
+                        <a href="javascript:;" id="mobile-tags">
+                            <span>Tags</span>
+                            
+                            
+                        </a>
+                    </div>
+                    <div class="mobile-nav-tagcloud">
+                        <div class="mobile-tagcloud-inner">
+                            <a href="/tags/Dubbo/" style="font-size: 14px;">Dubbo</a> <a href="/tags/GitHub-Pages/" style="font-size: 14px;">GitHub Pages</a> <a href="/tags/IO/" style="font-size: 14px;">IO</a> <a href="/tags/JVM/" style="font-size: 14px;">JVM</a> <a href="/tags/Spring/" style="font-size: 14px;">Spring</a> <a href="/tags/Zookeeper/" style="font-size: 14px;">Zookeeper</a> <a href="/tags/walkup/" style="font-size: 14px;">walkup</a> <a href="/tags/分布式/" style="font-size: 14px;">分布式</a>
+                        </div>
+                    </div>
+                </div>
+            
+            
+            
+                <div class="mobile-nav-item">
+                    <a href="/about">
+                        <span>About</span>
+                        
+                        
+                    </a>
+                </div>
+            
+            
+        </div>
+    </div>
+    <div class="mobile-header-nav">
+        <div class="mobile-header-item" id="mobile-left">
+            <div class="header-menu-item">
+                <span class="header-menu-line"></span>
+            </div>
+        </div>
+        <h1 class="mobile-header-title">
+            <a href="/">super2bai</a>
+        </h1>
+        <div class="mobile-header-item"></div>
+    </div>
+</div>
+
+    <div class="container">
+        <main class="main" id="main">
+            
+    
+    <article class="post">
+        <header class="post-header">
+            <div class="post-time syuanpi riseIn-light back-1">
+                <span>January 22, 2018</span>
+                
+            </div>
+            <h1 class="post-title syuanpi riseIn-light back-2">
+            
+                Mac 编译openJDk9
+            
+            </h1>
+            
+                
+                    <div class="post-tags syuanpi riseIn-light back-3">
+                    
+                        <a href="/tags/JVM/">JVM</a>
+                    
+                    </div>
+                
+            
+        </header>
+        <div class="post-content syuanpi riseIn-light back-3">
+            
+                <ul>
+<li>安装mercurial版本管理</li>
+</ul>
+<p><code>brew install mercurial</code></p>
+<a id="more"></a>
+<ul>
+<li>安装ccache提高编译速度</li>
+</ul>
+<p><code>brew install ccache</code></p>
+<ul>
+<li>安装freetype</li>
+</ul>
+<p><code>brew install freetype</code></p>
+<ul>
+<li>获取源码</li>
+</ul>
+<p><code>hg clone http://hg.openjdk.java.net/jdk9/jdk9 YourOpenJDK</code></p>
+<p><code>cd YourOpenJDK</code></p>
+<p><code>chmod +x get_source.sh</code></p>
+<p><code>./get_source.sh</code></p>
+<ul>
+<li>修改文件属性</li>
+</ul>
+<p><code>chmod +x configure</code></p>
+<ul>
+<li>输入一下命令激活后会生成一个编译配置。</li>
+</ul>
+<p><code>sudo ./configure --enable-debug --with-target-bits=64</code></p>
+<ul>
+<li>修改<code>get_resource.sh</code>，下载过程中，如果失败，则一直尝试，直至成功</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span> Get clones of all absent nested repositories (harmless if already exist)</div><div class="line">sh ./common/bin/hgforest.sh clone "$@" || exit $?</div><div class="line"></div><div class="line"><span class="meta">#</span> Update all existing repositories to the latest sources</div><div class="line">sh ./common/bin/hgforest.sh pull -u</div></pre></td></tr></table></figure>
+<p>修改为</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span> Get clones of all absent nested repositories (harmless if already exist)</div><div class="line">sh ./common/bin/hgforest.sh clone "$@"</div><div class="line"></div><div class="line">while [ $? -ne 0 ]</div><div class="line">do</div><div class="line">    sh ./common/bin/hgforest.sh clone "$@"</div><div class="line">done</div><div class="line"></div><div class="line"><span class="meta">#</span> Update all existing repositories to the latest sources</div><div class="line">sh ./common/bin/hgforest.sh pull -u</div><div class="line"></div><div class="line">while [ $? -ne 0 ]</div><div class="line">do</div><div class="line">    sh ./common/bin/hgforest.sh pull -u</div><div class="line">done</div></pre></td></tr></table></figure>
+<ul>
+<li>配置</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo ./configure --disable-warnings-as-errors --with-boot-jdk=/Library/Java/JavaVirtualMachines/jdk1.8.0_65.jdk/Contents/Home/</div></pre></td></tr></table></figure>
+<p><strong>参数解释</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">--with-target-bits：设置32位/64位编译</div><div class="line"></div><div class="line">--with-freetype：设置freetype路径</div><div class="line"></div><div class="line">--enable-ccache：设置启用ccache</div><div class="line"></div><div class="line">--with-jvm-variants=client,server：为了保证兼容性，编译时JVM的Client和Server都会被编译</div><div class="line"></div><div class="line">--with-boot-jdk-jvmargs：提供运行Bootstrap JDK所需要的JVM参数</div><div class="line"></div><div class="line">--disable-zip-debug-info：禁用zip调试信息</div><div class="line"></div><div class="line">--disable-warnings-as-errors：禁用将警告当做错误，避免因为警告而中断编译</div><div class="line"></div><div class="line">--with-debug-level：设置调试等级</div><div class="line"></div><div class="line">2&gt;&amp;1 | tee configure_mac_x64.log：将错误信息重定向至标准输出，并输出到configure_mac_x64.log</div></pre></td></tr></table></figure>
+<p><strong>configure</strong></p>
+<p><code>sudo ./configure --enable-debug --with-target-bits=64</code></p>
+<p> 如果是正式版本，./configure后边不需要加参数。configure过程会检查一些配置，然后在YourOpenJDK/build目录下会有macosx-x86_64-normal-server-fastdebug目录，如果不是fastdebug版本，会有macosx-x86_64-normal-server-release目录。这个过程中遇到一个问题:</p>
+<blockquote>
+<p><code>configure: error: GCC compiler is required</code></p>
+</blockquote>
+<p>对于这个问题，我查到是YourOpenJDK/common/autoconf/generated-configure.sh里边校验抛出，我直接找到下边文本出现的两个地方给注释掉了……</p>
+<blockquote>
+<p><code>as_fn_error $? &quot;GCC compiler is required. Try setting --with-tools-dir.&quot; &quot;$LINENO&quot; 5</code></p>
+</blockquote>
+<p><img src="http://ww4.sinaimg.cn/large/0060lm7Tly1fom4mil51aj31kw0yj4bc.jpg" alt="Markdown"></p>
+<p><strong>编译</strong></p>
+<p><code>sudo make CONF=macosx-x86_64-normal-server-release</code></p>
+<p><strong>验证</strong></p>
+<p><img src="https://wx2.sinaimg.cn/mw690/8c564d2agy1fpigacx7t9j216606mabz.jpg" alt="Markdown"></p>
+<p><strong>问题1</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">=== Output from failing command(s) repeated here ===</div><div class="line">/usr/bin/printf &quot;* For target hotspot_variant-server_libjvm_objs_lcm.o:\n&quot;</div><div class="line">* For target hotspot_variant-server_libjvm_objs_lcm.o:</div><div class="line">(/usr/bin/grep -v -e &quot;^Note: including file:&quot; &lt;  /Users/2bai/Documents/code/jdk9/build/macosx-x86_64-normal-server-fastdebug/make-support/failure-logs/hotspot_variant-server_libjvm_objs_lcm.o.log || true) | /usr/bin/head -n 12</div><div class="line">/Users/2bai/Documents/code/jdk9/hotspot/src/share/vm/opto/lcm.cpp:42:35: error: ordered comparison between pointer and zero (&apos;address&apos; (aka &apos;unsigned char *&apos;) and &apos;int&apos;)</div><div class="line">  if (Universe::narrow_oop_base() &gt; 0) &#123; // Implies UseCompressedOops.</div><div class="line">      ~~~~~~~~~~~~~~~~~~~~~~~~~~~ ^ ~</div><div class="line">1 error generated.</div><div class="line">if test `/usr/bin/wc -l &lt; /Users/2bai/Documents/code/jdk9/build/macosx-x86_64-normal-server-fastdebug/make-support/failure-logs/hotspot_variant-server_libjvm_objs_lcm.o.log` -gt 12; then /bin/echo &quot;   ... (rest of output omitted)&quot; ; fi</div><div class="line">/usr/bin/printf &quot;\n* All command lines available in /Users/2bai/Documents/code/jdk9/build/macosx-x86_64-normal-server-fastdebug/make-support/failure-logs.\n&quot;</div><div class="line"></div><div class="line">* All command lines available in /Users/2bai/Documents/code/jdk9/build/macosx-x86_64-normal-server-fastdebug/make-support/failure-logs.</div><div class="line">/usr/bin/printf &quot;=== End of repeated output ===\n&quot;</div><div class="line">=== End of repeated output ===</div><div class="line">if /usr/bin/grep -q &quot;recipe for target .* failed&quot; /Users/2bai/Documents/code/jdk9/build/macosx-x86_64-normal-server-fastdebug/build.log 2&gt; /dev/null; then /usr/bin/printf &quot;\n=== Make failed targets repeated here ===\n&quot; ; /usr/bin/grep &quot;recipe for target .* failed&quot; /Users/2bai/Documents/code/jdk9/build/macosx-x86_64-normal-server-fastdebug/build.log ; /usr/bin/printf &quot;=== End of repeated output ===\n&quot; ; /usr/bin/printf &quot;\nHint: Try searching the build log for the name of the first failed target.\n&quot; ; else /usr/bin/printf &quot;\nNo indication of failed target found.\n&quot; ; /usr/bin/printf &quot;Hint: Try searching the build log for &apos;] Error&apos;.\n&quot; ; fi</div><div class="line"></div><div class="line">=== Make failed targets repeated here ===</div><div class="line">lib/CompileJvm.gmk:207: recipe for target &apos;/Users/2bai/Documents/code/jdk9/build/macosx-x86_64-normal-server-fastdebug/hotspot/variant-server/libjvm/objs/lcm.o&apos; failed</div><div class="line">make/Main.gmk:263: recipe for target &apos;hotspot-server-libs&apos; failed</div><div class="line">=== End of repeated output ===</div><div class="line"></div><div class="line">Hint: Try searching the build log for the name of the first failed target.</div><div class="line">/usr/bin/printf &quot;Hint: See common/doc/building.html#troubleshooting for assistance.\n\n&quot;</div><div class="line">Hint: See common/doc/building.html#troubleshooting for assistance.</div><div class="line"></div><div class="line">gmake[2]: Leaving directory &apos;/Users/2bai/Documents/code/jdk9&apos;</div><div class="line">make[1]: *** [main] Error 2</div><div class="line">make: *** [all] Error 2</div></pre></td></tr></table></figure>
+<p><strong>解决</strong></p>
+<p>修改<code>jdk9/hotspot/src/share/vm/opto/lcm.cpp</code></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (base() &gt; <span class="number">0</span>) &#123; </div><div class="line"><span class="comment">//修改为</span></div><div class="line"><span class="keyword">if</span> (base() != <span class="literal">NULL</span>) &#123;</div></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (Universe::narrow_oop_base() &gt; <span class="number">0</span>) &#123; <span class="comment">// Implies UseCompressedOops.</span></div><div class="line"><span class="comment">//修改为</span></div><div class="line"><span class="keyword">if</span> (Universe::narrow_oop_base() != <span class="literal">NULL</span>) &#123; <span class="comment">// Implies UseCompressedOops.</span></div></pre></td></tr></table></figure>
+<p><strong>问题2</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">jdk9/hotspot/src/jdk.hotspot.agent/macosx/native/libsaproc/MacosxDebuggerLocal.m:692:21: warning: &apos;ePtAttachDeprecated&apos; is deprecated: PT_ATTACH is deprecated. See PT_ATTACHEXC [-Wdeprecated-declarations]</div><div class="line">  if ((res = ptrace(PT_ATTACH, pid, 0, 0)) &lt; 0) &#123;</div><div class="line">                    ^</div><div class="line">/usr/include/sys/ptrace.h:85:19: note: expanded from macro &apos;PT_ATTACH&apos;</div><div class="line">#define PT_ATTACH       ePtAttachDeprecated     /* trace some running process */</div><div class="line">                        ^</div><div class="line">/usr/include/sys/ptrace.h:71:22: note: &apos;ePtAttachDeprecated&apos; has been explicitly marked deprecated here</div><div class="line">        ePtAttachDeprecated __deprecated_enum_msg(&quot;PT_ATTACH is deprecated. See PT_ATTACHEXC&quot;) = 10</div><div class="line">                            ^</div></pre></td></tr></table></figure>
+<p><strong>解决2</strong></p>
+<p>尝试直接把上面报错地方的PT_ATTACH改成10试试</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> ((res = ptrace(PT_ATTACH, pid, <span class="number">0</span>, <span class="number">0</span>)) &lt; <span class="number">0</span>) &#123;</div><div class="line"><span class="comment">//修改为</span></div><div class="line"><span class="keyword">if</span> ((res = ptrace(<span class="number">10</span>, pid, <span class="number">0</span>, <span class="number">0</span>)) &lt; <span class="number">0</span>) &#123;</div></pre></td></tr></table></figure>
+<p><strong>问题3</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">jdk9/jdk/src/java.desktop/share/native/libjavajpeg/jdhuff.c:458:13: warning: shifting a negative signed value is undefined [-Wshift-negative-value]</div><div class="line">  &#123; 0, ((-1)&lt;&lt;1) + 1, ((-1)&lt;&lt;2) + 1, ((-1)&lt;&lt;3) + 1, ((-1)&lt;&lt;4) + 1,</div><div class="line">        ~~~~^</div></pre></td></tr></table></figure>
+<p><strong>解决3</strong></p>
+<p>修改文件：</p>
+<ul>
+<li>jdk9/jdk/src/java.desktop/share/native/libjavajpeg/jdphuff.c:221</li>
+<li>jdk9/jdk/src/java.desktop/share/native/libjavajpeg/jdhuff.c:458</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">static const int extend_offset[16] = /* entry n is (-1 &lt;&lt; n) + 1 */</div><div class="line">  &#123; 0, (-(1&lt;&lt;1)) + 1, (-(1&lt;&lt;2)) + 1, (-(1&lt;&lt;3)) + 1, (-(1&lt;&lt;4)) + 1,</div><div class="line">    (-(1&lt;&lt;5)) + 1, (-(1&lt;&lt;6)) + 1, (-(1&lt;&lt;7)) + 1, (-(1&lt;&lt;8)) + 1,</div><div class="line">    (-(1&lt;&lt;9)) + 1, (-(1&lt;&lt;10)) + 1, (-(1&lt;&lt;11)) + 1, (-(1&lt;&lt;12)) + 1,</div><div class="line">    (-(1&lt;&lt;13)) + 1, (-(1&lt;&lt;14)) + 1, (-(1&lt;&lt;15)) + 1 &#125;;</div></pre></td></tr></table></figure>
+<p><strong>问题4</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">=== Output from failing command(s) repeated here ===</div><div class="line">* For target hotspot_variant-server_libjvm_objs_loopPredicate.o:</div><div class="line">../src/share/vm/opto/loopPredicate.cpp:903:73: error: ordered comparison between pointer and zero (&apos;const TypeInt *&apos; and &apos;int&apos;)</div><div class="line">      assert(rng-&gt;Opcode() == Op_LoadRange || _igvn.type(rng)-&gt;is_int() &gt;= 0, &quot;must be&quot;);</div><div class="line">                                              ~~~~~~~~~~~~~~~~~~~~~~~~~ ^  ~</div><div class="line">../src/share/vm/utilities/debug.hpp:141:33: note: expanded from macro &apos;assert&apos;</div><div class="line">#define assert(p, ...) vmassert(p, __VA_ARGS__)</div><div class="line">                                ^</div><div class="line">../src/share/vm/utilities/debug.hpp:130:9: note: expanded from macro &apos;vmassert&apos;</div><div class="line">  if (!(p)) &#123;                                                                  \</div><div class="line">        ^</div><div class="line">1 error generated.</div><div class="line"></div><div class="line">* All command lines available in /Users/2bai/Documents/code/jdk9/build/macosx-x86_64-normal-serverANDclient-slowdebug/make-support/failure-logs.</div><div class="line">=== End of repeated output ===</div></pre></td></tr></table></figure>
+<p><strong>解决4</strong></p>
+<p>修改<code>jdk9/hotspot/src/share/vm/opto/loopPredicate.cpp:903</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">assert(rng-&gt;Opcode() == Op_LoadRange || _igvn.type(rng)-&gt;is_int() &gt;= 0, &quot;must be&quot;);</div></pre></td></tr></table></figure>
+<p>修改为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">assert(rng-&gt;Opcode() == Op_LoadRange || _igvn.type(rng)-&gt;is_int()-&gt;_lo &gt;= 0, &quot;must be&quot;);</div></pre></td></tr></table></figure>
+<h3 id="备份"><a href="#备份" class="headerlink" title="备份"></a>备份</h3><p><strong>和编译openJDK9无关！！！！</strong></p>
+<p>之前编译的时候取消了JAVA_HOME，怕自己忘记，记一下。</p>
+<ul>
+<li>JAVA_HOME</li>
+</ul>
+<p><code>/Library/Java/JavaVirtualMachines/jdk1.8.0_65.jdk/Contents/Home</code></p>
+
+            
+        
+        </div>
+        
+            
+            
+        
+    </article>
+    
+        
+    <nav class="article-page">
+        
+            <a href="/2018/01/30/undefined/" id="art-left" class="art-right">
+                <span class="next-title">
+                    Java内存区域<i class="iconfont icon-right"></i> 
+                </span>
+            </a>
+        
+        
+            <a href="/2017/12/10/undefined/" id="art-right" class="art-left">
+                <span class="prev-title"> 
+                    <i class="iconfont icon-left"></i>Spring Boot验证
+                </span>
+            </a>
+        
+    </nav>
+
+        
+    <i id="com-switch" class="iconfont icon-more jumping-in long infinite" style="font-size:24px;display:block;text-align:center;transform:rotate(180deg);"></i>
+    <div class="post-comments" id="post-comments" style="display: block;margin: auto 16px;">
+        
+        
+<!-- Gitment Comments -->
+<div id="gitment"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  owner: "super2bai",
+  repo: 'comment',
+  oauth: {
+    client_id: '37f2293730b41dcb5276',
+    client_secret: 'dbab4955840d4cbc88f1563be04ab676662194e5',
+  },
+})
+gitment.render('gitment')
+</script>
+
+        
+<!-- SOHUCS Comments -->
+<div id="SOHUCS"></div> 
+<script type="text/javascript"> 
+(function(){ 
+var appid = '';
+var conf = '';
+var width = window.innerWidth || document.documentElement.clientWidth; 
+if (width < 960) { 
+window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("http://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
+
+        
+
+    </div>
+
+    
+
+
+        </main>
+        <footer class="footer syuanpi fadeIn" id="footer">
+    <hr>
+    <div class="footer-wrapper">
+        <div class="left">
+            <div class="contact-icon">
+    
+    
+    
+    
+    
+    
+    
+    
+        
+            <a href="https://github.com/super2bai" class="iconfont icon-github" title="github"></a>
+        
+        
+        
+        
+        
+        
+        
+    
+</div>
+        </div>
+        <div class="right">
+            <div class="copyright">
+    <div class="info">
+        <span>&copy;</span>
+        <span>2017 ~ 2018</span>
+        <span>❤</span>
+        <span>super2bai</span>
+    </div>
+    <div class="theme">
+        <span>
+            Powered by
+            <a href="http://hexo.io/" target="_blank">Hexo </a>
+        </span>
+        <span>
+            Theme
+            <a href="https://github.com/ColMugX/hexo-theme-Nlvi"> Nlvi </a>
+        </span>
+    </div>
+    
+    <div class="visit_count">
+        <i class="iconfont icon-visit"></i>
+        <span id="busuanzi_value_site_uv"></span>
+        <i class="iconfont icon-people"></i>
+        <span id="busuanzi_value_site_pv"></span>
+    </div>
+    
+</div>
+        </div>
+    </div>
+</footer>
+    </div>
+    <script src="/script/nlvi.js"></script>
+<script src="/script/search.js"></script>
+
+    <script src="/lightbox/js/lightbox.min.js"></script>
+
+<script>
+$(document).ready(function(){
+    document.body.addEventListener('touchstart', function () {});
+    $('.progress').hide();
+    $('.body').show();
+    Nlvi.tagcloud();
+    Nlvi.mobileHeader();
+    Nlvi.back2top();
+    Nlvi.smoothScroll();
+    Nlvi.onView();
+    Nlvi.showToc();
+    Nlvi.showComments();
+    Nlvi.showReward();
+    Nlvi.picPos();
+
+    !CONFIG.animate && Nlvi.offAnimate();
+    CONFIG.lightbox && Nlvi.onPicBox();
+})
+</script>
+    </div>
+    
+        
+    <div class="post-toc">
+        <span class="title">文章目录</span>
+        <div class="toc-inner syuanpi back-1 fallIn-light">
+            <li class="title-link"><a href="javascript:;" class="toTop">Mac 编译openJDk9</a></li>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#备份"><span class="toc-text">备份</span></a></li></ol>
+        </div>
+    </div>
+
+    
+    <div class="backtop syuanpi dead toTop" id="backtop">
+    <i class="iconfont icon-up"></i>
+    <span style="text-align:center;font-family:Georgia;"><span style="font-family:Georgia;" id="scrollpercent">1</span>%</span>
+</div>
+    
+</body>
+</html>
