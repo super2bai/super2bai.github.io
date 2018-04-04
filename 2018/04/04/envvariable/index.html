@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="">
 <head>
-    <title> dubbo服务最佳实践 · super2bai </title>
+    <title> Linux环境变量 · super2bai </title>
     <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
@@ -17,7 +17,7 @@
 
 
 
-    <meta name="keywords" content="Dubbo, Nlvi" />
+    <meta name="keywords" content="Linux, Nlvi" />
 
 <link rel="stylesheet" href="/style/style.css">
 <script src="/script/jquery.min.js"></script>
@@ -214,19 +214,19 @@
     <article class="post">
         <header class="post-header">
             <div class="post-time syuanpi riseIn-light back-1">
-                <span>November 9, 2017</span>
+                <span>April 4, 2018</span>
                 
             </div>
             <h1 class="post-title syuanpi riseIn-light back-2">
             
-                dubbo服务最佳实践
+                Linux环境变量
             
             </h1>
             
                 
                     <div class="post-tags syuanpi riseIn-light back-3">
                     
-                        <a href="/tags/Dubbo/">Dubbo</a>
+                        <a href="/tags/Linux/">Linux</a>
                     
                     </div>
                 
@@ -234,59 +234,28 @@
         </header>
         <div class="post-content syuanpi riseIn-light back-3">
             
-                <h3 id="服务最佳实践"><a href="#服务最佳实践" class="headerlink" title="服务最佳实践"></a>服务最佳实践</h3><a id="more"></a>
-<h4 id="分包"><a href="#分包" class="headerlink" title="分包"></a>分包</h4><ul>
-<li>服务接口、请求服务模型、异常信息都放在api里面<ul>
-<li>符合重用发布等价原则，共同重用原则</li>
-</ul>
-</li>
-<li>api里面放去spring的引用配置。也可以放在模块的包目录下<ul>
-<li>com.bai.order/<em>*</em>-reference.xml</li>
-</ul>
-</li>
-</ul>
-<h4 id="粒度"><a href="#粒度" class="headerlink" title="粒度"></a>粒度</h4><ul>
-<li>尽可能把接口设置成粗力度，每个服务方法代表一个独立的功能，而不是某个功能的步骤。否则就会涉及到分布式事务</li>
-<li>服务接口建议以业务场景为单位划分。并对相近业务做抽象，防止接口暴增</li>
-<li>不建议使用过于抽象的通用接口T&lt;泛型&gt;<ul>
-<li>接口没有明确的语义，带来后期的维护</li>
-</ul>
-</li>
-</ul>
-<h4 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h4><ul>
-<li>每个接口都应该定义版本，为后续的兼容性提供前瞻性的考虑<ul>
-<li>version(maven-snapshot)没有做环境隔离会有问题</li>
-</ul>
-</li>
-<li>建议使用两位版本号，因为第三位版本号表示兼容性升级，只有不兼容时才需要变更服务版本</li>
-<li>当接口做不兼容升级的时候，先升级一半或者一台提供者为新版本，再将消费全部升级新版本，然后再将剩下的一半提供者升级新版本<ul>
-<li>预发布环境</li>
-</ul>
-</li>
-</ul>
-<h3 id="推荐用法-配置"><a href="#推荐用法-配置" class="headerlink" title="推荐用法(配置)"></a>推荐用法(配置)</h3><ul>
-<li>在provider端尽可能配置consumer端的属性<ul>
-<li>timeout、retires、线程池大小、loadBalance等</li>
-</ul>
-</li>
-<li>配置管理员信息<ul>
-<li>application上面配置的owner</li>
-<li>建议配置2个人以上</li>
-<li>因为owner都能够在监控中心看到</li>
-</ul>
-</li>
-</ul>
-<h3 id="配置dubbo缓存文件"><a href="#配置dubbo缓存文件" class="headerlink" title="配置dubbo缓存文件"></a>配置dubbo缓存文件</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dubbo:registry</span> <span class="attr">file</span>=<span class="string">".."</span> /&gt;</span></div></pre></td></tr></table></figure>
-<blockquote>
-<p>如果注册中心挂掉了(临时不可用)，可以从缓存文件中找。进一步保证可用性。</p>
+                <h3 id="全局有效-所有用户"><a href="#全局有效-所有用户" class="headerlink" title="全局有效(所有用户)"></a>全局有效(所有用户)</h3><a id="more"></a>
 <ul>
-<li>缓存内容<ul>
-<li>注册中心的列表</li>
-<li>服务提供者列表</li>
-</ul>
+<li><p><code>/etc/profile</code>: 此文件为系统的每个用户设置环境信息。当用户登录时，该文件被执行一次，并从 <code>/etc/profile.d</code> 目录的配置文件中搜集shell 的设置。一般用于设置所有用户使用的全局变量。</p>
+</li>
+<li><p><code>/etc/bashrc</code>: 当 bash shell 被打开时，该文件被读取。也就是说，每次新打开一个终端 shell，该文件就会被读取。</p>
+</li>
+<li><p>此外，修改 <code>/etc/environment</code> 这个文件也能实现环境变量的设置。</p>
+<blockquote>
+<p>/etc/environment 设置的也是全局变量，从文件本身的作用上来说， /etc/environment 设置的是整个系统的环境，而/etc/profile是设置所有用户的环境</p>
+</blockquote>
 </li>
 </ul>
+<h3 id="单个用户生效"><a href="#单个用户生效" class="headerlink" title="单个用户生效"></a>单个用户生效</h3><ul>
+<li><code>~/.bash_profile</code> 或 <code>~/.profile</code>: 只对单个用户生效，当用户登录时该文件仅执行一次。用户可使用该文件添加自己使用的 shell 变量信息。</li>
+</ul>
+<blockquote>
+<p>另外在不同的LINUX操作系统下，这个文件可能是不同的，可能是 <code>~/.bash_profile</code>，<code>~/.bash_login</code> 或 <code>~/.profile</code> 其中的一种或几种。</p>
+<p>如果存在几种的话，那么执行的顺序便是：<code>~/.bash_profile</code>、<code>~/.bash_login</code>、<code>~/.profile</code>。比如 系统一般是 ~/.profile 文件。</p>
 </blockquote>
+<ul>
+<li><code>~/.bashrc</code>: 只对单个用户生效，当登录以及每次打开新的 shell 时，该文件被读取。</li>
+</ul>
 
             
         
@@ -316,16 +285,10 @@
         
     <nav class="article-page">
         
-            <a href="/2017/11/10/rootcode/" id="art-left" class="art-right">
-                <span class="next-title">
-                    Dubbo主干源码分析<i class="iconfont icon-right"></i> 
-                </span>
-            </a>
         
-        
-            <a href="/2017/11/04/config/" id="art-right" class="art-left">
+            <a href="/2018/03/29/metaspace/" id="art-right" class="art-left">
                 <span class="prev-title"> 
-                    <i class="iconfont icon-left"></i>dubbo配置详解
+                    <i class="iconfont icon-left"></i>JVM元数据区溢出
                 </span>
             </a>
         
@@ -447,8 +410,8 @@ $(document).ready(function(){
     <div class="post-toc">
         <span class="title">文章目录</span>
         <div class="toc-inner syuanpi back-1 fallIn-light">
-            <li class="title-link"><a href="javascript:;" class="toTop">dubbo服务最佳实践</a></li>
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#服务最佳实践"><span class="toc-text">服务最佳实践</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#分包"><span class="toc-text">分包</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#粒度"><span class="toc-text">粒度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#版本"><span class="toc-text">版本</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#推荐用法-配置"><span class="toc-text">推荐用法(配置)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置dubbo缓存文件"><span class="toc-text">配置dubbo缓存文件</span></a></li></ol>
+            <li class="title-link"><a href="javascript:;" class="toTop">Linux环境变量</a></li>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#全局有效-所有用户"><span class="toc-text">全局有效(所有用户)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#单个用户生效"><span class="toc-text">单个用户生效</span></a></li></ol>
         </div>
     </div>
 
