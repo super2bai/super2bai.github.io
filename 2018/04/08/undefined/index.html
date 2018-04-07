@@ -261,12 +261,27 @@
 <h4 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h4><ul>
 <li><code>vi ~/.bash_profile</code></li>
 </ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span>配置版本</div><div class="line">export JAVA_6_HOME=`/usr/libexec/java_home -v 1.6`  </div><div class="line">export JAVA_7_HOME=`/usr/libexec/java_home -v 1.7`  </div><div class="line">export JAVA_8_HOME=`/usr/libexec/java_home -v 1.8` </div><div class="line"><span class="meta">#</span>配置JAVA_HOME</div><div class="line">export JAVA_HOME=$JAVA_6_HOME</div><div class="line"><span class="meta">#</span>配置PATH</div><div class="line">export PATH="$JAVA_HOME:$PATH"</div><div class="line"><span class="meta">#</span>alias命令动态切换JDK版本</div><div class="line">alias jdk6="export JAVA_HOME=$JAVA_6_HOME"</div><div class="line">alias jdk7="export JAVA_HOME=$JAVA_7_HOME"</div><div class="line">alias jdk8="export JAVA_HOME=$JAVA_8_HOME"</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span>配置版本</div><div class="line">export JAVA_6_HOME=`/usr/libexec/java_home -v 1.6`  </div><div class="line">export JAVA_7_HOME=`/usr/libexec/java_home -v 1.7`  </div><div class="line">export JAVA_8_HOME=`/usr/libexec/java_home -v 1.8` </div><div class="line"><span class="meta">#</span>配置JAVA_HOME</div><div class="line">export JAVA_HOME=`/usr/libexec/java_home`</div><div class="line"><span class="meta">#</span>配置PATH</div><div class="line">export PATH="$JAVA_HOME:$PATH"</div><div class="line"><span class="meta">#</span>alias命令动态切换JDK版本</div><div class="line">alias jdk6="export JAVA_HOME=$JAVA_6_HOME"</div><div class="line">alias jdk7="export JAVA_HOME=$JAVA_7_HOME"</div><div class="line">alias jdk8="export JAVA_HOME=$JAVA_8_HOME"</div></pre></td></tr></table></figure>
 <ul>
 <li><code>source ~/.bash_profile</code></li>
 <li>通过命令行输入<code>jdk6</code>、<code>jdk7</code>、<code>jdk8</code>、<code>jdk9</code>可以快速切换版本</li>
 </ul>
 <p><img src="https://wx3.sinaimg.cn/mw690/8c564d2agy1fq4q31yyrdj20se0kek7x.jpg" alt="Mac切换JDK版本"></p>
+<h3 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h3><h4 id="不建议写死JDK安装路径"><a href="#不建议写死JDK安装路径" class="headerlink" title="不建议写死JDK安装路径"></a>不建议写死JDK安装路径</h4><blockquote>
+<ul>
+<li>根据<a href="https://developer.apple.com/library/content/qa/qa1170/_index.html" target="_blank" rel="external">苹果的官方说明</a>，Mac OS X 10.5 及以后的版本应该使用 /usr/libexec/java_home 命令来确定 JAVA_HOME。</li>
+<li>版本发生变化需要修改配置</li>
+<li>无法适应不同的Java实现(Apple、Oracle、OpenJDk)</li>
+</ul>
+</blockquote>
+<h4 id="关于JDK路径"><a href="#关于JDK路径" class="headerlink" title="关于JDK路径"></a>关于JDK路径</h4><ul>
+<li>终端输入执行：<code>which java</code>，显示<code>/usr/bin/java</code></li>
+<li>执行<code>cd /usr/bin/</code>，再执行<code>ls -l |grep java</code>，可看到java此命令是link到<code>/System/Library/Frameworks/JavaVM.framework/Versions/Current/Commands/java</code></li>
+<li>执行：<code>cd /System/Library/Frameworks/JavaVM.framework/Versions/</code>进入后，再执行<code>ls -l</code>，可看到<code>Current -&gt; A</code>，也就是Current目录link到A目录。而A目录在安装第一个JDK时就存在，用来JDK多版本管理使用的。</li>
+</ul>
+<blockquote>
+<p><code>/System/Library/Frameworks/JavaVM.framework/Versions/</code> 下有多个不同（低）版本的目录，但它们链接的都是 CurrentJDK 目录。总之，这些Java都是苹果提供的Java，Oracle 或 OpenJDK 提供的 Java 不在此目录中。</p>
+</blockquote>
 <h3 id="小插曲"><a href="#小插曲" class="headerlink" title="小插曲"></a>小插曲</h3><p>取消了<code>/etc/profile</code>和<code>~/.bash_profile</code>两个文件中，对<code>JAVA_HOME</code>添加到<code>PATH</code>的语句后，输入<code>java -version</code>依旧出现版本信息。经查验，是因为在<code>/usr/bin</code>中存在<code>java</code>。</p>
 <p><img src="https://wx1.sinaimg.cn/mw690/8c564d2aly1fq2s4n7x7rj20d8020mye.jpg" alt=""></p>
 <blockquote>
@@ -447,7 +462,7 @@ $(document).ready(function(){
         <span class="title">文章目录</span>
         <div class="toc-inner syuanpi back-1 fallIn-light">
             <li class="title-link"><a href="javascript:;" class="toTop">Mac切换JDK版本</a></li>
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#背景"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#操作"><span class="toc-text">操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#排错"><span class="toc-text">排错</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#下载"><span class="toc-text">下载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置"><span class="toc-text">配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#修改配置文件"><span class="toc-text">修改配置文件</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#小插曲"><span class="toc-text">小插曲</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#阅读资料"><span class="toc-text">阅读资料</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#背景"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#操作"><span class="toc-text">操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#排错"><span class="toc-text">排错</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#下载"><span class="toc-text">下载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置"><span class="toc-text">配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#修改配置文件"><span class="toc-text">修改配置文件</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#补充"><span class="toc-text">补充</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#不建议写死JDK安装路径"><span class="toc-text">不建议写死JDK安装路径</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#关于JDK路径"><span class="toc-text">关于JDK路径</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#小插曲"><span class="toc-text">小插曲</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#阅读资料"><span class="toc-text">阅读资料</span></a></li></ol>
         </div>
     </div>
 
