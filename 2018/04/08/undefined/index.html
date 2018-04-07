@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="">
 <head>
-    <title> JVM对象的访问定位 · super2bai </title>
+    <title> Mac切换JDK版本 · super2bai </title>
     <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
@@ -17,7 +17,7 @@
 
 
 
-    <meta name="keywords" content="JVM, Nlvi" />
+    <meta name="keywords" content="JDK, Nlvi" />
 
 <link rel="stylesheet" href="/style/style.css">
 <script src="/script/jquery.min.js"></script>
@@ -214,19 +214,19 @@
     <article class="post">
         <header class="post-header">
             <div class="post-time syuanpi riseIn-light back-1">
-                <span>March 20, 2018</span>
+                <span>April 8, 2018</span>
                 
             </div>
             <h1 class="post-title syuanpi riseIn-light back-2">
             
-                JVM对象的访问定位
+                Mac切换JDK版本
             
             </h1>
             
                 
                     <div class="post-tags syuanpi riseIn-light back-3">
                     
-                        <a href="/tags/JVM/">JVM</a>
+                        <a href="/tags/JDK/">JDK</a>
                     
                     </div>
                 
@@ -234,22 +234,64 @@
         </header>
         <div class="post-content syuanpi riseIn-light back-3">
             
-                <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>核心内容：如何找对象</p>
-<p>方式：句柄、直接指针</p>
+                <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><ul>
+<li>在看<a href="https://book.douban.com/subject/24722612/" target="_blank" rel="external">深入理解Java虚拟机（第2版）</a>第二章的内容时，内存溢出在不同JDK版本下会有不同的表现，想测试不同<code>JDK</code>版本下，内存溢出的效果。</li>
+</ul>
 <a id="more"></a>
-<h3 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h3><p>Java程序通过<strong>栈上的<code>reference</code>数据</strong>来操作堆上的具体对象。</p>
-<p><code>reference</code>类型在Java虚拟机规范中只规定了<strong>一个指向对象的引用</strong>，并没有定义这个引用应该通过何种方式去定位、访问堆中的对象的具体位置，所以<strong>对象访问方式也是取决于虚拟机实现</strong>而定的。</p>
-<h3 id="句柄"><a href="#句柄" class="headerlink" title="句柄"></a>句柄</h3><p><img src="https://wx4.sinaimg.cn/mw690/8c564d2agy1fpjmzwd02kj20gw0bbmxs.jpg" alt="句柄方式"></p>
+<h3 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h3><p>在IDE中写对应内存溢出的代码，添加JVM参数，运行成功。</p>
+<p>使用不同JDK版本时，如果每次都需要修改IDE环境较为繁琐，所以想通过命令行的方式来指定JDK版本。</p>
+<p><strong>然而</strong></p>
+<p><img src="https://wx1.sinaimg.cn/mw690/8c564d2aly1fq0mrro9adj20t802o0tj.jpg" alt="[Could not find or load main class](https://huati.weibo.com/k/Could+not+find+or+load+main+class?from=501) "></p>
+<h3 id="排错"><a href="#排错" class="headerlink" title="排错"></a>排错</h3><ul>
+<li>文件本身错误<ul>
+<li>在IDE内运行成功，排除</li>
+</ul>
+</li>
+<li>命令行使用方式错误<ul>
+<li>检查命令行有无拼写错误或参数错误，排除</li>
+<li>Windows命令行环境下运行成功，排除</li>
+</ul>
+</li>
+<li>环境变量错误</li>
+</ul>
+<h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><p><strong>安装包(注意都是下载mac下的dmg安装包)：</strong></p>
+<p><a href="http://support.apple.com/kb/DL1572" target="_blank" rel="external">JDK 1.6</a></p>
+<p><a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html" target="_blank" rel="external">JDK 1.7&amp;1.8&amp;1.9（早期版本在页面下方）</a></p>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>关于Mac系统的环境变量文件入门介绍，可参考<a href="https://super2bai.github.io/2018/04/04/varFile/" target="_blank" rel="external">Linux环境变量文件</a>。</p>
+<h4 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h4><ul>
+<li><code>vi ~/.bash_profile</code></li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span>各版本安装路径</div><div class="line">export JAVA_6_HOME=/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home</div><div class="line">export JAVA_7_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_79.jdk/Contents/Home</div><div class="line">export JAVA_8_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_162.jdk/Contents/Home</div><div class="line">export JAVA_9_HOME=/Library/Java/JavaVirtualMachines/jdk-9.0.1.jdk/Contents/Home</div><div class="line"><span class="meta">#</span>配置JAVA_HOME</div><div class="line">export JAVA_HOME=$JAVA_6_HOME</div><div class="line"><span class="meta">#</span>配置PATH</div><div class="line">export PATH="$JAVA_HOME:$PATH"</div><div class="line"><span class="meta">#</span>alias命令动态切换JDK版本</div><div class="line">alias jdk6="export JAVA_HOME=$JAVA_6_HOME"</div><div class="line">alias jdk7="export JAVA_HOME=$JAVA_7_HOME"</div><div class="line">alias jdk8="export JAVA_HOME=$JAVA_8_HOME"</div><div class="line">alias jdk9="export JAVA_HOME=$JAVA_9_HOME"</div></pre></td></tr></table></figure>
+<ul>
+<li><code>source ~/.bash_profile</code></li>
+<li>通过命令行输入<code>jdk6</code>、<code>jdk7</code>、<code>jdk8</code>、<code>jdk9</code>可以快速切换版本</li>
+</ul>
+<p><img src="https://wx3.sinaimg.cn/mw690/8c564d2agy1fq4q31yyrdj20se0kek7x.jpg" alt="Mac切换JDK版本"></p>
+<h3 id="小插曲"><a href="#小插曲" class="headerlink" title="小插曲"></a>小插曲</h3><p>取消了<code>/etc/profile</code>和<code>~/.bash_profile</code>两个文件中，对<code>JAVA_HOME</code>添加到<code>PATH</code>的语句后，输入<code>java -version</code>依旧出现版本信息。经查验，是因为在<code>/usr/bin</code>中存在<code>java</code>。</p>
+<p><img src="https://wx1.sinaimg.cn/mw690/8c564d2aly1fq2s4n7x7rj20d8020mye.jpg" alt=""></p>
 <blockquote>
-<p>优点：reference中存储的是稳定的句柄地址。</p>
-<p>在对象被移动(垃圾收集时移动对象时非常普遍的行为)时，只会改变句柄中的实例数据指针，而reference本身不需要修改。</p>
+<p>所有用户皆可用的系统程序放在/bin</p>
+<p>超级用户才能使用的系统程序放在/sbin</p>
+<p>所有用户都可用的应用程序放在/usr/bin</p>
+<p>超级用户才能使用的应用程序放在/usr/sbin</p>
+<p>所有用户都可用的与本地机器无关的程序存放在/usr/local/bin</p>
 </blockquote>
-<h3 id="直接指针"><a href="#直接指针" class="headerlink" title="直接指针"></a>直接指针</h3><p><img src="https://wx4.sinaimg.cn/mw690/8c564d2agy1fpjn61pzxnj20gw0bbmxp.jpg" alt="直接指针"></p>
-<blockquote>
-<p>优点：速度更快，它节省了一次指针定位的时间开销。</p>
-<p>由于对象的访问在Java中非常频繁，因此这类开销积少成多后也是一项非常可观的执行成本。</p>
-<p>HotSpot使用直接指针来访问对象。</p>
-</blockquote>
+<p>更多文件系统说明，可在<code>terminal</code>中输入<code>man hier</code>查看文件系统层次说明。</p>
+<hr>
+<ul>
+<li>编辑文件时，如需要整行移动<ul>
+<li>通过<code>dd</code>当前行，在合适的地方<code>p</code>。</li>
+<li><code>:5 move 2</code></li>
+<li>map快捷键</li>
+<li><a href="https://github.com/tpope/vim-unimpaired" target="_blank" rel="external">安装插件vim-unimpaired</a><ul>
+<li>装好后按[e或者]e这两个快捷键移动当前行到上面或者下面</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="阅读资料"><a href="#阅读资料" class="headerlink" title="阅读资料"></a>阅读资料</h3><p><a href="https://docs.oracle.com/javase/tutorial/essential/environment/paths.html" target="_blank" rel="external">PATH and CLASSPATH</a></p>
+<p><a href="https://www.zhihu.com/question/21265424" target="_blank" rel="external">Linux文件系统中/bin、/sbin、/usr/bin、/usr/sbin、/usr/local/bin、/usr/local/sbin文件夹的区别是什么？</a></p>
 
             
         
@@ -279,16 +321,10 @@
         
     <nav class="article-page">
         
-            <a href="/2018/03/21/heap/" id="art-left" class="art-right">
-                <span class="next-title">
-                    JVM堆溢出<i class="iconfont icon-right"></i> 
-                </span>
-            </a>
         
-        
-            <a href="/2018/03/20/layout/" id="art-right" class="art-left">
+            <a href="/2018/04/04/varFile/" id="art-right" class="art-left">
                 <span class="prev-title"> 
-                    <i class="iconfont icon-left"></i>JVM中对象的内存布局
+                    <i class="iconfont icon-left"></i>Linux环境变量文件
                 </span>
             </a>
         
@@ -410,8 +446,8 @@ $(document).ready(function(){
     <div class="post-toc">
         <span class="title">文章目录</span>
         <div class="toc-inner syuanpi back-1 fallIn-light">
-            <li class="title-link"><a href="javascript:;" class="toTop">JVM对象的访问定位</a></li>
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#概述"><span class="toc-text">概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#操作"><span class="toc-text">操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#句柄"><span class="toc-text">句柄</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#直接指针"><span class="toc-text">直接指针</span></a></li></ol>
+            <li class="title-link"><a href="javascript:;" class="toTop">Mac切换JDK版本</a></li>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#背景"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#操作"><span class="toc-text">操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#排错"><span class="toc-text">排错</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#下载"><span class="toc-text">下载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置"><span class="toc-text">配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#修改配置文件"><span class="toc-text">修改配置文件</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#小插曲"><span class="toc-text">小插曲</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#阅读资料"><span class="toc-text">阅读资料</span></a></li></ol>
         </div>
     </div>
 
