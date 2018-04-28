@@ -1,11 +1,7 @@
 <!DOCTYPE html>
 <html lang="">
 <head>
-    <title>
-  
-    Archives · super2bai
-  
-</title>
+    <title> Python基础 · super2bai </title>
     <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
@@ -23,6 +19,8 @@
 
 
 
+
+    <meta name="keywords" content="Python, Nlvi" />
 
 <link rel="stylesheet" href="/style/style.css">
 <script src="/script/jquery.min.js"></script>
@@ -218,135 +216,140 @@
         <main class="main" id="main">
             
     
-    <div class="archive syuanpi riseIn-light" id="archive">
-        
-            <h1 class="archive-title">Total</h1>
-            <span class="archive-num">46 Posts In Total</span>
-        
-        <div class="archive-list">
-            <ul>
-        
+    <article class="post">
+        <header class="post-header">
+            <div class="post-time syuanpi riseIn-light back-1">
+                <span>April 20, 2018</span>
+                
+            </div>
+            <h1 class="post-title syuanpi riseIn-light back-2">
+            
+                Python基础
+            
+            </h1>
             
                 
-                
-                
+                    <div class="post-tags syuanpi riseIn-light back-3">
                     
-                     
-                        <h2 class="archive-year"> 2018 </h2>
+                        <a href="/tags/Python/">Python</a>
                     
+                    </div>
                 
             
+        </header>
+        <div class="post-content syuanpi riseIn-light back-3">
             
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    03-29
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/2018/03/29/metaspace/">JVM元数据区溢出</a>
-                </span>
-            </li>
+                <p><strong>本文适合有编码经验的用户阅读</strong></p>
+<a id="more"></a>
+<h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><h4 id="整数"><a href="#整数" class="headerlink" title="整数"></a>整数</h4><ul>
+<li>精准<ul>
+<li>除法用<code>//</code>，称为地板除，两个整数的除法仍是整数。</li>
+<li><code>10//3</code>输出为<code>3</code></li>
+</ul>
+</li>
+<li>也可用十六进制表示</li>
+<li>没有大小限制</li>
+</ul>
+<h4 id="浮点数"><a href="#浮点数" class="headerlink" title="浮点数"></a>浮点数</h4><ul>
+<li>存在四舍五入的误差</li>
+<li>很大或很小的浮点数必须用科学计数法表示</li>
+<li>除法<code>/</code>结果是浮点数，即使两个整数恰好整除，结果也是浮点数</li>
+<li>无大小限制，但是超过一定范围就直接表示为<code>inf</code>(无限大)</li>
+</ul>
+<h4 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h4><ul>
+<li>可以用<code>&#39;&#39;</code>或<code>&quot;&quot;</code>括起来，例：<code>&#39;a&#39;</code>或<code>&quot;a&quot;</code></li>
+<li>包含<code>&#39;&#39;</code>，就使用<code>&quot;&quot;</code>括起来，例：<code>&quot;I&#39;m OK&quot;</code></li>
+<li>既包含<code>&#39;&#39;</code>又包含<code>&quot;&quot;</code>，则用转义字符<code>\</code>，例：<code>&#39;I\&#39;m \&quot;OK\&quot;!&#39;</code></li>
+<li>需要输出转义字符本身，则用<code>r</code>，例：<code>print(r&#39;\\\t\\&#39;)</code>，输出<code>\\\t\\</code></li>
+<li>多次换行，命令行模式则用<code>&#39;&#39;&#39;...&#39;&#39;&#39;</code>，例<code>print(&#39;&#39;&#39;line1</code>，回车，会提示继续输入，直到输入<code>&#39;&#39;&#39;)</code>，才会打印所有输入的内容；文件模式，直接换行写输入内容即可，同样，多次换行也可以使用<code>r</code>来输出转义字符</li>
+</ul>
+<p><img src="https://wx2.sinaimg.cn/mw690/8c564d2aly1fqi4nkz6ebj20vo0p4gnt.jpg" alt=""></p>
+<p><img src="https://wx2.sinaimg.cn/mw690/8c564d2aly1fqi4nnfn1zj21kw0ps41p.jpg" alt=""></p>
+<h4 id="布尔值"><a href="#布尔值" class="headerlink" title="布尔值"></a>布尔值</h4><ul>
+<li>值有两种：<code>Trur</code>和<code>False</code>。大小写敏感</li>
+<li>运算有：<code>and</code>、<code>or</code>和<code>not</code></li>
+</ul>
+<h4 id="空值"><a href="#空值" class="headerlink" title="空值"></a>空值</h4><ul>
+<li>值为<code>None</code></li>
+</ul>
+<h4 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h4><ul>
+<li>弱类型</li>
+</ul>
+<h4 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h4><ul>
+<li>全大写</li>
+<li>Python没有任何机制保证常量值不会被改变。</li>
+</ul>
 
+            
+        
+        </div>
         
             
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    03-21
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/2018/03/21/stack/">JVM虚拟机栈和本地方法栈溢出</a>
-                </span>
-            </li>
-
-        
+    <div class="post-reward">
+        <span class="reward-btn" id="reward-btn">reward</span>
+        <div class="reward-wrapper" id="reward-wrapper" style="display:none;">
             
                 
                 
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    03-21
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/2018/03/21/heap/">JVM堆溢出</a>
-                </span>
-            </li>
-
-        
             
                 
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    03-20
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/2018/03/20/position/">JVM对象的访问定位</a>
-                </span>
-            </li>
-
-        
-            
-                
-                
+                <div class="reward-item reward-alipay">
+                    <img src="https://wx2.sinaimg.cn/mw690/8c564d2aly1fpunn3yinhj20py0pyn4i.jpg">
+                </div>
                 
             
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    03-20
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/2018/03/20/layout/">JVM中对象的内存布局</a>
-                </span>
-            </li>
-
-        
-            
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    03-15
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/2018/03/15/Africa/">WalkUp攻略-非洲</a>
-                </span>
-            </li>
-
-        
-            </ul>
         </div>
     </div>
+
+            
+        
+    </article>
     
-    <nav class="pagination">
-        <span class="page-number current">1</span>
+        
+    <nav class="article-page">
+        
+            <a href="/2018/04/28/jmeterStart/" id="art-left" class="art-right">
+                <span class="next-title">
+                    jmeter入门<i class="iconfont icon-right"></i> 
+                </span>
+            </a>
+        
+        
+            <a href="/2018/04/20/pyStart/" id="art-right" class="art-left">
+                <span class="prev-title"> 
+                    <i class="iconfont icon-left"></i>Python入门
+                </span>
+            </a>
+        
     </nav>
 
+        
+    <i id="com-switch" class="iconfont icon-more jumping-in long infinite" style="font-size:24px;display:block;text-align:center;transform:rotate(180deg);"></i>
+    <div class="post-comments" id="post-comments" style="display: block;margin: auto 16px;">
+        
+        
+<!-- Gitment Comments -->
+<div id="gitment"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  owner: "super2bai",
+  repo: 'comment',
+  oauth: {
+    client_id: '37f2293730b41dcb5276',
+    client_secret: 'dbab4955840d4cbc88f1563be04ab676662194e5',
+  },
+})
+gitment.render('gitment')
+</script>
+
+        
+        
+
+    </div>
+
+    
 
 
         </main>
@@ -431,6 +434,16 @@ $(document).ready(function(){
 })
 </script>
     </div>
+    
+        
+    <div class="post-toc">
+        <span class="title">文章目录</span>
+        <div class="toc-inner syuanpi back-1 fallIn-light">
+            <li class="title-link"><a href="javascript:;" class="toTop">Python基础</a></li>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#数据类型"><span class="toc-text">数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#整数"><span class="toc-text">整数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#浮点数"><span class="toc-text">浮点数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#字符串"><span class="toc-text">字符串</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#布尔值"><span class="toc-text">布尔值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#空值"><span class="toc-text">空值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#变量"><span class="toc-text">变量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#常量"><span class="toc-text">常量</span></a></li></ol></li></ol>
+        </div>
+    </div>
+
     
     <div class="backtop syuanpi dead toTop" id="backtop">
     <i class="iconfont icon-up"></i>
