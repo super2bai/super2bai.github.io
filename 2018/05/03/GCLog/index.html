@@ -1,11 +1,7 @@
 <!DOCTYPE html>
 <html lang="">
 <head>
-    <title>
-  
-    Archives · super2bai
-  
-</title>
+    <title> GC日志 · super2bai </title>
     <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
@@ -23,6 +19,8 @@
 
 
 
+
+    <meta name="keywords" content="JVM, Nlvi" />
 
 <link rel="stylesheet" href="/style/style.css">
 <script src="/script/jquery.min.js"></script>
@@ -218,207 +216,140 @@
         <main class="main" id="main">
             
     
-    <div class="archive syuanpi riseIn-light" id="archive">
-        
-            <h1 class="archive-title">Total</h1>
-            <span class="archive-num">48 Posts In Total</span>
-        
-        <div class="archive-list">
-            <ul>
-        
+    <article class="post">
+        <header class="post-header">
+            <div class="post-time syuanpi riseIn-light back-1">
+                <span>May 3, 2018</span>
+                
+            </div>
+            <h1 class="post-title syuanpi riseIn-light back-2">
+            
+                GC日志
+            
+            </h1>
             
                 
-                
-                
+                    <div class="post-tags syuanpi riseIn-light back-3">
                     
-                     
-                        <h2 class="archive-year"> 2018 </h2>
+                        <a href="/tags/JVM/">JVM</a>
                     
+                    </div>
                 
             
+        </header>
+        <div class="post-content syuanpi riseIn-light back-3">
             
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    03-21
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/2018/03/21/heap/">JVM堆溢出</a>
-                </span>
-            </li>
+                <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>每一种收集器的日志形式都是由它们自身的实现所决定的，格式不一致。</p>
+<a id="more"></a>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">33.125：[GC[DefNew：3324K-＞152K（3712K），0.0025925secs]3324K-＞152K（11904K），0.0031680 secs]</div></pre></td></tr></table></figure>
+<p>GC发生的时间(虚拟机启动以来经过的秒数)：<code>[</code>停顿类型<code>[</code>发生区域<code>：</code>GC前该内存区域已使用容量<code>-&gt;</code> GC后该内存区域已使用容量(内存区域总容量)<code>,该区域GC所占用的时间(秒)</code> <code>]</code>GC前Java堆已使用容量<code>-&gt;</code>GC后Java堆已使用容量(Java堆总容量)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">100.667：FullGC[Tenured：0K-＞210K（10240K），0.0149142secs]4603K-＞210K（19456K），[Perm：2999K-＞2999K（21248K）]，0.0150007 secs</div></pre></td></tr></table></figure>
+<ul>
+<li>类型：<ul>
+<li>FullGC：Stop-The-World</li>
+<li>FullGC(System)：调用<code>System.gc()</code></li>
+</ul>
+</li>
+<li>GC发生的区域(收集器决定名字)<ul>
+<li>DefNew<ul>
+<li>Serial中新生代名为”Default New Generation”</li>
+<li>ParNew中则为”ParNew”，意为”Parallel New Generation”</li>
+<li>Parallel Scavenge中则为“PSYoungGen”</li>
+</ul>
+</li>
+<li>Tenured</li>
+<li>Perm</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[Full GC 283.736：[ParNew：261599K-＞261599K（261952K），0.0000288 secs]</div></pre></td></tr></table></figure>
+<p>ParNew出现Full GC：一般是因为出现了分配担保失败之类的问题，所以才导致STW。</p>
+<h3 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h3><p>有的收集器会给出更具体的时间数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[Times : user=0.01 sys=0.00, real=0.02 secs]</div></pre></td></tr></table></figure>
+<p><code>user</code>：用户态消耗的CPU时间</p>
+<p><code>sys</code>：内核态消耗的CPU时间</p>
+<p><code>real</code>：操作从开始到结束所经过的墙钟时间(Wall Clock Time)</p>
+<blockquote>
+<p>CPU时间与墙钟时间的区别：</p>
+<ul>
+<li>CPU时间不包括耗时<ul>
+<li>系统有多CPU或多核时，多线程操作会叠加这些CPU时间</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>墙钟时间包括各种非运算的等待耗时<ul>
+<li>等待磁盘I/O</li>
+<li>等待线程阻塞</li>
+</ul>
+</li>
+</ul>
+</blockquote>
 
+            
+        
+        </div>
         
             
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    03-20
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/2018/03/20/position/">JVM对象的访问定位</a>
-                </span>
-            </li>
-
-        
+    <div class="post-reward">
+        <span class="reward-btn" id="reward-btn">reward</span>
+        <div class="reward-wrapper" id="reward-wrapper" style="display:none;">
             
                 
                 
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    03-20
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/2018/03/20/layout/">JVM中对象的内存布局</a>
-                </span>
-            </li>
-
-        
             
                 
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    03-15
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/2018/03/15/Africa/">WalkUp攻略-非洲</a>
-                </span>
-            </li>
-
-        
-            
-                
-                
+                <div class="reward-item reward-alipay">
+                    <img src="https://wx2.sinaimg.cn/mw690/8c564d2aly1fpunn3yinhj20py0pyn4i.jpg">
+                </div>
                 
             
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    01-31
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/2018/01/31/create/">JVM中对象的创建</a>
-                </span>
-            </li>
-
-        
-            
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    01-30
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/2018/01/30/Antarctica/">WalkUp攻略-南极洲</a>
-                </span>
-            </li>
-
-        
-            
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    01-30
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/2018/01/30/Europe/">WalkUp攻略-欧洲</a>
-                </span>
-            </li>
-
-        
-            
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    01-30
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/2018/01/30/Asia/">WalkUp攻略-亚洲</a>
-                </span>
-            </li>
-
-        
-            
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    01-30
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/2018/01/30/memory/">Java内存区域</a>
-                </span>
-            </li>
-
-        
-            
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    01-22
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/2018/01/22/build/">Mac 编译openJDk9</a>
-                </span>
-            </li>
-
-        
-            </ul>
         </div>
     </div>
+
+            
+        
+    </article>
     
-    <nav class="pagination">
-        <a class="extend prev" rel="prev" href="/archives/">< Prev</a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/page/3/">3</a><a class="page-number" href="/archives/page/4/">4</a><a class="page-number" href="/archives/page/5/">5</a><a class="extend next" rel="next" href="/archives/page/3/">Next ></a>
+        
+    <nav class="article-page">
+        
+        
+            <a href="/2018/05/01/GC/" id="art-right" class="art-left">
+                <span class="prev-title"> 
+                    <i class="iconfont icon-left"></i>垃圾收集器
+                </span>
+            </a>
+        
     </nav>
 
+        
+    <i id="com-switch" class="iconfont icon-more jumping-in long infinite" style="font-size:24px;display:block;text-align:center;transform:rotate(180deg);"></i>
+    <div class="post-comments" id="post-comments" style="display: block;margin: auto 16px;">
+        
+        
+<!-- Gitment Comments -->
+<div id="gitment"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  owner: "super2bai",
+  repo: 'comment',
+  oauth: {
+    client_id: '37f2293730b41dcb5276',
+    client_secret: 'dbab4955840d4cbc88f1563be04ab676662194e5',
+  },
+})
+gitment.render('gitment')
+</script>
+
+        
+        
+
+    </div>
+
+    
 
 
         </main>
@@ -503,6 +434,16 @@ $(document).ready(function(){
 })
 </script>
     </div>
+    
+        
+    <div class="post-toc">
+        <span class="title">文章目录</span>
+        <div class="toc-inner syuanpi back-1 fallIn-light">
+            <li class="title-link"><a href="javascript:;" class="toTop">GC日志</a></li>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#概述"><span class="toc-text">概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#示例"><span class="toc-text">示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其它"><span class="toc-text">其它</span></a></li></ol>
+        </div>
+    </div>
+
     
     <div class="backtop syuanpi dead toTop" id="backtop">
     <i class="iconfont icon-up"></i>
