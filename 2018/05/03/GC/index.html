@@ -276,8 +276,8 @@
 </ul>
 <h4 id="运行示意图"><a href="#运行示意图" class="headerlink" title="运行示意图"></a>运行示意图</h4><p><img src="https://wx1.sinaimg.cn/mw690/8c564d2aly1fqy1c6aamzj20oc0bjgmd.jpg" alt=""></p>
 <h3 id="ParNew"><a href="#ParNew" class="headerlink" title="ParNew"></a>ParNew</h3><h4 id="特点-1"><a href="#特点-1" class="headerlink" title="特点"></a>特点</h4><ul>
-<li><code>Serial GC</code>的多线程版本</li>
-<li><code>与Serial GC一致</code><ul>
+<li>Serial GC的多线程版本</li>
+<li>与Serial GC一致<ul>
 <li>控制参数</li>
 <li>收集算法</li>
 <li>Stop The World</li>
@@ -291,11 +291,10 @@
 </li>
 </ul>
 <h4 id="运行示意图-1"><a href="#运行示意图-1" class="headerlink" title="运行示意图"></a>运行示意图</h4><p><img src="https://wx2.sinaimg.cn/mw690/8c564d2aly1fqy1c0cxccj20oc0bj75b.jpg" alt=""></p>
-<h4 id="兼容性"><a href="#兼容性" class="headerlink" title="兼容性"></a>兼容性</h4><p>CMS作为老年代的收集器，却无法与JDK 1.4.0中已经存在的新生代收集器Paralled Scavenge配合工作。所以在JDK1.5中使用CMS时，新生代只能选择</p>
-<p>Paralled Scavenge或者Serial。<strong>Parallel Scavenge没有使用原本HotSpot其它GC通用的那个GC框架，所以不能跟使用了那个框架的CMS搭配使用。就这么简单，不是什么算法/技术上的不兼容，纯粹是人为造成的。Parallel Scavenge和ParNew抽象来说是同一思路的GC，而后者可以跟CMS搭配使用。这样就够了。</strong></p>
+<h4 id="兼容性"><a href="#兼容性" class="headerlink" title="兼容性"></a>兼容性</h4><p>CMS作为老年代的收集器，却无法与JDK 1.4.0中已经存在的新生代收集器Paralled Scavenge配合工作。所以在JDK1.5中使用CMS时，新生代只能选择Paralled Scavenge或者Serial。<strong>Parallel Scavenge没有使用原本HotSpot其它GC通用的那个GC框架，所以不能跟使用了那个框架的CMS搭配使用。就这么简单，不是什么算法/技术上的不兼容，纯粹是人为造成的。Parallel Scavenge和ParNew抽象来说是同一思路的GC，而后者可以跟CMS搭配使用。这样就够了。</strong></p>
 <h4 id="与Serial对比"><a href="#与Serial对比" class="headerlink" title="与Serial对比"></a>与Serial对比</h4><p>ParNew收集器在单CPU的环境中绝对不会有比Serial收集器更好的效果，甚至由于线程交互的开销，该收集器在通过超线程技术实现的两个CPU的环境中都不能百分之百的保证可以超越Serial收集器。当然，随着可以使用的CPU的数量的增加，它对于GC使系统资源的有效利用还是很有好处的。</p>
 <blockquote>
-<p>超线程技术是一个很好的提升核心利用率的东西，将闲置处理资源充分调用起来，增强核心并行运算性能，在操作系统中一颗物理CPU能当作多棵CPU来使用。</p>
+<p>超线程技术是一个很好的提升核心利用率的东西，将闲置处理资源充分调用起来，增强核心并行运算性能，在操作系统中一颗物理CPU能当作多颗CPU来使用。</p>
 <p>好处：</p>
 <ul>
 <li>有效提升CPU利用率</li>
@@ -323,7 +322,7 @@
 <h4 id="运行示意图-2"><a href="#运行示意图-2" class="headerlink" title="运行示意图"></a>运行示意图</h4><p><img src="https://wx2.sinaimg.cn/mw690/8c564d2aly1fqy1c2a1hkj20oc0bjdgo.jpg" alt=""></p>
 <h4 id="吞吐量"><a href="#吞吐量" class="headerlink" title="吞吐量"></a>吞吐量</h4><ul>
 <li>CPU用于运行用户代码的时间与CPU总消耗的时间的比值</li>
-<li>吞吐量=运行用户代码时间<code>/</code>(运行用户代码时间+垃圾收集时间)</li>
+<li>吞吐量<code>=</code>运行用户代码时间<code>/(</code>运行用户代码时间<code>+</code>垃圾收集时间<code>)</code></li>
 <li>虚拟机总共运行了100分钟，其中垃圾收集花掉1分钟，那吞吐量就是99%</li>
 <li>高吞吐量可以高效率的利用CPU时间，尽快完成程序的运算任务，主要适合在后台运算而不需要太多交互的任务</li>
 </ul>
