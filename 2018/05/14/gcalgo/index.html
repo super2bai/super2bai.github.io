@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <title> 垃圾收集算法 · super2bai </title>
+    <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="browsermode" content="application">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="super2bai">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="msapplication-navbutton-color" content="#666666">
+<meta name= "format-detection" content="telephone=no" />
+<meta name="keywords" content="nlvi, Nlvi" />
+
+    <link rel="apple-touch-icon"  sizes="72x72"  href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+    <link rel="apple-touch-icon-precomposed"  sizes="72x72"  href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+
+
+
+
+
+    <meta name="keywords" content="JVM, Nlvi" />
+
+<link rel="stylesheet" href="/style/style.css">
+<script src="/script/jquery.min.js"></script>
+<script>
+    var CONFIG = {
+        title: "super2bai",
+        author: "super2bai",
+        lightbox: true,
+        animate: true
+    }
+</script>
+
+
+
+    <link rel="stylesheet" href="/lightbox/css/lightbox.min.css">
+
+
+
+
+    <link rel="stylesheet" href="/syuanpi/syuanpi.min.css">
+
+
+
+
+    <link rel="icon" href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-116557847-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-1178101469132492",
+    enable_page_level_ads: true
+  });
+</script>
+</head>
+<body>
+    <div class="progress">
+    <div class="progress-inner"></div>
+</div>
+    <div class="body">
+    <div class="tagcloud-mask"></div>  
+<div class="tagcloud" id="tagcloud">
+    <div class="tagcloud-inner">
+        <a href="/tags/Dubbo/" style="font-size: 14px;">Dubbo</a> <a href="/tags/GitHub-Pages/" style="font-size: 14px;">GitHub Pages</a> <a href="/tags/IO/" style="font-size: 14px;">IO</a> <a href="/tags/JDK/" style="font-size: 14px;">JDK</a> <a href="/tags/JVM/" style="font-size: 14px;">JVM</a> <a href="/tags/Linux/" style="font-size: 14px;">Linux</a> <a href="/tags/Python/" style="font-size: 14px;">Python</a> <a href="/tags/Spring/" style="font-size: 14px;">Spring</a> <a href="/tags/Zookeeper/" style="font-size: 14px;">Zookeeper</a> <a href="/tags/jmeter/" style="font-size: 14px;">jmeter</a> <a href="/tags/walkup/" style="font-size: 14px;">walkup</a> <a href="/tags/分布式/" style="font-size: 14px;">分布式</a>
+    </div>
+</div>
+    <header class="header" id="header">
+    <div class="title syuanpi tvIn">
+    <div class="table">
+        <div class="connect">
+            <div class="connect-inner">
+                <span><a href="/">super2bai</a></span>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <nav class="main-nav syuanpi tvIn">
+<div class="table">
+
+    <ul class="menu">
+        
+        
+        
+            <li class="menu-item">
+                <a href="/">
+                    <span>Article</span>
+                    
+                    
+                </a>
+            </li>
+        
+        
+        
+            <li class="menu-item">
+                <a href="/archives">
+                    <span>Archives</span>
+                    
+                    
+                </a>
+            </li>
+        
+        
+        
+            <li class="menu-item">
+                <a href="javascript:;" id="tags">
+                    <span>Tags</span>
+                    
+                    
+                </a>
+            </li>
+        
+        
+        
+            <li class="menu-item">
+                <a href="/about">
+                    <span>About</span>
+                    
+                    
+                </a>
+            </li>
+        
+        
+    </ul>
+
+</div>
+</nav>
+</header>
+<div class="mobile-header">
+    <div class="mobile-header-body">
+        <div class="mobile-header-list">
+            
+            
+                <div class="mobile-nav-item">
+                    <a href="/">
+                        <span>Article</span>
+                        
+                        
+                    </a>
+                </div>
+            
+            
+            
+                <div class="mobile-nav-item">
+                    <a href="/archives">
+                        <span>Archives</span>
+                        
+                        
+                    </a>
+                </div>
+            
+            
+            
+                <div class="mobile-nav-item inner-cloud">
+                    <div class="mobile-nav-tag">
+                        <a href="javascript:;" id="mobile-tags">
+                            <span>Tags</span>
+                            
+                            
+                        </a>
+                    </div>
+                    <div class="mobile-nav-tagcloud">
+                        <div class="mobile-tagcloud-inner">
+                            <a href="/tags/Dubbo/" style="font-size: 14px;">Dubbo</a> <a href="/tags/GitHub-Pages/" style="font-size: 14px;">GitHub Pages</a> <a href="/tags/IO/" style="font-size: 14px;">IO</a> <a href="/tags/JDK/" style="font-size: 14px;">JDK</a> <a href="/tags/JVM/" style="font-size: 14px;">JVM</a> <a href="/tags/Linux/" style="font-size: 14px;">Linux</a> <a href="/tags/Python/" style="font-size: 14px;">Python</a> <a href="/tags/Spring/" style="font-size: 14px;">Spring</a> <a href="/tags/Zookeeper/" style="font-size: 14px;">Zookeeper</a> <a href="/tags/jmeter/" style="font-size: 14px;">jmeter</a> <a href="/tags/walkup/" style="font-size: 14px;">walkup</a> <a href="/tags/分布式/" style="font-size: 14px;">分布式</a>
+                        </div>
+                    </div>
+                </div>
+            
+            
+            
+                <div class="mobile-nav-item">
+                    <a href="/about">
+                        <span>About</span>
+                        
+                        
+                    </a>
+                </div>
+            
+            
+        </div>
+    </div>
+    <div class="mobile-header-nav">
+        <div class="mobile-header-item" id="mobile-left">
+            <div class="header-menu-item">
+                <span class="header-menu-line"></span>
+            </div>
+        </div>
+        <h1 class="mobile-header-title">
+            <a href="/">super2bai</a>
+        </h1>
+        <div class="mobile-header-item"></div>
+    </div>
+</div>
+
+    <div class="container">
+        <main class="main" id="main">
+            
+    
+    <article class="post">
+        <header class="post-header">
+            <div class="post-time syuanpi riseIn-light back-1">
+                <span>May 14, 2018</span>
+                
+            </div>
+            <h1 class="post-title syuanpi riseIn-light back-2">
+            
+                垃圾收集算法
+            
+            </h1>
+            
+                
+                    <div class="post-tags syuanpi riseIn-light back-3">
+                    
+                        <a href="/tags/JVM/">JVM</a>
+                    
+                    </div>
+                
+            
+        </header>
+        <div class="post-content syuanpi riseIn-light back-3">
+            
+                <blockquote>
+<p>介绍几种算法的思想及其发展过程</p>
+</blockquote>
+<a id="more"></a>
+<h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><ul>
+<li>算法主要做的事情包括<ul>
+<li>所有存活的对象</li>
+<li>清除死亡和无用的对象</li>
+</ul>
+</li>
+</ul>
+<h4 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h4><ul>
+<li>GC会定义一些特别的对象为GC Roots<ul>
+<li>本地变量和当前正在运行的方法的参数</li>
+<li>运行的线程</li>
+<li>已加载类的静态字段</li>
+<li>JNI引用</li>
+</ul>
+</li>
+</ul>
+<h4 id="标记"><a href="#标记" class="headerlink" title="标记"></a>标记</h4><p>接下来，GC会遍历内存中的所有对象，从GC Roots开始，沿着引用到达其它对象，所有GC访问过的对象都会被标记为存活，其它对象为不可达的对象</p>
+<ul>
+<li>标记阶段<ul>
+<li>标记阶段是Stop-The-World</li>
+<li>暂停时间取决于存活对象的数量，不取决于堆中所有对象的数量，也不取决于堆大小</li>
+</ul>
+</li>
+</ul>
+<p>标记阶段结束后，GC执行下一步并移除所有不可达对象。</p>
+<p><img src="https://wx3.sinaimg.cn/mw690/8c564d2aly1frb8v15jixj20g405smy1.jpg" alt=""></p>
+<h4 id="移除"><a href="#移除" class="headerlink" title="移除"></a>移除</h4><p>移除不可达对象在不同的GC算法中是不一样的，但概括来看，可分为三类：清除、压缩和复制。</p>
+<h3 id="标记-清除算法"><a href="#标记-清除算法" class="headerlink" title="标记-清除算法"></a>标记-清除算法</h3><h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><blockquote>
+<p>Mark-Sweep，首先标记出所有需要回收的对象，在标记完成后统一回收所有被标记的对象。</p>
+</blockquote>
+<p><code>free-list</code>记录所有可用空间和大小，释放所有被不可达对象占用的内存</p>
+<h3 id="执行过程"><a href="#执行过程" class="headerlink" title="执行过程"></a>执行过程</h3><p><img src="https://wx4.sinaimg.cn/mw690/8c564d2aly1frb9kjgprwj20g90cjglp.jpg" alt=""></p>
+<h4 id="不足"><a href="#不足" class="headerlink" title="不足"></a>不足</h4><ul>
+<li>效率<ul>
+<li>标记和清除两个过程的效率都不高</li>
+</ul>
+</li>
+<li>空间<ul>
+<li>标记清除后会产生大量部连续的内存碎片，空间碎片太多可能会导致以后在程序运行过程中需要分配较大对象时，无法找到足够的连续内存而不得不提前触发另一次垃圾收集动作</li>
+</ul>
+</li>
+</ul>
+<h3 id="复制算法"><a href="#复制算法" class="headerlink" title="复制算法"></a>复制算法</h3><h4 id="原理-1"><a href="#原理-1" class="headerlink" title="原理"></a>原理</h4><blockquote>
+<p>Copying，解决效率问题，将可用内存按容量划分为大小相等的两块，每次只使用其中一块。当这一块的内存用完了，就将还存活的对象复制到另外一块上面，再把已使用过的内存空间一次清理掉。这样使得每次都是对整个半区进行回收，内存分配时也无需考虑内存碎片等问题，只需要移动堆顶指针，按顺序分配内存即可。</p>
+</blockquote>
+<h4 id="执行过程-1"><a href="#执行过程-1" class="headerlink" title="执行过程"></a>执行过程</h4><p><img src="https://wx1.sinaimg.cn/mw690/8c564d2aly1frb9kjf96nj20gd0ddt8u.jpg" alt=""></p>
+<h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><ul>
+<li>实现简单</li>
+<li>运行高效</li>
+</ul>
+<h4 id="不足-1"><a href="#不足-1" class="headerlink" title="不足"></a>不足</h4><ul>
+<li>将内存缩小为原来的一半</li>
+<li>在对象存活率较高时就要进行较多的复制操作，效率将会变低</li>
+<li>需要额外的空间进行分配担保，以对应被使用的内存中所有对象都100%存活的极端情况，所以在老年代一半不能直接选用这种算法</li>
+</ul>
+<h4 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h4><p>现在的商业虚拟机都采用复制算法来回收新生代，在HotSpot中，将内存分为一块较大的Eden空间和两块较小的Survivor空间，每次使用Eden和其中一块Survivor。当回收时，将Eden和Survivor中还存活的对象一次性地复制到另外一块Survivor空间上，最后清理掉Eden和刚才用过的Survivor空间。HotSpot虚拟机默认Eden和Survivor大小比是8:1，一般情况下，每次新生代中可用内存空间为整个新生代容量的90%(80%+10%)，只有10%的空间会被“浪费”掉。当Survivor空间不够用时，需要依赖其它内存(老年代)进行分配担保(Handle Promotion)。</p>
+<blockquote>
+<p>“分配担保”：如果另外一块Survivor空间没有足够空间存放上一次新生代收集下来的存活对象时，这些对象将直接通过分配担保机制进入老年代。</p>
+</blockquote>
+<h3 id="标记-整理算法"><a href="#标记-整理算法" class="headerlink" title="标记-整理算法"></a>标记-整理算法</h3><h4 id="原理-2"><a href="#原理-2" class="headerlink" title="原理"></a>原理</h4><blockquote>
+<p>Mark-Compact，标记后，让所有存活的对象都向一端移动，然后直接清理掉端边界以外的内存。</p>
+</blockquote>
+<h4 id="执行过程-2"><a href="#执行过程-2" class="headerlink" title="执行过程"></a>执行过程</h4><p><img src="https://wx3.sinaimg.cn/mw690/8c564d2aly1frb9kjf1r1j20gg0crglp.jpg" alt=""></p>
+<h3 id="分代收集算法"><a href="#分代收集算法" class="headerlink" title="分代收集算法"></a>分代收集算法</h3><blockquote>
+<p>根据对象存活周期的不同将内存划分为几块。</p>
+<p>一般是把Java堆分为新生代和老年代，根据不同年代特点采用不同算法。</p>
+<p>新生代：死的多，活的少：复制</p>
+<p>老年代：死的少，活的少：标记-整理、标记-清除</p>
+</blockquote>
+<hr>
+<h3 id="和R大学习"><a href="#和R大学习" class="headerlink" title="和R大学习"></a>和R大学习</h3><p><strong>以下为问题<a href="http://hllvm.group.iteye.com/group/topic/38223" target="_blank" rel="external">并发垃圾收集器（CMS）为什么没有采用标记-整理算法来实现？</a>中R大的回答，搬运过来。</strong></p>
+<p>分代式GC里，年老代常用mark-sweep；或者是mark-sweep/mark-compact的混合方式，一般情况下用mark-sweep，统计估算碎片量达到一定程度时用mark-compact。这是因为传统上大家认为年老代的对象可能会长时间存活且存活率高，或者是比较大，这样拷贝起来不划算，还不如采用就地收集的方式。<a href="http://www.memorymanagement.org/glossary/m.html#mark-sweep" target="_blank" rel="external">Mark-sweep</a>、<a href="http://www.memorymanagement.org/glossary/m.html#mark-compact" target="_blank" rel="external">mark-compact</a>、<a href="http://www.memorymanagement.org/glossary/c.html#copying.garbage.collection" target="_blank" rel="external">copying</a>这三种基本算法里，只有mark-sweep是不移动对象（也就是不用拷贝）的，所以选用mark-sweep。 </p>
+<h4 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h4><table>
+<thead>
+<tr>
+<th></th>
+<th>mark-sweep</th>
+<th>mark-compact</th>
+<th>copying</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>速度</td>
+<td>中等</td>
+<td>最慢</td>
+<td>最快</td>
+</tr>
+<tr>
+<td>空间开销</td>
+<td>少（但会堆积碎片</td>
+<td>少（不堆积碎片）</td>
+<td>通常需要活对象的2倍大小（不堆积碎片）</td>
+</tr>
+<tr>
+<td>移动对象?</td>
+<td>否</td>
+<td>是</td>
+<td>是</td>
+</tr>
+</tbody>
+</table>
+<h4 id="时间开销"><a href="#时间开销" class="headerlink" title="时间开销"></a>时间开销</h4><ul>
+<li>mark-sweep<ul>
+<li>mark阶段与活对象的数量成正比</li>
+<li>sweep阶段与整堆大小成正比 </li>
+</ul>
+</li>
+<li>mark-compact<ul>
+<li>mark阶段与活对象的数量成正比</li>
+<li>compact阶段与活对象的大小成正比 </li>
+</ul>
+</li>
+<li>copying<ul>
+<li>与活对象大小成正比 </li>
+</ul>
+</li>
+</ul>
+<p>如果把mark、sweep、compact、copying这几种动作的耗时放在一起看，大致有这样的关系：<br>compaction &gt;= copying &gt; marking &gt; sweeping<br>还有 marking + sweeping &gt; copying </p>
+<blockquote>
+<p>虽然compactiont与copying都涉及移动对象，但取决于具体算法，compact可能要先计算一次对象的目标地址，然后修正指针，然后再移动对象；copying则可以把这几件事情合为一体来做，所以可以快一些。 </p>
+<p>另外还需要留意GC带来的开销不能只看collector的耗时，还得看allocator一侧的。如果能保证内存没碎片，分配就可以用pointer bumping方式，只有挪一个指针就完成了分配，非常快；而如果内存有碎片就得用freelist之类的方式管理，分配速度通常会慢一些。</p>
+</blockquote>
+<p>在分代式假设中，年轻代中的对象在minor GC时的存活率应该很低，这样用copying算法就是最合算的，因为其时间开销与活对象的大小成正比，如果没多少活对象，它就非常快；而且young gen本身应该比较小，就算需要2倍空间也只会浪费不太多的空间。 </p>
+<p>而年老代被GC时对象存活率可能会很高，而且假定可用剩余空间不太多，这样copying算法就不太合适，于是更可能选用另两种算法，特别是不用移动对象的mark-sweep算法。 </p>
+<p>不过HotSpot VM中除了CMS之外的其它收集器都是会移动对象的，也就是要么是copying、要么是mark-compact的变种。 </p>
+<p>================================================================ </p>
+<h4 id="关于名字"><a href="#关于名字" class="headerlink" title="关于名字"></a>关于名字</h4><p>HotSpot VM的serial GC（UseSerialGC）、parallel GC（UseParallelGC）中，只有full GC会收集年老代（实际上收集整个GC堆，包括年老代在内）。它用的算法是<a href="http://www.oracle.com/technetwork/java/whitepaper-135217.html" target="_blank" rel="external">mark-compact</a>（”Mark-Compact Old Object Collector”那一节），具体来说是典型的单线程（串行）的<a href="http://www.memorymanagement.org/glossary/m.html#mark-compact" target="_blank" rel="external">LISP 2算法</a>。虽然在HotSpot VM的源码里，这个full GC的实现类叫做<a href="http://hg.openjdk.java.net/jdk6/jdk6/hotspot/file/tip/src/share/vm/gc_implementation/shared/markSweep.hpp" target="_blank" rel="external">MarkSweep</a>，而许多资料上都把它称为<a href="http://www.oracle.com/technetwork/java/javase/memorymanagement-whitepaper-150215.pdf" target="_blank" rel="external">mark-sweep-compact</a>，但实际上它是典型的mark-compact而不是mark-sweep，请留意不要弄混了。出现这种情况是历史原因，十几二十年前GC的术语还没固定到几个公认的用法时mark-sweep-compact和mark-compact说的是一回事。 </p>
+<h4 id="历史"><a href="#历史" class="headerlink" title="历史"></a>历史</h4><p>我不太清楚当初HotSpot VM为何选择先以mark-compact算法来实现full GC，而不像后来微软的<a href="http://msdn.microsoft.com/en-us/library/8bs2ecf4.aspx" target="_blank" rel="external">CLR</a>那样先选择使用mark-sweep为基本算法来实现<a href="http://msdn.microsoft.com/en-us/library/ee787088.aspx" target="_blank" rel="external">Gen 2 GC</a>。但其背后的真相未必很复杂：<br>HotSpot VM的前身是<a href="http://strongtalk.org/" target="_blank" rel="external">Strongtalk VM</a>，它的full GC也是mark-compact算法的，虽说具体算法跟HotSpot VM的不同，是一种threaded compaction算法。这种算法比较省空间，但限制也挺多，实现起来比较绕弯，所以后来出现的HotSpot才改用了更简单直观的LISP 2算法吧，而这个决定又进一步在V8上得到体现。<br>而Strongtalk VM的前身是<a href="http://selflanguage.org/" target="_blank" rel="external">Self VM</a>，同样使用mark-compact算法来实现full GC。可以看到mark-compact是这一系列VM一脉相承的，一直延续到更加新的<a href="https://code.google.com/p/v8/" target="_blank" rel="external">Google V8</a>也是如此。或许当初规划HotSpot VM时也没想那么多就先继承下了其前身的特点。 </p>
+<p>如果硬要猜为什么，那一个合理的推断是：如果不能整理碎片，长时间运行的程序终究会遭遇内存碎片化，导致内存空间的浪费和内存分配速度下降的问题；要解决这个问题就得要能整理内存。如果决定要根治碎片化问题，那么可以直接选用mark-compact，或者是主要用mark-sweep外加用mark-compact来备份。显然直接选用mark-compact实现起来更简单些。所以就选它了。<br>（而CLR就选择了不根治碎片化问题。所有可能出问题的地方都最终会出问题，于是现在就有很多.NET程序受碎片化的困扰） </p>
+<p>后来HotSpot VM有了<a href="http://docs.oracle.com/javase/6/docs/technotes/guides/vm/par-compaction-6.html" target="_blank" rel="external">parallel old GC</a>（UseParallelOldGC），这个用的是多线程并行版的mark-compact算法。这个算法具体应该叫什么名字我说不上来，因为并没有专门的论文去描述它，而大家有许多不同的办法去并行化LISP 2之类的经典mark-compact算法，各自取舍的细节都不同。无论如何，这里要关注的只是它用的也是mark-compact而不是mark-sweep算法。 </p>
+<p>================================================================ </p>
+<h4 id="CMS算法分析"><a href="#CMS算法分析" class="headerlink" title="CMS算法分析"></a>CMS算法分析</h4><p><strong>那CMS为啥选用mark-sweep为基本算法将其并发化，而不跟HotSpot VM的其它GC一样用会移动对象的算法呢？</strong></p>
+<p>一个不算原因的原因是：当时设计和实现CMS是在Sun的另外一款JVM，<a href="http://www.cs.rit.edu/~swm/gc/smli_tr-98-67.pdf%E2%80%8E" target="_blank" rel="external">Exact VM（EVM）</a>上做的。后来EVM项目跟HotSpot VM竞争落败，CMS才从EVM移植到HotSpot VM来。因此它没有HotSpot VM的初始血缘。 &lt;- 真的算不上原因（逃 </p>
+<p>真正的原因请参考CMS的原始论文：<a href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.22.8915" target="_blank" rel="external">A Generational Mostly-concurrent Garbage Collector</a>（可恶，Oracle Labs的链接挂了。用CiteSeerX的链接吧） </p>
+<p>把GC之外的代码（主要是应用程序的逻辑）叫做mutator，把GC的代码叫做collector。两者之间需要保持同步，这样才可以保证两者所观察到的对象图是一致的。 </p>
+<p>如果有一个串行、不并发、不分代、不增量式的collector，那么它在工作的时候总是能观察到整个对象图。因而它跟mutator之间的同步方式非常简单：mutator一侧不用做任何特殊的事情，只要在需要GC时同步调用collector即可，就跟普通函数调用一样。 </p>
+<p>如果有一个分代式的，或者增量式的collector，那它在工作的时候就只会观察到整个对象图的一部分；它观察不到的部分就有可能与mutator产生不一致，于是需要mutator配合：它与mutator之间需要额外的同步。Mutator在改变对象图中的引用关系时必须执行一些额外代码，让collector记录下这些变化。有两种做法，一种是<a href="http://www.ravenbrook.com/project/mps/master/manual/html/glossary/w.html#term-write-barrier" target="_blank" rel="external">write barrier</a>，一种是<a href="http://www.ravenbrook.com/project/mps/master/manual/html/glossary/r.html#term-read-barrier" target="_blank" rel="external">read barrier</a>。<br>Write barrier就是当改写一个引用时： </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">a.x = b</div></pre></td></tr></table></figure>
+<p>插入一块额外的代码，变成： </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">write_barrier(a, &amp;(a-&gt;x), b);  </div><div class="line">a-&gt;x = b;</div></pre></td></tr></table></figure>
+<p>Read barrier就是当读取一个引用时： </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">b = a.x</div></pre></td></tr></table></figure>
+<p>插入一块额外的代码，变成：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">read_barrier(&amp;(a-&gt;x));  </div><div class="line">b = a-&gt;x;</div></pre></td></tr></table></figure>
+<p>通常一个程序里对引用的读远比对引用的写要更频繁，所以通常认为read barrier的开销远大于write barrier，所以很少有GC使用read barrier。<br>如果只用write barrier，那么“移动对象”这个动作就必须要完全暂停mutator，让collector把对象都移动好，然后把指针都修正好，接下来才可以恢复mutator的执行。也就是说collector“移动对象”这个动作无法与mutator并发进行。 </p>
+<p>如果用到了read barrier（虽少见但不是不存在，例如<a href="http://www.azulsystems.com/technology/c4-garbage-collector" target="_blank" rel="external">Azul C4 Collector</a>），那移动对象就可以单个单个的进行，而且不需要立即修正所有的指针，所以可以看作整个过程collector都与mutator是并发的。 </p>
+<p>CMS没有使用read barrier，只用了write barrier。这样，如果它要选用mark-compact为基本算法的话，就只有mark阶段可以并发执行（其中root scanning阶段仍然需要暂停mutator，这是initial marking；后面的concurrent marking才可以跟mutator并发执行），然后整个compact阶段都要暂停mutator。回想最初提到的：compact阶段的时间开销与活对象的大小成正比，这对年老代来说就不划算了。<br>于是选用mark-sweep为基本算法就是很合理的选择：mark与sweep阶段都可以与mutator并发执行。Sweep阶段由于不移动对象所以不用修正指针，所以不用暂停mutator。 </p>
+<p>（题外话：但现实中我们仍然可以看到以mark-compact为基础算法的增量式/并发式年老代GC。例如Google V8里的年老代GC就可以把marking阶段拆分为非并发的initial marking和增量式的<a href="https://code.google.com/p/v8/source/browse/trunk/src/incremental-marking.h" target="_blank" rel="external">incremental marking</a>；但真正比较耗时的compact阶段仍然需要完全暂停mutator。它要降低暂停时间就只能想办法在年老代内进一步选择其中一部分来做compaction，而不是整个年老代一口气做compaction。这在V8里也已经有实现，叫做incremental compaction。再继续朝这方向发展的话最终会变成region-based collector，那就跟G1类似了。） </p>
+<p>那碎片堆积起来了怎么办呢？HotSpot VM里CMS只负责并发收集年老代（而不是整个GC堆）。如果并发收集所回收到的空间赶不上分配的需求，就会回退到使用serial GC的mark-compact算法做full GC。也就是mark-sweep为主，mark-compact为备份的经典配置。但这种配置方式也埋下了隐患：使用CMS时必须非常小心的调优，尽量推迟由碎片化引致的full GC的发生。一旦发生full GC，暂停时间可能又会很长，这样原本为低延迟而选择CMS的优势就没了。 </p>
+<p>所以新的Garbage-First（G1）GC就回到了以copying为基础的算法上，把整个GC堆划分为许多小区域（region），通过每次GC只选择收集很少量region来控制移动对象带来的暂停时间。这样既能实现低延迟也不会受碎片化的影响。<br>（注意：G1虽然有concurrent global marking，但那是可选的，真正带来暂停时间的工作仍然是基于copying算法而不是mark-compact的）</p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p><a href="https://plumbr.io/handbook/garbage-collection-algorithms" target="_blank" rel="external">垃圾收集算法</a></p>
+<p><a href="https://my.oschina.net/feinik/blog/895192" target="_blank" rel="external">图片来源</a></p>
+<p><a href="http://hllvm.group.iteye.com/group/topic/38223" target="_blank" rel="external">关于收集算法—R大的回答</a></p>
+
+            
+        
+        </div>
+        
+            
+    <div class="post-reward">
+        <span class="reward-btn" id="reward-btn">reward</span>
+        <div class="reward-wrapper" id="reward-wrapper" style="display:none;">
+            
+                
+                
+            
+                
+                <div class="reward-item reward-alipay">
+                    <img src="https://wx2.sinaimg.cn/mw690/8c564d2aly1fpunn3yinhj20py0pyn4i.jpg">
+                </div>
+                
+            
+        </div>
+    </div>
+
+            
+        
+    </article>
+    
+        
+    <nav class="article-page">
+        
+        
+            <a href="/2018/05/14/reference/" id="art-right" class="art-left">
+                <span class="prev-title"> 
+                    <i class="iconfont icon-left"></i>关于对象引用
+                </span>
+            </a>
+        
+    </nav>
+
+        
+    <i id="com-switch" class="iconfont icon-more jumping-in long infinite" style="font-size:24px;display:block;text-align:center;transform:rotate(180deg);"></i>
+    <div class="post-comments" id="post-comments" style="display: block;margin: auto 16px;">
+        
+        
+<!-- Gitment Comments -->
+<div id="gitment"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  owner: "super2bai",
+  repo: 'comment',
+  oauth: {
+    client_id: '37f2293730b41dcb5276',
+    client_secret: 'dbab4955840d4cbc88f1563be04ab676662194e5',
+  },
+})
+gitment.render('gitment')
+</script>
+
+        
+        
+
+    </div>
+
+    
+
+
+        </main>
+        <footer class="footer syuanpi fadeIn" id="footer">
+    <hr>
+    <div class="footer-wrapper">
+        <div class="left">
+            <div class="contact-icon">
+    
+    
+    
+    
+    
+    
+    
+    
+        
+            <a href="https://github.com/super2bai" class="iconfont icon-github" title="github"></a>
+        
+        
+        
+        
+        
+        
+        
+    
+</div>
+        </div>
+        <div class="right">
+            <div class="copyright">
+    <div class="info">
+        <span>&copy;</span>
+        <span>2017 ~ 2018</span>
+        <span>❤</span>
+        <span>super2bai</span>
+    </div>
+    <div class="theme">
+        <span>
+            Powered by
+            <a href="http://hexo.io/" target="_blank">Hexo </a>
+        </span>
+        <span>
+            Theme
+            <a href="https://github.com/ColMugX/hexo-theme-Nlvi"> Nlvi </a>
+        </span>
+    </div>
+    
+    <div class="visit_count">
+        <i class="iconfont icon-visit"></i>
+        <span id="busuanzi_value_site_uv"></span>
+        <i class="iconfont icon-people"></i>
+        <span id="busuanzi_value_site_pv"></span>
+    </div>
+    
+</div>
+        </div>
+    </div>
+</footer>
+    </div>
+    <script src="/script/nlvi.js"></script>
+<script src="/script/search.js"></script>
+
+    <script src="/lightbox/js/lightbox.min.js"></script>
+
+<script>
+$(document).ready(function(){
+    document.body.addEventListener('touchstart', function () {});
+    $('.progress').hide();
+    $('.body').show();
+    Nlvi.tagcloud();
+    Nlvi.mobileHeader();
+    Nlvi.back2top();
+    Nlvi.smoothScroll();
+    Nlvi.onView();
+    Nlvi.showToc();
+    Nlvi.showComments();
+    Nlvi.showReward();
+    Nlvi.picPos();
+
+    !CONFIG.animate && Nlvi.offAnimate();
+    CONFIG.lightbox && Nlvi.onPicBox();
+})
+</script>
+    </div>
+    
+        
+    <div class="post-toc">
+        <span class="title">文章目录</span>
+        <div class="toc-inner syuanpi back-1 fallIn-light">
+            <li class="title-link"><a href="javascript:;" class="toTop">垃圾收集算法</a></li>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#概述"><span class="toc-text">概述</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#开始"><span class="toc-text">开始</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#标记"><span class="toc-text">标记</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#移除"><span class="toc-text">移除</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#标记-清除算法"><span class="toc-text">标记-清除算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#原理"><span class="toc-text">原理</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#执行过程"><span class="toc-text">执行过程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#不足"><span class="toc-text">不足</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#复制算法"><span class="toc-text">复制算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#原理-1"><span class="toc-text">原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#执行过程-1"><span class="toc-text">执行过程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#优点"><span class="toc-text">优点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#不足-1"><span class="toc-text">不足</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#其它"><span class="toc-text">其它</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#标记-整理算法"><span class="toc-text">标记-整理算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#原理-2"><span class="toc-text">原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#执行过程-2"><span class="toc-text">执行过程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分代收集算法"><span class="toc-text">分代收集算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#和R大学习"><span class="toc-text">和R大学习</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#对比"><span class="toc-text">对比</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#时间开销"><span class="toc-text">时间开销</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#关于名字"><span class="toc-text">关于名字</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#历史"><span class="toc-text">历史</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CMS算法分析"><span class="toc-text">CMS算法分析</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考资料"><span class="toc-text">参考资料</span></a></li></ol>
+        </div>
+    </div>
+
+    
+    <div class="backtop syuanpi dead toTop" id="backtop">
+    <i class="iconfont icon-up"></i>
+    <span style="text-align:center;font-family:Georgia;"><span style="font-family:Georgia;" id="scrollpercent">1</span>%</span>
+</div>
+    
+</body>
+</html>
