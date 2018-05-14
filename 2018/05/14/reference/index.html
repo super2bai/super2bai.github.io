@@ -252,11 +252,11 @@
 </ul>
 <h3 id="可达性分析算法"><a href="#可达性分析算法" class="headerlink" title="可达性分析算法"></a>可达性分析算法</h3><p>商用程序语言(Java、C#、Lisp)的主流实现实现中，都是通过可达性分析(Reachability Analysis)来判定对象是否存活的。</p>
 <h4 id="原理-1"><a href="#原理-1" class="headerlink" title="原理"></a>原理</h4><blockquote>
-<p>通过一些列的称为“GC Roots”的对象作为起始点，从这些节点开始向下搜索，搜索所走过的路径称为”引用链”，当一个对象到GC Roots没有任何引用链相连(用图论的话来说，就是GC Roots到这个对象不可达)时，则证明此对象是不可用的，暂处于”缓行”阶段。</p>
+<p>通过一些列的称为“GC Roots”的对象作为起始点，从这些节点开始向下搜索，搜索所走过的路径称为”引用链”，当一个对象到GC Roots没有任何引用链相连(用图论的话来说，就是GC Roots到这个对象不可达)时，则证明此对象是不可用的，暂处于”缓刑”阶段。</p>
 </blockquote>
 <h3 id="再谈引用"><a href="#再谈引用" class="headerlink" title="再谈引用"></a>再谈引用</h3><h4 id="JDK1-2以前"><a href="#JDK1-2以前" class="headerlink" title="JDK1.2以前"></a>JDK1.2以前</h4><ul>
 <li>如果reference类型的数据中存储的数值代表的是另外一块内存的起始地址，就称这块内存代表着一个引用。</li>
-<li>只有被引用活着没有被引用两种状态</li>
+<li>只有被引用或者没有被引用两种状态</li>
 </ul>
 <blockquote>
 <p>希望：</p>
@@ -327,7 +327,7 @@
 <ul>
 <li>废弃常量<ul>
 <li>没有任何String对象引用常量池中的常量</li>
-<li>没有其他地方引用了这个字面亮</li>
+<li>没有其他地方引用了这个字面量</li>
 </ul>
 </li>
 <li>无用的类<ul>
