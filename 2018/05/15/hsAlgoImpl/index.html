@@ -1,11 +1,7 @@
 <!DOCTYPE html>
 <html lang="">
 <head>
-    <title>
-  
-    JVM · super2bai
-  
-</title>
+    <title> HotSpot的算法实现 · super2bai </title>
     <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
@@ -23,6 +19,8 @@
 
 
 
+
+    <meta name="keywords" content="JVM, Nlvi" />
 
 <link rel="stylesheet" href="/style/style.css">
 <script src="/script/jquery.min.js"></script>
@@ -218,64 +216,176 @@
         <main class="main" id="main">
             
     
-    <div class="archive syuanpi riseIn-light" id="archive">
-        
-            <h2 class="archive-title"> now in </h2>
-            <span class="archive-name"> — JVM</span>
-        
-        <div class="archive-list">
-            <ul>
-        
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
+    <article class="post">
+        <header class="post-header">
+            <div class="post-time syuanpi riseIn-light back-1">
+                <span>May 15, 2018</span>
                 
-                    2018-01-31
+            </div>
+            <h1 class="post-title syuanpi riseIn-light back-2">
+            
+                HotSpot的算法实现
+            
+            </h1>
+            
                 
-                </span>
-                <span class="archive-post-link">
-                    <a href="/2018/01/31/create/">JVM中对象的创建</a>
-                </span>
-            </li>
+                    <div class="post-tags syuanpi riseIn-light back-3">
+                    
+                        <a href="/tags/JVM/">JVM</a>
+                    
+                    </div>
+                
+            
+        </header>
+        <div class="post-content syuanpi riseIn-light back-3">
+            
+                <p>HotSpot虚拟机实现垃圾收集算法时，必须对算法的执行效率有严格的考量，才能保证虚拟机高效运行。</p>
+<a id="more"></a>
+<h3 id="枚举根节点"><a href="#枚举根节点" class="headerlink" title="枚举根节点"></a>枚举根节点</h3><ul>
+<li>可作为GC Roots的节点<ul>
+<li>全局性的引用<ul>
+<li>常量或类静态属性</li>
+</ul>
+</li>
+<li>执行上下文<ul>
+<li>栈帧中的本地变量表</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>可达性分析必须在一个能确保一致性的快照中进行，这导致GC进行时必须停顿所有Java执行线程(Sun称为“Stop-The-World”)。CMS收集器中，枚举根节点时也是必须要停顿的。</p>
+<blockquote>
+<p>一致性：整个分析期间整个执行系统看起来就像被冻结在某个时间点上，不可能出现分析过程中对象引用关系还在不断变化的情况，该点不满足就无法保证分析结果准确性</p>
+</blockquote>
+<p>由于目前的主流Java虚拟机使用的都是精准式GC，在HotSpot的实现中，是使用一组称为<code>OopMap</code>的数据结构来达到这个目的的，在类加载完成的时候，HotSpot就把对象内对应偏移量上是什么类型的数据计算出来，在JIT编译过程中，也会在特定的位置记录下栈和寄存器中哪些位置是引用。这样，GC在扫描时就可以直接得知这些信息了。</p>
+<blockquote>
+<p>准确式GC：就是让JVM知道内存中某位置数据的类型什么。比如当前内存位置中的数据究竟是一个整型变量还是一个引用类型。这样JVM可以很快确定所有引用类型的位置，从而更有针对性的进行GC roots枚举。</p>
+</blockquote>
+<h3 id="安全点"><a href="#安全点" class="headerlink" title="安全点"></a>安全点</h3><h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h4><blockquote>
+<p>HotSpot没有为每条指令都生成OopMap，只有在“特定的位置”记录了这些信息，这些位置称为<strong>安全点(Safepoint)</strong>。</p>
+</blockquote>
+<p>程序执行时并非在所有地方都能停顿下来开始GC，只有在到达安全点时才能暂停。</p>
+<h4 id="选择标准"><a href="#选择标准" class="headerlink" title="选择标准"></a>选择标准</h4><blockquote>
+<p>是否具有让程序长时间执行的特征为标准</p>
+</blockquote>
+<p>安全点的选定既不能太少，让GC等待时间太长，也不能太多，过分增大运行时的负荷。</p>
+<p>每条指令执行的时间都非常短暂，程序不太可能因为指令流长度太长而过长时间运行。</p>
+<blockquote>
+<ul>
+<li>长时间执行的特征就是指令序列复用<ul>
+<li>方法调用</li>
+<li>循环跳转</li>
+<li>异常跳转</li>
+</ul>
+</li>
+</ul>
+<p>具有这些功能的指令才会产生Safepoint</p>
+</blockquote>
+<ul>
+<li>如何在GC发生时让所有线程(不包括执行JNI调用的线程)都运行到最近的安全点上再停顿下来？<ul>
+<li>抢先式中断Preemptive Suspension</li>
+<li>主动式中断Voluntary Suspension</li>
+</ul>
+</li>
+</ul>
+<h4 id="抢先式中断"><a href="#抢先式中断" class="headerlink" title="抢先式中断"></a>抢先式中断</h4><blockquote>
+<p>不需要线程的执行代码主动配合，在GC发生时，首先把所有线程全部中断，如果发现有线程不在安全点上，就恢复线程，直到运行至安全点再中断。</p>
+</blockquote>
+<p>几乎没有虚拟机实现采用抢先式中断</p>
+<h4 id="主动式中断"><a href="#主动式中断" class="headerlink" title="主动式中断"></a>主动式中断</h4><blockquote>
+<p>当GC需要中断线程时，不直接对线程操作，仅仅设置一个标志，各个线程执行时主动去轮训这个标志，发现中断标志为真时就主动中断挂起。</p>
+</blockquote>
+<p>轮询标志的地方和安全点是重合的，另外再加上创建对象需要分配内存的地方。</p>
+<h3 id="安全区域"><a href="#安全区域" class="headerlink" title="安全区域"></a>安全区域</h3><h4 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h4><p>对于程序不执行时，线程须发响应JVM的中断请求，运行至安全的地方中断挂起，JVM也不太可能等待线程重新运行，此时就需要安全区域来解决。</p>
+<blockquote>
+<p>程序不执行：</p>
+<p>没有分配CPU时间，如：线程处于Sleep或Blocked状态</p>
+</blockquote>
+<h4 id="概述-1"><a href="#概述-1" class="headerlink" title="概述"></a>概述</h4><blockquote>
+<p>Safe Region，在一段代码片段之中，引用关系不会发生变化。在这个区域中的任意地方开始GC都是安全的。</p>
+<p>被扩展后的Safepoint</p>
+</blockquote>
+<h4 id="执行过程"><a href="#执行过程" class="headerlink" title="执行过程"></a>执行过程</h4><p>在线程执行到Safe Region中的代码时</p>
+<ul>
+<li>标志自己已经进入了Safe Region<ul>
+<li>在这段时间里JVM要发起GC时，就不用管标志自己为Safe Region状态的线程了</li>
+</ul>
+</li>
+</ul>
+<p>在线程要离开Safe Region时</p>
+<ul>
+<li>检查系统是否已经完成了根节点枚举(或时整个GC过程)<ul>
+<li>是：线程继续执行</li>
+<li>否：必须等待至收到可以安全离开Safe Region的信号</li>
+</ul>
+</li>
+</ul>
 
+            
+        
+        </div>
         
             
+    <div class="post-reward">
+        <span class="reward-btn" id="reward-btn">reward</span>
+        <div class="reward-wrapper" id="reward-wrapper" style="display:none;">
             
-            <li class="archive-post">
-                <span class="archive-post-time">
                 
-                    2018-01-30
                 
-                </span>
-                <span class="archive-post-link">
-                    <a href="/2018/01/30/memory/">Java内存区域</a>
-                </span>
-            </li>
-
-        
             
+                
+                <div class="reward-item reward-alipay">
+                    <img src="https://wx2.sinaimg.cn/mw690/8c564d2aly1fpunn3yinhj20py0pyn4i.jpg">
+                </div>
+                
             
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    2018-01-22
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/2018/01/22/build/">Mac 编译openJDk9</a>
-                </span>
-            </li>
-
-        
-            </ul>
         </div>
     </div>
+
+            
+        
+    </article>
     
-    <nav class="pagination">
-        <a class="extend prev" rel="prev" href="/tags/JVM/">< Prev</a><a class="page-number" href="/tags/JVM/">1</a><span class="page-number current">2</span>
+        
+    <nav class="article-page">
+        
+        
+            <a href="/2018/05/14/gcalgo/" id="art-right" class="art-left">
+                <span class="prev-title"> 
+                    <i class="iconfont icon-left"></i>垃圾收集算法
+                </span>
+            </a>
+        
     </nav>
 
+        
+    <i id="com-switch" class="iconfont icon-more jumping-in long infinite" style="font-size:24px;display:block;text-align:center;transform:rotate(180deg);"></i>
+    <div class="post-comments" id="post-comments" style="display: block;margin: auto 16px;">
+        
+        
+<!-- Gitment Comments -->
+<div id="gitment"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  owner: "super2bai",
+  repo: 'comment',
+  oauth: {
+    client_id: '37f2293730b41dcb5276',
+    client_secret: 'dbab4955840d4cbc88f1563be04ab676662194e5',
+  },
+})
+gitment.render('gitment')
+</script>
+
+        
+        
+
+    </div>
+
+    
 
 
         </main>
@@ -360,6 +470,16 @@ $(document).ready(function(){
 })
 </script>
     </div>
+    
+        
+    <div class="post-toc">
+        <span class="title">文章目录</span>
+        <div class="toc-inner syuanpi back-1 fallIn-light">
+            <li class="title-link"><a href="javascript:;" class="toTop">HotSpot的算法实现</a></li>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#枚举根节点"><span class="toc-text">枚举根节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安全点"><span class="toc-text">安全点</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#概述"><span class="toc-text">概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#选择标准"><span class="toc-text">选择标准</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#抢先式中断"><span class="toc-text">抢先式中断</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#主动式中断"><span class="toc-text">主动式中断</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安全区域"><span class="toc-text">安全区域</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#背景"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#概述-1"><span class="toc-text">概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#执行过程"><span class="toc-text">执行过程</span></a></li></ol></li></ol>
+        </div>
+    </div>
+
     
     <div class="backtop syuanpi dead toTop" id="backtop">
     <i class="iconfont icon-up"></i>
