@@ -315,7 +315,7 @@
 </blockquote>
 <hr>
 <h3 id="和R大学习"><a href="#和R大学习" class="headerlink" title="和R大学习"></a>和R大学习</h3><p><strong>以下为问题<a href="http://hllvm.group.iteye.com/group/topic/38223" target="_blank" rel="external">并发垃圾收集器（CMS）为什么没有采用标记-整理算法来实现？</a>中R大的回答，搬运过来。</strong></p>
-<p>分代式GC里，年老代常用mark-sweep；或者是mark-sweep/mark-compact的混合方式，一般情况下用mark-sweep，统计估算碎片量达到一定程度时用mark-compact。这是因为传统上大家认为年老代的对象可能会长时间存活且存活率高，或者是比较大，这样拷贝起来不划算，还不如采用就地收集的方式。<a href="http://www.memorymanagement.org/glossary/m.html#mark-sweep" target="_blank" rel="external">Mark-sweep</a>、<a href="http://www.memorymanagement.org/glossary/m.html#mark-compact" target="_blank" rel="external">mark-compact</a>、<a href="http://www.memorymanagement.org/glossary/c.html#copying.garbage.collection" target="_blank" rel="external">copying</a>这三种基本算法里，只有mark-sweep是不移动对象（也就是不用拷贝）的，所以选用mark-sweep。 </p>
+<p>分代式GC里，年老代常用<code>mark-sweep</code>或者是<code>mark-sweep/mark-compact</code>的混合方式，一般情况下用<code>mark-sweep</code>，统计估算碎片量达到一定程度时用<code>mark-compac</code>t。这是因为传统上大家认为年老代的对象可能会长时间存活且存活率高，或者是比较大，这样拷贝起来不划算，还不如采用就地收集的方式。<a href="http://www.memorymanagement.org/glossary/m.html#mark-sweep" target="_blank" rel="external">Mark-sweep</a>、<a href="http://www.memorymanagement.org/glossary/m.html#mark-compact" target="_blank" rel="external">mark-compact</a>、<a href="http://www.memorymanagement.org/glossary/c.html#copying.garbage.collection" target="_blank" rel="external">copying</a>这三种基本算法里，只有<code>mark-sweep</code>是不移动对象（也就是不用拷贝）的，所以选用<code>mark-sweep</code>。 </p>
 <h4 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h4><table>
 <thead>
 <tr>
