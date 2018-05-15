@@ -270,6 +270,7 @@
 <p>标记阶段结束后，GC执行下一步并移除所有不可达对象。</p>
 <p><img src="https://wx3.sinaimg.cn/mw690/8c564d2aly1frb8v15jixj20g405smy1.jpg" alt=""></p>
 <h4 id="移除"><a href="#移除" class="headerlink" title="移除"></a>移除</h4><p>移除不可达对象在不同的GC算法中是不一样的，但概括来看，可分为三类：清除、压缩和复制。</p>
+<hr>
 <h3 id="标记-清除算法"><a href="#标记-清除算法" class="headerlink" title="标记-清除算法"></a>标记-清除算法</h3><h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><blockquote>
 <p>Mark-Sweep，首先标记出所有需要回收的对象，在标记完成后统一回收所有被标记的对象。</p>
 </blockquote>
@@ -296,7 +297,7 @@
 <h4 id="不足-1"><a href="#不足-1" class="headerlink" title="不足"></a>不足</h4><ul>
 <li>将内存缩小为原来的一半</li>
 <li>在对象存活率较高时就要进行较多的复制操作，效率将会变低</li>
-<li>需要额外的空间进行分配担保，以对应被使用的内存中所有对象都100%存活的极端情况，所以在老年代一半不能直接选用这种算法</li>
+<li>需要额外的空间进行分配担保，以对应被使用的内存中所有对象都100%存活的极端情况，所以在老年代一般不能直接选用这种算法</li>
 </ul>
 <h4 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h4><p>现在的商业虚拟机都采用复制算法来回收新生代，在HotSpot中，将内存分为一块较大的Eden空间和两块较小的Survivor空间，每次使用Eden和其中一块Survivor。当回收时，将Eden和Survivor中还存活的对象一次性地复制到另外一块Survivor空间上，最后清理掉Eden和刚才用过的Survivor空间。HotSpot虚拟机默认Eden和Survivor大小比是8:1，一般情况下，每次新生代中可用内存空间为整个新生代容量的90%(80%+10%)，只有10%的空间会被“浪费”掉。当Survivor空间不够用时，需要依赖其它内存(老年代)进行分配担保(Handle Promotion)。</p>
 <blockquote>
@@ -310,7 +311,7 @@
 <p>根据对象存活周期的不同将内存划分为几块。</p>
 <p>一般是把Java堆分为新生代和老年代，根据不同年代特点采用不同算法。</p>
 <p>新生代：死的多，活的少：复制</p>
-<p>老年代：死的少，活的少：标记-整理、标记-清除</p>
+<p>老年代：死的少，活的多：标记-整理、标记-清除</p>
 </blockquote>
 <hr>
 <h3 id="和R大学习"><a href="#和R大学习" class="headerlink" title="和R大学习"></a>和R大学习</h3><p><strong>以下为问题<a href="http://hllvm.group.iteye.com/group/topic/38223" target="_blank" rel="external">并发垃圾收集器（CMS）为什么没有采用标记-整理算法来实现？</a>中R大的回答，搬运过来。</strong></p>
