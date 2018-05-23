@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="">
 <head>
-    <title> HotSpot的算法实现 · super2bai </title>
+    <title> Python基础 · super2bai </title>
     <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
@@ -22,7 +22,7 @@
 
 
 
-    <meta name="keywords" content="JVM, Nlvi" />
+    <meta name="keywords" content="Python, Nlvi" />
 
 <link rel="stylesheet" href="/style/style.css">
 <script src="/script/jquery.min.js"></script>
@@ -223,23 +223,23 @@
     <article class="post">
         <header class="post-header">
             <div class="post-time syuanpi riseIn-light back-1">
-                <span>May 15, 2018</span>
+                <span>April 20, 2018</span>
                 
                 
-                    <span class="post-category"><a href="/categories/JVM/">JVM</a></span>
+                    <span class="post-category"><a href="/categories/Python/">Python</a></span>
                 
                 
             </div>
             <h1 class="post-title syuanpi riseIn-light back-2">
             
-                HotSpot的算法实现
+                Python基础
             
             </h1>
             
                 
                     <div class="post-tags syuanpi riseIn-light back-3">
                     
-                        <a href="/tags/JVM/">JVM</a>
+                        <a href="/tags/Python/">Python</a>
                     
                     </div>
                 
@@ -247,92 +247,46 @@
         </header>
         <div class="post-content syuanpi riseIn-light back-3">
             
-                <p>HotSpot虚拟机实现垃圾收集算法时，必须对算法的执行效率有严格的考量，才能保证虚拟机高效运行。</p>
+                <p><strong>本文适合有编码经验的用户阅读</strong></p>
 <a id="more"></a>
-<h3 id="枚举根节点"><a href="#枚举根节点" class="headerlink" title="枚举根节点"></a>枚举根节点</h3><ul>
-<li>可作为GC Roots的节点<ul>
-<li>全局性的引用<ul>
-<li>常量或类静态属性</li>
+<h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><h4 id="整数"><a href="#整数" class="headerlink" title="整数"></a>整数</h4><ul>
+<li>精准<ul>
+<li>除法用<code>//</code>，称为地板除，两个整数的除法仍是整数。</li>
+<li><code>10//3</code>输出为<code>3</code></li>
 </ul>
 </li>
-<li>执行上下文<ul>
-<li>栈帧中的本地变量表</li>
+<li>也可用十六进制表示</li>
+<li>没有大小限制</li>
 </ul>
-</li>
+<h4 id="浮点数"><a href="#浮点数" class="headerlink" title="浮点数"></a>浮点数</h4><ul>
+<li>存在四舍五入的误差</li>
+<li>很大或很小的浮点数必须用科学计数法表示</li>
+<li>除法<code>/</code>结果是浮点数，即使两个整数恰好整除，结果也是浮点数</li>
+<li>无大小限制，但是超过一定范围就直接表示为<code>inf</code>(无限大)</li>
 </ul>
-</li>
+<h4 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h4><ul>
+<li>可以用<code>&#39;&#39;</code>或<code>&quot;&quot;</code>括起来，例：<code>&#39;a&#39;</code>或<code>&quot;a&quot;</code></li>
+<li>包含<code>&#39;&#39;</code>，就使用<code>&quot;&quot;</code>括起来，例：<code>&quot;I&#39;m OK&quot;</code></li>
+<li>既包含<code>&#39;&#39;</code>又包含<code>&quot;&quot;</code>，则用转义字符<code>\</code>，例：<code>&#39;I\&#39;m \&quot;OK\&quot;!&#39;</code></li>
+<li>需要输出转义字符本身，则用<code>r</code>，例：<code>print(r&#39;\\\t\\&#39;)</code>，输出<code>\\\t\\</code></li>
+<li>多次换行，命令行模式则用<code>&#39;&#39;&#39;...&#39;&#39;&#39;</code>，例<code>print(&#39;&#39;&#39;line1</code>，回车，会提示继续输入，直到输入<code>&#39;&#39;&#39;)</code>，才会打印所有输入的内容；文件模式，直接换行写输入内容即可，同样，多次换行也可以使用<code>r</code>来输出转义字符</li>
 </ul>
-<p>可达性分析必须在一个能确保一致性的快照中进行，这导致GC进行时必须停顿所有Java执行线程(Sun称为“Stop-The-World”)。CMS收集器中，枚举根节点时也是必须要停顿的。</p>
-<blockquote>
-<p>一致性：整个分析期间整个执行系统看起来就像被冻结在某个时间点上，不可能出现分析过程中对象引用关系还在不断变化的情况，该点不满足就无法保证分析结果准确性</p>
-</blockquote>
-<p>由于目前的主流Java虚拟机使用的都是精准式GC，在HotSpot的实现中，是使用一组称为<code>OopMap</code>的数据结构来达到这个目的的，在类加载完成的时候，HotSpot就把对象内对应偏移量上是什么类型的数据计算出来，在JIT编译过程中，也会在特定的位置记录下栈和寄存器中哪些位置是引用。这样，GC在扫描时就可以直接得知这些信息了。</p>
-<blockquote>
-<p>准确式GC：就是让JVM知道内存中某位置数据的类型什么。比如当前内存位置中的数据究竟是一个整型变量还是一个引用类型。这样JVM可以很快确定所有引用类型的位置，从而更有针对性的进行GC roots枚举。</p>
-</blockquote>
-<h3 id="安全点"><a href="#安全点" class="headerlink" title="安全点"></a>安全点</h3><h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h4><blockquote>
-<p>HotSpot没有为每条指令都生成OopMap，只有在“特定的位置”记录了这些信息，这些位置称为<strong>安全点(Safepoint)</strong>。</p>
-</blockquote>
-<p>程序执行时并非在所有地方都能停顿下来开始GC，只有在到达安全点时才能暂停。</p>
-<h4 id="选择标准"><a href="#选择标准" class="headerlink" title="选择标准"></a>选择标准</h4><blockquote>
-<p>是否具有让程序长时间执行的特征为标准</p>
-</blockquote>
-<p>安全点的选定既不能太少，让GC等待时间太长，也不能太多，过分增大运行时的负荷。</p>
-<p>每条指令执行的时间都非常短暂，程序不太可能因为指令流长度太长而过长时间运行。</p>
-<blockquote>
-<ul>
-<li>长时间执行的特征就是指令序列复用<ul>
-<li>方法调用</li>
-<li>循环跳转</li>
-<li>异常跳转</li>
+<p><img src="https://wx2.sinaimg.cn/mw690/8c564d2aly1fqi4nkz6ebj20vo0p4gnt.jpg" alt=""></p>
+<p><img src="https://wx2.sinaimg.cn/mw690/8c564d2aly1fqi4nnfn1zj21kw0ps41p.jpg" alt=""></p>
+<h4 id="布尔值"><a href="#布尔值" class="headerlink" title="布尔值"></a>布尔值</h4><ul>
+<li>值有两种：<code>Trur</code>和<code>False</code>。大小写敏感</li>
+<li>运算有：<code>and</code>、<code>or</code>和<code>not</code></li>
 </ul>
-</li>
+<h4 id="空值"><a href="#空值" class="headerlink" title="空值"></a>空值</h4><ul>
+<li>值为<code>None</code></li>
 </ul>
-<p>具有这些功能的指令才会产生Safepoint</p>
-</blockquote>
-<ul>
-<li>如何在GC发生时让所有线程(不包括执行JNI调用的线程)都运行到最近的安全点上再停顿下来？<ul>
-<li>抢先式中断Preemptive Suspension</li>
-<li>主动式中断Voluntary Suspension</li>
+<h4 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h4><ul>
+<li>弱类型</li>
 </ul>
-</li>
+<h4 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h4><ul>
+<li>全大写</li>
+<li>Python没有任何机制保证常量值不会被改变。</li>
 </ul>
-<h4 id="抢先式中断"><a href="#抢先式中断" class="headerlink" title="抢先式中断"></a>抢先式中断</h4><blockquote>
-<p>不需要线程的执行代码主动配合，在GC发生时，首先把所有线程全部中断，如果发现有线程不在安全点上，就恢复线程，直到运行至安全点再中断。</p>
-</blockquote>
-<p>几乎没有虚拟机实现采用抢先式中断</p>
-<h4 id="主动式中断"><a href="#主动式中断" class="headerlink" title="主动式中断"></a>主动式中断</h4><blockquote>
-<p>当GC需要中断线程时，不直接对线程操作，仅仅设置一个标志，各个线程执行时主动去轮训这个标志，发现中断标志为真时就主动中断挂起。</p>
-</blockquote>
-<p>轮询标志的地方和安全点是重合的，另外再加上创建对象需要分配内存的地方。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">0x01b6d62d: test   %eax,0x160100      ;   &#123;poll&#125;</div></pre></td></tr></table></figure>
-<p><code>test</code>：HotSpot生成的轮询指令</p>
-<p>当需要线程暂停时，虚拟机把<code>0x160100</code>的内存页设置为不可读，线程执行到<code>test</code>指令时就会产生一个自陷异常信号，在预先注册的处理器中暂停线程实现等待，这样一条汇编指令便完成安全点轮询和触发线程中断。</p>
-<h3 id="安全区域"><a href="#安全区域" class="headerlink" title="安全区域"></a>安全区域</h3><h4 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h4><p>对于程序不执行时，线程须发响应JVM的中断请求，运行至安全的地方中断挂起，JVM也不太可能等待线程重新运行，此时就需要安全区域来解决。</p>
-<blockquote>
-<p>程序不执行：</p>
-<p>没有分配CPU时间，如：线程处于Sleep或Blocked状态</p>
-</blockquote>
-<h4 id="概述-1"><a href="#概述-1" class="headerlink" title="概述"></a>概述</h4><blockquote>
-<p>Safe Region，在一段代码片段之中，引用关系不会发生变化。在这个区域中的任意地方开始GC都是安全的。</p>
-<p>被扩展后的Safepoint</p>
-</blockquote>
-<h4 id="执行过程"><a href="#执行过程" class="headerlink" title="执行过程"></a>执行过程</h4><p>在线程执行到Safe Region中的代码时</p>
-<ul>
-<li>标志自己已经进入了Safe Region<ul>
-<li>在这段时间里JVM要发起GC时，就不用管标志自己为Safe Region状态的线程了</li>
-</ul>
-</li>
-</ul>
-<p>在线程要离开Safe Region时</p>
-<ul>
-<li>检查系统是否已经完成了根节点枚举(或时整个GC过程)<ul>
-<li>是：线程继续执行</li>
-<li>否：必须等待至收到可以安全离开Safe Region的信号</li>
-</ul>
-</li>
-</ul>
-<h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4><p><a href="https://blog.csdn.net/column/details/talk-about-jvm.html" target="_blank" rel="external">聊聊JVM</a></p>
 
             
         
@@ -362,16 +316,16 @@
         
     <nav class="article-page">
         
-            <a href="/JVM/memStrategy.html" id="art-left" class="art-right">
+            <a href="/jmeter/start.html" id="art-left" class="art-right">
                 <span class="next-title">
-                    内存分配与回收策略<i class="iconfont icon-right"></i> 
+                    jmeter入门<i class="iconfont icon-right"></i> 
                 </span>
             </a>
         
         
-            <a href="/JVM/gcAlgorithm.html" id="art-right" class="art-left">
+            <a href="/Python/start.html" id="art-right" class="art-left">
                 <span class="prev-title"> 
-                    <i class="iconfont icon-left"></i>垃圾收集算法
+                    <i class="iconfont icon-left"></i>Python入门
                 </span>
             </a>
         
@@ -493,8 +447,8 @@ $(document).ready(function(){
     <div class="post-toc">
         <span class="title">文章目录</span>
         <div class="toc-inner syuanpi back-1 fallIn-light">
-            <li class="title-link"><a href="javascript:;" class="toTop">HotSpot的算法实现</a></li>
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#枚举根节点"><span class="toc-text">枚举根节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安全点"><span class="toc-text">安全点</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#概述"><span class="toc-text">概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#选择标准"><span class="toc-text">选择标准</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#抢先式中断"><span class="toc-text">抢先式中断</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#主动式中断"><span class="toc-text">主动式中断</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安全区域"><span class="toc-text">安全区域</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#背景"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#概述-1"><span class="toc-text">概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#执行过程"><span class="toc-text">执行过程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#参考资料"><span class="toc-text">参考资料</span></a></li></ol></li></ol>
+            <li class="title-link"><a href="javascript:;" class="toTop">Python基础</a></li>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#数据类型"><span class="toc-text">数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#整数"><span class="toc-text">整数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#浮点数"><span class="toc-text">浮点数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#字符串"><span class="toc-text">字符串</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#布尔值"><span class="toc-text">布尔值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#空值"><span class="toc-text">空值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#变量"><span class="toc-text">变量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#常量"><span class="toc-text">常量</span></a></li></ol></li></ol>
         </div>
     </div>
 
