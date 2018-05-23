@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <title> Zookeeper中的一些概念 · super2bai </title>
+    <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="browsermode" content="application">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="super2bai">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="msapplication-navbutton-color" content="#666666">
+<meta name= "format-detection" content="telephone=no" />
+<meta name="keywords" content="nlvi, Nlvi" />
+
+    <link rel="apple-touch-icon"  sizes="72x72"  href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+    <link rel="apple-touch-icon-precomposed"  sizes="72x72"  href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+
+
+    <meta name="subtitle" content="学的多一点，不会的就少一点">
+
+
+
+
+    <meta name="keywords" content="Zookeeper, Nlvi" />
+
+<link rel="stylesheet" href="/style/style.css">
+<script src="/script/jquery.min.js"></script>
+<script>
+    var CONFIG = {
+        title: "super2bai",
+        author: "super2bai",
+        lightbox: true,
+        animate: true
+    }
+</script>
+
+
+
+    <link rel="stylesheet" href="/lightbox/css/lightbox.min.css">
+
+
+
+
+    <link rel="stylesheet" href="/syuanpi/syuanpi.min.css">
+
+
+
+
+    <link rel="icon" href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-116557847-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-1178101469132492",
+    enable_page_level_ads: true
+  });
+</script>
+</head>
+<body>
+    <div class="progress">
+    <div class="progress-inner"></div>
+</div>
+    <div class="body">
+    <div class="tagcloud-mask"></div>  
+<div class="tagcloud" id="tagcloud">
+    <div class="tagcloud-inner">
+        <a href="/tags/Dubbo/" style="font-size: 14px;">Dubbo</a> <a href="/tags/GitHubPages/" style="font-size: 14px;">GitHubPages</a> <a href="/tags/IO/" style="font-size: 14px;">IO</a> <a href="/tags/JDK/" style="font-size: 14px;">JDK</a> <a href="/tags/JVM/" style="font-size: 14px;">JVM</a> <a href="/tags/Linux/" style="font-size: 14px;">Linux</a> <a href="/tags/Python/" style="font-size: 14px;">Python</a> <a href="/tags/Spring/" style="font-size: 14px;">Spring</a> <a href="/tags/Zookeeper/" style="font-size: 14px;">Zookeeper</a> <a href="/tags/jmeter/" style="font-size: 14px;">jmeter</a> <a href="/tags/walkup/" style="font-size: 14px;">walkup</a> <a href="/tags/分布式/" style="font-size: 14px;">分布式</a>
+    </div>
+</div>
+    <header class="header" id="header">
+    <div class="title syuanpi tvIn">
+    <div class="table">
+        <div class="connect">
+            <div class="connect-inner">
+                <span><a href="/">super2bai</a></span>
+                
+                    <span id="subtitle">学的多一点，不会的就少一点</span>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <nav class="main-nav syuanpi tvIn">
+<div class="table">
+
+    <ul class="menu">
+        
+        
+        
+            <li class="menu-item">
+                <a href="/">
+                    <span>Article</span>
+                    
+                    
+                </a>
+            </li>
+        
+        
+        
+            <li class="menu-item">
+                <a href="/archives">
+                    <span>Archives</span>
+                    
+                    
+                </a>
+            </li>
+        
+        
+        
+            <li class="menu-item">
+                <a href="javascript:;" id="tags">
+                    <span>Tags</span>
+                    
+                    
+                </a>
+            </li>
+        
+        
+        
+            <li class="menu-item">
+                <a href="/about">
+                    <span>About</span>
+                    
+                    
+                </a>
+            </li>
+        
+        
+    </ul>
+
+</div>
+</nav>
+</header>
+<div class="mobile-header">
+    <div class="mobile-header-body">
+        <div class="mobile-header-list">
+            
+            
+                <div class="mobile-nav-item">
+                    <a href="/">
+                        <span>Article</span>
+                        
+                        
+                    </a>
+                </div>
+            
+            
+            
+                <div class="mobile-nav-item">
+                    <a href="/archives">
+                        <span>Archives</span>
+                        
+                        
+                    </a>
+                </div>
+            
+            
+            
+                <div class="mobile-nav-item inner-cloud">
+                    <div class="mobile-nav-tag">
+                        <a href="javascript:;" id="mobile-tags">
+                            <span>Tags</span>
+                            
+                            
+                        </a>
+                    </div>
+                    <div class="mobile-nav-tagcloud">
+                        <div class="mobile-tagcloud-inner">
+                            <a href="/tags/Dubbo/" style="font-size: 14px;">Dubbo</a> <a href="/tags/GitHubPages/" style="font-size: 14px;">GitHubPages</a> <a href="/tags/IO/" style="font-size: 14px;">IO</a> <a href="/tags/JDK/" style="font-size: 14px;">JDK</a> <a href="/tags/JVM/" style="font-size: 14px;">JVM</a> <a href="/tags/Linux/" style="font-size: 14px;">Linux</a> <a href="/tags/Python/" style="font-size: 14px;">Python</a> <a href="/tags/Spring/" style="font-size: 14px;">Spring</a> <a href="/tags/Zookeeper/" style="font-size: 14px;">Zookeeper</a> <a href="/tags/jmeter/" style="font-size: 14px;">jmeter</a> <a href="/tags/walkup/" style="font-size: 14px;">walkup</a> <a href="/tags/分布式/" style="font-size: 14px;">分布式</a>
+                        </div>
+                    </div>
+                </div>
+            
+            
+            
+                <div class="mobile-nav-item">
+                    <a href="/about">
+                        <span>About</span>
+                        
+                        
+                    </a>
+                </div>
+            
+            
+        </div>
+    </div>
+    <div class="mobile-header-nav">
+        <div class="mobile-header-item" id="mobile-left">
+            <div class="header-menu-item">
+                <span class="header-menu-line"></span>
+            </div>
+        </div>
+        <h1 class="mobile-header-title">
+            <a href="/">super2bai</a>
+        </h1>
+        <div class="mobile-header-item"></div>
+    </div>
+</div>
+
+    <div class="container">
+        <main class="main" id="main">
+            
+    
+    <article class="post">
+        <header class="post-header">
+            <div class="post-time syuanpi riseIn-light back-1">
+                <span>October 23, 2017</span>
+                
+                
+                    <span class="post-category"><a href="/categories/Zookeeper/">Zookeeper</a></span>
+                
+                
+            </div>
+            <h1 class="post-title syuanpi riseIn-light back-2">
+            
+                Zookeeper中的一些概念
+            
+            </h1>
+            
+                
+                    <div class="post-tags syuanpi riseIn-light back-3">
+                    
+                        <a href="/tags/Zookeeper/">Zookeeper</a>
+                    
+                    </div>
+                
+            
+        </header>
+        <div class="post-content syuanpi riseIn-light back-3">
+            
+                <p>Zookeeper序列化使用的是<code>Jute</code>。</p>
+<h3 id="数据模型"><a href="#数据模型" class="headerlink" title="数据模型"></a>数据模型</h3><p>Zookeeper的数据模型和文件系统类似，每一个节点称为<code>znode</code>.是Zookeeper中的最小数据单元。每一个<code>znode</code>上都可以保存数据和挂载子节点。从而构成一个层次话的属性结构。默认存储大小为<code>3M</code>。</p>
+<a id="more"></a>
+<h3 id="zNode"><a href="#zNode" class="headerlink" title="zNode"></a>zNode</h3><ul>
+<li>节点特性<ul>
+<li>持久化节点<ul>
+<li>节点创建后会一致存在zookeeper服务器上，直到主动删除</li>
+</ul>
+</li>
+<li>持久化有序节点<ul>
+<li>节点创建后会一直存在zookeeper服务器上，直到主动删除</li>
+</ul>
+</li>
+<li>临时节点<ul>
+<li>临时节点的声明周期和客户端的会话保持一致。</li>
+<li>当客户端会话失效，该节点自动清理。<ul>
+<li>会话失效后，会有一个重连机制，短时间内此节点存在，过了重连时间后，该节点自动清理</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>临时有序节点<ul>
+<li>在临时节点上多了一个顺序性特性</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>节点名称区分大小写</li>
+<li>子节点<ul>
+<li>创建子节点操作要点<ul>
+<li>先创建父节点<ul>
+<li>直接创建父和子节点，会报错：<code>Node does not exist</code></li>
+</ul>
+</li>
+<li>一定要输入完整的路径(包含父路径)</li>
+<li>删除节点一定要从子节点逐层向上删除</li>
+</ul>
+</li>
+<li>没有命令可以显示节点数<ul>
+<li>想要知道节点数，可以自己递归计算</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="数据存储"><a href="#数据存储" class="headerlink" title="数据存储"></a>数据存储</h3><ul>
+<li>Zookeeper中数据的两种类型<ul>
+<li>内存数据</li>
+<li>磁盘数据</li>
+</ul>
+</li>
+</ul>
+<p>Zookeeper会把节点信息存到内存里(<code>org.apache.zookeeper.server.DataTree</code>类中的<code>private final ConcurrentHashMap&lt;String, DataNode&gt; nodes = new ConcurrentHashMap&lt;String, DataNode&gt;();</code>),Zookeeper会定时把数据存储在磁盘上。</p>
+<h3 id="会话"><a href="#会话" class="headerlink" title="会话"></a>会话</h3><p> 客户端和zookeeper建立一个连接(无所谓哪个节点)</p>
+<ul>
+<li>会话状态</li>
+</ul>
+<p><code>NOT CONNECTED</code>-&gt;<code>CONNECTING</code>-&gt;<code>CONNECTED</code>-&gt;<code>CLOSED</code></p>
+<h3 id="Watcher"><a href="#Watcher" class="headerlink" title="Watcher"></a>Watcher</h3><ul>
+<li>Zookeeper提供了分布式数据发布/订阅，Zookeeper允许客户端向服务器注册一个watcher监听。</li>
+<li>当服务器端的节点触发指定事件的时候会触发watcher，服务端会向客户端发送一个事件通知</li>
+<li>watcher的通知是<strong>一次性</strong>，一旦触发一次通知后，该watcher就失效。如果需要永久监听，则需要反复注册</li>
+<li>不关心客户端是否收到，只关心发出去了。</li>
+<li>监听类型<ul>
+<li>连接状态监听<ul>
+<li><code>Event.KeeperState.Expired</code><ul>
+<li>客户端和服务器之间在一个tickTime事件周期之内，客户端没有收到服务器端的通知，则认为当前会话已过期 ，客户端会废弃当前连接，并重建连接</li>
+</ul>
+</li>
+<li><code>Event.KeeperState.Disconnected</code><ul>
+<li>客户端主动断开</li>
+</ul>
+</li>
+<li><code>Event.KeeperState.SyncConnected</code><ul>
+<li>客户端和服务器端在某一个节点上建立连接，并完成了<code>version</code>和<code>zxid</code>的同步</li>
+</ul>
+</li>
+<li><code>Event.KeeperState.AuthFailed</code><ul>
+<li>授权失败</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>事件监听<ul>
+<li>None<ul>
+<li>客户端和服务器连接状态发生变化，没有触发事件</li>
+</ul>
+</li>
+<li>NodeCreated<ul>
+<li>节点被创建</li>
+</ul>
+</li>
+<li>NodeDeleted<ul>
+<li>节点被删除</li>
+</ul>
+</li>
+<li>NodeDataChanged<ul>
+<li>节点数据发生变化</li>
+</ul>
+</li>
+<li>NodeChildrenChanged<ul>
+<li>子节点被创建、删除或子节点数据发生变化</li>
+<li>只有一级子节点会触发</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="ACL"><a href="#ACL" class="headerlink" title="ACL"></a>ACL</h3><p><a href="http://zookeeper.apache.org/doc/trunk/zookeeperProgrammers.html#sc_ZooKeeperAccessControl" target="_blank" rel="external">官方介绍文档</a></p>
+<ul>
+<li>Zookeeper提供控制节点访问权限的功能，用于有效的保证Zookeeper中数据的安全性。避免误操作而导致系统出现重大事故</li>
+<li>权限角色<ul>
+<li>CREATE</li>
+<li>READ</li>
+<li>WRITE</li>
+<li>DELETE</li>
+<li>ADMIN</li>
+</ul>
+</li>
+<li>Builtin ACL Schemes<ul>
+<li>ip<ul>
+<li>指定ip授权</li>
+</ul>
+</li>
+<li>digest(常用)<ul>
+<li>username:password组成字符串，通过API转换为加密内容设置到权限内</li>
+</ul>
+</li>
+<li>world<ul>
+<li>开放式的权限控制模式。所有人。</li>
+</ul>
+</li>
+<li>auth(super)<ul>
+<li>超级用户，可以对zookeeper上的数据节点进行操作。</li>
+</ul>
+</li>
+<li>x509<ul>
+<li>将客户端X500 Principal作为ACL ID身份。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+        
+        </div>
+        
+            
+    <div class="post-reward">
+        <span class="reward-btn" id="reward-btn">reward</span>
+        <div class="reward-wrapper" id="reward-wrapper" style="display:none;">
+            
+                
+                
+            
+                
+                <div class="reward-item reward-alipay">
+                    <img src="https://wx2.sinaimg.cn/mw690/8c564d2aly1fpunn3yinhj20py0pyn4i.jpg">
+                </div>
+                
+            
+        </div>
+    </div>
+
+            
+        
+    </article>
+    
+        
+    <nav class="article-page">
+        
+            <a href="/Zookeeper/order.html" id="art-left" class="art-right">
+                <span class="next-title">
+                    Zookeeper的命令操作<i class="iconfont icon-right"></i> 
+                </span>
+            </a>
+        
+        
+            <a href="/Zookeeper/zooconfig.html" id="art-right" class="art-left">
+                <span class="prev-title"> 
+                    <i class="iconfont icon-left"></i>zoo.cfg配置文件分析
+                </span>
+            </a>
+        
+    </nav>
+
+        
+    <i id="com-switch" class="iconfont icon-more jumping-in long infinite" style="font-size:24px;display:block;text-align:center;transform:rotate(180deg);"></i>
+    <div class="post-comments" id="post-comments" style="display: block;margin: auto 16px;">
+        
+        
+<!-- Gitment Comments -->
+<div id="gitment"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  owner: "super2bai",
+  repo: 'comment',
+  oauth: {
+    client_id: '37f2293730b41dcb5276',
+    client_secret: 'dbab4955840d4cbc88f1563be04ab676662194e5',
+  },
+})
+gitment.render('gitment')
+</script>
+
+        
+        
+
+    </div>
+
+    
+
+
+        </main>
+        <footer class="footer syuanpi fadeIn" id="footer">
+    <hr>
+    <div class="footer-wrapper">
+        <div class="left">
+            <div class="contact-icon">
+    
+    
+    
+    
+    
+    
+    
+    
+        
+            <a href="https://github.com/super2bai" class="iconfont icon-github" title="github"></a>
+        
+        
+        
+        
+        
+        
+        
+    
+</div>
+        </div>
+        <div class="right">
+            <div class="copyright">
+    <div class="info">
+        <span>&copy;</span>
+        <span>2017 ~ 2018</span>
+        <span>❤</span>
+        <span>super2bai</span>
+    </div>
+    <div class="theme">
+        <span>
+            Powered by
+            <a href="http://hexo.io/" target="_blank">Hexo </a>
+        </span>
+        <span>
+            Theme
+            <a href="https://github.com/ColMugX/hexo-theme-Nlvi"> Nlvi </a>
+        </span>
+    </div>
+    
+    <div class="visit_count">
+        <i class="iconfont icon-visit"></i>
+        <span id="busuanzi_value_site_uv"></span>
+        <i class="iconfont icon-people"></i>
+        <span id="busuanzi_value_site_pv"></span>
+    </div>
+    
+</div>
+        </div>
+    </div>
+</footer>
+    </div>
+    <script src="/script/nlvi.js"></script>
+<script src="/script/search.js"></script>
+
+    <script src="/lightbox/js/lightbox.min.js"></script>
+
+<script>
+$(document).ready(function(){
+    document.body.addEventListener('touchstart', function () {});
+    $('.progress').hide();
+    $('.body').show();
+    Nlvi.tagcloud();
+    Nlvi.mobileHeader();
+    Nlvi.back2top();
+    Nlvi.smoothScroll();
+    Nlvi.onView();
+    Nlvi.showToc();
+    Nlvi.showComments();
+    Nlvi.showReward();
+    Nlvi.picPos();
+
+    !CONFIG.animate && Nlvi.offAnimate();
+    CONFIG.lightbox && Nlvi.onPicBox();
+})
+</script>
+    </div>
+    
+        
+    <div class="post-toc">
+        <span class="title">文章目录</span>
+        <div class="toc-inner syuanpi back-1 fallIn-light">
+            <li class="title-link"><a href="javascript:;" class="toTop">Zookeeper中的一些概念</a></li>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#数据模型"><span class="toc-text">数据模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#zNode"><span class="toc-text">zNode</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据存储"><span class="toc-text">数据存储</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#会话"><span class="toc-text">会话</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Watcher"><span class="toc-text">Watcher</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ACL"><span class="toc-text">ACL</span></a></li></ol>
+        </div>
+    </div>
+
+    
+    <div class="backtop syuanpi dead toTop" id="backtop">
+    <i class="iconfont icon-up"></i>
+    <span style="text-align:center;font-family:Georgia;"><span style="font-family:Georgia;" id="scrollpercent">1</span>%</span>
+</div>
+    
+</body>
+</html>

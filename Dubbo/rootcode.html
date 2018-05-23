@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <title> Dubbo主干源码分析 · super2bai </title>
+    <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="browsermode" content="application">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="super2bai">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="msapplication-navbutton-color" content="#666666">
+<meta name= "format-detection" content="telephone=no" />
+<meta name="keywords" content="nlvi, Nlvi" />
+
+    <link rel="apple-touch-icon"  sizes="72x72"  href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+    <link rel="apple-touch-icon-precomposed"  sizes="72x72"  href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+
+
+    <meta name="subtitle" content="学的多一点，不会的就少一点">
+
+
+
+
+    <meta name="keywords" content="Dubbo, Nlvi" />
+
+<link rel="stylesheet" href="/style/style.css">
+<script src="/script/jquery.min.js"></script>
+<script>
+    var CONFIG = {
+        title: "super2bai",
+        author: "super2bai",
+        lightbox: true,
+        animate: true
+    }
+</script>
+
+
+
+    <link rel="stylesheet" href="/lightbox/css/lightbox.min.css">
+
+
+
+
+    <link rel="stylesheet" href="/syuanpi/syuanpi.min.css">
+
+
+
+
+    <link rel="icon" href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-116557847-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-1178101469132492",
+    enable_page_level_ads: true
+  });
+</script>
+</head>
+<body>
+    <div class="progress">
+    <div class="progress-inner"></div>
+</div>
+    <div class="body">
+    <div class="tagcloud-mask"></div>  
+<div class="tagcloud" id="tagcloud">
+    <div class="tagcloud-inner">
+        <a href="/tags/Dubbo/" style="font-size: 14px;">Dubbo</a> <a href="/tags/GitHubPages/" style="font-size: 14px;">GitHubPages</a> <a href="/tags/IO/" style="font-size: 14px;">IO</a> <a href="/tags/JDK/" style="font-size: 14px;">JDK</a> <a href="/tags/JVM/" style="font-size: 14px;">JVM</a> <a href="/tags/Linux/" style="font-size: 14px;">Linux</a> <a href="/tags/Python/" style="font-size: 14px;">Python</a> <a href="/tags/Spring/" style="font-size: 14px;">Spring</a> <a href="/tags/Zookeeper/" style="font-size: 14px;">Zookeeper</a> <a href="/tags/jmeter/" style="font-size: 14px;">jmeter</a> <a href="/tags/walkup/" style="font-size: 14px;">walkup</a> <a href="/tags/分布式/" style="font-size: 14px;">分布式</a>
+    </div>
+</div>
+    <header class="header" id="header">
+    <div class="title syuanpi tvIn">
+    <div class="table">
+        <div class="connect">
+            <div class="connect-inner">
+                <span><a href="/">super2bai</a></span>
+                
+                    <span id="subtitle">学的多一点，不会的就少一点</span>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <nav class="main-nav syuanpi tvIn">
+<div class="table">
+
+    <ul class="menu">
+        
+        
+        
+            <li class="menu-item">
+                <a href="/">
+                    <span>Article</span>
+                    
+                    
+                </a>
+            </li>
+        
+        
+        
+            <li class="menu-item">
+                <a href="/archives">
+                    <span>Archives</span>
+                    
+                    
+                </a>
+            </li>
+        
+        
+        
+            <li class="menu-item">
+                <a href="javascript:;" id="tags">
+                    <span>Tags</span>
+                    
+                    
+                </a>
+            </li>
+        
+        
+        
+            <li class="menu-item">
+                <a href="/about">
+                    <span>About</span>
+                    
+                    
+                </a>
+            </li>
+        
+        
+    </ul>
+
+</div>
+</nav>
+</header>
+<div class="mobile-header">
+    <div class="mobile-header-body">
+        <div class="mobile-header-list">
+            
+            
+                <div class="mobile-nav-item">
+                    <a href="/">
+                        <span>Article</span>
+                        
+                        
+                    </a>
+                </div>
+            
+            
+            
+                <div class="mobile-nav-item">
+                    <a href="/archives">
+                        <span>Archives</span>
+                        
+                        
+                    </a>
+                </div>
+            
+            
+            
+                <div class="mobile-nav-item inner-cloud">
+                    <div class="mobile-nav-tag">
+                        <a href="javascript:;" id="mobile-tags">
+                            <span>Tags</span>
+                            
+                            
+                        </a>
+                    </div>
+                    <div class="mobile-nav-tagcloud">
+                        <div class="mobile-tagcloud-inner">
+                            <a href="/tags/Dubbo/" style="font-size: 14px;">Dubbo</a> <a href="/tags/GitHubPages/" style="font-size: 14px;">GitHubPages</a> <a href="/tags/IO/" style="font-size: 14px;">IO</a> <a href="/tags/JDK/" style="font-size: 14px;">JDK</a> <a href="/tags/JVM/" style="font-size: 14px;">JVM</a> <a href="/tags/Linux/" style="font-size: 14px;">Linux</a> <a href="/tags/Python/" style="font-size: 14px;">Python</a> <a href="/tags/Spring/" style="font-size: 14px;">Spring</a> <a href="/tags/Zookeeper/" style="font-size: 14px;">Zookeeper</a> <a href="/tags/jmeter/" style="font-size: 14px;">jmeter</a> <a href="/tags/walkup/" style="font-size: 14px;">walkup</a> <a href="/tags/分布式/" style="font-size: 14px;">分布式</a>
+                        </div>
+                    </div>
+                </div>
+            
+            
+            
+                <div class="mobile-nav-item">
+                    <a href="/about">
+                        <span>About</span>
+                        
+                        
+                    </a>
+                </div>
+            
+            
+        </div>
+    </div>
+    <div class="mobile-header-nav">
+        <div class="mobile-header-item" id="mobile-left">
+            <div class="header-menu-item">
+                <span class="header-menu-line"></span>
+            </div>
+        </div>
+        <h1 class="mobile-header-title">
+            <a href="/">super2bai</a>
+        </h1>
+        <div class="mobile-header-item"></div>
+    </div>
+</div>
+
+    <div class="container">
+        <main class="main" id="main">
+            
+    
+    <article class="post">
+        <header class="post-header">
+            <div class="post-time syuanpi riseIn-light back-1">
+                <span>November 10, 2017</span>
+                
+                
+                    <span class="post-category"><a href="/categories/Dubbo/">Dubbo</a></span>
+                
+                
+            </div>
+            <h1 class="post-title syuanpi riseIn-light back-2">
+            
+                Dubbo主干源码分析
+            
+            </h1>
+            
+                
+                    <div class="post-tags syuanpi riseIn-light back-3">
+                    
+                        <a href="/tags/Dubbo/">Dubbo</a>
+                    
+                    </div>
+                
+            
+        </header>
+        <div class="post-content syuanpi riseIn-light back-3">
+            
+                <h3 id="模块介绍"><a href="#模块介绍" class="headerlink" title="模块介绍"></a>模块介绍</h3><a id="more"></a>
+<ul>
+<li>dubbo-admin:<ul>
+<li>控制台</li>
+</ul>
+</li>
+<li>dubbo-cluster<ul>
+<li>集群</li>
+<li>负载均衡<ul>
+<li>loadbalance<ul>
+<li>AbstractLoadBalance</li>
+<li>ConsistentHashLoadBalance</li>
+<li>LeastActiveLoadBalance</li>
+<li>RandomLoadBalance</li>
+<li>RoundRobinLoadBalance</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>dubbo-common<ul>
+<li>公共的逻辑模块<ul>
+<li>工具类<ul>
+<li>json</li>
+<li>log</li>
+<li>…</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>dubbo-config<ul>
+<li>配置层<ul>
+<li>spring配置的集成</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>dubbo-container<ul>
+<li>容器</li>
+</ul>
+</li>
+<li>dubbo-demo<ul>
+<li>演示案例</li>
+</ul>
+</li>
+<li>dubbo-filter<ul>
+<li>过滤器<ul>
+<li>验证</li>
+<li>缓存</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>dubbo-maven<ul>
+<li>​</li>
+</ul>
+</li>
+<li>dubbo-monitor<ul>
+<li>监测中心</li>
+</ul>
+</li>
+<li>dubbo-registry<ul>
+<li>注册中心<ul>
+<li>multicase</li>
+<li>redis</li>
+<li>zookeeper</li>
+<li>…</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>dubbo-remoting<ul>
+<li>远程通讯协议<ul>
+<li>grizzly</li>
+<li>http</li>
+<li>mima</li>
+<li>netty</li>
+<li>netty4</li>
+<li>p2p</li>
+<li>zookeeper</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>dubbo-rpc<ul>
+<li>远程传输协议<ul>
+<li>dubbo协议的实现</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>dubbo-simple<ul>
+<li>简单的监控中心</li>
+</ul>
+</li>
+<li>dubbo-test<ul>
+<li>​</li>
+</ul>
+</li>
+<li>dubbo-lite<ul>
+<li>hessian序列化协议的一个包<ul>
+<li>dubbo对hessian做了改造，不是原生的hessian协议。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="入口"><a href="#入口" class="headerlink" title="入口"></a>入口</h3><ul>
+<li>基于App.java中的main方法去运行，main方法基于spring容器去启动。所以先到<code>dubbo-config</code>中找到<code>dubbo-config-spring</code>。</li>
+<li>使用dubbo时，都是基于自定义的dubbo配置。相当于对spring配置的一个扩展。需要自定义配置时使用的两个接口<ul>
+<li>NamespaceHandler<ul>
+<li>注册BeanDefinitionParser，利用它来解析</li>
+</ul>
+</li>
+<li>BeanDefinitionParser<ul>
+<li>解析配置文件的元素</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>resources/spring.handlers<ul>
+<li>做spring扩展，默认加载。</li>
+<li>spring会默认加载jar包下/META-INF/spring.handlers  找到对应的NamespaceHandler</li>
+<li>com.alibaba.dubbo.config.spring.schema.DubboNamespaceHandler#init</li>
+</ul>
+</li>
+<li>Main.main(args)—container.start()—context.start—init—DubboBeanDefinitionParser<ul>
+<li>解析<ul>
+<li>application</li>
+<li>module</li>
+<li>registry</li>
+<li>monitor</li>
+<li>provider</li>
+<li>consumer</li>
+<li>protocol</li>
+<li>service</li>
+<li>reference</li>
+<li>annotation</li>
+</ul>
+</li>
+<li>单独处理<ul>
+<li>ProtocolConfig</li>
+<li>ServiceBean</li>
+<li>ProviderConfig</li>
+<li>ConsumerConfig</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><code>com.alibaba.dubbo.config.spring.ServiceBean</code>实现了</p>
+<ul>
+<li>InitializingBean<ul>
+<li>当spring容器初始化后，触发afterPropertiesSet方法</li>
+</ul>
+</li>
+<li>DisposableBean<ul>
+<li>Bean被销毁时，调用destroy方法</li>
+</ul>
+</li>
+<li>ApplicationContextAware<ul>
+<li>Bean注入成功以后，注入一个ApplicationContext对象，获取spring上下文</li>
+</ul>
+</li>
+<li>ApplicationListener<ul>
+<li>spring容器启动后，会触发事件通知</li>
+</ul>
+</li>
+<li>BeanNameAware<ul>
+<li>Bean初始化完成后，可以获得bean相关属性</li>
+</ul>
+</li>
+</ul>
+<p><code>afterPropertiesSet</code>方法</p>
+<ul>
+<li>检查<code>Provider</code>、<code>Application</code>、<code>Module</code>、<code>Registry</code>、<code>Monitor</code>、<code>Protocol</code>、<code>Path</code>是否为空，如果为空，则赋值。</li>
+<li>判断是否延迟，不延迟则发布服务export—doExport<ul>
+<li>获得注册中心的配置、多协议发布<ul>
+<li><code>com.alibaba.dubbo.config.ServiceConfig#doExportUrls</code></li>
+<li><code>List&lt;URL&gt; registryURLs = loadRegistries(true);</code></li>
+</ul>
+</li>
+<li>如果协议名称没有配置，则采用dubbo协议<ul>
+<li><code>com.alibaba.dubbo.config.ServiceConfig#doExportUrlsFor1Protocol</code></li>
+</ul>
+</li>
+<li>获得host</li>
+<li>获得port<ul>
+<li><code>com.alibaba.dubbo.config.ServiceConfig#findConfigedPorts</code></li>
+<li>解析环境变量配置的port</li>
+<li>取协议的默认端口(dubbo默认20880)</li>
+<li>都没有，则随机生成</li>
+</ul>
+</li>
+<li>用Map<string, string="">来存储配置信息<ul>
+<li>dubboVersion</li>
+<li>timestamp</li>
+<li>pid</li>
+<li>application</li>
+<li>module</li>
+<li>provider</li>
+<li>…</li>
+</ul>
+</string,></li>
+<li>根据<code>name</code>、<code>host</code>、<code>port</code>、<code>path</code>、<code>map</code>生成发布服务的URL</li>
+<li>如果register不为空，则将服务注册</li>
+<li>通过<code>protocol.export</code>发布服务<ul>
+<li><code>com.alibaba.dubbo.rpc.protocol.dubbo.DubboProtocol#export</code></li>
+<li>openServer—发布服务的URL存放到serverMap<ul>
+<li><code>com.alibaba.dubbo.rpc.protocol.dubbo.DubboProtocol#createServer</code></li>
+<li><code>ExchangeServer</code>为协议层的API</li>
+<li><code>server = Exchangers.bind(url, requestHandler);</code><ul>
+<li><code>com.alibaba.dubbo.remoting.exchange.support.header.HeaderExchanger#bind</code></li>
+<li><code>Transporters.bind</code>绑定传输协议<ul>
+<li>Grizzly</li>
+<li>Mina</li>
+<li>Netty</li>
+<li>Netty4</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="SPI机制"><a href="#SPI机制" class="headerlink" title="SPI机制"></a>SPI机制</h3><p><code>External Libraries</code>—<code>dubbo-2.5.3.jar</code>—<code>META-INF</code>—<code>dubbo.internal</code>—<code>com.alibaba.dubbo.rpc.Protocol</code>配置的是协议的实现(Key-Value)。</p>
+<p>Netty的SPI机制就相当于一个插件化的支持。</p>
+<p>原生SPI通过serviceLoader一次性加载，而在上述文件中会根据<code>name</code>加载。</p>
+<h4 id="如何实现"><a href="#如何实现" class="headerlink" title="如何实现"></a>如何实现</h4><ul>
+<li>创建类<code>MyProtocol</code>实现<code>com.alibaba.dubbo.rpc.Protocol</code>接口及方法<ul>
+<li><code>int getDefaultPort()</code></li>
+<li><code>&lt;T&gt; Exporter&lt;T&gt; export(Invoker&lt;T&gt; invoker) throws RpcException;</code></li>
+<li><code>&lt;T&gt; Invoker&lt;T&gt; refer(Class&lt;T&gt; type, URL url) throws RpcException;</code></li>
+<li><code>void destroy();</code></li>
+</ul>
+</li>
+<li><code>META-INF/services/</code>—<code>META-INF/dubbo/</code>—<code>META-INF/dubbo/internal/</code>这几个文件夹皆可<ul>
+<li>创建<code>com.alibaba.dubbo.rpc.Protocol</code>文件 </li>
+<li>写入<code>myprotocol=com.bai.dubbo.demo.MyProtocol</code></li>
+</ul>
+</li>
+<li><code>App</code>类内<code>Protocol protocol=ExtensionLoader.getExtensionLoader(Protocol.class).getExtension(&quot;myprotocol&quot;);</code></li>
+<li>可以获得到自定义端口</li>
+</ul>
+<h4 id="dubbo源码"><a href="#dubbo源码" class="headerlink" title="dubbo源码"></a>dubbo源码</h4><p><code>com.alibaba.dubbo.config.ServiceConfig#doExportUrlsFor1Protocol</code></p>
+<p><strong><code>Exporter&lt;?&gt; exporter = protocol.export(invoker);</code></strong></p>
+<p>会通过动态代理的方式生成动态类<code>ProtocolAdaptive</code>。</p>
+<p><code>com.alibaba.dubbo.common.extension.Adaptive</code></p>
+<p>每一个扩展里都有一个自适配的Adaptive，如果没有配置自定义协议，则采用dubbo协议。</p>
+<p>Adaptive注解可以放在类上也可以放在方法上。</p>
+<p>通过扩展去调用方法,会有getAdaptive方法，在协议里有自适配的Adaptive。</p>
+<p><code>com.alibaba.dubbo.common.extension.ExtensionLoader</code></p>
+<p><strong><code>getExtensionLoader</code></strong></p>
+<ul>
+<li>判断类是否为null，为null报错</li>
+<li>判断是否为接口，不是接口报错</li>
+<li>判断带SPI注解，没带SPI注解报错</li>
+<li>每个定义的SPI的接口都会构建一个ExtensionLoader实例，存储在<code>ConcurrentMap&lt;Class&lt;?&gt;, ExtensionLoader&lt;?&gt;&gt; EXTENSION_LOADERS</code></li>
+<li>从<code>EXTENSION_LOADERS</code>里取类对应的ExtensionLoader实例，如果为<code>null</code>，则<code>new</code>一个，再存储到<code>EXTENSION_LOADERS</code>里</li>
+</ul>
+<p><strong>带参构造</strong></p>
+<ul>
+<li>找到一个适配的Extension</li>
+</ul>
+<p><strong><code>getAdaptiveExtension</code></strong></p>
+<p><strong><code>createAdaptiveExtension</code></strong></p>
+<p>A类内有成员变量B类，B类继承了C类。通过SPI扩展时，如何判断需要注入的是B还是C。此方法会生成一个Adaptive。</p>
+<ul>
+<li>ProtocolFilterWrapper<ul>
+<li>根据invoker的url的协议判断该协议是该注册还是该发布<ul>
+<li>registry<ul>
+<li>RegitstryProtocol</li>
+</ul>
+</li>
+<li>dubbo<ul>
+<li>DubboProtocol</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>ProtocolListenerWrapper</li>
+</ul>
+<p><strong><code>loadFile</code></strong></p>
+<ul>
+<li>启动初始化时，会填充ExtensionLoader类的一些缓存数据(cacheXXX)，从目录中(<code>META-INF/services/</code>—<code>META-INF/dubbo/</code>—<code>META-INF/dubbo/internal/</code>)读取，通过ClassLoader去加载。</li>
+<li>逐行读取com.alibaba.dubbo.rpc.Protocol里的内容，<ul>
+<li>有<code>@Adaptive</code>，则将此类作为Protocol协议的适配，加载到缓存(cahedNames)里,然后根据name找到class，再去通过ClassLoader实例化(new Instance())</li>
+<li>没有<code>@Adaptive</code>，适配类通过javassist修改字节码生成。<ul>
+<li>判断实现类是否存在入参为接口的构造器（就是DubbboProtocol类是否还有入参为Protocol的构造器），有的话作为包装类缓存到此ExtensionLoader的Set<class<?>&gt;集合中，这个其实是个装饰模式</class<?></li>
+</ul>
+</li>
+<li>既不是适配对象也不是wrapped对象，那就是扩展点的具体实现对象，查找<code>@Activate</code><ul>
+<li>有，缓存到cachedActivates</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>服务消费</strong></p>
+<p>根据dubbo内配置的dubboReference加载spring配置。</p>
+<p><code>com.alibaba.dubbo.config.spring.ReferenceBean#afterPropertiesSet</code></p>
+<p>最后会调用<code>getObject</code>方法。跳转到<code>com.alibaba.dubbo.config.ReferenceConfig#init</code>。判断—生成参数—createProxy</p>
+<ul>
+<li>一个JVM内，会通过本地方式调用，否则用远程方式调用。</li>
+<li><code>com.alibaba.dubbo.rpc.Invoker</code>  ,通过它去调用具体的服务</li>
+<li><code>refprotocol.refer</code><ul>
+<li><code>com.alibaba.dubbo.registry.integration.RegistryProtocol#refer</code><ul>
+<li>通过<code>proxyFactory.getInvoker</code>调用</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h3><p><strong>dubbo核心设计</strong></p>
+<ul>
+<li>exporter</li>
+<li>invoker</li>
+<li>protocol</li>
+<li>SPI</li>
+</ul>
+<p><strong>dubbo和dubbox有什么区别</strong></p>
+<p>dubbox是当当的架构师在dubbo的基础上做了升级后的开源框架</p>
+<p>序列化—<code>kryo</code>—比hessian序列化更好</p>
+<p><strong>dubbo执行代码的编译</strong></p>
+<ul>
+<li>利用JDk工具类变异</li>
+<li>利用javassist根据源代码生成字节码</li>
+</ul>
+<p><strong>ObjectFactory是如何根据类型和名字来获取对象的</strong></p>
+<ul>
+<li>ExtensionFactory    <ul>
+<li>AdaptiveExtensionFactory<ul>
+<li>持有所有ExtensionFactory对象的集合</li>
+</ul>
+</li>
+<li>SpiExtensionFactory<ul>
+<li>优先查找</li>
+<li>获取要被注入的对象，就是要获取dubbo spi扩展的实现，所以传入的参数类型必须是接口类型并且接口上打上了@SPI注解，返回的是一个设配类对象。</li>
+</ul>
+</li>
+<li>SpringExtensionFactory<ul>
+<li>SpiExtensionFactory获取结果为null再在此查找</li>
+<li>Dubbo利用spring的扩展机制跟spring做了很好的融合。在发布或者去引用一个服务的时候，会把spring的容器添加到SpringExtensionFactory工厂集合中去， 当SpiExtensionFactory没有获取到对象的时候会遍历SpringExtensionFactory中的spring容器来获取要注入的对象</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p> ObjectFactory也是基于dubbo的spi扩展机制的。</p>
+<p>它跟Compiler接口一样设配类注解@Adaptive是打在类AdaptiveExtensionFactory上的。</p>
+</blockquote>
+
+            
+        
+        </div>
+        
+            
+    <div class="post-reward">
+        <span class="reward-btn" id="reward-btn">reward</span>
+        <div class="reward-wrapper" id="reward-wrapper" style="display:none;">
+            
+                
+                
+            
+                
+                <div class="reward-item reward-alipay">
+                    <img src="https://wx2.sinaimg.cn/mw690/8c564d2aly1fpunn3yinhj20py0pyn4i.jpg">
+                </div>
+                
+            
+        </div>
+    </div>
+
+            
+        
+    </article>
+    
+        
+    <nav class="article-page">
+        
+            <a href="/distributed/solution.html" id="art-left" class="art-right">
+                <span class="next-title">
+                    分布式事务解决方案<i class="iconfont icon-right"></i> 
+                </span>
+            </a>
+        
+        
+            <a href="/Dubbo/best.html" id="art-right" class="art-left">
+                <span class="prev-title"> 
+                    <i class="iconfont icon-left"></i>dubbo服务最佳实践
+                </span>
+            </a>
+        
+    </nav>
+
+        
+    <i id="com-switch" class="iconfont icon-more jumping-in long infinite" style="font-size:24px;display:block;text-align:center;transform:rotate(180deg);"></i>
+    <div class="post-comments" id="post-comments" style="display: block;margin: auto 16px;">
+        
+        
+<!-- Gitment Comments -->
+<div id="gitment"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  owner: "super2bai",
+  repo: 'comment',
+  oauth: {
+    client_id: '37f2293730b41dcb5276',
+    client_secret: 'dbab4955840d4cbc88f1563be04ab676662194e5',
+  },
+})
+gitment.render('gitment')
+</script>
+
+        
+        
+
+    </div>
+
+    
+
+
+        </main>
+        <footer class="footer syuanpi fadeIn" id="footer">
+    <hr>
+    <div class="footer-wrapper">
+        <div class="left">
+            <div class="contact-icon">
+    
+    
+    
+    
+    
+    
+    
+    
+        
+            <a href="https://github.com/super2bai" class="iconfont icon-github" title="github"></a>
+        
+        
+        
+        
+        
+        
+        
+    
+</div>
+        </div>
+        <div class="right">
+            <div class="copyright">
+    <div class="info">
+        <span>&copy;</span>
+        <span>2017 ~ 2018</span>
+        <span>❤</span>
+        <span>super2bai</span>
+    </div>
+    <div class="theme">
+        <span>
+            Powered by
+            <a href="http://hexo.io/" target="_blank">Hexo </a>
+        </span>
+        <span>
+            Theme
+            <a href="https://github.com/ColMugX/hexo-theme-Nlvi"> Nlvi </a>
+        </span>
+    </div>
+    
+    <div class="visit_count">
+        <i class="iconfont icon-visit"></i>
+        <span id="busuanzi_value_site_uv"></span>
+        <i class="iconfont icon-people"></i>
+        <span id="busuanzi_value_site_pv"></span>
+    </div>
+    
+</div>
+        </div>
+    </div>
+</footer>
+    </div>
+    <script src="/script/nlvi.js"></script>
+<script src="/script/search.js"></script>
+
+    <script src="/lightbox/js/lightbox.min.js"></script>
+
+<script>
+$(document).ready(function(){
+    document.body.addEventListener('touchstart', function () {});
+    $('.progress').hide();
+    $('.body').show();
+    Nlvi.tagcloud();
+    Nlvi.mobileHeader();
+    Nlvi.back2top();
+    Nlvi.smoothScroll();
+    Nlvi.onView();
+    Nlvi.showToc();
+    Nlvi.showComments();
+    Nlvi.showReward();
+    Nlvi.picPos();
+
+    !CONFIG.animate && Nlvi.offAnimate();
+    CONFIG.lightbox && Nlvi.onPicBox();
+})
+</script>
+    </div>
+    
+        
+    <div class="post-toc">
+        <span class="title">文章目录</span>
+        <div class="toc-inner syuanpi back-1 fallIn-light">
+            <li class="title-link"><a href="javascript:;" class="toTop">Dubbo主干源码分析</a></li>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#模块介绍"><span class="toc-text">模块介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#入口"><span class="toc-text">入口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SPI机制"><span class="toc-text">SPI机制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#如何实现"><span class="toc-text">如何实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#dubbo源码"><span class="toc-text">dubbo源码</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#补充"><span class="toc-text">补充</span></a></li></ol>
+        </div>
+    </div>
+
+    
+    <div class="backtop syuanpi dead toTop" id="backtop">
+    <i class="iconfont icon-up"></i>
+    <span style="text-align:center;font-family:Georgia;"><span style="font-family:Georgia;" id="scrollpercent">1</span>%</span>
+</div>
+    
+</body>
+</html>

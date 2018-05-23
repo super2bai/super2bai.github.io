@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <title> 初步认识Dubbo · super2bai </title>
+    <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="browsermode" content="application">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="super2bai">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="msapplication-navbutton-color" content="#666666">
+<meta name= "format-detection" content="telephone=no" />
+<meta name="keywords" content="nlvi, Nlvi" />
+
+    <link rel="apple-touch-icon"  sizes="72x72"  href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+    <link rel="apple-touch-icon-precomposed"  sizes="72x72"  href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+
+
+    <meta name="subtitle" content="学的多一点，不会的就少一点">
+
+
+
+
+    <meta name="keywords" content="Dubbo, Nlvi" />
+
+<link rel="stylesheet" href="/style/style.css">
+<script src="/script/jquery.min.js"></script>
+<script>
+    var CONFIG = {
+        title: "super2bai",
+        author: "super2bai",
+        lightbox: true,
+        animate: true
+    }
+</script>
+
+
+
+    <link rel="stylesheet" href="/lightbox/css/lightbox.min.css">
+
+
+
+
+    <link rel="stylesheet" href="/syuanpi/syuanpi.min.css">
+
+
+
+
+    <link rel="icon" href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-116557847-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-1178101469132492",
+    enable_page_level_ads: true
+  });
+</script>
+</head>
+<body>
+    <div class="progress">
+    <div class="progress-inner"></div>
+</div>
+    <div class="body">
+    <div class="tagcloud-mask"></div>  
+<div class="tagcloud" id="tagcloud">
+    <div class="tagcloud-inner">
+        <a href="/tags/Dubbo/" style="font-size: 14px;">Dubbo</a> <a href="/tags/GitHubPages/" style="font-size: 14px;">GitHubPages</a> <a href="/tags/IO/" style="font-size: 14px;">IO</a> <a href="/tags/JDK/" style="font-size: 14px;">JDK</a> <a href="/tags/JVM/" style="font-size: 14px;">JVM</a> <a href="/tags/Linux/" style="font-size: 14px;">Linux</a> <a href="/tags/Python/" style="font-size: 14px;">Python</a> <a href="/tags/Spring/" style="font-size: 14px;">Spring</a> <a href="/tags/Zookeeper/" style="font-size: 14px;">Zookeeper</a> <a href="/tags/jmeter/" style="font-size: 14px;">jmeter</a> <a href="/tags/walkup/" style="font-size: 14px;">walkup</a> <a href="/tags/分布式/" style="font-size: 14px;">分布式</a>
+    </div>
+</div>
+    <header class="header" id="header">
+    <div class="title syuanpi tvIn">
+    <div class="table">
+        <div class="connect">
+            <div class="connect-inner">
+                <span><a href="/">super2bai</a></span>
+                
+                    <span id="subtitle">学的多一点，不会的就少一点</span>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <nav class="main-nav syuanpi tvIn">
+<div class="table">
+
+    <ul class="menu">
+        
+        
+        
+            <li class="menu-item">
+                <a href="/">
+                    <span>Article</span>
+                    
+                    
+                </a>
+            </li>
+        
+        
+        
+            <li class="menu-item">
+                <a href="/archives">
+                    <span>Archives</span>
+                    
+                    
+                </a>
+            </li>
+        
+        
+        
+            <li class="menu-item">
+                <a href="javascript:;" id="tags">
+                    <span>Tags</span>
+                    
+                    
+                </a>
+            </li>
+        
+        
+        
+            <li class="menu-item">
+                <a href="/about">
+                    <span>About</span>
+                    
+                    
+                </a>
+            </li>
+        
+        
+    </ul>
+
+</div>
+</nav>
+</header>
+<div class="mobile-header">
+    <div class="mobile-header-body">
+        <div class="mobile-header-list">
+            
+            
+                <div class="mobile-nav-item">
+                    <a href="/">
+                        <span>Article</span>
+                        
+                        
+                    </a>
+                </div>
+            
+            
+            
+                <div class="mobile-nav-item">
+                    <a href="/archives">
+                        <span>Archives</span>
+                        
+                        
+                    </a>
+                </div>
+            
+            
+            
+                <div class="mobile-nav-item inner-cloud">
+                    <div class="mobile-nav-tag">
+                        <a href="javascript:;" id="mobile-tags">
+                            <span>Tags</span>
+                            
+                            
+                        </a>
+                    </div>
+                    <div class="mobile-nav-tagcloud">
+                        <div class="mobile-tagcloud-inner">
+                            <a href="/tags/Dubbo/" style="font-size: 14px;">Dubbo</a> <a href="/tags/GitHubPages/" style="font-size: 14px;">GitHubPages</a> <a href="/tags/IO/" style="font-size: 14px;">IO</a> <a href="/tags/JDK/" style="font-size: 14px;">JDK</a> <a href="/tags/JVM/" style="font-size: 14px;">JVM</a> <a href="/tags/Linux/" style="font-size: 14px;">Linux</a> <a href="/tags/Python/" style="font-size: 14px;">Python</a> <a href="/tags/Spring/" style="font-size: 14px;">Spring</a> <a href="/tags/Zookeeper/" style="font-size: 14px;">Zookeeper</a> <a href="/tags/jmeter/" style="font-size: 14px;">jmeter</a> <a href="/tags/walkup/" style="font-size: 14px;">walkup</a> <a href="/tags/分布式/" style="font-size: 14px;">分布式</a>
+                        </div>
+                    </div>
+                </div>
+            
+            
+            
+                <div class="mobile-nav-item">
+                    <a href="/about">
+                        <span>About</span>
+                        
+                        
+                    </a>
+                </div>
+            
+            
+        </div>
+    </div>
+    <div class="mobile-header-nav">
+        <div class="mobile-header-item" id="mobile-left">
+            <div class="header-menu-item">
+                <span class="header-menu-line"></span>
+            </div>
+        </div>
+        <h1 class="mobile-header-title">
+            <a href="/">super2bai</a>
+        </h1>
+        <div class="mobile-header-item"></div>
+    </div>
+</div>
+
+    <div class="container">
+        <main class="main" id="main">
+            
+    
+    <article class="post">
+        <header class="post-header">
+            <div class="post-time syuanpi riseIn-light back-1">
+                <span>November 1, 2017</span>
+                
+                
+                    <span class="post-category"><a href="/categories/Dubbo/">Dubbo</a></span>
+                
+                
+            </div>
+            <h1 class="post-title syuanpi riseIn-light back-2">
+            
+                初步认识Dubbo
+            
+            </h1>
+            
+                
+                    <div class="post-tags syuanpi riseIn-light back-3">
+                    
+                        <a href="/tags/Dubbo/">Dubbo</a>
+                    
+                    </div>
+                
+            
+        </header>
+        <div class="post-content syuanpi riseIn-light back-3">
+            
+                <h3 id="技术演变"><a href="#技术演变" class="headerlink" title="技术演变"></a>技术演变</h3><a id="more"></a>
+<ul>
+<li>程序最早运行在在JVM里面，处于单一系统架构。</li>
+<li>服务做拆分，运行在多个JVM内<ul>
+<li>之间通信技术<ul>
+<li>JMS规范<ul>
+<li>ActiveMQ</li>
+</ul>
+</li>
+<li>远程RPC通信框架<ul>
+<li>RMI</li>
+</ul>
+</li>
+<li>WebService</li>
+<li>Hessian</li>
+<li>Kafka+Zookeeper</li>
+</ul>
+</li>
+<li>集群<ul>
+<li>F5负载均衡</li>
+<li>软负载均衡<ul>
+<li>Nginx</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>对节点集群<ul>
+<li>硬负载均衡<ul>
+<li>F5</li>
+</ul>
+</li>
+<li>软负载均衡<ul>
+<li>Nginx+LVS</li>
+<li>Nginx+keepalived</li>
+<li>Apache</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>数据存储<ul>
+<li>关系型数据库<ul>
+<li>SQL Server</li>
+<li>Oracle</li>
+<li>MySQL</li>
+<li>MariDB</li>
+</ul>
+</li>
+<li>非关系型数据库<ul>
+<li>MongoDB</li>
+<li>Redis</li>
+<li>DB2</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>扩容<ul>
+<li>Master-Slave模型<ul>
+<li>Master写</li>
+<li>Slave读</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>服务治理<ul>
+<li>Dubbo+Zookeeper<ul>
+<li>URL维护困难</li>
+<li>监控服务依赖关系及响应时间</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>单进程优化性能<ul>
+<li>多线程</li>
+</ul>
+</li>
+</ul>
+<h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><blockquote>
+<ul>
+<li>各个节点中的URL管理维护很困难、依赖关系很模糊<ul>
+<li>注册中心</li>
+</ul>
+</li>
+<li>每个应用节点的性能、访问量、响应时间无法评估<ul>
+<li>监控中心</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h3 id="使用入门"><a href="#使用入门" class="headerlink" title="使用入门"></a>使用入门</h3><p>​    示例代码网上都有</p>
+<h3 id="相关问题"><a href="#相关问题" class="headerlink" title="相关问题"></a>相关问题</h3><h4 id="dubbo如何加载Spring"><a href="#dubbo如何加载Spring" class="headerlink" title="dubbo如何加载Spring"></a>dubbo如何加载Spring</h4><ul>
+<li><code>com.alibaba.dubbo.container.Main</code>中<ul>
+<li><code>ExtensionLoader&lt;Container&gt; loader</code><ul>
+<li>dubbo中的扩展机制。实现机制类似于SPI。</li>
+</ul>
+</li>
+<li><code>container.start();</code>启动Spring<ul>
+<li><code>Main.main(args)</code>中的<code>args</code>会有一个参数叫<code>spring</code><ul>
+<li><code>spring</code>来自于<code>com.alibaba.dubbo.container</code>的配置文件里<code>dubbo/internal</code>中的<code>spring=com.alibaba.dubbo.container.spring.SpringContainer</code></li>
+</ul>
+</li>
+<li><code>com.alibaba.dubbo.container.spring.SpringContainer#start</code>中读取Spring配置：<code>public static final String DEFAULT_SPRING_CONFIG = &quot;classpath*:META-INF/spring/*.xml&quot;;</code></li>
+<li><code>com.alibaba.dubbo.container.spring.SpringContainer</code>中加载Spring<code>context = new ClassPathXmlApplicationContext(configPath.split(&quot;[,\\s]+&quot;));</code>然后<code>context.start();</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="如何让进程不终止"><a href="#如何让进程不终止" class="headerlink" title="如何让进程不终止"></a>如何让进程不终止</h4><ul>
+<li><code>com.alibaba.dubbo.container.Main</code> 中利用<code>await()</code>等待</li>
+</ul>
+<h4 id="日志如何集成"><a href="#日志如何集成" class="headerlink" title="日志如何集成"></a>日志如何集成</h4><ul>
+<li><code>com.alibaba.dubbo.common.logger.LoggerFactory</code><ul>
+<li>log4j</li>
+<li>slf4j</li>
+<li>jcl</li>
+<li>jdk</li>
+</ul>
+</li>
+<li>如不指定，优先级为log4j&gt;slf4j&gt;jcl&gt;jdk</li>
+</ul>
+<h4 id="admin控制台的安装"><a href="#admin控制台的安装" class="headerlink" title="admin控制台的安装"></a>admin控制台的安装</h4><ul>
+<li>源码中dubbo-admin模块打成war</li>
+<li>修改<code>dubbo-admin-src-main-webapp-WEB-INF-dubbo.properties</code>中<code>dubbo.registry.address</code>为zk的集群地址</li>
+<li>浏览器访问地址<ul>
+<li>Run/Debug Configration中的地址</li>
+</ul>
+</li>
+<li>输入用户名及密码<ul>
+<li><code>dubbo.properties</code>中的密码</li>
+<li>用户名：root   密码：root</li>
+</ul>
+</li>
+<li>可以进行服务治理<ul>
+<li>权重</li>
+<li>路由</li>
+<li>…</li>
+</ul>
+</li>
+<li>没有监控功能，有另外的监控中心</li>
+</ul>
+<h4 id="simple监控中心"><a href="#simple监控中心" class="headerlink" title="simple监控中心"></a>simple监控中心</h4><ul>
+<li>provider项目的xml中添加配置<ul>
+<li><code>&lt;duboo:monitor protocol=&quot;registry&quot;/&gt;</code></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>下载<code>dubbo-monitor-simple</code></li>
+<li>修改配置<ul>
+<li>conf/dubbo.propertties<ul>
+<li>Dubbo.registry.address=zk集群地址</li>
+<li>dubbo.protocol.port<ul>
+<li>monitor也是一个dubbo服务，也有端口和url</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>或修改服务提供者的xml(xxx-provider.xml)<ul>
+<li>建议使用xml</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>运行<ul>
+<li>执行<code>bin</code>文件夹下的<code>start</code>脚本</li>
+</ul>
+</li>
+<li>浏览器访问地址<ul>
+<li>localhost:port<ul>
+<li>port为<code>dubbo.propertties</code>中<code>dubbo.jetty.port</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>带图表和监控</li>
+<li>监控服务的监控<ul>
+<li>调用次数</li>
+<li>调用关系</li>
+<li>响应时间</li>
+<li>…</li>
+</ul>
+</li>
+<li>默认五分钟生成一次</li>
+</ul>
+<h4 id="telnet命令"><a href="#telnet命令" class="headerlink" title="telnet命令"></a>telnet命令</h4><ul>
+<li>2.0.5后提供</li>
+<li>telnet localhost 20880</li>
+<li>telnet调用接口是不受监控的</li>
+<li>常用命令<ul>
+<li>ls</li>
+<li>cd</li>
+<li>pwd</li>
+<li>clear</li>
+<li>invoke</li>
+</ul>
+</li>
+</ul>
+
+            
+        
+        </div>
+        
+            
+    <div class="post-reward">
+        <span class="reward-btn" id="reward-btn">reward</span>
+        <div class="reward-wrapper" id="reward-wrapper" style="display:none;">
+            
+                
+                
+            
+                
+                <div class="reward-item reward-alipay">
+                    <img src="https://wx2.sinaimg.cn/mw690/8c564d2aly1fpunn3yinhj20py0pyn4i.jpg">
+                </div>
+                
+            
+        </div>
+    </div>
+
+            
+        
+    </article>
+    
+        
+    <nav class="article-page">
+        
+            <a href="/Dubbo/config.html" id="art-left" class="art-right">
+                <span class="next-title">
+                    dubbo配置详解<i class="iconfont icon-right"></i> 
+                </span>
+            </a>
+        
+        
+            <a href="/Zookeeper/ZAB.html" id="art-right" class="art-left">
+                <span class="prev-title"> 
+                    <i class="iconfont icon-left"></i>ZAB协议
+                </span>
+            </a>
+        
+    </nav>
+
+        
+    <i id="com-switch" class="iconfont icon-more jumping-in long infinite" style="font-size:24px;display:block;text-align:center;transform:rotate(180deg);"></i>
+    <div class="post-comments" id="post-comments" style="display: block;margin: auto 16px;">
+        
+        
+<!-- Gitment Comments -->
+<div id="gitment"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  owner: "super2bai",
+  repo: 'comment',
+  oauth: {
+    client_id: '37f2293730b41dcb5276',
+    client_secret: 'dbab4955840d4cbc88f1563be04ab676662194e5',
+  },
+})
+gitment.render('gitment')
+</script>
+
+        
+        
+
+    </div>
+
+    
+
+
+        </main>
+        <footer class="footer syuanpi fadeIn" id="footer">
+    <hr>
+    <div class="footer-wrapper">
+        <div class="left">
+            <div class="contact-icon">
+    
+    
+    
+    
+    
+    
+    
+    
+        
+            <a href="https://github.com/super2bai" class="iconfont icon-github" title="github"></a>
+        
+        
+        
+        
+        
+        
+        
+    
+</div>
+        </div>
+        <div class="right">
+            <div class="copyright">
+    <div class="info">
+        <span>&copy;</span>
+        <span>2017 ~ 2018</span>
+        <span>❤</span>
+        <span>super2bai</span>
+    </div>
+    <div class="theme">
+        <span>
+            Powered by
+            <a href="http://hexo.io/" target="_blank">Hexo </a>
+        </span>
+        <span>
+            Theme
+            <a href="https://github.com/ColMugX/hexo-theme-Nlvi"> Nlvi </a>
+        </span>
+    </div>
+    
+    <div class="visit_count">
+        <i class="iconfont icon-visit"></i>
+        <span id="busuanzi_value_site_uv"></span>
+        <i class="iconfont icon-people"></i>
+        <span id="busuanzi_value_site_pv"></span>
+    </div>
+    
+</div>
+        </div>
+    </div>
+</footer>
+    </div>
+    <script src="/script/nlvi.js"></script>
+<script src="/script/search.js"></script>
+
+    <script src="/lightbox/js/lightbox.min.js"></script>
+
+<script>
+$(document).ready(function(){
+    document.body.addEventListener('touchstart', function () {});
+    $('.progress').hide();
+    $('.body').show();
+    Nlvi.tagcloud();
+    Nlvi.mobileHeader();
+    Nlvi.back2top();
+    Nlvi.smoothScroll();
+    Nlvi.onView();
+    Nlvi.showToc();
+    Nlvi.showComments();
+    Nlvi.showReward();
+    Nlvi.picPos();
+
+    !CONFIG.animate && Nlvi.offAnimate();
+    CONFIG.lightbox && Nlvi.onPicBox();
+})
+</script>
+    </div>
+    
+        
+    <div class="post-toc">
+        <span class="title">文章目录</span>
+        <div class="toc-inner syuanpi back-1 fallIn-light">
+            <li class="title-link"><a href="javascript:;" class="toTop">初步认识Dubbo</a></li>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#技术演变"><span class="toc-text">技术演变</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#作用"><span class="toc-text">作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用入门"><span class="toc-text">使用入门</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#相关问题"><span class="toc-text">相关问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#dubbo如何加载Spring"><span class="toc-text">dubbo如何加载Spring</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#如何让进程不终止"><span class="toc-text">如何让进程不终止</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#日志如何集成"><span class="toc-text">日志如何集成</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#admin控制台的安装"><span class="toc-text">admin控制台的安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#simple监控中心"><span class="toc-text">simple监控中心</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#telnet命令"><span class="toc-text">telnet命令</span></a></li></ol></li></ol>
+        </div>
+    </div>
+
+    
+    <div class="backtop syuanpi dead toTop" id="backtop">
+    <i class="iconfont icon-up"></i>
+    <span style="text-align:center;font-family:Georgia;"><span style="font-family:Georgia;" id="scrollpercent">1</span>%</span>
+</div>
+    
+</body>
+</html>
