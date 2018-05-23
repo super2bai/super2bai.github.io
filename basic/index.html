@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <title> 分布式基础知识 · super2bai </title>
+    <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="browsermode" content="application">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="super2bai">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="msapplication-navbutton-color" content="#666666">
+<meta name= "format-detection" content="telephone=no" />
+<meta name="keywords" content="nlvi, Nlvi" />
+
+    <link rel="apple-touch-icon"  sizes="72x72"  href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+    <link rel="apple-touch-icon-precomposed"  sizes="72x72"  href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+
+
+    <meta name="subtitle" content="学的多一点，不会的就少一点">
+
+
+
+
+    <meta name="keywords" content="分布式, Nlvi" />
+
+<link rel="stylesheet" href="/style/style.css">
+<script src="/script/jquery.min.js"></script>
+<script>
+    var CONFIG = {
+        title: "super2bai",
+        author: "super2bai",
+        lightbox: true,
+        animate: true
+    }
+</script>
+
+
+
+    <link rel="stylesheet" href="/lightbox/css/lightbox.min.css">
+
+
+
+
+    <link rel="stylesheet" href="/syuanpi/syuanpi.min.css">
+
+
+
+
+    <link rel="icon" href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-116557847-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-1178101469132492",
+    enable_page_level_ads: true
+  });
+</script>
+</head>
+<body>
+    <div class="progress">
+    <div class="progress-inner"></div>
+</div>
+    <div class="body">
+    <div class="tagcloud-mask"></div>  
+<div class="tagcloud" id="tagcloud">
+    <div class="tagcloud-inner">
+        <a href="/tags/Dubbo/" style="font-size: 14px;">Dubbo</a> <a href="/tags/GitHub-Pages/" style="font-size: 14px;">GitHub Pages</a> <a href="/tags/IO/" style="font-size: 14px;">IO</a> <a href="/tags/JDK/" style="font-size: 14px;">JDK</a> <a href="/tags/JVM/" style="font-size: 14px;">JVM</a> <a href="/tags/Linux/" style="font-size: 14px;">Linux</a> <a href="/tags/Python/" style="font-size: 14px;">Python</a> <a href="/tags/Spring/" style="font-size: 14px;">Spring</a> <a href="/tags/Zookeeper/" style="font-size: 14px;">Zookeeper</a> <a href="/tags/jmeter/" style="font-size: 14px;">jmeter</a> <a href="/tags/walkup/" style="font-size: 14px;">walkup</a> <a href="/tags/分布式/" style="font-size: 14px;">分布式</a>
+    </div>
+</div>
+    <header class="header" id="header">
+    <div class="title syuanpi tvIn">
+    <div class="table">
+        <div class="connect">
+            <div class="connect-inner">
+                <span><a href="/">super2bai</a></span>
+                
+                    <span id="subtitle">学的多一点，不会的就少一点</span>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <nav class="main-nav syuanpi tvIn">
+<div class="table">
+
+    <ul class="menu">
+        
+        
+        
+            <li class="menu-item">
+                <a href="/">
+                    <span>Article</span>
+                    
+                    
+                </a>
+            </li>
+        
+        
+        
+            <li class="menu-item">
+                <a href="/archives">
+                    <span>Archives</span>
+                    
+                    
+                </a>
+            </li>
+        
+        
+        
+            <li class="menu-item">
+                <a href="javascript:;" id="tags">
+                    <span>Tags</span>
+                    
+                    
+                </a>
+            </li>
+        
+        
+        
+            <li class="menu-item">
+                <a href="/about">
+                    <span>About</span>
+                    
+                    
+                </a>
+            </li>
+        
+        
+    </ul>
+
+</div>
+</nav>
+</header>
+<div class="mobile-header">
+    <div class="mobile-header-body">
+        <div class="mobile-header-list">
+            
+            
+                <div class="mobile-nav-item">
+                    <a href="/">
+                        <span>Article</span>
+                        
+                        
+                    </a>
+                </div>
+            
+            
+            
+                <div class="mobile-nav-item">
+                    <a href="/archives">
+                        <span>Archives</span>
+                        
+                        
+                    </a>
+                </div>
+            
+            
+            
+                <div class="mobile-nav-item inner-cloud">
+                    <div class="mobile-nav-tag">
+                        <a href="javascript:;" id="mobile-tags">
+                            <span>Tags</span>
+                            
+                            
+                        </a>
+                    </div>
+                    <div class="mobile-nav-tagcloud">
+                        <div class="mobile-tagcloud-inner">
+                            <a href="/tags/Dubbo/" style="font-size: 14px;">Dubbo</a> <a href="/tags/GitHub-Pages/" style="font-size: 14px;">GitHub Pages</a> <a href="/tags/IO/" style="font-size: 14px;">IO</a> <a href="/tags/JDK/" style="font-size: 14px;">JDK</a> <a href="/tags/JVM/" style="font-size: 14px;">JVM</a> <a href="/tags/Linux/" style="font-size: 14px;">Linux</a> <a href="/tags/Python/" style="font-size: 14px;">Python</a> <a href="/tags/Spring/" style="font-size: 14px;">Spring</a> <a href="/tags/Zookeeper/" style="font-size: 14px;">Zookeeper</a> <a href="/tags/jmeter/" style="font-size: 14px;">jmeter</a> <a href="/tags/walkup/" style="font-size: 14px;">walkup</a> <a href="/tags/分布式/" style="font-size: 14px;">分布式</a>
+                        </div>
+                    </div>
+                </div>
+            
+            
+            
+                <div class="mobile-nav-item">
+                    <a href="/about">
+                        <span>About</span>
+                        
+                        
+                    </a>
+                </div>
+            
+            
+        </div>
+    </div>
+    <div class="mobile-header-nav">
+        <div class="mobile-header-item" id="mobile-left">
+            <div class="header-menu-item">
+                <span class="header-menu-line"></span>
+            </div>
+        </div>
+        <h1 class="mobile-header-title">
+            <a href="/">super2bai</a>
+        </h1>
+        <div class="mobile-header-item"></div>
+    </div>
+</div>
+
+    <div class="container">
+        <main class="main" id="main">
+            
+    
+    <article class="post">
+        <header class="post-header">
+            <div class="post-time syuanpi riseIn-light back-1">
+                <span>October 19, 2017</span>
+                
+            </div>
+            <h1 class="post-title syuanpi riseIn-light back-2">
+            
+                分布式基础知识
+            
+            </h1>
+            
+                
+                    <div class="post-tags syuanpi riseIn-light back-3">
+                    
+                        <a href="/tags/分布式/">分布式</a>
+                    
+                    </div>
+                
+            
+        </header>
+        <div class="post-content syuanpi riseIn-light back-3">
+            
+                <h3 id="分布式环境的特点"><a href="#分布式环境的特点" class="headerlink" title="分布式环境的特点"></a>分布式环境的特点</h3><a id="more"></a>
+<p><strong>分布性</strong></p>
+<p><strong>并发性</strong></p>
+<p>程序运行过程中，并发性操作是很常见的。比如同一个分布式系统中的多个节点，同时访问一个共享资源。数据库、分布式存储</p>
+<p><strong>无序性</strong></p>
+<p>进程之间的消息通信，会出现顺序不一致问题</p>
+<h3 id="分布式环境下面临的问题"><a href="#分布式环境下面临的问题" class="headerlink" title="分布式环境下面临的问题"></a>分布式环境下面临的问题</h3><p><strong>网络通信</strong></p>
+<p>网络本身的不可靠性，因此会设计到一些网络通信问题</p>
+<p><strong>网络分区(脑裂)</strong></p>
+<blockquote>
+<p>当网络发生异常导致分布式系统中部分节点之间的网络延时不断增加，最终导致组成分布式架构的所有节点中是有部分节点能够正常通信。</p>
+</blockquote>
+<p>一个master，多个slave组成的正常集群，假设其中两台服务器网络通信不正常，可能会重新选举出一个master，导致两个独立的集群，这两个集群本身是完整的。会产生数据重复等问题。</p>
+<p>###分布式三态</p>
+<ul>
+<li>成功</li>
+<li>失败</li>
+<li>超时<ul>
+<li>出现网络问题，消息没有发送到客户端，或客户端没有收到</li>
+</ul>
+</li>
+</ul>
+<p>单机环境</p>
+<ul>
+<li>成功</li>
+<li>失败</li>
+</ul>
+<p>###分布式事务</p>
+<ul>
+<li>原子性</li>
+<li>一致性</li>
+<li>隔离性</li>
+<li>持久性</li>
+</ul>
+<p>###中心化和去中心化</p>
+<ul>
+<li><p>中心化    </p>
+<ul>
+<li>角色<ul>
+<li>领导</li>
+<li>下属</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>解决<ul>
+<li>热备<ul>
+<li>人才储备，领导不行了，直接激活人才</li>
+</ul>
+</li>
+<li>冷备<ul>
+<li>两个领导都存活，一个干活，一个就绪</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>去中心化<ul>
+<li>所有人都是水平的，没有谁领导谁</li>
+<li>全国网络节点</li>
+<li>解决脑裂问题</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>分布式架构里面，很多的架构思想采用的是：当集群发生故障的时候，集群中的人群会自动选举出一个新的领导。最典型的是：zookeeper/etcd</p>
+</blockquote>
+<p>###经典的CAP/BASE理论</p>
+<ul>
+<li>CAP<ul>
+<li>C<ul>
+<li>Consistency一致性</li>
+<li>所有节点上的数据，时刻保持一致</li>
+<li>同步会有延迟(网络)</li>
+</ul>
+</li>
+<li>A<ul>
+<li>Availability可用性</li>
+<li>每个请求都能收到一个响应，无论响应成功或者失败</li>
+</ul>
+</li>
+<li>P<ul>
+<li>Partition-tolerance分区容错</li>
+<li>表示系统出现脑裂以后，可能导致某些server与集群中的其它机器失去联系</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>一般只能满足两个条件，常见是：CP/AP。</p>
+<p>CAP理论仅适用于原子读写的NoSQL场景，不适用于数据库系统。因为数据出现问题是没办法恢复的，更新一些错误的数据而导致数据出现紊乱，无论什么样的数据库高可用方案都是徒劳。虽然XA事务(分布式事务解决方案)可以保证数据库在分布式系统下的ACID特性，但是会带来性能方面的影响。</p>
+</blockquote>
+<ul>
+<li>BASE<ul>
+<li>Basically Available<ul>
+<li>数据库采用分片模式，把100W的用户数据分布在5个实例。如果破坏了其中一个实例，仍然可以保证80%的用户可用</li>
+</ul>
+</li>
+<li>soft-state<ul>
+<li>在基于client-server模式的系统中，serveer端是否有状态，决定了系统是否具备良好的水平扩展、负载均衡、故障恢复等特性</li>
+<li>server端承诺会维护client端状态数据，这个状态仅仅维持一小段时间，这段时间以后，server端就会丢弃这个状态，恢复正常</li>
+</ul>
+</li>
+<li>Eventually Consistent<ul>
+<li>数据的最终一致性</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+        
+        </div>
+        
+            
+    <div class="post-reward">
+        <span class="reward-btn" id="reward-btn">reward</span>
+        <div class="reward-wrapper" id="reward-wrapper" style="display:none;">
+            
+                
+                
+            
+                
+                <div class="reward-item reward-alipay">
+                    <img src="https://wx2.sinaimg.cn/mw690/8c564d2aly1fpunn3yinhj20py0pyn4i.jpg">
+                </div>
+                
+            
+        </div>
+    </div>
+
+            
+        
+    </article>
+    
+        
+    <nav class="article-page">
+        
+            <a href="/zoofirst/" id="art-left" class="art-right">
+                <span class="next-title">
+                    初步认识zookeeper<i class="iconfont icon-right"></i> 
+                </span>
+            </a>
+        
+        
+            <a href="/framework/" id="art-right" class="art-left">
+                <span class="prev-title"> 
+                    <i class="iconfont icon-left"></i>spring-framework
+                </span>
+            </a>
+        
+    </nav>
+
+        
+    <i id="com-switch" class="iconfont icon-more jumping-in long infinite" style="font-size:24px;display:block;text-align:center;transform:rotate(180deg);"></i>
+    <div class="post-comments" id="post-comments" style="display: block;margin: auto 16px;">
+        
+        
+<!-- Gitment Comments -->
+<div id="gitment"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  owner: "super2bai",
+  repo: 'comment',
+  oauth: {
+    client_id: '37f2293730b41dcb5276',
+    client_secret: 'dbab4955840d4cbc88f1563be04ab676662194e5',
+  },
+})
+gitment.render('gitment')
+</script>
+
+        
+        
+
+    </div>
+
+    
+
+
+        </main>
+        <footer class="footer syuanpi fadeIn" id="footer">
+    <hr>
+    <div class="footer-wrapper">
+        <div class="left">
+            <div class="contact-icon">
+    
+    
+    
+    
+    
+    
+    
+    
+        
+            <a href="https://github.com/super2bai" class="iconfont icon-github" title="github"></a>
+        
+        
+        
+        
+        
+        
+        
+    
+</div>
+        </div>
+        <div class="right">
+            <div class="copyright">
+    <div class="info">
+        <span>&copy;</span>
+        <span>2017 ~ 2018</span>
+        <span>❤</span>
+        <span>super2bai</span>
+    </div>
+    <div class="theme">
+        <span>
+            Powered by
+            <a href="http://hexo.io/" target="_blank">Hexo </a>
+        </span>
+        <span>
+            Theme
+            <a href="https://github.com/ColMugX/hexo-theme-Nlvi"> Nlvi </a>
+        </span>
+    </div>
+    
+    <div class="visit_count">
+        <i class="iconfont icon-visit"></i>
+        <span id="busuanzi_value_site_uv"></span>
+        <i class="iconfont icon-people"></i>
+        <span id="busuanzi_value_site_pv"></span>
+    </div>
+    
+</div>
+        </div>
+    </div>
+</footer>
+    </div>
+    <script src="/script/nlvi.js"></script>
+<script src="/script/search.js"></script>
+
+    <script src="/lightbox/js/lightbox.min.js"></script>
+
+<script>
+$(document).ready(function(){
+    document.body.addEventListener('touchstart', function () {});
+    $('.progress').hide();
+    $('.body').show();
+    Nlvi.tagcloud();
+    Nlvi.mobileHeader();
+    Nlvi.back2top();
+    Nlvi.smoothScroll();
+    Nlvi.onView();
+    Nlvi.showToc();
+    Nlvi.showComments();
+    Nlvi.showReward();
+    Nlvi.picPos();
+
+    !CONFIG.animate && Nlvi.offAnimate();
+    CONFIG.lightbox && Nlvi.onPicBox();
+})
+</script>
+    </div>
+    
+        
+    <div class="post-toc">
+        <span class="title">文章目录</span>
+        <div class="toc-inner syuanpi back-1 fallIn-light">
+            <li class="title-link"><a href="javascript:;" class="toTop">分布式基础知识</a></li>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#分布式环境的特点"><span class="toc-text">分布式环境的特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分布式环境下面临的问题"><span class="toc-text">分布式环境下面临的问题</span></a></li></ol>
+        </div>
+    </div>
+
+    
+    <div class="backtop syuanpi dead toTop" id="backtop">
+    <i class="iconfont icon-up"></i>
+    <span style="text-align:center;font-family:Georgia;"><span style="font-family:Georgia;" id="scrollpercent">1</span>%</span>
+</div>
+    
+</body>
+</html>

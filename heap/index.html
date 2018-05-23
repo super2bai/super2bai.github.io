@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <title> JVM堆溢出 · super2bai </title>
+    <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="browsermode" content="application">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="super2bai">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="msapplication-navbutton-color" content="#666666">
+<meta name= "format-detection" content="telephone=no" />
+<meta name="keywords" content="nlvi, Nlvi" />
+
+    <link rel="apple-touch-icon"  sizes="72x72"  href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+    <link rel="apple-touch-icon-precomposed"  sizes="72x72"  href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+
+
+    <meta name="subtitle" content="学的多一点，不会的就少一点">
+
+
+
+
+    <meta name="keywords" content="JVM, Nlvi" />
+
+<link rel="stylesheet" href="/style/style.css">
+<script src="/script/jquery.min.js"></script>
+<script>
+    var CONFIG = {
+        title: "super2bai",
+        author: "super2bai",
+        lightbox: true,
+        animate: true
+    }
+</script>
+
+
+
+    <link rel="stylesheet" href="/lightbox/css/lightbox.min.css">
+
+
+
+
+    <link rel="stylesheet" href="/syuanpi/syuanpi.min.css">
+
+
+
+
+    <link rel="icon" href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-116557847-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-1178101469132492",
+    enable_page_level_ads: true
+  });
+</script>
+</head>
+<body>
+    <div class="progress">
+    <div class="progress-inner"></div>
+</div>
+    <div class="body">
+    <div class="tagcloud-mask"></div>  
+<div class="tagcloud" id="tagcloud">
+    <div class="tagcloud-inner">
+        <a href="/tags/Dubbo/" style="font-size: 14px;">Dubbo</a> <a href="/tags/GitHub-Pages/" style="font-size: 14px;">GitHub Pages</a> <a href="/tags/IO/" style="font-size: 14px;">IO</a> <a href="/tags/JDK/" style="font-size: 14px;">JDK</a> <a href="/tags/JVM/" style="font-size: 14px;">JVM</a> <a href="/tags/Linux/" style="font-size: 14px;">Linux</a> <a href="/tags/Python/" style="font-size: 14px;">Python</a> <a href="/tags/Spring/" style="font-size: 14px;">Spring</a> <a href="/tags/Zookeeper/" style="font-size: 14px;">Zookeeper</a> <a href="/tags/jmeter/" style="font-size: 14px;">jmeter</a> <a href="/tags/walkup/" style="font-size: 14px;">walkup</a> <a href="/tags/分布式/" style="font-size: 14px;">分布式</a>
+    </div>
+</div>
+    <header class="header" id="header">
+    <div class="title syuanpi tvIn">
+    <div class="table">
+        <div class="connect">
+            <div class="connect-inner">
+                <span><a href="/">super2bai</a></span>
+                
+                    <span id="subtitle">学的多一点，不会的就少一点</span>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <nav class="main-nav syuanpi tvIn">
+<div class="table">
+
+    <ul class="menu">
+        
+        
+        
+            <li class="menu-item">
+                <a href="/">
+                    <span>Article</span>
+                    
+                    
+                </a>
+            </li>
+        
+        
+        
+            <li class="menu-item">
+                <a href="/archives">
+                    <span>Archives</span>
+                    
+                    
+                </a>
+            </li>
+        
+        
+        
+            <li class="menu-item">
+                <a href="javascript:;" id="tags">
+                    <span>Tags</span>
+                    
+                    
+                </a>
+            </li>
+        
+        
+        
+            <li class="menu-item">
+                <a href="/about">
+                    <span>About</span>
+                    
+                    
+                </a>
+            </li>
+        
+        
+    </ul>
+
+</div>
+</nav>
+</header>
+<div class="mobile-header">
+    <div class="mobile-header-body">
+        <div class="mobile-header-list">
+            
+            
+                <div class="mobile-nav-item">
+                    <a href="/">
+                        <span>Article</span>
+                        
+                        
+                    </a>
+                </div>
+            
+            
+            
+                <div class="mobile-nav-item">
+                    <a href="/archives">
+                        <span>Archives</span>
+                        
+                        
+                    </a>
+                </div>
+            
+            
+            
+                <div class="mobile-nav-item inner-cloud">
+                    <div class="mobile-nav-tag">
+                        <a href="javascript:;" id="mobile-tags">
+                            <span>Tags</span>
+                            
+                            
+                        </a>
+                    </div>
+                    <div class="mobile-nav-tagcloud">
+                        <div class="mobile-tagcloud-inner">
+                            <a href="/tags/Dubbo/" style="font-size: 14px;">Dubbo</a> <a href="/tags/GitHub-Pages/" style="font-size: 14px;">GitHub Pages</a> <a href="/tags/IO/" style="font-size: 14px;">IO</a> <a href="/tags/JDK/" style="font-size: 14px;">JDK</a> <a href="/tags/JVM/" style="font-size: 14px;">JVM</a> <a href="/tags/Linux/" style="font-size: 14px;">Linux</a> <a href="/tags/Python/" style="font-size: 14px;">Python</a> <a href="/tags/Spring/" style="font-size: 14px;">Spring</a> <a href="/tags/Zookeeper/" style="font-size: 14px;">Zookeeper</a> <a href="/tags/jmeter/" style="font-size: 14px;">jmeter</a> <a href="/tags/walkup/" style="font-size: 14px;">walkup</a> <a href="/tags/分布式/" style="font-size: 14px;">分布式</a>
+                        </div>
+                    </div>
+                </div>
+            
+            
+            
+                <div class="mobile-nav-item">
+                    <a href="/about">
+                        <span>About</span>
+                        
+                        
+                    </a>
+                </div>
+            
+            
+        </div>
+    </div>
+    <div class="mobile-header-nav">
+        <div class="mobile-header-item" id="mobile-left">
+            <div class="header-menu-item">
+                <span class="header-menu-line"></span>
+            </div>
+        </div>
+        <h1 class="mobile-header-title">
+            <a href="/">super2bai</a>
+        </h1>
+        <div class="mobile-header-item"></div>
+    </div>
+</div>
+
+    <div class="container">
+        <main class="main" id="main">
+            
+    
+    <article class="post">
+        <header class="post-header">
+            <div class="post-time syuanpi riseIn-light back-1">
+                <span>March 21, 2018</span>
+                
+            </div>
+            <h1 class="post-title syuanpi riseIn-light back-2">
+            
+                JVM堆溢出
+            
+            </h1>
+            
+                
+                    <div class="post-tags syuanpi riseIn-light back-3">
+                    
+                        <a href="/tags/JVM/">JVM</a>
+                    
+                    </div>
+                
+            
+        </header>
+        <div class="post-content syuanpi riseIn-light back-3">
+            
+                <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p><strong>本文目的</strong></p>
+<ul>
+<li>通过代码验证Java虚拟机规范中描述的堆中存储的内容</li>
+<li>遇到内存溢出错误时<ul>
+<li>能根据异常的信息快速判断出是堆的溢出</li>
+<li>出现此类问题后如何处理</li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+<h3 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h3><h4 id="创建类"><a href="#创建类" class="headerlink" title="创建类"></a>创建类</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.super2bai.jvm;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.ArrayList;</div><div class="line"><span class="keyword">import</span> java.util.List;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * </span></div><div class="line"><span class="comment"> * <span class="doctag">@author</span> 2bai &lt;br/&gt;</span></div><div class="line"><span class="comment"> *         VM Args:&lt;br/&gt;</span></div><div class="line"><span class="comment"> *         -verbose:gc -Xms20M -Xmx20M -Xmn10M -XX:+PrintGCDetails</span></div><div class="line"><span class="comment"> *         -XX:SurvivorRatio=8&lt;br/&gt;</span></div><div class="line"><span class="comment"> * </span></div><div class="line"><span class="comment"> *         -verbose:gc&lt;br/&gt;</span></div><div class="line"><span class="comment"> *         在虚拟机发生内存回收时在输出设备显示信息&lt;br/&gt;</span></div><div class="line"><span class="comment"> *         -Xms20M&lt;br/&gt;</span></div><div class="line"><span class="comment"> *         堆的最小可用内存为20M&lt;br/&gt;</span></div><div class="line"><span class="comment"> *         -Xmx20M&lt;br/&gt;</span></div><div class="line"><span class="comment"> *         堆的最大可用内存为20M&lt;br/&gt;</span></div><div class="line"><span class="comment"> *         -Xmn10M&lt;br/&gt;</span></div><div class="line"><span class="comment"> *         表示新生代分配10M&lt;br/&gt;</span></div><div class="line"><span class="comment"> *         -XX:+PrintGCDetails&lt;br/&gt;</span></div><div class="line"><span class="comment"> *         打印GC日志到控制台&lt;br/&gt;</span></div><div class="line"><span class="comment"> *         -XX:SurvivorRatio=8&lt;br/&gt;</span></div><div class="line"><span class="comment"> *         表示新生代的eden区:from区：to区:8:1:1&lt;br/&gt;</span></div><div class="line"><span class="comment"> *         -XX:+HeapDumpOnOutOfMemoryError&lt;br/&gt;</span></div><div class="line"><span class="comment"> *         让虚拟机在出现内存溢出时Dump出当前的内存转储快找以便事后分析&lt;br/&gt;</span></div><div class="line"><span class="comment"> * </span></div><div class="line"><span class="comment"> *         PS：堆的最大可用内存和最小可用内存设置成相同的值，即可避免堆自动扩展&lt;br/&gt;</span></div><div class="line"><span class="comment"> * </span></div><div class="line"><span class="comment"> *</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HeapOOM</span> </span>&#123;</div><div class="line">	<span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">OOMObject</span> </span>&#123;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		List&lt;OOMObject&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">		<span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</div><div class="line">			<span class="comment">/**</span></div><div class="line"><span class="comment">			 * Java堆用来存放对象实例&lt;br/&gt;</span></div><div class="line"><span class="comment">			 * 只要不断创建对象&lt;br/&gt;</span></div><div class="line"><span class="comment">			 * 并且保证GC Roots到对象之间有可达路径来避免垃圾回收机制清除这些对象&lt;br/&gt;</span></div><div class="line"><span class="comment">			 * 那么对象数量到达最大堆的容量限制之后就会产生内存溢出异常&lt;br/&gt;</span></div><div class="line"><span class="comment">			 */</span></div><div class="line">			list.add(<span class="keyword">new</span> OOMObject());</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="设置虚拟机参数"><a href="#设置虚拟机参数" class="headerlink" title="设置虚拟机参数"></a>设置虚拟机参数</h4><p>右键单击类文件 -&gt; <code>Run As</code> -&gt; <code>Run Configurations...</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">-verbose:gc -Xms20M -Xmx20M -Xmn10M -XX:+PrintGCDetails -XX:SurvivorRatio=<span class="number">8</span> -XX:+HeapDumpOnOutOfMemoryError</div></pre></td></tr></table></figure>
+<p><img src="https://wx2.sinaimg.cn/mw690/8c564d2agy1fpjp9y90fkj21di0zk47c.jpg" alt="VM Args"></p>
+<h4 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h4><p><img src="https://wx3.sinaimg.cn/mw690/8c564d2aly1fpkf3xo2ltj21kw0k0k02.jpg" alt="堆内存溢出"></p>
+<p>运行后，如果未指定dump文件路径，会在当前项目的根路径下生成名为<code>java_pid*.hprof</code>的文件，如果没有此文件，<code>F5</code>刷新当前项目。</p>
+<blockquote>
+<p>Java堆内存的OOM异常是实际应用中常见的内存溢出异常情况。</p>
+<p>当出现Java堆内存溢出时，异常堆栈信息<code>java.lang.OutOfMemoryError</code>会跟着进一步提示<code>Java heap space</code>。</p>
+</blockquote>
+<h4 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h4><p>一般的手段时通过内存映像分析工具(如·Eclipse Memory Analyzer·)对Dump出来的堆转储快进行分析，重点是<strong>确认内存中的对象是否是必要的</strong>，也就是要先<strong>分清楚到底是出现了内存泄漏(Memory Leak)还是内存溢出(Memory Overflow)</strong>。</p>
+<h4 id="Eclipse-Memory-Analyzer"><a href="#Eclipse-Memory-Analyzer" class="headerlink" title="Eclipse Memory Analyzer"></a>Eclipse Memory Analyzer</h4><p><a href="http://wiki.eclipse.org/MemoryAnalyzer" target="_blank" rel="external">MemoryAnalyzer官网</a></p>
+<p><a href="http://www.vogella.com/tutorials/EclipseMemoryAnalyzer/article.html" target="_blank" rel="external">安装使用教程</a></p>
+<p><a href="https://eclipsesource.com/blogs/2013/01/21/10-tips-for-using-the-eclipse-memory-analyzer/" target="_blank" rel="external">MAT使用技巧</a></p>
+<h3 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h3><p><a href="https://dzone.com/articles/memory-leak-andjava-code" target="_blank" rel="external">Memory Leaks and Java Code</a></p>
+<p><a href="https://developers.redhat.com/blog/2014/08/14/find-fix-memory-leaks-java-application/" target="_blank" rel="external">How to find and fix memory leaks in your Java application</a></p>
+<p><del>日后有时间将会翻译并发布上面两篇文章</del></p>
+<p><a href="http://hllvm.group.iteye.com/group/topic/37095" target="_blank" rel="external">重点看RednaxelaFx的回答，R大讲的不错</a></p>
+<p><a href="https://stackoverflow.com/questions/4943518/what-is-the-difference-between-an-outofmemoryerror-amd-a-memory-leak" target="_blank" rel="external">What is the difference between an OutOfMemoryError and a memory leak</a></p>
+
+            
+        
+        </div>
+        
+            
+    <div class="post-reward">
+        <span class="reward-btn" id="reward-btn">reward</span>
+        <div class="reward-wrapper" id="reward-wrapper" style="display:none;">
+            
+                
+                
+            
+                
+                <div class="reward-item reward-alipay">
+                    <img src="https://wx2.sinaimg.cn/mw690/8c564d2aly1fpunn3yinhj20py0pyn4i.jpg">
+                </div>
+                
+            
+        </div>
+    </div>
+
+            
+        
+    </article>
+    
+        
+    <nav class="article-page">
+        
+            <a href="/stack/" id="art-left" class="art-right">
+                <span class="next-title">
+                    JVM虚拟机栈和本地方法栈溢出<i class="iconfont icon-right"></i> 
+                </span>
+            </a>
+        
+        
+            <a href="/position/" id="art-right" class="art-left">
+                <span class="prev-title"> 
+                    <i class="iconfont icon-left"></i>JVM对象的访问定位
+                </span>
+            </a>
+        
+    </nav>
+
+        
+    <i id="com-switch" class="iconfont icon-more jumping-in long infinite" style="font-size:24px;display:block;text-align:center;transform:rotate(180deg);"></i>
+    <div class="post-comments" id="post-comments" style="display: block;margin: auto 16px;">
+        
+        
+<!-- Gitment Comments -->
+<div id="gitment"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  owner: "super2bai",
+  repo: 'comment',
+  oauth: {
+    client_id: '37f2293730b41dcb5276',
+    client_secret: 'dbab4955840d4cbc88f1563be04ab676662194e5',
+  },
+})
+gitment.render('gitment')
+</script>
+
+        
+        
+
+    </div>
+
+    
+
+
+        </main>
+        <footer class="footer syuanpi fadeIn" id="footer">
+    <hr>
+    <div class="footer-wrapper">
+        <div class="left">
+            <div class="contact-icon">
+    
+    
+    
+    
+    
+    
+    
+    
+        
+            <a href="https://github.com/super2bai" class="iconfont icon-github" title="github"></a>
+        
+        
+        
+        
+        
+        
+        
+    
+</div>
+        </div>
+        <div class="right">
+            <div class="copyright">
+    <div class="info">
+        <span>&copy;</span>
+        <span>2017 ~ 2018</span>
+        <span>❤</span>
+        <span>super2bai</span>
+    </div>
+    <div class="theme">
+        <span>
+            Powered by
+            <a href="http://hexo.io/" target="_blank">Hexo </a>
+        </span>
+        <span>
+            Theme
+            <a href="https://github.com/ColMugX/hexo-theme-Nlvi"> Nlvi </a>
+        </span>
+    </div>
+    
+    <div class="visit_count">
+        <i class="iconfont icon-visit"></i>
+        <span id="busuanzi_value_site_uv"></span>
+        <i class="iconfont icon-people"></i>
+        <span id="busuanzi_value_site_pv"></span>
+    </div>
+    
+</div>
+        </div>
+    </div>
+</footer>
+    </div>
+    <script src="/script/nlvi.js"></script>
+<script src="/script/search.js"></script>
+
+    <script src="/lightbox/js/lightbox.min.js"></script>
+
+<script>
+$(document).ready(function(){
+    document.body.addEventListener('touchstart', function () {});
+    $('.progress').hide();
+    $('.body').show();
+    Nlvi.tagcloud();
+    Nlvi.mobileHeader();
+    Nlvi.back2top();
+    Nlvi.smoothScroll();
+    Nlvi.onView();
+    Nlvi.showToc();
+    Nlvi.showComments();
+    Nlvi.showReward();
+    Nlvi.picPos();
+
+    !CONFIG.animate && Nlvi.offAnimate();
+    CONFIG.lightbox && Nlvi.onPicBox();
+})
+</script>
+    </div>
+    
+        
+    <div class="post-toc">
+        <span class="title">文章目录</span>
+        <div class="toc-inner syuanpi back-1 fallIn-light">
+            <li class="title-link"><a href="javascript:;" class="toTop">JVM堆溢出</a></li>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#概述"><span class="toc-text">概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#操作"><span class="toc-text">操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#创建类"><span class="toc-text">创建类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#设置虚拟机参数"><span class="toc-text">设置虚拟机参数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#运行结果"><span class="toc-text">运行结果</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#解决"><span class="toc-text">解决</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Eclipse-Memory-Analyzer"><span class="toc-text">Eclipse Memory Analyzer</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其它"><span class="toc-text">其它</span></a></li></ol>
+        </div>
+    </div>
+
+    
+    <div class="backtop syuanpi dead toTop" id="backtop">
+    <i class="iconfont icon-up"></i>
+    <span style="text-align:center;font-family:Georgia;"><span style="font-family:Georgia;" id="scrollpercent">1</span>%</span>
+</div>
+    
+</body>
+</html>
