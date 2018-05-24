@@ -1,11 +1,7 @@
 <!DOCTYPE html>
 <html lang="">
 <head>
-    <title>
-  
-    Archives · super2bai
-  
-</title>
+    <title> hexo站点地图 · super2bai </title>
     <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
@@ -25,6 +21,8 @@
 
 
 
+
+    <meta name="keywords" content="GitHubPages, Nlvi" />
 
 <link rel="stylesheet" href="/style/style.css">
 <script src="/script/jquery.min.js"></script>
@@ -222,207 +220,120 @@
         <main class="main" id="main">
             
     
-    <div class="archive syuanpi riseIn-light" id="archive">
-        
-            <h1 class="archive-title">Total</h1>
-            <span class="archive-num">53 Posts In Total</span>
-        
-        <div class="archive-list">
-            <ul>
-        
+    <article class="post">
+        <header class="post-header">
+            <div class="post-time syuanpi riseIn-light back-1">
+                <span>May 24, 2018</span>
+                
+                
+                    <span class="post-category"><a href="/categories/GitHubPages/">GitHubPages</a></span>
+                
+                
+            </div>
+            <h1 class="post-title syuanpi riseIn-light back-2">
+            
+                hexo站点地图
+            
+            </h1>
             
                 
-                
-                
+                    <div class="post-tags syuanpi riseIn-light back-3">
                     
-                     
-                        <h2 class="archive-year"> 2017 </h2>
+                        <a href="/tags/GitHubPages/">GitHubPages</a>
                     
+                    </div>
                 
             
+        </header>
+        <div class="post-content syuanpi riseIn-light back-3">
             
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    11-04
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/Dubbo/config.html">dubbo配置详解</a>
-                </span>
-            </li>
+                <p>目的：搜索引擎收录网站</p>
+<a id="more"></a>
+<h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><blockquote>
+<p><strong>站点地图</strong>：描述了一个网站的架构。</p>
+<p>它可以是一个任意形式的文档，也可以是列出网站中所有页面的一个网页。</p>
+<p>通常采用分级形式。</p>
+<p>有助于访问者以及搜索引擎的机器人找到网站中的页面</p>
+</blockquote>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">npm install hexo-generator-sitemap --save #sitemap.xml适合提交给谷歌搜素引擎</div><div class="line">npm install hexo-generator-baidu-sitemap --save #baidusitemap.xml适合提交百度搜索引擎</div></pre></td></tr></table></figure>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><h4 id="config-yml"><a href="#config-yml" class="headerlink" title="_config.yml"></a>_config.yml</h4><ul>
+<li>在站点配置文件<code>_config.yml</code>中<strong>添加</strong>以下代码</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash"> 自动生成sitemap</span></div><div class="line">sitemap:</div><div class="line">path: sitemap.xml</div><div class="line">baidusitemap:</div><div class="line">path: baidusitemap.xml</div></pre></td></tr></table></figure>
+<ul>
+<li>在站点配置文件<code>_config.yml</code>中<strong>修改</strong>以下代码</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash"> URL</span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'</span></span></div><div class="line">url: http://yoursite</div></pre></td></tr></table></figure>
+<h3 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo g -d</div></pre></td></tr></table></figure>
+<p>会在<code>/public</code>下生成<code>sitemap.xml</code>和<code>baidusitemap.xml</code></p>
+<h3 id="google"><a href="#google" class="headerlink" title="google"></a>google</h3><p><a href="https://www.google.com/webmasters/tools/home?hl=zh-CN" target="_blank" rel="external">Search Console</a></p>
+<h3 id="baidu"><a href="#baidu" class="headerlink" title="baidu"></a>baidu</h3><p><a href="https://ziyuan.baidu.com/https/index" target="_blank" rel="external">百度资源</a></p>
+<p>百度目前抓去github有问题，需要在国内部署镜像。等我搞定后更新上来，今天先到这里。</p>
 
+            
+        
+        </div>
         
             
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    11-01
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/Dubbo/dubbofirst.html">初步认识Dubbo</a>
-                </span>
-            </li>
-
-        
+    <div class="post-reward">
+        <span class="reward-btn" id="reward-btn">reward</span>
+        <div class="reward-wrapper" id="reward-wrapper" style="display:none;">
             
                 
                 
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    10-31
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/Zookeeper/ZAB.html">ZAB协议</a>
-                </span>
-            </li>
-
-        
             
                 
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    10-30
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/Zookeeper/analyze.html">Zookeeper的几个原理分析</a>
-                </span>
-            </li>
-
-        
-            
-                
-                
+                <div class="reward-item reward-alipay">
+                    <img src="https://wx2.sinaimg.cn/mw690/8c564d2aly1fpunn3yinhj20py0pyn4i.jpg">
+                </div>
                 
             
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    10-29
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/Zookeeper/interface.html">curator提供应用场景的封装</a>
-                </span>
-            </li>
-
-        
-            
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    10-28
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/Zookeeper/situation.html">Zookeeper的实际应用场景</a>
-                </span>
-            </li>
-
-        
-            
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    10-27
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/Zookeeper/client.html">Zookeeper客户端</a>
-                </span>
-            </li>
-
-        
-            
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    10-26
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/Zookeeper/node.html">Zookeeper节点权限示例代码</a>
-                </span>
-            </li>
-
-        
-            
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    10-25
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/Zookeeper/zooapi.html">Zookeeper Java API 使用</a>
-                </span>
-            </li>
-
-        
-            
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    10-24
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/Zookeeper/order.html">Zookeeper的命令操作</a>
-                </span>
-            </li>
-
-        
-            </ul>
         </div>
     </div>
+
+            
+        
+    </article>
     
-    <nav class="pagination">
-        <a class="extend prev" rel="prev" href="/archives/2017/">< Prev</a><a class="page-number" href="/archives/2017/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/2017/page/3/">3</a><a class="extend next" rel="next" href="/archives/2017/page/3/">Next ></a>
+        
+    <nav class="article-page">
+        
+        
+            <a href="/JVM/memStrategy.html" id="art-right" class="art-left">
+                <span class="prev-title"> 
+                    <i class="iconfont icon-left"></i>内存分配与回收策略
+                </span>
+            </a>
+        
     </nav>
 
+        
+    <i id="com-switch" class="iconfont icon-more jumping-in long infinite" style="font-size:24px;display:block;text-align:center;transform:rotate(180deg);"></i>
+    <div class="post-comments" id="post-comments" style="display: block;margin: auto 16px;">
+        
+        
+<!-- Gitment Comments -->
+<div id="gitment"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  owner: "super2bai",
+  repo: 'comment',
+  oauth: {
+    client_id: '37f2293730b41dcb5276',
+    client_secret: 'dbab4955840d4cbc88f1563be04ab676662194e5',
+  },
+})
+gitment.render('gitment')
+</script>
+
+        
+        
+
+    </div>
+
+    
 
 
         </main>
@@ -507,6 +418,16 @@ $(document).ready(function(){
 })
 </script>
     </div>
+    
+        
+    <div class="post-toc">
+        <span class="title">文章目录</span>
+        <div class="toc-inner syuanpi back-1 fallIn-light">
+            <li class="title-link"><a href="javascript:;" class="toTop">hexo站点地图</a></li>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#概念"><span class="toc-text">概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置"><span class="toc-text">配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#config-yml"><span class="toc-text">_config.yml</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#编译"><span class="toc-text">编译</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#google"><span class="toc-text">google</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#baidu"><span class="toc-text">baidu</span></a></li></ol>
+        </div>
+    </div>
+
     
     <div class="backtop syuanpi dead toTop" id="backtop">
     <i class="iconfont icon-up"></i>

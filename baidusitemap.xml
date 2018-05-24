@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>https://super2bai.github.io/GitHubPages/sitemap.html</loc>
+    <lastmod>2018-05-24T16:03:24.757Z</lastmod>
+    <data>
+        <display>
+        <title>hexo站点地图</title>
+        <pubTime>2018-05-24T15:41:24.000Z</pubTime>
+        
+        <tag>GitHubPages</tag>
+         
+         
+           
+             
+              <breadCrumb title="GitHubPages" url="https://super2bai.github.io/categories/GitHubPages/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://super2bai.github.io/JVM/gcAlgo.html</loc>
     <lastmod>2018-05-23T10:25:26.646Z</lastmod>
     <data>
