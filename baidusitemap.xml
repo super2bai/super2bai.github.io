@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>https://super2bai.github.io/GHPages/sitemap.html</loc>
+    <lastmod>2018-05-24T16:11:42.486Z</lastmod>
+    <data>
+        <display>
+        <title>hexo站点地图</title>
+        <pubTime>2018-05-24T15:41:24.000Z</pubTime>
+        
+        <tag>GHPages</tag>
+         
+         
+           
+             
+              <breadCrumb title="GHPages" url="https://super2bai.github.io/categories/GHPages/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://super2bai.github.io/GHPages/blog.html</loc>
     <lastmod>2018-05-24T16:09:26.384Z</lastmod>
     <data>
@@ -30,26 +50,6 @@
         <display>
         <title>Hello World</title>
         <pubTime>2017-10-16T07:55:28.000Z</pubTime>
-        
-        <tag>GHPages</tag>
-         
-         
-           
-             
-              <breadCrumb title="GHPages" url="https://super2bai.github.io/categories/GHPages/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://super2bai.github.io/GHPages/sitemap.html</loc>
-    <lastmod>2018-05-24T16:08:25.302Z</lastmod>
-    <data>
-        <display>
-        <title>hexo站点地图</title>
-        <pubTime>2018-05-24T15:41:24.000Z</pubTime>
         
         <tag>GHPages</tag>
          
