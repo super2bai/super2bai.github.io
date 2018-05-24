@@ -4,19 +4,59 @@
 
     
   <url>
-    <loc>https://super2bai.github.io/GitHubPages/sitemap.html</loc>
-    <lastmod>2018-05-24T16:07:31.572Z</lastmod>
+    <loc>https://super2bai.github.io/GHPages/blog.html</loc>
+    <lastmod>2018-05-24T16:09:26.384Z</lastmod>
+    <data>
+        <display>
+        <title>hexo+github=blog</title>
+        <pubTime>2017-10-17T07:55:28.000Z</pubTime>
+        
+        <tag>GHPages</tag>
+         
+         
+           
+             
+              <breadCrumb title="GHPages" url="https://super2bai.github.io/categories/GHPages/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://super2bai.github.io/GHPages/hello.html</loc>
+    <lastmod>2018-05-24T16:09:18.850Z</lastmod>
+    <data>
+        <display>
+        <title>Hello World</title>
+        <pubTime>2017-10-16T07:55:28.000Z</pubTime>
+        
+        <tag>GHPages</tag>
+         
+         
+           
+             
+              <breadCrumb title="GHPages" url="https://super2bai.github.io/categories/GHPages/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://super2bai.github.io/GHPages/sitemap.html</loc>
+    <lastmod>2018-05-24T16:08:25.302Z</lastmod>
     <data>
         <display>
         <title>hexo站点地图</title>
         <pubTime>2018-05-24T15:41:24.000Z</pubTime>
         
-        <tag>GitHubPages</tag>
+        <tag>GHPages</tag>
          
          
            
              
-              <breadCrumb title="GitHubPages" url="https://super2bai.github.io/categories/GitHubPages/"/>
+              <breadCrumb title="GHPages" url="https://super2bai.github.io/categories/GHPages/"/>
           
         </display>
     </data>
@@ -597,46 +637,6 @@
            
              
               <breadCrumb title="Dubbo" url="https://super2bai.github.io/categories/Dubbo/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://super2bai.github.io/GitHubPages/hello.html</loc>
-    <lastmod>2018-05-23T03:33:54.814Z</lastmod>
-    <data>
-        <display>
-        <title>Hello World</title>
-        <pubTime>2017-10-16T07:55:28.000Z</pubTime>
-        
-        <tag>GitHubPages</tag>
-         
-         
-           
-             
-              <breadCrumb title="GitHubPages" url="https://super2bai.github.io/categories/GitHubPages/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://super2bai.github.io/GitHubPages/blog.html</loc>
-    <lastmod>2018-05-23T03:33:43.000Z</lastmod>
-    <data>
-        <display>
-        <title>hexo+github=blog</title>
-        <pubTime>2017-10-17T07:55:28.000Z</pubTime>
-        
-        <tag>GitHubPages</tag>
-         
-         
-           
-             
-              <breadCrumb title="GitHubPages" url="https://super2bai.github.io/categories/GitHubPages/"/>
           
         </display>
     </data>

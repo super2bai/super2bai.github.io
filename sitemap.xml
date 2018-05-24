@@ -2,9 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://super2bai.github.io/GitHubPages/sitemap.html</loc>
+    <loc>https://super2bai.github.io/GHPages/blog.html</loc>
     
-    <lastmod>2018-05-24T16:07:31.572Z</lastmod>
+    <lastmod>2018-05-24T16:09:26.384Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://super2bai.github.io/GHPages/hello.html</loc>
+    
+    <lastmod>2018-05-24T16:09:18.850Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://super2bai.github.io/GHPages/sitemap.html</loc>
+    
+    <lastmod>2018-05-24T16:08:25.302Z</lastmod>
     
   </url>
   
@@ -208,20 +222,6 @@
     <loc>https://super2bai.github.io/Dubbo/best.html</loc>
     
     <lastmod>2018-05-23T03:34:03.893Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://super2bai.github.io/GitHubPages/hello.html</loc>
-    
-    <lastmod>2018-05-23T03:33:54.814Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://super2bai.github.io/GitHubPages/blog.html</loc>
-    
-    <lastmod>2018-05-23T03:33:43.000Z</lastmod>
     
   </url>
   
