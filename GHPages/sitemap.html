@@ -108,7 +108,7 @@
         
             <li class="menu-item">
                 <a href="/">
-                    <span>キジ</span>
+                    <span>Article</span>
                     
                     
                 </a>
@@ -118,7 +118,7 @@
         
             <li class="menu-item">
                 <a href="/archives">
-                    <span>アーカイブ</span>
+                    <span>Archives</span>
                     
                     
                 </a>
@@ -128,7 +128,7 @@
         
             <li class="menu-item">
                 <a href="javascript:;" id="tags">
-                    <span>タグ</span>
+                    <span>Tags</span>
                     
                     
                 </a>
@@ -138,7 +138,7 @@
         
             <li class="menu-item">
                 <a href="/about">
-                    <span>ついて</span>
+                    <span>About</span>
                     
                     
                 </a>
@@ -157,7 +157,7 @@
             
                 <div class="mobile-nav-item">
                     <a href="/">
-                        <span>キジ</span>
+                        <span>Article</span>
                         
                         
                     </a>
@@ -167,7 +167,7 @@
             
                 <div class="mobile-nav-item">
                     <a href="/archives">
-                        <span>アーカイブ</span>
+                        <span>Archives</span>
                         
                         
                     </a>
@@ -178,7 +178,7 @@
                 <div class="mobile-nav-item inner-cloud">
                     <div class="mobile-nav-tag">
                         <a href="javascript:;" id="mobile-tags">
-                            <span>タグ</span>
+                            <span>Tags</span>
                             
                             
                         </a>
@@ -194,7 +194,7 @@
             
                 <div class="mobile-nav-item">
                     <a href="/about">
-                        <span>ついて</span>
+                        <span>About</span>
                         
                         
                     </a>
@@ -266,9 +266,19 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span> URL</div><div class="line"><span class="meta">#</span># If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'</div><div class="line"><span class="meta">#</span># 比如网站地址是https://a.com，那么下面就写url: https://a.com</div><div class="line">url: http://yoursite</div></pre></td></tr></table></figure>
 <h3 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo g -d</div></pre></td></tr></table></figure>
 <p>会在<code>/public</code>下生成<code>sitemap.xml</code>和<code>baidusitemap.xml</code></p>
-<h3 id="google"><a href="#google" class="headerlink" title="google"></a>google</h3><p><a href="https://www.google.com/webmasters/tools/home?hl=zh-CN" target="_blank" rel="external">Search Console</a></p>
-<h3 id="baidu"><a href="#baidu" class="headerlink" title="baidu"></a>baidu</h3><p><a href="https://ziyuan.baidu.com/https/index" target="_blank" rel="external">百度资源</a></p>
-<p>百度目前抓取github有问题，需要在国内部署镜像。等我搞定后更新上来，今天先到这里。</p>
+<h3 id="收录"><a href="#收录" class="headerlink" title="收录"></a>收录</h3><h4 id="google"><a href="#google" class="headerlink" title="google"></a>google</h4><p><a href="https://www.google.com/webmasters/tools/home?hl=zh-CN" target="_blank" rel="external">Search Console</a></p>
+<ul>
+<li>添加网站地址</li>
+<li>提交<code>sitemap.xml</code></li>
+</ul>
+<h4 id="baidu"><a href="#baidu" class="headerlink" title="baidu"></a>baidu</h4><p><a href="https://ziyuan.baidu.com/https/index" target="_blank" rel="external">百度资源</a></p>
+<ul>
+<li>添加网站地址</li>
+<li>提交<ul>
+<li>站点信息-&gt;网页抓取-&gt;详情</li>
+</ul>
+</li>
+</ul>
 
             
         
@@ -276,7 +286,7 @@
         
             
     <div class="post-reward">
-        <span class="reward-btn" id="reward-btn">褒賞</span>
+        <span class="reward-btn" id="reward-btn">reward</span>
         <div class="reward-wrapper" id="reward-wrapper" style="display:none;">
             
                 
@@ -424,7 +434,7 @@ $(document).ready(function(){
         <span class="title">文章目录</span>
         <div class="toc-inner syuanpi back-1 fallIn-light">
             <li class="title-link"><a href="javascript:;" class="toTop">hexo站点地图</a></li>
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#概念"><span class="toc-text">概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置"><span class="toc-text">配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#config-yml"><span class="toc-text">_config.yml</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#编译"><span class="toc-text">编译</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#google"><span class="toc-text">google</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#baidu"><span class="toc-text">baidu</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#概念"><span class="toc-text">概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置"><span class="toc-text">配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#config-yml"><span class="toc-text">_config.yml</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#编译"><span class="toc-text">编译</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#收录"><span class="toc-text">收录</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#google"><span class="toc-text">google</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#baidu"><span class="toc-text">baidu</span></a></li></ol></li></ol>
         </div>
     </div>
 
