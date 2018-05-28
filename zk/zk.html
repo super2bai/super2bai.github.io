@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <title>
-  
-</title>
+    <title> 初步认识zookeeper · super2bai </title>
     <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
@@ -23,6 +21,8 @@
 
 
 
+
+    <meta name="keywords" content="Zookeeper, Nlvi" />
 
 <link rel="stylesheet" href="/style/style.css">
 <script src="/script/jquery.min.js"></script>
@@ -228,50 +228,234 @@
         <main class="main" id="main">
             
     
-    <div class="archive syuanpi riseIn-light" id="archive">
-        
-            <h2 class="archive-title"> 正在查看 </h2>
-            <span class="archive-name"> — distributed</span>
-        
-        <div class="archive-list">
-            <ul>
-        
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
+    <article class="post">
+        <header class="post-header">
+            <div class="post-time syuanpi riseIn-light back-1">
+                <span>2017年10月20日</span>
                 
-                    2017-11-11
                 
-                </span>
-                <span class="archive-post-link">
-                    <a href="/distributed/solution.html">分布式事务解决方案</a>
-                </span>
-            </li>
+                    <span class="post-category"><a href="/categories/zk/">zk</a></span>
+                
+                
+            </div>
+            <h1 class="post-title syuanpi riseIn-light back-2">
+            
+                初步认识zookeeper
+            
+            </h1>
+            
+                
+                    <div class="post-tags syuanpi riseIn-light back-3">
+                    
+                        <a href="/tags/Zookeeper/">Zookeeper</a>
+                    
+                    </div>
+                
+            
+        </header>
+        <div class="post-content syuanpi riseIn-light back-3">
+            
+                <p><strong>初步认识zookeeper</strong></p>
+<a id="more"></a>
+<blockquote>
+<p>zookeeper是一个开源的分布式协调服务，是由雅虎创建的，基于google chubby。</p>
+</blockquote>
+<p><strong>zookeeper是什么</strong></p>
+<blockquote>
+<p>分布式数据一致性的解决方案</p>
+</blockquote>
+<p><strong>zookeeper能做什么</strong></p>
+<ul>
+<li>数据的发布/订阅<ul>
+<li>配置中心：disconf</li>
+</ul>
+</li>
+<li>负载均衡<ul>
+<li>dubbo利用zookeeper机制实现负载均衡</li>
+</ul>
+</li>
+<li>命名服务</li>
+<li>master选举<ul>
+<li>kafka</li>
+<li>Hadoop</li>
+<li>hbase</li>
+</ul>
+</li>
+<li>分布式队列</li>
+<li>分布式锁</li>
+</ul>
+<p><strong>zookeeper特性</strong></p>
+<ul>
+<li>顺序一致性<ul>
+<li>从同一个客户端发起的事务请求，最终都会严格按照顺序被应用到zookeeper中</li>
+</ul>
+</li>
+<li>原子性<ul>
+<li>所有的事务请求的处理结果在整个集群中的所有机器上的应用情况是一致的，也就是说，要么整个集群中的所有机器都成功应用了某以事务、要么全都不应用</li>
+</ul>
+</li>
+<li>实时性<ul>
+<li>一旦一个事务被成功应用，客户端就能够立即从服务端读取到事务变更后的最新数据状态<ul>
+<li>zookeeper仅仅保证在一定时间内，近实时</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>单一视图<ul>
+<li>无论客户端连接到哪个服务器，所看到的模型都是一样</li>
+</ul>
+</li>
+<li>可靠性<ul>
+<li>一旦服务器端提交了一个事务并且获得了服务器端返回成功的标识，那么这个事务所引起的服务器端的变更会一直保留</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>Zookeeper并不是用来存储数据的，而是通过监控数据状态的变化，达到基于数据的集群管理</p>
+</blockquote>
+<p><strong>zookeeper安装</strong></p>
+<ul>
+<li>单机环境<ul>
+<li><a href="https://zookeeper.apache.org/releases.html#download" target="_blank" rel="external">下载zookeeper的安装包</a></li>
+<li>解压<ul>
+<li><code>tar -zxvf zookeeper-xx.tar.gz</code></li>
+</ul>
+</li>
+<li>生成zoo.cfg<ul>
+<li><code>cd ZK_HOME/conf</code></li>
+<li><code>cp zoo_sample.cfg zoo.cfg</code></li>
+</ul>
+</li>
+<li>运行<ul>
+<li><code>sh zkServer.sh start-foreground</code><ul>
+<li>start</li>
+<li>start-foreground</li>
+<li>stop</li>
+<li>restart</li>
+<li>status</li>
+<li>upgrade</li>
+<li>print-cmd</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>客户端连接<ul>
+<li><code>sh zkCli.sh -server ip:port</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>集群环境<ul>
+<li>集群角色<ul>
+<li>leader</li>
+<li>follower</li>
+<li>observer<ul>
+<li><code>server.id=ip:zkPort:leaderElectionPort:observer</code></li>
+<li>不参数投票，只接收投票结果</li>
+<li>不属于zookeeper的关键部位</li>
+<li>特殊的zookeeper节点</li>
+<li>帮助解决zookeeper的扩展性<ul>
+<li>如果大量客户端访问zookeeper集群，需要增加zookeeper集群机器数量。从而增加zookeeper集群性能。导致zookeeper集群写性能下降，zookeeper的数据变更需要半数以上服务器投票通过，造成网络小号增加投票成本</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>修改配置文件<ul>
+<li><code>server.id=ip:zkPort:leaderElectionPort</code><ul>
+<li><code>id</code>：1~255，标识该机器在集群中的机器序号</li>
+<li>有几台机器就写几行</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>创建 <code>myid</code>文件<ul>
+<li>在每一台服务器的dataDir目录下创建</li>
+<li>数据内容是没太机器对应的serverId的数字</li>
+</ul>
+</li>
+<li>启动zookeeper</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<ul>
+<li>客户端的写请求一定会发送到leader节点上</li>
+<li>客户端的读请求，会根据算法分配到不同节点</li>
+</ul>
+</blockquote>
 
+            
+        
+        </div>
         
             
+    <div class="post-reward">
+        <span class="reward-btn" id="reward-btn">赞赏</span>
+        <div class="reward-wrapper" id="reward-wrapper" style="display:none;">
             
-            <li class="archive-post">
-                <span class="archive-post-time">
                 
-                    2017-10-19
                 
-                </span>
-                <span class="archive-post-link">
-                    <a href="/distributed/basic.html">分布式基础知识</a>
-                </span>
-            </li>
-
-        
-            </ul>
+            
+                
+                <div class="reward-item reward-alipay">
+                    <img src="https://wx2.sinaimg.cn/mw690/8c564d2aly1fpunn3yinhj20py0pyn4i.jpg">
+                </div>
+                
+            
         </div>
     </div>
+
+            
+        
+    </article>
     
-    <nav class="pagination">
-        <span class="page-number current">1</span>
+        
+    <nav class="article-page">
+        
+            <a href="/Zookeeper/zoos.html" id="art-left" class="art-right">
+                <span class="next-title">
+                    搭建Zookeeper集群<i class="iconfont icon-right"></i> 
+                </span>
+            </a>
+        
+        
+            <a href="/distributed/basic.html" id="art-right" class="art-left">
+                <span class="prev-title"> 
+                    <i class="iconfont icon-left"></i>分布式基础知识
+                </span>
+            </a>
+        
     </nav>
 
+        
+    <i id="com-switch" class="iconfont icon-more jumping-in long infinite" style="font-size:24px;display:block;text-align:center;transform:rotate(180deg);"></i>
+    <div class="post-comments" id="post-comments" style="display: block;margin: auto 16px;">
+        
+        
+<!-- Gitment Comments -->
+<div id="gitment"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  owner: "super2bai",
+  repo: 'comment',
+  oauth: {
+    client_id: '37f2293730b41dcb5276',
+    client_secret: 'dbab4955840d4cbc88f1563be04ab676662194e5',
+  },
+})
+gitment.render('gitment')
+</script>
+
+        
+        
+
+    </div>
+
+    
 
 
         </main>
@@ -356,6 +540,16 @@ $(document).ready(function(){
 })
 </script>
     </div>
+    
+        
+    <div class="post-toc">
+        <span class="title">文章目录</span>
+        <div class="toc-inner syuanpi back-1 fallIn-light">
+            <li class="title-link"><a href="javascript:;" class="toTop">初步认识zookeeper</a></li>
+            
+        </div>
+    </div>
+
     
     <div class="backtop syuanpi dead toTop" id="backtop">
     <i class="iconfont icon-up"></i>

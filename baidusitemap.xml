@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>https://super2bai.github.io/zk/zk.html</loc>
+    <lastmod>2018-05-28T07:08:32.285Z</lastmod>
+    <data>
+        <display>
+        <title>初步认识zookeeper</title>
+        <pubTime>2017-10-20T07:55:28.000Z</pubTime>
+        
+        <tag>Zookeeper</tag>
+         
+         
+           
+             
+              <breadCrumb title="zk" url="https://super2bai.github.io/categories/zk/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://super2bai.github.io/JVM/GCAlgoImpl.html</loc>
     <lastmod>2018-05-28T06:46:41.221Z</lastmod>
     <data>
@@ -1017,26 +1037,6 @@
            
              
               <breadCrumb title="Dubbo" url="https://super2bai.github.io/categories/Dubbo/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://super2bai.github.io/Zookeeper/zoofirst.html</loc>
-    <lastmod>2018-05-23T03:29:10.429Z</lastmod>
-    <data>
-        <display>
-        <title>初步认识zookeeper</title>
-        <pubTime>2017-10-20T07:55:28.000Z</pubTime>
-        
-        <tag>Zookeeper</tag>
-         
-         
-           
-             
-              <breadCrumb title="Zookeeper" url="https://super2bai.github.io/categories/Zookeeper/"/>
           
         </display>
     </data>
