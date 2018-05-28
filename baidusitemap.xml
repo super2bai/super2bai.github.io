@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>https://super2bai.github.io/Python/basis.html</loc>
+    <lastmod>2018-05-28T06:43:58.241Z</lastmod>
+    <data>
+        <display>
+        <title>Python基础</title>
+        <pubTime>2018-04-20T02:30:31.000Z</pubTime>
+        
+        <tag>Python</tag>
+         
+         
+           
+             
+              <breadCrumb title="Python" url="https://super2bai.github.io/categories/Python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://super2bai.github.io/GHPages/sitemap.html</loc>
     <lastmod>2018-05-25T06:34:35.180Z</lastmod>
     <data>
@@ -77,26 +97,6 @@
            
              
               <breadCrumb title="JVM" url="https://super2bai.github.io/categories/JVM/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://super2bai.github.io/Python/basis.html</loc>
-    <lastmod>2018-05-23T10:25:08.921Z</lastmod>
-    <data>
-        <display>
-        <title>Python基础</title>
-        <pubTime>2018-04-20T02:30:31.000Z</pubTime>
-        
-        <tag>Python</tag>
-         
-         
-           
-             
-              <breadCrumb title="Python" url="https://super2bai.github.io/categories/Python/"/>
           
         </display>
     </data>

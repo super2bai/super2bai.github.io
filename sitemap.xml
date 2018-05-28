@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://super2bai.github.io/Python/basis.html</loc>
+    
+    <lastmod>2018-05-28T06:43:58.241Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://super2bai.github.io/GHPages/sitemap.html</loc>
     
     <lastmod>2018-05-25T06:34:35.180Z</lastmod>
@@ -26,13 +33,6 @@
     <loc>https://super2bai.github.io/JVM/gcAlgo.html</loc>
     
     <lastmod>2018-05-23T10:25:26.646Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://super2bai.github.io/Python/basis.html</loc>
-    
-    <lastmod>2018-05-23T10:25:08.921Z</lastmod>
     
   </url>
   
