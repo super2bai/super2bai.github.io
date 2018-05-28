@@ -4,6 +4,46 @@
 
     
   <url>
+    <loc>https://super2bai.github.io/zk/start.html</loc>
+    <lastmod>2018-05-28T07:22:05.630Z</lastmod>
+    <data>
+        <display>
+        <title>初步认识zookeeper</title>
+        <pubTime>2017-10-20T07:55:28.000Z</pubTime>
+        
+        <tag>Zookeeper</tag>
+         
+         
+           
+             
+              <breadCrumb title="zk" url="https://super2bai.github.io/categories/zk/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://super2bai.github.io/zk/ZAB.html</loc>
+    <lastmod>2018-05-28T07:20:44.847Z</lastmod>
+    <data>
+        <display>
+        <title>ZAB协议</title>
+        <pubTime>2017-10-31T02:27:51.000Z</pubTime>
+        
+        <tag>Zookeeper</tag>
+         
+         
+           
+             
+              <breadCrumb title="zk" url="https://super2bai.github.io/categories/zk/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://super2bai.github.io/zk/idea.html</loc>
     <lastmod>2018-05-28T07:20:11.000Z</lastmod>
     <data>
@@ -190,26 +230,6 @@
         <display>
         <title>搭建Zookeeper集群</title>
         <pubTime>2017-10-21T07:55:28.000Z</pubTime>
-        
-        <tag>Zookeeper</tag>
-         
-         
-           
-             
-              <breadCrumb title="zk" url="https://super2bai.github.io/categories/zk/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://super2bai.github.io/zk/zkStart.html</loc>
-    <lastmod>2018-05-28T07:18:57.984Z</lastmod>
-    <data>
-        <display>
-        <title>初步认识zookeeper</title>
-        <pubTime>2017-10-20T07:55:28.000Z</pubTime>
         
         <tag>Zookeeper</tag>
          
@@ -977,26 +997,6 @@
            
              
               <breadCrumb title="Spring" url="https://super2bai.github.io/categories/Spring/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://super2bai.github.io/Zookeeper/ZAB.html</loc>
-    <lastmod>2018-05-23T03:31:17.220Z</lastmod>
-    <data>
-        <display>
-        <title>ZAB协议</title>
-        <pubTime>2017-10-31T02:27:51.000Z</pubTime>
-        
-        <tag>Zookeeper</tag>
-         
-         
-           
-             
-              <breadCrumb title="Zookeeper" url="https://super2bai.github.io/categories/Zookeeper/"/>
           
         </display>
     </data>
