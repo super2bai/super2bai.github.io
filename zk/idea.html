@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <title> Zookeeper的几个原理分析 · super2bai </title>
+    <title> Zookeeper中的一些概念 · super2bai </title>
     <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
@@ -231,16 +231,16 @@
     <article class="post">
         <header class="post-header">
             <div class="post-time syuanpi riseIn-light back-1">
-                <span>2017年10月30日</span>
+                <span>2017年10月23日</span>
                 
                 
-                    <span class="post-category"><a href="/categories/Zookeeper/">Zookeeper</a></span>
+                    <span class="post-category"><a href="/categories/zk/">zk</a></span>
                 
                 
             </div>
             <h1 class="post-title syuanpi riseIn-light back-2">
             
-                Zookeeper的几个原理分析
+                Zookeeper中的一些概念
             
             </h1>
             
@@ -255,91 +255,151 @@
         </header>
         <div class="post-content syuanpi riseIn-light back-3">
             
-                <h4 id="Zookeeper的集群角色"><a href="#Zookeeper的集群角色" class="headerlink" title="Zookeeper的集群角色"></a>Zookeeper的集群角色</h4><a id="more"></a>
-<p><strong>leader</strong></p>
-<ul>
-<li>集群的核心</li>
-<li>事务请求的唯一调度者和处理者，保证集群事务处理的顺序性</li>
-<li>集群内部各个服务器的调度者</li>
-</ul>
-<p><strong>follower</strong></p>
-<ul>
-<li>处理客户端非事务请求，以及转发事务请求给leader服务器</li>
-<li>参与事务请求提议(proposal)的投票<ul>
-<li>客户端的一个事务请求，需要半数服务器投票通过以后才能通知leader commit</li>
-<li>leader会发起一个提案，要求follower投票</li>
+                <p>Zookeeper序列化使用的是<code>Jute</code>。</p>
+<h3 id="数据模型"><a href="#数据模型" class="headerlink" title="数据模型"></a>数据模型</h3><p>Zookeeper的数据模型和文件系统类似，每一个节点称为<code>znode</code>.是Zookeeper中的最小数据单元。每一个<code>znode</code>上都可以保存数据和挂载子节点。从而构成一个层次话的属性结构。默认存储大小为<code>3M</code>。</p>
+<a id="more"></a>
+<h3 id="zNode"><a href="#zNode" class="headerlink" title="zNode"></a>zNode</h3><ul>
+<li>节点特性<ul>
+<li>持久化节点<ul>
+<li>节点创建后会一致存在zookeeper服务器上，直到主动删除</li>
 </ul>
 </li>
-<li>参与leader选的投票</li>
+<li>持久化有序节点<ul>
+<li>节点创建后会一直存在zookeeper服务器上，直到主动删除</li>
 </ul>
-<p><strong>observer</strong></p>
-<ul>
-<li>Zookeeper3.3以后新增</li>
-</ul>
-<ul>
-<li>观察集群中最新状态的变化并将这些状态同步到observer服务器上</li>
-<li>增加observer不影响集群中事务处理能力，同时还能提升集群的非事务处理能力</li>
-</ul>
-<h3 id="Zookeeper的集群组成"><a href="#Zookeeper的集群组成" class="headerlink" title="Zookeeper的集群组成"></a>Zookeeper的集群组成</h3><h4 id="服务器集群数量"><a href="#服务器集群数量" class="headerlink" title="服务器集群数量"></a>服务器集群数量</h4><p><strong>一般由<code>2n+1</code>台服务器组成</strong></p>
-<ul>
-<li>1台—standalone</li>
-<li>多台情况下，集群必须要有过半的机器能够正常工作并且能够正常通信，因为投票要过半。<ul>
-<li>5台必须3台存活，6台也必须3台存活</li>
-<li>增加了投票的过程，但对可用性并没有提高</li>
+</li>
+<li>临时节点<ul>
+<li>临时节点的声明周期和客户端的会话保持一致。</li>
+<li>当客户端会话失效，该节点自动清理。<ul>
+<li>会话失效后，会有一个重连机制，短时间内此节点存在，过了重连时间后，该节点自动清理</li>
 </ul>
 </li>
 </ul>
-<h3 id="leader选举"><a href="#leader选举" class="headerlink" title="leader选举"></a>leader选举</h3><h4 id="选举算法"><a href="#选举算法" class="headerlink" title="选举算法"></a>选举算法</h4><p><code>org.apache.zookeeper.server.quorum.QuorumPeer#startLeaderElection</code></p>
-<ul>
-<li>leaderElection</li>
-<li>AuthFastLeaderElection</li>
-<li>FastLeaderElection <ul>
-<li>默认(<code>org.apache.zookeeper.server.quorum#electionAlg</code>)</li>
+</li>
+<li>临时有序节点<ul>
+<li>在临时节点上多了一个顺序性特性</li>
 </ul>
 </li>
 </ul>
-<h4 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h4><p><a href="https://github.com/apache/zookeeper" target="_blank" rel="external">源码地址</a></p>
-<ul>
-<li>编译条件<ul>
-<li>JDK1.7以上</li>
-<li>Ant</li>
-<li>IDEA</li>
+</li>
+<li>节点名称区分大小写</li>
+<li>子节点<ul>
+<li>创建子节点操作要点<ul>
+<li>先创建父节点<ul>
+<li>直接创建父和子节点，会报错：<code>Node does not exist</code></li>
 </ul>
 </li>
-</ul>
-<h3 id="名词"><a href="#名词" class="headerlink" title="名词"></a>名词</h3><h5 id="serverid"><a href="#serverid" class="headerlink" title="serverid"></a><code>serverid</code></h5><p>在配置server集群的时候，给定服务器的标识id(myid)</p>
-<h5 id="zxid"><a href="#zxid" class="headerlink" title="zxid"></a><code>zxid</code></h5><p>服务器在运行时产生的数据ID，<code>zxid</code>越大，表示数据越新</p>
-<h5 id="Epoch"><a href="#Epoch" class="headerlink" title="Epoch"></a><code>Epoch</code></h5><p>选举的轮数</p>
-<h3 id="server的状态"><a href="#server的状态" class="headerlink" title="server的状态"></a>server的状态</h3><ul>
-<li>Looking</li>
-<li>Floowing</li>
-<li>Observering</li>
-<li>Leading</li>
-</ul>
-<h3 id="选举流程"><a href="#选举流程" class="headerlink" title="选举流程"></a>选举流程</h3><p><strong>第一次初始化启动的时候状态为：<code>LOOKING</code></strong></p>
-<ul>
-<li>所有在集群中的server都会推荐自己为leader，然后把<code>myid</code>、<code>zxid</code>、<code>epoch</code>作为广播信息，广播给集群总的其它server，并等待其它服务器返回</li>
-<li>每个服务器都会接收来自集群中的其它服务器的投票。集群中的每个服务器在接收到投票后，开始判断投票的有效性<ul>
-<li>判断逻辑时钟<code>Epoch</code><ul>
-<li>大于自己当前的<code>Epoch</code>，说明自己保存的是过期的。<ul>
-<li>更新<code>Epoch</code>，同时clear其它服务器发送过来的选举数据。</li>
-<li>判断是否需要更新当前自己的选举情况</li>
+<li>一定要输入完整的路径(包含父路径)</li>
+<li>删除节点一定要从子节点逐层向上删除</li>
 </ul>
 </li>
-<li>小于自己当前的<code>Epoch</code>，说明对方的是过期的，也就意味着对方服务器的选举轮数是过期的。这个时候，只需要将自己的信息发送给对象</li>
-<li>等于自己当前的<code>Epoch</code>，则根据规则来判断是否有资格获得leader<ul>
-<li>接收到来自其它服务器的投票后，针对每一个投票，都需要将别人的投票和自己的投票进行PK，<code>ZXID</code>最大的服务器优先。</li>
+<li>没有命令可以显示节点数<ul>
+<li>想要知道节点数，可以自己递归计算</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-</li>
-<li>统计投票</li>
-<li>改变服务器状态</li>
+<h3 id="数据存储"><a href="#数据存储" class="headerlink" title="数据存储"></a>数据存储</h3><ul>
+<li>Zookeeper中数据的两种类型<ul>
+<li>内存数据</li>
+<li>磁盘数据</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">st=&gt;start: 选自己当领导</div><div class="line">broadcase=&gt;operation: 广播投票信息</div><div class="line">looking=&gt;condition: Looking(第一次，第n次)</div><div class="line">first=&gt;inputoutput: 第一次</div><div class="line">n=&gt;inputoutput: 第n次</div><div class="line">resultState=&gt;operation: 投票结果状态</div><div class="line">old=&gt;condition: 投票是否过期?</div><div class="line">clear=&gt;operation: 清空投票信息</div><div class="line">update=&gt;operation: 更新投票信息</div><div class="line">record=&gt;operation: 记录投票信息</div><div class="line">finish=&gt;operation: 判断投票是否完成</div><div class="line">comfirm=&gt;operation: 确认领导</div><div class="line">same=&gt;operation: 是否为同一轮</div><div class="line">recordOld=&gt;operation: 记录已完成投票</div><div class="line">e=&gt;end</div><div class="line"></div><div class="line">st-&gt;broadcase-&gt;looking-&gt;resultState-&gt;old</div><div class="line">looking(yes)-&gt;first-&gt;resultState-&gt;old</div><div class="line">old(yes)-&gt;clear-&gt;update</div><div class="line">old(no)-&gt;update-&gt;record-&gt;comfirm</div><div class="line">looking(no)-&gt;n-&gt;same-&gt;recordOld-&gt;finish-&gt;comfirm</div><div class="line">update-&gt;record-&gt;finish-&gt;comfirm</div></pre></td></tr></table></figure>
-<p><strong>流程图如果无法正常显示，请复制粘贴到支持流程图的编辑器内查看</strong></p>
+</li>
+</ul>
+<p>Zookeeper会把节点信息存到内存里(<code>org.apache.zookeeper.server.DataTree</code>类中的<code>private final ConcurrentHashMap&lt;String, DataNode&gt; nodes = new ConcurrentHashMap&lt;String, DataNode&gt;();</code>),Zookeeper会定时把数据存储在磁盘上。</p>
+<h3 id="会话"><a href="#会话" class="headerlink" title="会话"></a>会话</h3><p> 客户端和zookeeper建立一个连接(无所谓哪个节点)</p>
+<ul>
+<li>会话状态</li>
+</ul>
+<p><code>NOT CONNECTED</code>-&gt;<code>CONNECTING</code>-&gt;<code>CONNECTED</code>-&gt;<code>CLOSED</code></p>
+<h3 id="Watcher"><a href="#Watcher" class="headerlink" title="Watcher"></a>Watcher</h3><ul>
+<li>Zookeeper提供了分布式数据发布/订阅，Zookeeper允许客户端向服务器注册一个watcher监听。</li>
+<li>当服务器端的节点触发指定事件的时候会触发watcher，服务端会向客户端发送一个事件通知</li>
+<li>watcher的通知是<strong>一次性</strong>，一旦触发一次通知后，该watcher就失效。如果需要永久监听，则需要反复注册</li>
+<li>不关心客户端是否收到，只关心发出去了。</li>
+<li>监听类型<ul>
+<li>连接状态监听<ul>
+<li><code>Event.KeeperState.Expired</code><ul>
+<li>客户端和服务器之间在一个tickTime事件周期之内，客户端没有收到服务器端的通知，则认为当前会话已过期 ，客户端会废弃当前连接，并重建连接</li>
+</ul>
+</li>
+<li><code>Event.KeeperState.Disconnected</code><ul>
+<li>客户端主动断开</li>
+</ul>
+</li>
+<li><code>Event.KeeperState.SyncConnected</code><ul>
+<li>客户端和服务器端在某一个节点上建立连接，并完成了<code>version</code>和<code>zxid</code>的同步</li>
+</ul>
+</li>
+<li><code>Event.KeeperState.AuthFailed</code><ul>
+<li>授权失败</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>事件监听<ul>
+<li>None<ul>
+<li>客户端和服务器连接状态发生变化，没有触发事件</li>
+</ul>
+</li>
+<li>NodeCreated<ul>
+<li>节点被创建</li>
+</ul>
+</li>
+<li>NodeDeleted<ul>
+<li>节点被删除</li>
+</ul>
+</li>
+<li>NodeDataChanged<ul>
+<li>节点数据发生变化</li>
+</ul>
+</li>
+<li>NodeChildrenChanged<ul>
+<li>子节点被创建、删除或子节点数据发生变化</li>
+<li>只有一级子节点会触发</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="ACL"><a href="#ACL" class="headerlink" title="ACL"></a>ACL</h3><p><a href="http://zookeeper.apache.org/doc/trunk/zookeeperProgrammers.html#sc_ZooKeeperAccessControl" target="_blank" rel="external">官方介绍文档</a></p>
+<ul>
+<li>Zookeeper提供控制节点访问权限的功能，用于有效的保证Zookeeper中数据的安全性。避免误操作而导致系统出现重大事故</li>
+<li>权限角色<ul>
+<li>CREATE</li>
+<li>READ</li>
+<li>WRITE</li>
+<li>DELETE</li>
+<li>ADMIN</li>
+</ul>
+</li>
+<li>Builtin ACL Schemes<ul>
+<li>ip<ul>
+<li>指定ip授权</li>
+</ul>
+</li>
+<li>digest(常用)<ul>
+<li>username:password组成字符串，通过API转换为加密内容设置到权限内</li>
+</ul>
+</li>
+<li>world<ul>
+<li>开放式的权限控制模式。所有人。</li>
+</ul>
+</li>
+<li>auth(super)<ul>
+<li>超级用户，可以对zookeeper上的数据节点进行操作。</li>
+</ul>
+</li>
+<li>x509<ul>
+<li>将客户端X500 Principal作为ACL ID身份。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 
             
         
@@ -369,16 +429,16 @@
         
     <nav class="article-page">
         
-            <a href="/Zookeeper/ZAB.html" id="art-left" class="art-right">
+            <a href="/zk/order.html" id="art-left" class="art-right">
                 <span class="next-title">
-                    ZAB协议<i class="iconfont icon-right"></i> 
+                    Zookeeper的命令操作<i class="iconfont icon-right"></i> 
                 </span>
             </a>
         
         
-            <a href="/Zookeeper/interface.html" id="art-right" class="art-left">
+            <a href="/zk/zooconfig.html" id="art-right" class="art-left">
                 <span class="prev-title"> 
-                    <i class="iconfont icon-left"></i>curator提供应用场景的封装
+                    <i class="iconfont icon-left"></i>zoo.cfg配置文件分析
                 </span>
             </a>
         
@@ -500,8 +560,8 @@ $(document).ready(function(){
     <div class="post-toc">
         <span class="title">文章目录</span>
         <div class="toc-inner syuanpi back-1 fallIn-light">
-            <li class="title-link"><a href="javascript:;" class="toTop">Zookeeper的几个原理分析</a></li>
-            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Zookeeper的集群角色"><span class="toc-text">Zookeeper的集群角色</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Zookeeper的集群组成"><span class="toc-text">Zookeeper的集群组成</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#服务器集群数量"><span class="toc-text">服务器集群数量</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#leader选举"><span class="toc-text">leader选举</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#选举算法"><span class="toc-text">选举算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#源码"><span class="toc-text">源码</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#名词"><span class="toc-text">名词</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#serverid"><span class="toc-text">serverid</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#zxid"><span class="toc-text">zxid</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Epoch"><span class="toc-text">Epoch</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#server的状态"><span class="toc-text">server的状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#选举流程"><span class="toc-text">选举流程</span></a>
+            <li class="title-link"><a href="javascript:;" class="toTop">Zookeeper中的一些概念</a></li>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#数据模型"><span class="toc-text">数据模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#zNode"><span class="toc-text">zNode</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据存储"><span class="toc-text">数据存储</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#会话"><span class="toc-text">会话</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Watcher"><span class="toc-text">Watcher</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ACL"><span class="toc-text">ACL</span></a></li></ol>
         </div>
     </div>
 

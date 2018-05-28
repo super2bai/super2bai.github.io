@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <title> Zookeeper的命令操作 · super2bai </title>
+    <title> curator提供应用场景的封装 · super2bai </title>
     <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
@@ -231,16 +231,16 @@
     <article class="post">
         <header class="post-header">
             <div class="post-time syuanpi riseIn-light back-1">
-                <span>2017年10月24日</span>
+                <span>2017年10月29日</span>
                 
                 
-                    <span class="post-category"><a href="/categories/Zookeeper/">Zookeeper</a></span>
+                    <span class="post-category"><a href="/categories/zk/">zk</a></span>
                 
                 
             </div>
             <h1 class="post-title syuanpi riseIn-light back-2">
             
-                Zookeeper的命令操作
+                curator提供应用场景的封装
             
             </h1>
             
@@ -255,48 +255,30 @@
         </header>
         <div class="post-content syuanpi riseIn-light back-3">
             
-                <h3 id="创建节点"><a href="#创建节点" class="headerlink" title="创建节点"></a>创建节点</h3><a id="more"></a>
-<p><code>create [-s] [-e] path data acl</code></p>
-<p><code>-s</code>：表示节点是否有序</p>
-<p><code>-e</code>：表示是否为临时节点。默认是持久化节点</p>
-<ul>
-<li>临时节点不能创建子节点</li>
+                <h3 id="针对Zookeeper能够实现的应用封装"><a href="#针对Zookeeper能够实现的应用封装" class="headerlink" title="针对Zookeeper能够实现的应用封装"></a>针对Zookeeper能够实现的应用封装</h3><ul>
+<li>Master/leader选举</li>
+<li>分布式锁（读锁/写锁）</li>
+<li>分布式队列</li>
+<li>…</li>
 </ul>
-<h3 id="获取指定path信息"><a href="#获取指定path信息" class="headerlink" title="获取指定path信息"></a>获取指定path信息</h3><p><code>get path [watch]</code></p>
-<ul>
-<li>path必须以<code>/</code>开始</li>
+<a id="more"></a>
+<h3 id="curator-reciples提供的API"><a href="#curator-reciples提供的API" class="headerlink" title="curator-reciples提供的API"></a>curator-reciples提供的API</h3><ul>
+<li>LeaderLatch<ul>
+<li>阻塞</li>
+<li>都一起去抢，后续没抢到的等待</li>
 </ul>
-<h3 id="修改节点path对应的data"><a href="#修改节点path对应的data" class="headerlink" title="修改节点path对应的data"></a>修改节点path对应的data</h3><p><code>set path data [version]</code></p>
-<ul>
-<li>version<ul>
-<li>数据初次创建好，version为0</li>
-<li>每次修改后，version会增加1</li>
-<li>采用<a href="https://zh.wikipedia.org/wiki/%E4%B9%90%E8%A7%82%E5%B9%B6%E5%8F%91%E6%8E%A7%E5%88%B6" target="_blank" rel="external">乐观锁</a>的概念</li>
-<li>数据库里面有一个version字段去控制数据行的版本号</li>
+</li>
+<li>LeaderSelector<ul>
+<li>自动抢</li>
+<li>带有序节点的选举过程，根据最小节点来获得优先权，用完以后释放，下一个节点继续去用</li>
 </ul>
 </li>
 </ul>
-<h3 id="删除节点"><a href="#删除节点" class="headerlink" title="删除节点"></a>删除节点</h3><p><code>delete path [version]</code></p>
-<ul>
-<li>删除节点必须从最底层的子节点逐层向上删除</li>
+<h3 id="对于网络抖动的处理"><a href="#对于网络抖动的处理" class="headerlink" title="对于网络抖动的处理"></a>对于网络抖动的处理</h3><ul>
+<li>对于网络抖动，如果本次抢master的节点之前是master，那就继续用本地节点当master.</li>
+<li>客户端和服务端建立一个连接是建立一个session，如果出现网络不稳定或异常情况下，消息传输可能会出现丢包，如果出现丢包，客户端则认为session已经失效，实际上master并没有失效。</li>
 </ul>
-<p><code>rmr</code></p>
-<ul>
-<li>rmr是一个递归删除命令, 如果发生指定节点拥有子节点时, rmr命令会首先删除子节点</li>
-</ul>
-<h3 id="stat信息"><a href="#stat信息" class="headerlink" title="stat信息"></a>stat信息</h3><p>表示节点状态信息</p>
-<p><code>cversion = 0</code>       子节点的版本号</p>
-<p><code>aclVersion = 0</code>     表示ACL的版本号，修改节点权限</p>
-<p><code>dataVersion = 1</code>    表示的是当前节点数据的版本号</p>
-<p> 版本只能加，不能回退。</p>
-<p><code>czxid</code>    节点被创建时的事务ID</p>
-<p><code>mzxid</code>   节点最后一次被更新的事务ID</p>
-<p><code>pzxid</code>    当前节点下的子节点最后一次被修改时的事务ID</p>
-<p><code>ctime = Sat Aug 05 20:48:26 CST 2017</code> 创建时间</p>
-<p><code>mtime = Sat Aug 05 20:48:50 CST 2017</code> 修改事件</p>
-<p><code>ephemeralOwner = 0x0</code>   创建临时节点的时候，会有一个sessionId 。 该值存储的就是这个sessionid</p>
-<p><code>dataLength = 3</code>    数据值长度</p>
-<p><code>numChildren = 0</code>  子节点数</p>
+<h3 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h3><h4 id="Leader选举"><a href="#Leader选举" class="headerlink" title="Leader选举"></a>Leader选举</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.bai.curator.scene;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.apache.curator.framework.CuratorFramework;</div><div class="line"><span class="keyword">import</span> org.apache.curator.framework.CuratorFrameworkFactory;</div><div class="line"><span class="keyword">import</span> org.apache.curator.framework.recipes.leader.LeaderSelector;</div><div class="line"><span class="keyword">import</span> org.apache.curator.framework.recipes.leader.LeaderSelectorListenerAdapter;</div><div class="line"><span class="keyword">import</span> org.apache.curator.retry.ExponentialBackoffRetry;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.concurrent.TimeUnit;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * Created by 2bai on 30/10/2017.</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MasterSelector</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> String CONNECTSTRING = <span class="string">""</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> String MASTER_PATH=<span class="string">"/curator_master_path"</span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        CuratorFramework curatorFramework = CuratorFrameworkFactory.builder().connectString(CONNECTSTRING).retryPolicy(<span class="keyword">new</span> ExponentialBackoffRetry(<span class="number">1000</span>,<span class="number">3</span>)).build();</div><div class="line">        LeaderSelector leaderSelector=<span class="keyword">new</span> LeaderSelector(curatorFramework, MASTER_PATH, <span class="keyword">new</span> LeaderSelectorListenerAdapter() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">takeLeadership</span><span class="params">(CuratorFramework curatorFramework)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">                System.out.println(<span class="string">"获得leader成功"</span>);</div><div class="line">                TimeUnit.SECONDS.sleep(<span class="number">2</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">        <span class="comment">//自动争抢</span></div><div class="line">        leaderSelector.autoRequeue();</div><div class="line">        <span class="comment">//开始选举</span></div><div class="line">        leaderSelector.start();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
             
         
@@ -326,16 +308,16 @@
         
     <nav class="article-page">
         
-            <a href="/Zookeeper/zooapi.html" id="art-left" class="art-right">
+            <a href="/zk/analyze.html" id="art-left" class="art-right">
                 <span class="next-title">
-                    Zookeeper Java API 使用<i class="iconfont icon-right"></i> 
+                    Zookeeper的几个原理分析<i class="iconfont icon-right"></i> 
                 </span>
             </a>
         
         
-            <a href="/Zookeeper/idea.html" id="art-right" class="art-left">
+            <a href="/zk/situation.html" id="art-right" class="art-left">
                 <span class="prev-title"> 
-                    <i class="iconfont icon-left"></i>Zookeeper中的一些概念
+                    <i class="iconfont icon-left"></i>Zookeeper的实际应用场景
                 </span>
             </a>
         
@@ -457,8 +439,8 @@ $(document).ready(function(){
     <div class="post-toc">
         <span class="title">文章目录</span>
         <div class="toc-inner syuanpi back-1 fallIn-light">
-            <li class="title-link"><a href="javascript:;" class="toTop">Zookeeper的命令操作</a></li>
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建节点"><span class="toc-text">创建节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取指定path信息"><span class="toc-text">获取指定path信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改节点path对应的data"><span class="toc-text">修改节点path对应的data</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除节点"><span class="toc-text">删除节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#stat信息"><span class="toc-text">stat信息</span></a></li></ol>
+            <li class="title-link"><a href="javascript:;" class="toTop">curator提供应用场景的封装</a></li>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#针对Zookeeper能够实现的应用封装"><span class="toc-text">针对Zookeeper能够实现的应用封装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#curator-reciples提供的API"><span class="toc-text">curator-reciples提供的API</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对于网络抖动的处理"><span class="toc-text">对于网络抖动的处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代码示例"><span class="toc-text">代码示例</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Leader选举"><span class="toc-text">Leader选举</span></a></li></ol></li></ol>
         </div>
     </div>
 

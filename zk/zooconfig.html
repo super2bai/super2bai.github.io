@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <title> Zookeeper节点权限示例代码 · super2bai </title>
+    <title> zoo.cfg配置文件分析 · super2bai </title>
     <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
@@ -231,16 +231,16 @@
     <article class="post">
         <header class="post-header">
             <div class="post-time syuanpi riseIn-light back-1">
-                <span>2017年10月26日</span>
+                <span>2017年10月22日</span>
                 
                 
-                    <span class="post-category"><a href="/categories/Zookeeper/">Zookeeper</a></span>
+                    <span class="post-category"><a href="/categories/zk/">zk</a></span>
                 
                 
             </div>
             <h1 class="post-title syuanpi riseIn-light back-2">
             
-                Zookeeper节点权限示例代码
+                zoo.cfg配置文件分析
             
             </h1>
             
@@ -255,9 +255,24 @@
         </header>
         <div class="post-content syuanpi riseIn-light back-3">
             
-                <p>通过权限控制节点操作</p>
-<a id="more"></a>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.bai.javaapi;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">import</span> org.apache.zookeeper.*;</div><div class="line"><span class="keyword">import</span> org.apache.zookeeper.data.ACL;</div><div class="line"><span class="keyword">import</span> org.apache.zookeeper.data.Id;</div><div class="line"><span class="keyword">import</span> org.apache.zookeeper.data.Stat;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.io.IOException;</div><div class="line"><span class="keyword">import</span> java.util.ArrayList;</div><div class="line"><span class="keyword">import</span> java.util.List;</div><div class="line"><span class="keyword">import</span> java.util.concurrent.CountDownLatch;</div><div class="line"><span class="keyword">import</span> java.util.concurrent.TimeUnit;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * Created by 2bai on 25/10/2017.</span></div><div class="line"><span class="comment"> * 权限控制</span></div><div class="line"><span class="comment"> * 主要用于一些比较隐私的数据节点，不能随意变化的数据，通过权限去控制节点</span></div><div class="line"><span class="comment"> * ACL：CREATE/DELETE/ADMIN/READ/WRITE</span></div><div class="line"><span class="comment"> * &lt;p&gt;</span></div><div class="line"><span class="comment"> * 权限模式</span></div><div class="line"><span class="comment"> * 可以通过几种方式去控制节点的读写操作</span></div><div class="line"><span class="comment"> * schema：授权对象/ip/digest(账号密码)/world(开放权限)/super</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AuthControlDemo</span> <span class="keyword">implements</span> <span class="title">Watcher</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> String CONNECTSTRING = <span class="string">""</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> CountDownLatch countDownLatch = <span class="keyword">new</span> CountDownLatch(<span class="number">1</span>);</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> CountDownLatch countDownLatch2 = <span class="keyword">new</span> CountDownLatch(<span class="number">1</span>);</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> ZooKeeper zooKeeper;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Stat stat = <span class="keyword">new</span> Stat();</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException, InterruptedException, KeeperException </span>&#123;</div><div class="line">        zooKeeper = <span class="keyword">new</span> ZooKeeper(CONNECTSTRING, <span class="number">5000</span>, <span class="keyword">new</span> AuthControlDemo());</div><div class="line">        countDownLatch.await();</div><div class="line"></div><div class="line">        ACL digestAcl = <span class="keyword">new</span> ACL(ZooDefs.Perms.CREATE, <span class="keyword">new</span> Id(<span class="string">"digest"</span>, <span class="string">"root:root"</span>));</div><div class="line">        List&lt;ACL&gt; acls = <span class="keyword">new</span> ArrayList&lt;ACL&gt;();</div><div class="line">        acls.add(digestAcl);</div><div class="line"></div><div class="line"></div><div class="line">        zooKeeper.create(<span class="string">"/auth1"</span>, <span class="string">"123"</span>.getBytes(), acls, CreateMode.PERSISTENT);</div><div class="line">        zooKeeper.addAuthInfo(<span class="string">"digest"</span>, <span class="string">"root:root"</span>.getBytes());</div><div class="line"></div><div class="line">        <span class="comment">//ZooDefs.Ids.OPEN_ACL_UNSAFE, 则可以删除成功</span></div><div class="line">        zooKeeper.create(<span class="string">"/auth"</span>, <span class="string">"123"</span>.getBytes(), ZooDefs.Ids.CREATOR_ALL_ACL, CreateMode.PERSISTENT);</div><div class="line">        zooKeeper.create(<span class="string">"/auth/auth1-1"</span>, <span class="string">"456"</span>.getBytes(), ZooDefs.Ids.CREATOR_ALL_ACL, CreateMode.PERSISTENT);</div><div class="line"></div><div class="line">        <span class="comment">//新创建客户端对象去删除</span></div><div class="line">        ZooKeeper zooKeeper1 = <span class="keyword">new</span> ZooKeeper(CONNECTSTRING, <span class="number">5000</span>, <span class="keyword">new</span> AuthControlDemo());</div><div class="line">        countDownLatch2.await();</div><div class="line">        <span class="comment">//添加权限信息</span></div><div class="line">        zooKeeper1.addAuthInfo(<span class="string">"digest"</span>, <span class="string">"root:root"</span>.getBytes());</div><div class="line">        zooKeeper1.delete(<span class="string">"/auth/auth1-1"</span>, -<span class="number">1</span>);</div><div class="line">        zooKeeper1.delete(<span class="string">"/auth"</span>, -<span class="number">1</span>);</div><div class="line">        zooKeeper1.delete(<span class="string">"/auth1"</span>, -<span class="number">1</span>);</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line"><span class="comment">     * 提供两种监听</span></div><div class="line"><span class="comment">     * 1.连接状态；2.事件监听</span></div><div class="line"><span class="comment">     *</span></div><div class="line"><span class="comment">     * <span class="doctag">@param</span> watchedEvent</span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">process</span><span class="params">(WatchedEvent watchedEvent)</span> </span>&#123;</div><div class="line"></div><div class="line">        <span class="comment">// 如果当前的连接状态是连接成功，那么就通过计数器去控制</span></div><div class="line">        <span class="keyword">if</span> (watchedEvent.getState() == Event.KeeperState.SyncConnected) &#123;</div><div class="line">            <span class="keyword">if</span> (Event.EventType.None == watchedEvent.getType() &amp;&amp; <span class="keyword">null</span> == watchedEvent.getPath()) &#123;</div><div class="line">                countDownLatch.countDown();</div><div class="line">                countDownLatch2.countDown();</div><div class="line">                System.out.println(watchedEvent.getState() + <span class="string">"---&gt;"</span> + watchedEvent.getType());</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+                <h3 id="zoo-cfg配置文件分析"><a href="#zoo-cfg配置文件分析" class="headerlink" title="zoo.cfg配置文件分析"></a>zoo.cfg配置文件分析</h3><a id="more"></a>
+<p><strong>tickTime=2000</strong></p>
+<p>zookeeper中最小的时间单位长度(ms)</p>
+<p><strong>initLimit=10</strong></p>
+<p>follower节点启动后与leader节点完成数据同步的时间</p>
+<p><strong>syncLimit=5</strong></p>
+<p>leader节点与folloew节点进行心跳检测的最大延迟时间</p>
+<p><strong>dataDir=/tmp/zookeeper</strong></p>
+<p>表示zookeeper服务器存储快照文件的目录。</p>
+<p>快照：存储某以时刻全量的内存数据内容。</p>
+<p>Zookeeper会定时把内存数据存储在磁盘上。</p>
+<p>第一条写入事务的<code>zxid</code>结尾。    </p>
+<p>查看日志命令：<code>java -cp :/dir/zookeeper-3.4.9/lib/slf4j-api-1.6.1.jar:/dir/zookeeper-3.4.9/zookeeper-3.4.9.jar org.apache.zookeeper.server.LogFormatter log.zxid</code></p>
+<p><strong>dataLogDir=/tmp/zookeeper</strong></p>
+<p>表示zookeeper事务日志的存储路径，默认指定在dataDir目录下</p>
+<p><strong>clientPort=2181</strong></p>
+<p>表示客户端与服务器建立连接的端口号</p>
+
             
         
         </div>
@@ -286,16 +301,16 @@
         
     <nav class="article-page">
         
-            <a href="/Zookeeper/client.html" id="art-left" class="art-right">
+            <a href="/zk/idea.html" id="art-left" class="art-right">
                 <span class="next-title">
-                    Zookeeper客户端<i class="iconfont icon-right"></i> 
+                    Zookeeper中的一些概念<i class="iconfont icon-right"></i> 
                 </span>
             </a>
         
         
-            <a href="/Zookeeper/zooapi.html" id="art-right" class="art-left">
+            <a href="/zk/zoos.html" id="art-right" class="art-left">
                 <span class="prev-title"> 
-                    <i class="iconfont icon-left"></i>Zookeeper Java API 使用
+                    <i class="iconfont icon-left"></i>搭建Zookeeper集群
                 </span>
             </a>
         
@@ -417,8 +432,8 @@ $(document).ready(function(){
     <div class="post-toc">
         <span class="title">文章目录</span>
         <div class="toc-inner syuanpi back-1 fallIn-light">
-            <li class="title-link"><a href="javascript:;" class="toTop">Zookeeper节点权限示例代码</a></li>
-            
+            <li class="title-link"><a href="javascript:;" class="toTop">zoo.cfg配置文件分析</a></li>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#zoo-cfg配置文件分析"><span class="toc-text">zoo.cfg配置文件分析</span></a></li></ol>
         </div>
     </div>
 
