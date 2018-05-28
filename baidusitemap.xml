@@ -4,6 +4,86 @@
 
     
   <url>
+    <loc>https://super2bai.github.io/zk/api.html</loc>
+    <lastmod>2018-05-28T07:27:30.856Z</lastmod>
+    <data>
+        <display>
+        <title>Zookeeper Java API 使用</title>
+        <pubTime>2017-10-25T05:09:39.000Z</pubTime>
+        
+        <tag>Zookeeper</tag>
+         
+         
+           
+             
+              <breadCrumb title="zk" url="https://super2bai.github.io/categories/zk/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://super2bai.github.io/zk/command.html</loc>
+    <lastmod>2018-05-28T07:27:16.888Z</lastmod>
+    <data>
+        <display>
+        <title>Zookeeper的命令操作</title>
+        <pubTime>2017-10-24T07:55:28.000Z</pubTime>
+        
+        <tag>Zookeeper</tag>
+         
+         
+           
+             
+              <breadCrumb title="zk" url="https://super2bai.github.io/categories/zk/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://super2bai.github.io/zk/concept.html</loc>
+    <lastmod>2018-05-28T07:26:39.951Z</lastmod>
+    <data>
+        <display>
+        <title>Zookeeper中的一些概念</title>
+        <pubTime>2017-10-23T07:55:28.000Z</pubTime>
+        
+        <tag>Zookeeper</tag>
+         
+         
+           
+             
+              <breadCrumb title="zk" url="https://super2bai.github.io/categories/zk/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://super2bai.github.io/zk/config.html</loc>
+    <lastmod>2018-05-28T07:26:01.240Z</lastmod>
+    <data>
+        <display>
+        <title>zoo.cfg配置文件分析</title>
+        <pubTime>2017-10-22T07:55:28.000Z</pubTime>
+        
+        <tag>Zookeeper</tag>
+         
+         
+           
+             
+              <breadCrumb title="zk" url="https://super2bai.github.io/categories/zk/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://super2bai.github.io/zk/start.html</loc>
     <lastmod>2018-05-28T07:22:05.630Z</lastmod>
     <data>
@@ -30,26 +110,6 @@
         <display>
         <title>ZAB协议</title>
         <pubTime>2017-10-31T02:27:51.000Z</pubTime>
-        
-        <tag>Zookeeper</tag>
-         
-         
-           
-             
-              <breadCrumb title="zk" url="https://super2bai.github.io/categories/zk/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://super2bai.github.io/zk/idea.html</loc>
-    <lastmod>2018-05-28T07:20:11.000Z</lastmod>
-    <data>
-        <display>
-        <title>Zookeeper中的一些概念</title>
-        <pubTime>2017-10-23T07:55:28.000Z</pubTime>
         
         <tag>Zookeeper</tag>
          
@@ -124,72 +184,12 @@
 
     
   <url>
-    <loc>https://super2bai.github.io/zk/order.html</loc>
-    <lastmod>2018-05-28T07:19:51.430Z</lastmod>
-    <data>
-        <display>
-        <title>Zookeeper的命令操作</title>
-        <pubTime>2017-10-24T07:55:28.000Z</pubTime>
-        
-        <tag>Zookeeper</tag>
-         
-         
-           
-             
-              <breadCrumb title="zk" url="https://super2bai.github.io/categories/zk/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://super2bai.github.io/zk/analyze.html</loc>
     <lastmod>2018-05-28T07:19:46.940Z</lastmod>
     <data>
         <display>
         <title>Zookeeper的几个原理分析</title>
         <pubTime>2017-10-30T09:57:42.000Z</pubTime>
-        
-        <tag>Zookeeper</tag>
-         
-         
-           
-             
-              <breadCrumb title="zk" url="https://super2bai.github.io/categories/zk/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://super2bai.github.io/zk/zooapi.html</loc>
-    <lastmod>2018-05-28T07:19:42.790Z</lastmod>
-    <data>
-        <display>
-        <title>Zookeeper Java API 使用</title>
-        <pubTime>2017-10-25T05:09:39.000Z</pubTime>
-        
-        <tag>Zookeeper</tag>
-         
-         
-           
-             
-              <breadCrumb title="zk" url="https://super2bai.github.io/categories/zk/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://super2bai.github.io/zk/zooconfig.html</loc>
-    <lastmod>2018-05-28T07:19:36.828Z</lastmod>
-    <data>
-        <display>
-        <title>zoo.cfg配置文件分析</title>
-        <pubTime>2017-10-22T07:55:28.000Z</pubTime>
         
         <tag>Zookeeper</tag>
          

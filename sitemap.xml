@@ -2,6 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://super2bai.github.io/zk/api.html</loc>
+    
+    <lastmod>2018-05-28T07:27:30.856Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://super2bai.github.io/zk/command.html</loc>
+    
+    <lastmod>2018-05-28T07:27:16.888Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://super2bai.github.io/zk/concept.html</loc>
+    
+    <lastmod>2018-05-28T07:26:39.951Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://super2bai.github.io/zk/config.html</loc>
+    
+    <lastmod>2018-05-28T07:26:01.240Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://super2bai.github.io/zk/start.html</loc>
     
     <lastmod>2018-05-28T07:22:05.630Z</lastmod>
@@ -12,13 +40,6 @@
     <loc>https://super2bai.github.io/zk/ZAB.html</loc>
     
     <lastmod>2018-05-28T07:20:44.847Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://super2bai.github.io/zk/idea.html</loc>
-    
-    <lastmod>2018-05-28T07:20:11.000Z</lastmod>
     
   </url>
   
@@ -44,30 +65,9 @@
   </url>
   
   <url>
-    <loc>https://super2bai.github.io/zk/order.html</loc>
-    
-    <lastmod>2018-05-28T07:19:51.430Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://super2bai.github.io/zk/analyze.html</loc>
     
     <lastmod>2018-05-28T07:19:46.940Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://super2bai.github.io/zk/zooapi.html</loc>
-    
-    <lastmod>2018-05-28T07:19:42.790Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://super2bai.github.io/zk/zooconfig.html</loc>
-    
-    <lastmod>2018-05-28T07:19:36.828Z</lastmod>
     
   </url>
   
