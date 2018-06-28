@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <title>
-  
-</title>
+    <title> 文本文件从Windows拷贝到Mac乱码 · 贰白 </title>
     <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
@@ -23,6 +21,8 @@
 
 
 
+
+    <meta name="keywords" content="编码, Nlvi" />
 
 <link rel="stylesheet" href="/style/style.css">
 <script src="/script/jquery.min.js"></script>
@@ -228,36 +228,197 @@
         <main class="main" id="main">
             
     
-    <div class="archive syuanpi riseIn-light" id="archive">
-        
-            <h2 class="archive-title"> 正在查看 </h2>
-            <span class="archive-name"> — game</span>
-        
-        <div class="archive-list">
-            <ul>
-        
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
+    <article class="post">
+        <header class="post-header">
+            <div class="post-time syuanpi riseIn-light back-1">
+                <span>2018年6月28日</span>
                 
-                    2018-05-30
                 
-                </span>
-                <span class="archive-post-link">
-                    <a href="/game/type.html">游戏分类</a>
-                </span>
-            </li>
+                    <span class="post-category"><a href="/categories/codec/">codec</a></span>
+                
+                
+            </div>
+            <h1 class="post-title syuanpi riseIn-light back-2">
+            
+                文本文件从Windows拷贝到Mac乱码
+            
+            </h1>
+            
+                
+                    <div class="post-tags syuanpi riseIn-light back-3">
+                    
+                        <a href="/tags/编码/">编码</a>
+                    
+                    </div>
+                
+            
+        </header>
+        <div class="post-content syuanpi riseIn-light back-3">
+            
+                <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>Windows系统下创建的文本文档发送到Mac上打开乱码。</p>
+<a id="more"></a>
+<h3 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h3><ul>
+<li>可以打开，汉字部分乱码</li>
+<li>提示<strong>未能打开文稿“”。文本编码“Unicode(UTF-8)不适用”</strong></li>
+</ul>
+<h3 id="解决-Sublime-Text"><a href="#解决-Sublime-Text" class="headerlink" title="解决(Sublime Text)"></a>解决(Sublime Text)</h3><h4 id="Package-Control"><a href="#Package-Control" class="headerlink" title="Package Control"></a>Package Control</h4><ul>
+<li>打开Sublime Text 3</li>
+<li><code>Ctrl</code>+<code>~</code></li>
+<li>输入<a href="https://packagecontrol.io/installation" target="_blank" rel="external">内容</a>，回车，等待安装完毕，重启</li>
+<li>用Package Control 搜索ConvertUTF8，安装</li>
+</ul>
+<p>我的Package Control搜索不到结果，稍后找到解决办法再来更新这部分，目前需要解决的问题是乱码，尝试手动安装插件。</p>
+<h4 id="手动安装Sublime插件"><a href="#手动安装Sublime插件" class="headerlink" title="手动安装Sublime插件"></a>手动安装Sublime插件</h4><p><strong>ConvertUFT8</strong></p>
+<ul>
+<li>下载<a href="https://github.com/seanliang/ConvertToUTF8/archive/master.zip" target="_blank" rel="external">ConvertUTF8</a></li>
+<li>解压后，将文件夹改为<code>ConverToUTF8</code></li>
+<li>将文件夹移动到Sublime Text的Packages文件夹下<ul>
+<li><code>Sublime Text</code> &gt; <code>Preferences</code>  &gt; <code>Browse Packages</code></li>
+</ul>
+</li>
+</ul>
+<p><strong>Codecs33</strong></p>
+<blockquote>
+<p>由于 Sublime Text 3 内嵌的 Python 限制，ConvertToUFT8可能无法正常工作，需要安装Codecs33插件。</p>
+</blockquote>
+<ul>
+<li>下载<ul>
+<li><a href="https://github.com/seanliang/Codecs33/archive/linux-x32.zip" target="_blank" rel="external">Linux-x32</a></li>
+<li><a href="https://github.com/seanliang/Codecs33/archive/linux-x64.zip" target="_blank" rel="external">Linux-x64</a></li>
+<li><a href="https://github.com/seanliang/Codecs33/archive/osx.zip" target="_blank" rel="external">OSX</a></li>
+</ul>
+</li>
+<li>解压后，将文件夹改为<code>Codecs33</code></li>
+<li>将文件夹移动到Sublime Text的Packages文件夹下<ul>
+<li><code>Sublime Text</code> &gt; <code>Preferences</code>  &gt; <code>Browse Packages</code></li>
+</ul>
+</li>
+</ul>
+<p>重启Sublime Text后，乱码均已正常显示。</p>
+<p>Over。</p>
+<h3 id="解决-iconv"><a href="#解决-iconv" class="headerlink" title="解决(iconv)"></a>解决(iconv)</h3><h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><blockquote>
+<p><strong>iconv</strong>是一个计算机程序以及一套应用程序编程接口的名称。它的作用是在多种国际编码格式之间进行文本内码的转换。</p>
+</blockquote>
+<h4 id="适用"><a href="#适用" class="headerlink" title="适用"></a>适用</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">iconv -f GB18030 -t utf-8 &lt; infile &gt; outfile</div></pre></td></tr></table></figure>
+<h4 id="解释"><a href="#解释" class="headerlink" title="解释"></a>解释</h4><p><code>-f</code>：<code>--from-code=NAME</code>，原始文本编码</p>
+<p><code>-t</code>：<code>--to-code=NAME</code>，输出编码</p>
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><h4 id="文本文档编码"><a href="#文本文档编码" class="headerlink" title="文本文档编码"></a>文本文档编码</h4><ul>
+<li>Windows，Mac端可通过<code>file 文件名称</code>，输出<code>ISO-8859 text, with CRLF line terminators</code>。</li>
+<li>Mac，Mac端通过<code>file 文件名称</code>，输出<code>UTF-8 Unicode text, with no line terminators</code>。</li>
+</ul>
+<h4 id="系统编码"><a href="#系统编码" class="headerlink" title="系统编码"></a>系统编码</h4><ul>
+<li>Windows，输入<code>chcp</code></li>
+</ul>
+<p><img src="https://wx3.sinaimg.cn/mw690/8c564d2aly1fsr8usl8z8j205r01b0sv.jpg" alt=""></p>
+<table>
+<thead>
+<tr>
+<th>定义</th>
+<th></th>
+<th>附加信息</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1252</td>
+<td>英语、法语、西班牙语、意大利语、德语、葡萄牙语</td>
+<td>ANSI Latin 1; 西欧 (Windows)</td>
+</tr>
+<tr>
+<td>932</td>
+<td>日语</td>
+<td>ANSI/OEM Japanese; 日语 (Shift-JIS)</td>
+</tr>
+<tr>
+<td>949</td>
+<td>韩语</td>
+<td>ANSI/OEM Korean (Unified Hangul Code)</td>
+</tr>
+<tr>
+<td>936</td>
+<td>简体中文GBK</td>
+<td>简体中文 (GB2312); 简体中文 (GB2312-80)</td>
+</tr>
+<tr>
+<td>950</td>
+<td>繁体中文GBK</td>
+<td>ANSI/OEM 繁体中文 (台湾; 香港 SAR, PRC);繁体中文(Big5)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Mac，输入<code>locale</code></li>
+</ul>
+<p><img src="https://wx2.sinaimg.cn/mw690/8c564d2aly1fsr8v6us7ij20c009cwfb.jpg" alt=""></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://github.com/seanliang/ConvertToUTF8" target="_blank" rel="external">ConvertToUTF8</a></p>
+<p><a href="https://packagecontrol.io/installation" target="_blank" rel="external">Package Control</a></p>
+<p><a href="code-page-identifiers">Windows-Code Pages Identifiers</a></p>
+<p><a href="https://zh.wikipedia.org/wiki/Iconv" target="_blank" rel="external">iconv</a></p>
 
+            
         
-            </ul>
+        </div>
+        
+            
+    <div class="post-reward">
+        <span class="reward-btn" id="reward-btn">赞赏</span>
+        <div class="reward-wrapper" id="reward-wrapper" style="display:none;">
+            
+                
+                
+            
+                
+                <div class="reward-item reward-alipay">
+                    <img src="https://wx2.sinaimg.cn/mw690/8c564d2aly1fpunn3yinhj20py0pyn4i.jpg">
+                </div>
+                
+            
         </div>
     </div>
+
+            
+        
+    </article>
     
-    <nav class="pagination">
-        <span class="page-number current">1</span>
+        
+    <nav class="article-page">
+        
+        
+            <a href="/JVM/decompile.html" id="art-right" class="art-left">
+                <span class="prev-title"> 
+                    <i class="iconfont icon-left"></i>JIT&HSDIS查看反编译代码
+                </span>
+            </a>
+        
     </nav>
 
+        
+    <i id="com-switch" class="iconfont icon-more jumping-in long infinite" style="font-size:24px;display:block;text-align:center;transform:rotate(180deg);"></i>
+    <div class="post-comments" id="post-comments" style="display: block;margin: auto 16px;">
+        
+        
+<!-- Gitment Comments -->
+<div id="gitment"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  owner: "super2bai",
+  repo: 'comment',
+  oauth: {
+    client_id: '37f2293730b41dcb5276',
+    client_secret: 'dbab4955840d4cbc88f1563be04ab676662194e5',
+  },
+})
+gitment.render('gitment')
+</script>
+
+        
+        
+
+    </div>
+
+    
 
 
         </main>
@@ -342,6 +503,16 @@ $(document).ready(function(){
 })
 </script>
     </div>
+    
+        
+    <div class="post-toc">
+        <span class="title">文章目录</span>
+        <div class="toc-inner syuanpi back-1 fallIn-light">
+            <li class="title-link"><a href="javascript:;" class="toTop">文本文件从Windows拷贝到Mac乱码</a></li>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#背景"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#现象"><span class="toc-text">现象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决-Sublime-Text"><span class="toc-text">解决(Sublime Text)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Package-Control"><span class="toc-text">Package Control</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#手动安装Sublime插件"><span class="toc-text">手动安装Sublime插件</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决-iconv"><span class="toc-text">解决(iconv)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#定义"><span class="toc-text">定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#适用"><span class="toc-text">适用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#解释"><span class="toc-text">解释</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分析"><span class="toc-text">分析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#文本文档编码"><span class="toc-text">文本文档编码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#系统编码"><span class="toc-text">系统编码</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考"><span class="toc-text">参考</span></a></li></ol>
+        </div>
+    </div>
+
     
     <div class="backtop syuanpi dead toTop" id="backtop">
     <i class="iconfont icon-up"></i>
