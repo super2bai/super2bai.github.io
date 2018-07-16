@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title> Docker入门 · 贰白 </title>
+    <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="browsermode" content="application">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="贰白">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="msapplication-navbutton-color" content="#666666">
+<meta name= "format-detection" content="telephone=no" />
+<meta name="keywords" content="nlvi, Nlvi" />
+
+    <link rel="apple-touch-icon"  sizes="72x72"  href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+    <link rel="apple-touch-icon-precomposed"  sizes="72x72"  href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+
+
+    <meta name="subtitle" content="苦于探索，全是未知">
+
+
+
+
+    <meta name="keywords" content="Docker, Nlvi" />
+
+<link rel="stylesheet" href="/style/style.css">
+<script src="/script/jquery.min.js"></script>
+<script>
+    var CONFIG = {
+        title: "贰白",
+        author: "super2bai",
+        lightbox: true,
+        animate: true
+    }
+</script>
+
+
+
+    <link rel="stylesheet" href="/lightbox/css/lightbox.min.css">
+
+
+
+
+    <link rel="stylesheet" href="/syuanpi/syuanpi.min.css">
+
+
+
+
+    <link rel="icon" href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-116557847-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-1178101469132492",
+    enable_page_level_ads: true
+  });
+</script>
+</head>
+<body>
+    <div class="progress">
+    <div class="progress-inner"></div>
+</div>
+    <div class="body">
+    <div class="tagcloud-mask"></div>  
+<div class="tagcloud" id="tagcloud">
+    <div class="tagcloud-inner">
+        <a href="/tags/3D编辑器/" style="font-size: 14px;">3D编辑器</a> <a href="/tags/Docker/" style="font-size: 14px;">Docker</a> <a href="/tags/Dubbo/" style="font-size: 14px;">Dubbo</a> <a href="/tags/Eclipse/" style="font-size: 14px;">Eclipse</a> <a href="/tags/GHPages/" style="font-size: 14px;">GHPages</a> <a href="/tags/IO/" style="font-size: 14px;">IO</a> <a href="/tags/JDK/" style="font-size: 14px;">JDK</a> <a href="/tags/JVM/" style="font-size: 14px;">JVM</a> <a href="/tags/Linux/" style="font-size: 14px;">Linux</a> <a href="/tags/Python/" style="font-size: 14px;">Python</a> <a href="/tags/Spring/" style="font-size: 14px;">Spring</a> <a href="/tags/Zookeeper/" style="font-size: 14px;">Zookeeper</a> <a href="/tags/jmeter/" style="font-size: 14px;">jmeter</a> <a href="/tags/mac/" style="font-size: 14px;">mac</a> <a href="/tags/walkup/" style="font-size: 14px;">walkup</a> <a href="/tags/分布式/" style="font-size: 14px;">分布式</a> <a href="/tags/工具/" style="font-size: 14px;">工具</a> <a href="/tags/游戏/" style="font-size: 14px;">游戏</a> <a href="/tags/编码/" style="font-size: 14px;">编码</a> <a href="/tags/部署/" style="font-size: 14px;">部署</a> <a href="/tags/问题/" style="font-size: 14px;">问题</a>
+    </div>
+</div>
+    <header class="header" id="header">
+    <div class="title syuanpi tvIn">
+    <div class="table">
+        <div class="connect">
+            <div class="connect-inner">
+                <span><a href="/">贰白</a></span>
+                
+                    <span id="subtitle">苦于探索，全是未知</span>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <nav class="main-nav syuanpi tvIn">
+<div class="table">
+
+    <ul class="menu">
+        
+        
+        
+            <li class="menu-item">
+                <a href="/">
+                    <span>文章</span>
+                    
+                        <span class="menu-item-label">article</span>
+                    
+                </a>
+            </li>
+        
+        
+        
+            <li class="menu-item">
+                <a href="/archives">
+                    <span>归档</span>
+                    
+                        <span class="menu-item-label">archives</span>
+                    
+                </a>
+            </li>
+        
+        
+        
+            <li class="menu-item">
+                <a href="javascript:;" id="tags">
+                    <span>标签</span>
+                    
+                        <span class="menu-item-label">tags</span>
+                    
+                </a>
+            </li>
+        
+        
+        
+            <li class="menu-item">
+                <a href="/about">
+                    <span>关于</span>
+                    
+                        <span class="menu-item-label">about</span>
+                    
+                </a>
+            </li>
+        
+        
+    </ul>
+
+</div>
+</nav>
+</header>
+<div class="mobile-header">
+    <div class="mobile-header-body">
+        <div class="mobile-header-list">
+            
+            
+                <div class="mobile-nav-item">
+                    <a href="/">
+                        <span>文章</span>
+                        
+                            <span class="menu-item-label">article</span>
+                        
+                    </a>
+                </div>
+            
+            
+            
+                <div class="mobile-nav-item">
+                    <a href="/archives">
+                        <span>归档</span>
+                        
+                            <span class="menu-item-label">archives</span>
+                        
+                    </a>
+                </div>
+            
+            
+            
+                <div class="mobile-nav-item inner-cloud">
+                    <div class="mobile-nav-tag">
+                        <a href="javascript:;" id="mobile-tags">
+                            <span>标签</span>
+                            
+                                <span class="menu-item-label">tags</span>
+                            
+                        </a>
+                    </div>
+                    <div class="mobile-nav-tagcloud">
+                        <div class="mobile-tagcloud-inner">
+                            <a href="/tags/3D编辑器/" style="font-size: 14px;">3D编辑器</a> <a href="/tags/Docker/" style="font-size: 14px;">Docker</a> <a href="/tags/Dubbo/" style="font-size: 14px;">Dubbo</a> <a href="/tags/Eclipse/" style="font-size: 14px;">Eclipse</a> <a href="/tags/GHPages/" style="font-size: 14px;">GHPages</a> <a href="/tags/IO/" style="font-size: 14px;">IO</a> <a href="/tags/JDK/" style="font-size: 14px;">JDK</a> <a href="/tags/JVM/" style="font-size: 14px;">JVM</a> <a href="/tags/Linux/" style="font-size: 14px;">Linux</a> <a href="/tags/Python/" style="font-size: 14px;">Python</a> <a href="/tags/Spring/" style="font-size: 14px;">Spring</a> <a href="/tags/Zookeeper/" style="font-size: 14px;">Zookeeper</a> <a href="/tags/jmeter/" style="font-size: 14px;">jmeter</a> <a href="/tags/mac/" style="font-size: 14px;">mac</a> <a href="/tags/walkup/" style="font-size: 14px;">walkup</a> <a href="/tags/分布式/" style="font-size: 14px;">分布式</a> <a href="/tags/工具/" style="font-size: 14px;">工具</a> <a href="/tags/游戏/" style="font-size: 14px;">游戏</a> <a href="/tags/编码/" style="font-size: 14px;">编码</a> <a href="/tags/部署/" style="font-size: 14px;">部署</a> <a href="/tags/问题/" style="font-size: 14px;">问题</a>
+                        </div>
+                    </div>
+                </div>
+            
+            
+            
+                <div class="mobile-nav-item">
+                    <a href="/about">
+                        <span>关于</span>
+                        
+                            <span class="menu-item-label">about</span>
+                        
+                    </a>
+                </div>
+            
+            
+        </div>
+    </div>
+    <div class="mobile-header-nav">
+        <div class="mobile-header-item" id="mobile-left">
+            <div class="header-menu-item">
+                <span class="header-menu-line"></span>
+            </div>
+        </div>
+        <h1 class="mobile-header-title">
+            <a href="/">贰白</a>
+        </h1>
+        <div class="mobile-header-item"></div>
+    </div>
+</div>
+
+    <div class="container">
+        <main class="main" id="main">
+            
+    
+    <article class="post">
+        <header class="post-header">
+            <div class="post-time syuanpi riseIn-light back-1">
+                <span>2018年7月16日</span>
+                
+                
+                    <span class="post-category"><a href="/categories/Docker/">Docker</a></span>
+                
+                
+            </div>
+            <h1 class="post-title syuanpi riseIn-light back-2">
+            
+                Docker入门
+            
+            </h1>
+            
+                
+                    <div class="post-tags syuanpi riseIn-light back-3">
+                    
+                        <a href="/tags/Docker/">Docker</a>
+                    
+                    </div>
+                
+            
+        </header>
+        <div class="post-content syuanpi riseIn-light back-3">
+            
+                <p>没有道理不介绍一下现在流行的Docker</p>
+<a id="more"></a>
+<h3 id="Docker是什么"><a href="#Docker是什么" class="headerlink" title="Docker是什么"></a>Docker是什么</h3><blockquote>
+<p>Docker是一个开发，分发和运行应用程序的开放平台。 Docker可以将应用程序与基础架构分离，以便快速交付软件。 使用Docker，可以像管理应用程序一样管理基础架构。 通过利用Docker实现快速发送，测试和部署代码，可以显着减少编写代码和在生产中运行代码之间的延迟。</p>
+</blockquote>
+<ul>
+<li>Docker 项目的目标是实现轻量级的操作系统虚拟化解决方案</li>
+<li>早期版本的Docker是基于已经成熟的Linux Container（LXC）技术实现的。自Docker 0.9版本起，Docker逐渐从LXC转移到新的libcontainer（<a href="https://github.com/docker/libcontainer）上，并且积极推动开放容器规范runc，试图打造更通用的底层容器虚拟化库。" target="_blank" rel="external">https://github.com/docker/libcontainer）上，并且积极推动开放容器规范runc，试图打造更通用的底层容器虚拟化库。</a></li>
+</ul>
+<h3 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h3><p><img src="https://wx4.sinaimg.cn/mw690/8c564d2aly1ftbrd670cfj20rc0lejta.jpg" alt=""></p>
+<p><img src="https://wx2.sinaimg.cn/mw690/8c564d2aly1ftbrd5u96xj22dq3agayu.jpg" alt=""></p>
+<h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><h4 id="docker-cli命令行"><a href="#docker-cli命令行" class="headerlink" title="docker cli命令行"></a>docker cli命令行</h4><blockquote>
+<p>Command Line Interface</p>
+<p>操作Docker的命令行</p>
+</blockquote>
+<ul>
+<li>Docker CLI Command</li>
+</ul>
+<p><img src="https://wx4.sinaimg.cn/mw690/8c564d2aly1ft7fskumxyj219c0z2qk7.jpg" alt=""></p>
+<ul>
+<li>Docker Container State</li>
+</ul>
+<p><img src="https://wx2.sinaimg.cn/mw690/8c564d2aly1ft7fsb4y6xj20sb09ydh8.jpg" alt=""></p>
+<p>另，如果只想安装client不想安装整套Docker，可以下载<a href="https://howtowhale.github.io/dvm/" target="_blank" rel="external">Docker Version Manager</a></p>
+<h4 id="image镜像"><a href="#image镜像" class="headerlink" title="image镜像"></a>image镜像</h4><blockquote>
+<ul>
+<li>一个镜像是轻量的、独立的、一个包含所有需要运行它(软件、运行时、系统工具、系统库、设置)的可执行包的软件。</li>
+<li>只读的模版</li>
+<li>可以创建、更新现有镜像，也可以直接下载已有镜像使用</li>
+<li>可以用来创建container</li>
+<li>统一文件系统(union file system)技术将不同的层整合成一个文件系统，为这些层提供了一个统一的视角，隐藏了多层的存在，在用户的角度看，只存在一个文件系统。</li>
+</ul>
+</blockquote>
+<p><img src="https://wx2.sinaimg.cn/mw690/8c564d2aly1ft88pi8e4hj20hc057dg7.jpg" alt=""></p>
+<h5 id="镜像层"><a href="#镜像层" class="headerlink" title="镜像层"></a>镜像层</h5><p><img src="https://wx4.sinaimg.cn/mw690/8c564d2agy1ft8kb1fb3aj20jk02774c.jpg" alt=""></p>
+<ul>
+<li>元数据：让Docker获取运行和构建时的信息、父层的层次信息。每一层都有元数据</li>
+<li>指针：指向父层、没有则代表它处于最底层</li>
+</ul>
+<h4 id="container容器"><a href="#container容器" class="headerlink" title="container容器"></a>container容器</h4><blockquote>
+<ul>
+<li>镜像创建的运行实例</li>
+<li>Docker利用容器运行应用</li>
+<li>启动、开始、停止、删除</li>
+<li>容器间相互隔离</li>
+<li>与镜像的区别：最上面一层是可读写的</li>
+<li>容器=镜像+读写层</li>
+</ul>
+</blockquote>
+<p><img src="https://wx1.sinaimg.cn/mw690/8c564d2aly1ft88pl5mhej20i304uwex.jpg" alt=""></p>
+<p><img src="https://wx1.sinaimg.cn/mw690/8c564d2agy1ft8k85ry2ij20ha05iaam.jpg" alt=""></p>
+<h4 id="daemon守护进程"><a href="#daemon守护进程" class="headerlink" title="daemon守护进程"></a>daemon守护进程</h4><blockquote>
+<ul>
+<li>Docker的守护进程，也就是Server端</li>
+<li>clinet通过命令行与daemon通信</li>
+<li>修改方式：<ul>
+<li>命令行（学习研究）</li>
+<li>启动项（配置稳定、不常修改）</li>
+<li>配置文件（定时修改）</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h4 id="registry注册服务器"><a href="#registry注册服务器" class="headerlink" title="registry注册服务器"></a>registry注册服务器</h4><blockquote>
+<ul>
+<li>镜像仓库</li>
+<li>Registry有很多repository</li>
+<li>可以被第三方托管</li>
+</ul>
+</blockquote>
+<ul>
+<li><a href="https://hub.docker.com/" target="_blank" rel="external">Docker Hub</a></li>
+<li><a href="https://quay.io/" target="_blank" rel="external">Quay</a></li>
+<li><a href="https://cloud.google.com/container-registry/" target="_blank" rel="external">Google Container Registry</a></li>
+<li><a href="https://aws.amazon.com/ecr/" target="_blank" rel="external">AWS Container Registry</a></li>
+</ul>
+<h4 id="repository仓库"><a href="#repository仓库" class="headerlink" title="repository仓库"></a>repository仓库</h4><blockquote>
+<ul>
+<li>是一系列拥有相同名字不同tag的镜像集合</li>
+</ul>
+</blockquote>
+<p>注册服务器上存有多个仓库，每个仓库又存放了多个镜像，每个镜像有不同的标签tag</p>
+<h3 id="核心技术"><a href="#核心技术" class="headerlink" title="核心技术"></a>核心技术</h3><h4 id="cgroup资源限制"><a href="#cgroup资源限制" class="headerlink" title="cgroup资源限制"></a>cgroup资源限制</h4><blockquote>
+<p>Control Groups是Linux内核提供的一种极致，可以根据特定的行为，把一系列系统任务及其子任务整合（或分离）到按资源划分等级的不同组内，从而为系统资源管理提供一个统一的框架。</p>
+</blockquote>
+<ul>
+<li>功能<ul>
+<li>资源限制(Resource Limiting)：对进程组使用的资源总额进行限制（包括CPU、memory、IO、网络、文件等）</li>
+<li>优先级分配(Prioritization)：通过分配的CPU时间片数量及硬盘IO带宽大小，实际上就相当于控制了进程运行的有年纪</li>
+<li>隔离(Isolation)：为组隔离命名空间，这样一个组不会看到另一个组的进程、网络连接和文件系统</li>
+<li>资源统计(Accounting)：统计系统的资源使用量</li>
+<li>进程控制(Control)：对进程组执行挂起、恢复和重启等操作</li>
+</ul>
+</li>
+</ul>
+<h4 id="namespace资源隔离"><a href="#namespace资源隔离" class="headerlink" title="namespace资源隔离"></a>namespace资源隔离</h4><blockquote>
+<p>每个容器都有独立的命名空间，运行在其中的应用都像是在独立的操作系统环境中一样，命名空间机制保证了容器之间彼此互不影响。</p>
+</blockquote>
+<ul>
+<li>进程命名空间</li>
+</ul>
+<blockquote>
+<p>Linux通过命名空间管理进程号，对于同一进程（即同一个task_struct），在不同的命名空间中，看到的进程号不相同，每个进程命名空间有一套自己的进程号管理方法。进程命名空间是一个父子关系的结构，子空间中的进程对于父空间是可见的。新fork出的进程在父命名空间和子命名空间将分别有一个进程号来对应。</p>
+</blockquote>
+<ul>
+<li>网络命名空间</li>
+</ul>
+<blockquote>
+<p>网络命名空间为进程提供了一个完全独立的网络协议栈的视图，包括网络设备接口、IPv4和IPv6协议栈、IP路由表、防火墙规则、sockets等，这样每个容器的网络就能隔离开来。Docker采用虚拟网络设备（Virtual Network Device）的方式，将不同命名空间的网络设备连接到一起。默认情况下，容器中的虚拟网卡将同本地主机上的docker0网桥连接在一起。</p>
+</blockquote>
+<ul>
+<li>IPC命名空间</li>
+</ul>
+<blockquote>
+<p>容器中进程交互还是采用了Linux常见的进程间交互方法（Interprocess Communication，IPC），包括信号量、消息队列和共享内存等。PID Namespace和IPC Namespace可以组合起来一起使用，同一个IPC命名空间内的进程可以彼此可见，允许进行交互；不同空间的进程则无法交互。</p>
+</blockquote>
+<ul>
+<li>挂载命名空间</li>
+</ul>
+<blockquote>
+<p>类似于chroot，将一个进程放到一个特定的目录执行。挂载命名空间允许不同命名空间的进程看到的文件结构不同，这样每个命名空间中的进程所看到的文件目录彼此被隔离。</p>
+</blockquote>
+<ul>
+<li>UTS命名空间</li>
+</ul>
+<blockquote>
+<p>UTS（UNIX Time-sharing System）命名空间允许每个容器拥有独立的主机名和域名，从而可以虚拟出一个有独立主机名和网络空间的环境，就跟网络上一台独立的主机一样。默认情况下，Docker容器的主机名就是返回的容器ID</p>
+</blockquote>
+<ul>
+<li>用户命名空间</li>
+</ul>
+<blockquote>
+<p>每个容器可以有不同的用户和组id，也就是说可以在容器内使用特定的内部用户执行程序，而非本地系统上存在的用户。</p>
+<p>每个容器内部都可以有root帐号，但跟宿主主机不在一个命名空间。</p>
+<p>通过使用隔离的用户命名空间可以提高安全性，避免容器内进程获取到额外的权限。</p>
+</blockquote>
+<h4 id="Union-File-System联合文件系统"><a href="#Union-File-System联合文件系统" class="headerlink" title="Union File System联合文件系统"></a>Union File System联合文件系统</h4><blockquote>
+<p>联合文件系统（UnionFS）是一种轻量级的高性能分层文件系统，它支持将文件系统中的修改信息作为一次提交，并层层叠加，同时可以将不同目录挂载到同一个虚拟文件系统下，应用看到的是挂载的最终结果。</p>
+<p>在Docker中，只读层及在顶部的读写层的组合被称为<a href="https://docs.docker.com/terms/layer/#union-file-system" target="_blank" rel="external">Union File System</a>（联合文件系统）。</p>
+</blockquote>
+<ul>
+<li>Docker存储</li>
+</ul>
+<blockquote>
+<p>Docker目前通过插件化方式支持多种文件系统后端。Debian/Ubuntu上成熟的AUFS（Another Union File System，或v2版本往后的Advanced Multilayered Unification File System），就是一种联合文件系统实现。AUFS支持为每一个成员目录（类似Git的分支）设定只读（readonly）、读写（readwrite）或写出（whiteout-able）权限，同时AUFS里有一个类似分层的概念，对只读权限的分支可以在逻辑上进行增量地修改（不影响只读部分的）。</p>
+</blockquote>
+<p>Docker镜像自身就是由多个文件层组成，每一层有唯一的编号(层ID)，可以通过<code>docker history</code>查看多个文件层组成。</p>
+<p><strong>推荐将容器修改的数据通过volume方式挂载，而不是直接修改镜像内数据。</strong></p>
+<ul>
+<li>多种文件系统比较</li>
+</ul>
+<blockquote>
+<p>Docker目前支持的联合文件系统种类包括AUFS、OverlayFS、btrfs、vfs、zfs和Device Mapper等。</p>
+</blockquote>
+<ul>
+<li>AUFS：最早支持的文件系统，对Debian/Ubuntu支持好，虽然没有合并到Linux内核中，但成熟度很高；</li>
+<li>OverlayFS：类似于AUFS，性能更好一些，已经合并到内核，未来会取代AUFS，但成熟度有待提高；</li>
+<li>Device Mapper：Redhat公司和Docker团队一起开发用于支持RHEL的文件系统，内核支持，性能略慢，成熟度高；</li>
+<li>btrfs：参考zfs等特性设计的文件系统，由Linux社区开发，试图未来取代Device Mapper，成熟度有待提高；</li>
+<li>vfs：基于普通文件系统（ext、nfs等）的中间层抽象，性能差，比较占用空间，成熟度也一般。</li>
+<li>zfs：最初设计为Solaris 10上的写时文件系统，拥有不少好的特性，但对Linux支持还不够成熟。</li>
+</ul>
+<p><strong>AFUS、Device Mapper应用广泛，支持成熟，生产环境考虑；OverlayFS可能具有更好的性能。</strong></p>
+<h4 id="Linux网络虚拟化支持"><a href="#Linux网络虚拟化支持" class="headerlink" title="Linux网络虚拟化支持"></a>Linux网络虚拟化支持</h4><blockquote>
+<p>Docker中的网络接口默认都是虚拟的接口。虚拟接口的最大优势就是转发效率极高。这是因为Linux通过在内核中进行数据复制来实现虚拟接口之间的数据转发，即发送接口的发送缓存中的数据包将被直接复制到接收接口的接收缓存中，而无需通过外部物理网络设备进行交换。对于本地系统和容器内系统来看，虚拟接口跟一个正常的以太网卡相比并无区别，只是它速度要快得多。</p>
+</blockquote>
+<p>Docker的本地网络实现其实就是利用了Linux上的网络命名空间和虚拟网络设备，特别是veth pair，在本地主机和容器内分别创建一个虚拟接口，并让它们彼此连通（这样的一对接口叫做veth pair）。</p>
+<h3 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h3><h4 id="images"><a href="#images" class="headerlink" title="images"></a>images</h4><ul>
+<li><code>docker create &lt;image-id&gt;</code>为指定的镜像添加了一个可读写层，构成了一个新的没有运行的容器</li>
+<li><code>docker run &lt;image-id&gt;</code>包含了<code>docker create</code>和<code>docker start</code>命令</li>
+<li><code>docker images</code>列出所有顶层镜像<ul>
+<li>顶层：创建容器时使用的镜像、直接pull下来的镜像。每一个顶层镜像下面都隐藏了多个镜像层</li>
+</ul>
+</li>
+<li><code>docker images -a</code>列出所有的镜像(列出了所有的可读层)</li>
+<li><code>docker history</code>列出某一个image-id下的所有层</li>
+<li><code>docker rmi &lt;image-id&gt;</code>移除构成镜像的一个只读层，可以通过<code>-f</code>参数来强制删除中间的只读层。</li>
+<li><code>docker build</code>：根据Dockerfile文件中的<code>FROM</code>指令获取到镜像，然后重复的run、update、commit。在循环中的每一步都会生成一个新的层，因此许多新的层会被创建。</li>
+<li><code>docker save &lt;image-id&gt;</code>创建一个镜像的压缩文件，这个文件能够在另外一个主机的Docker上使用。和export命令不同，这个命令为每一个层都保存了它们的元数据，通过<code>docker images -tree</code>命令能够看到历史镜像。</li>
+<li><code>docker history &lt;image-id&gt;</code>递归地输出指定镜像的历史镜像</li>
+</ul>
+<h4 id="container"><a href="#container" class="headerlink" title="container"></a>container</h4><ul>
+<li><code>docker start &lt;container-id&gt;</code>为容器文件系统创建了一个进程隔离空间，每个容器只有一个进程隔离空间。</li>
+<li><code>docker ps</code>列出所有运行中的容器</li>
+<li><code>docker ps -a</code> 列出所有容器</li>
+<li><code>docker stop &lt;container-id&gt;</code>向运行中的容器发送一个SIGTERM的系统信号，然后等待容器中的应用程序终止执行，如果等待时间达到设定的超时时间(默认10秒)，会继续发送SIGKILL的系统信号强行KILL掉进程。<ul>
+<li>设置超时时间：<code>docker stop --``time``=20 container_name</code></li>
+</ul>
+</li>
+<li><code>docker kill</code>：直接发出SIGKILL的系统信号，强行终止容器中程序的运行。</li>
+<li><code>docker pause &lt;container-id&gt;</code>利用cgroups的特性将运行中的进程空间暂停，不保证暂停所有进程</li>
+<li><code>docker rm &lt;container-id&gt;</code>移除构成容器的可读写层，只对非运行态容器执行。</li>
+<li><code>docker commit &lt;container-id&gt;</code>将容器的可读写层转换为一个只读层，这样就把一个容器转换成了不可变的镜像。</li>
+<li><code>docker exec &lt;running-container-id&gt;</code>会在运行中的容器执行一个新进程，进入到容器内。</li>
+<li><code>docker export &lt;container-id&gt;</code>创建一个tar文件，并且移除了元数据和不必要的层，将多个层整合成了一个层，只保存了当前统一视角看到的内容</li>
+</ul>
+<h4 id="both"><a href="#both" class="headerlink" title="both"></a>both</h4><p><code>docker inspect &lt;container-id&gt; or &lt;image-id&gt;</code>提取出容器或者镜像最顶层的元数据</p>
+<h3 id="镜像加速器"><a href="#镜像加速器" class="headerlink" title="镜像加速器"></a>镜像加速器</h3><p>推荐用<a href="https://cr.console.aliyun.com/#/accelerator" target="_blank" rel="external">阿里云加速器</a></p>
+<blockquote>
+<p>针对安装了Docker for Mac的用户</p>
+<p>右键点击桌面顶栏的 docker 图标，选择 Preferences ，在 Daemon 标签（Docker 17.03 之前版本为 Advanced 标签）下的 Registry mirrors 列表中将</p>
+<p><a href="https://is7p3fej.mirror.aliyuncs.com加到&quot;registry-mirrors&quot;的数组里，点击" target="_blank" rel="external">https://is7p3fej.mirror.aliyuncs.com加到&quot;registry-mirrors&quot;的数组里，点击</a> Apply &amp; Restart按钮，等待Docker重启并应用配置的镜像加速器。</p>
+</blockquote>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="https://www.cnblogs.com/bethal/p/5942369.html" target="_blank" rel="external">docker容器和镜像区别</a></p>
+<p><a href="https://stackoverflow.com/questions/34004076/difference-between-docker-registry-and-repository" target="_blank" rel="external">Difference between Docker registry and repository</a></p>
+<p><a href="http://www.infoq.com/cn/articles/docker-kernel-knowledge-cgroups-resource-isolation" target="_blank" rel="external">Docker背后的内核知识</a></p>
+<p><a href="https://www.cnblogs.com/wade-luffy/p/6589254.html" target="_blank" rel="external">Docker核心实现技术</a></p>
+
+            
+        
+        </div>
+        
+            
+    <div class="post-reward">
+        <span class="reward-btn" id="reward-btn">赞赏</span>
+        <div class="reward-wrapper" id="reward-wrapper" style="display:none;">
+            
+                
+                
+            
+                
+                <div class="reward-item reward-alipay">
+                    <img src="https://wx2.sinaimg.cn/mw690/8c564d2aly1fpunn3yinhj20py0pyn4i.jpg">
+                </div>
+                
+            
+        </div>
+    </div>
+
+            
+        
+    </article>
+    
+        
+    <nav class="article-page">
+        
+        
+            <a href="/walkup/SA.html" id="art-right" class="art-left">
+                <span class="prev-title"> 
+                    <i class="iconfont icon-left"></i>WalkUp攻略-南美洲
+                </span>
+            </a>
+        
+    </nav>
+
+        
+    <i id="com-switch" class="iconfont icon-more jumping-in long infinite" style="font-size:24px;display:block;text-align:center;transform:rotate(180deg);"></i>
+    <div class="post-comments" id="post-comments" style="display: block;margin: auto 16px;">
+        
+        
+<!-- Gitment Comments -->
+<div id="gitment"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  owner: "super2bai",
+  repo: 'comment',
+  oauth: {
+    client_id: '37f2293730b41dcb5276',
+    client_secret: 'dbab4955840d4cbc88f1563be04ab676662194e5',
+  },
+})
+gitment.render('gitment')
+</script>
+
+        
+        
+
+    </div>
+
+    
+
+
+        </main>
+        <footer class="footer syuanpi fadeIn" id="footer">
+    <hr>
+    <div class="footer-wrapper">
+        <div class="left">
+            <div class="contact-icon">
+    
+    
+    
+    
+    
+    
+    
+    
+        
+            <a href="https://github.com/super2bai" class="iconfont icon-github" title="github"></a>
+        
+        
+        
+        
+        
+        
+        
+    
+</div>
+        </div>
+        <div class="right">
+            <div class="copyright">
+    <div class="info">
+        <span>&copy;</span>
+        <span>2017 ~ 2018</span>
+        <span>❤</span>
+        <span>super2bai</span>
+    </div>
+    <div class="theme">
+        <span>
+            动力来源于
+            <a href="http://hexo.io/" target="_blank">Hexo </a>
+        </span>
+        <span>
+            主题
+            <a href="https://github.com/ColMugX/hexo-theme-Nlvi"> Nlvi </a>
+        </span>
+    </div>
+    
+    <div class="visit_count">
+        <i class="iconfont icon-visit"></i>
+        <span id="busuanzi_value_site_uv"></span>
+        <i class="iconfont icon-people"></i>
+        <span id="busuanzi_value_site_pv"></span>
+    </div>
+    
+</div>
+        </div>
+    </div>
+</footer>
+    </div>
+    <script src="/script/nlvi.js"></script>
+<script src="/script/search.js"></script>
+
+    <script src="/lightbox/js/lightbox.min.js"></script>
+
+<script>
+$(document).ready(function(){
+    document.body.addEventListener('touchstart', function () {});
+    $('.progress').hide();
+    $('.body').show();
+    Nlvi.tagcloud();
+    Nlvi.mobileHeader();
+    Nlvi.back2top();
+    Nlvi.smoothScroll();
+    Nlvi.onView();
+    Nlvi.showToc();
+    Nlvi.showComments();
+    Nlvi.showReward();
+    Nlvi.picPos();
+
+    !CONFIG.animate && Nlvi.offAnimate();
+    CONFIG.lightbox && Nlvi.onPicBox();
+})
+</script>
+    </div>
+    
+        
+    <div class="post-toc">
+        <span class="title">文章目录</span>
+        <div class="toc-inner syuanpi back-1 fallIn-light">
+            <li class="title-link"><a href="javascript:;" class="toTop">Docker入门</a></li>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Docker是什么"><span class="toc-text">Docker是什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#架构"><span class="toc-text">架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#概念"><span class="toc-text">概念</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#docker-cli命令行"><span class="toc-text">docker cli命令行</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#image镜像"><span class="toc-text">image镜像</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#镜像层"><span class="toc-text">镜像层</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#container容器"><span class="toc-text">container容器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#daemon守护进程"><span class="toc-text">daemon守护进程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#registry注册服务器"><span class="toc-text">registry注册服务器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#repository仓库"><span class="toc-text">repository仓库</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#核心技术"><span class="toc-text">核心技术</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#cgroup资源限制"><span class="toc-text">cgroup资源限制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#namespace资源隔离"><span class="toc-text">namespace资源隔离</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Union-File-System联合文件系统"><span class="toc-text">Union File System联合文件系统</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Linux网络虚拟化支持"><span class="toc-text">Linux网络虚拟化支持</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#命令"><span class="toc-text">命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#images"><span class="toc-text">images</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#container"><span class="toc-text">container</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#both"><span class="toc-text">both</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#镜像加速器"><span class="toc-text">镜像加速器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#参考"><span class="toc-text">参考</span></a></li></ol></li></ol>
+        </div>
+    </div>
+
+    
+    <div class="backtop syuanpi dead toTop" id="backtop">
+    <i class="iconfont icon-up"></i>
+    <span style="text-align:center;font-family:Georgia;"><span style="font-family:Georgia;" id="scrollpercent">1</span>%</span>
+</div>
+    
+</body>
+</html>
