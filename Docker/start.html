@@ -343,7 +343,7 @@
 <ul>
 <li>功能<ul>
 <li>资源限制(Resource Limiting)：对进程组使用的资源总额进行限制（包括CPU、memory、IO、网络、文件等）</li>
-<li>优先级分配(Prioritization)：通过分配的CPU时间片数量及硬盘IO带宽大小，实际上就相当于控制了进程运行的有年纪</li>
+<li>优先级分配(Prioritization)：通过分配的CPU时间片数量及硬盘IO带宽大小，实际上就相当于控制了进程运行的优先级</li>
 <li>隔离(Isolation)：为组隔离命名空间，这样一个组不会看到另一个组的进程、网络连接和文件系统</li>
 <li>资源统计(Accounting)：统计系统的资源使用量</li>
 <li>进程控制(Control)：对进程组执行挂起、恢复和重启等操作</li>
@@ -388,9 +388,19 @@
 </ul>
 <blockquote>
 <p>每个容器可以有不同的用户和组id，也就是说可以在容器内使用特定的内部用户执行程序，而非本地系统上存在的用户。</p>
-<p>每个容器内部都可以有root帐号，但跟宿主主机不在一个命名空间。</p>
+<p>大约在0.6版，privileged被引入docker。</p>
+<p>使用该参数，container内的root拥有真正的root权限。</p>
+<p>否则，container内的root只是外部的一个普通用户权限。</p>
+<p><img src="https://wx4.sinaimg.cn/mw690/8c564d2aly1ftd6t8cnd2j21kw0cd0vk.jpg" alt=""></p>
+<p>privileged启动的容器，可以看到很多host上的设备，并且可以执行mount。</p>
+<p>甚至允许在docker容器中启动docker容器。</p>
 <p>通过使用隔离的用户命名空间可以提高安全性，避免容器内进程获取到额外的权限。</p>
 </blockquote>
+<p><strong>mount上去的文件，docker没有读写权限。</strong></p>
+<p>举个例子：</p>
+<p>mount了一个文件夹，但是在docker里面就是无法访问。</p>
+<p><img src="https://wx1.sinaimg.cn/mw690/8c564d2aly1ftcnqg0yuqj20mk03ydgm.jpg" alt=""></p>
+<p>相关搜索关键字：<code>docker privileged=ture</code></p>
 <h4 id="Union-File-System联合文件系统"><a href="#Union-File-System联合文件系统" class="headerlink" title="Union File System联合文件系统"></a>Union File System联合文件系统</h4><blockquote>
 <p>联合文件系统（UnionFS）是一种轻量级的高性能分层文件系统，它支持将文件系统中的修改信息作为一次提交，并层层叠加，同时可以将不同目录挂载到同一个虚拟文件系统下，应用看到的是挂载的最终结果。</p>
 <p>在Docker中，只读层及在顶部的读写层的组合被称为<a href="https://docs.docker.com/terms/layer/#union-file-system" target="_blank" rel="external">Union File System</a>（联合文件系统）。</p>
@@ -431,7 +441,10 @@
 </li>
 <li><code>docker images -a</code>列出所有的镜像(列出了所有的可读层)</li>
 <li><code>docker history</code>列出某一个image-id下的所有层</li>
-<li><code>docker rmi &lt;image-id&gt;</code>移除构成镜像的一个只读层，可以通过<code>-f</code>参数来强制删除中间的只读层。</li>
+<li><code>docker rmi &lt;image-id&gt;</code>删除镜像，默认会删除unlinked的中间layer，为了安全，当有容器在引用这个images时是不可以删除的，通过<code>-f</code>参数，可以强制删除<ul>
+<li><code>--no-prune</code>：不删除中间layer</li>
+</ul>
+</li>
 <li><code>docker build</code>：根据Dockerfile文件中的<code>FROM</code>指令获取到镜像，然后重复的run、update、commit。在循环中的每一步都会生成一个新的层，因此许多新的层会被创建。</li>
 <li><code>docker save &lt;image-id&gt;</code>创建一个镜像的压缩文件，这个文件能够在另外一个主机的Docker上使用。和export命令不同，这个命令为每一个层都保存了它们的元数据，通过<code>docker images -tree</code>命令能够看到历史镜像。</li>
 <li><code>docker history &lt;image-id&gt;</code>递归地输出指定镜像的历史镜像</li>
@@ -452,17 +465,35 @@
 <li><code>docker export &lt;container-id&gt;</code>创建一个tar文件，并且移除了元数据和不必要的层，将多个层整合成了一个层，只保存了当前统一视角看到的内容</li>
 </ul>
 <h4 id="both"><a href="#both" class="headerlink" title="both"></a>both</h4><p><code>docker inspect &lt;container-id&gt; or &lt;image-id&gt;</code>提取出容器或者镜像最顶层的元数据</p>
-<h3 id="镜像加速器"><a href="#镜像加速器" class="headerlink" title="镜像加速器"></a>镜像加速器</h3><p>推荐用<a href="https://cr.console.aliyun.com/#/accelerator" target="_blank" rel="external">阿里云加速器</a></p>
-<blockquote>
+<h3 id="镜像加速器"><a href="#镜像加速器" class="headerlink" title="镜像加速器"></a>镜像加速器</h3><h4 id="阿里云加速器"><a href="#阿里云加速器" class="headerlink" title="阿里云加速器"></a><a href="https://cr.console.aliyun.com/#/accelerator" target="_blank" rel="external">阿里云加速器</a></h4><blockquote>
 <p>针对安装了Docker for Mac的用户</p>
 <p>右键点击桌面顶栏的 docker 图标，选择 Preferences ，在 Daemon 标签（Docker 17.03 之前版本为 Advanced 标签）下的 Registry mirrors 列表中将</p>
 <p>加速器地址加到”registry-mirrors”的数组里，点击 Apply &amp; Restart按钮，等待Docker重启并应用配置的镜像加速器。</p>
 </blockquote>
 <p><img src="https://wx4.sinaimg.cn/mw690/8c564d2aly1ftbtkllnq0j215s0jq41t.jpg" alt=""></p>
+<h4 id="Docker-中国官方镜像加速"><a href="#Docker-中国官方镜像加速" class="headerlink" title="Docker 中国官方镜像加速"></a><a href="https://www.docker-cn.com/registry-mirror" target="_blank" rel="external">Docker 中国官方镜像加速</a></h4><blockquote>
+<p>配置Docker守护进程默认使用Docker官方镜像加速，可以默认通过官方镜像加速拉取，而无需在每次拉取时指定registry.docker-cn.com</p>
+</blockquote>
+<ul>
+<li>在守护进程启动时传入<code>--registry-mirror</code>参数：</li>
+</ul>
+<p><code>docker --registry-mirror=https://registry.docker-cn.com daemon</code></p>
+<ul>
+<li>永久性保留更改，可以通过修改<code>/etc/docker/daemon.json</code>文件兵添加上registry-mirrors键值</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  "registry-mirrors": ["https://registry.docker-cn.com"]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>修改保存后，重启Docker以使配置生效。</li>
+</ul>
+<h4 id="新手建议"><a href="#新手建议" class="headerlink" title="新手建议"></a>新手建议</h4><p><a href="https://docs.docker.com/" target="_blank" rel="external">新手入门-官方Guide</a></p>
+<p><a href="https://docs.docker.com/reference/" target="_blank" rel="external">查字典-官方Reference</a></p>
 <h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="https://www.cnblogs.com/bethal/p/5942369.html" target="_blank" rel="external">docker容器和镜像区别</a></p>
 <p><a href="https://stackoverflow.com/questions/34004076/difference-between-docker-registry-and-repository" target="_blank" rel="external">Difference between Docker registry and repository</a></p>
 <p><a href="http://www.infoq.com/cn/articles/docker-kernel-knowledge-cgroups-resource-isolation" target="_blank" rel="external">Docker背后的内核知识</a></p>
 <p><a href="https://www.cnblogs.com/wade-luffy/p/6589254.html" target="_blank" rel="external">Docker核心实现技术</a></p>
+<p><a href="https://www.docker.com/docker-news-and-press/docker-brings-docker-public-registry-china-expand-developer-adoption-and-fuel" target="_blank" rel="external">说明文档-Docker和阿里云合作的公共加速器</a></p>
+<p><a href="https://www.cnblogs.com/sammyliu/p/5878973.html" target="_blank" rel="external">理解Docker（3）：Docker 使用 Linux namespace 隔离容器的运行环境</a></p>
+<p><a href="https://www.cnblogs.com/sammyliu/p/5878973.html" target="_blank" rel="external">Understanding how uid and gid work in Docker containers</a></p>
 
             
         
@@ -618,7 +649,7 @@ $(document).ready(function(){
         <span class="title">文章目录</span>
         <div class="toc-inner syuanpi back-1 fallIn-light">
             <li class="title-link"><a href="javascript:;" class="toTop">Docker入门</a></li>
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Docker是什么"><span class="toc-text">Docker是什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#架构"><span class="toc-text">架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#概念"><span class="toc-text">概念</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#docker-cli命令行"><span class="toc-text">docker cli命令行</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#image镜像"><span class="toc-text">image镜像</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#镜像层"><span class="toc-text">镜像层</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#container容器"><span class="toc-text">container容器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#daemon守护进程"><span class="toc-text">daemon守护进程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#registry注册服务器"><span class="toc-text">registry注册服务器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#repository仓库"><span class="toc-text">repository仓库</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#核心技术"><span class="toc-text">核心技术</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#cgroup资源限制"><span class="toc-text">cgroup资源限制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#namespace资源隔离"><span class="toc-text">namespace资源隔离</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Union-File-System联合文件系统"><span class="toc-text">Union File System联合文件系统</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Linux网络虚拟化支持"><span class="toc-text">Linux网络虚拟化支持</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#命令"><span class="toc-text">命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#images"><span class="toc-text">images</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#container"><span class="toc-text">container</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#both"><span class="toc-text">both</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#镜像加速器"><span class="toc-text">镜像加速器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#参考"><span class="toc-text">参考</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Docker是什么"><span class="toc-text">Docker是什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#架构"><span class="toc-text">架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#概念"><span class="toc-text">概念</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#docker-cli命令行"><span class="toc-text">docker cli命令行</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#image镜像"><span class="toc-text">image镜像</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#镜像层"><span class="toc-text">镜像层</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#container容器"><span class="toc-text">container容器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#daemon守护进程"><span class="toc-text">daemon守护进程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#registry注册服务器"><span class="toc-text">registry注册服务器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#repository仓库"><span class="toc-text">repository仓库</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#核心技术"><span class="toc-text">核心技术</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#cgroup资源限制"><span class="toc-text">cgroup资源限制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#namespace资源隔离"><span class="toc-text">namespace资源隔离</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Union-File-System联合文件系统"><span class="toc-text">Union File System联合文件系统</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Linux网络虚拟化支持"><span class="toc-text">Linux网络虚拟化支持</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#命令"><span class="toc-text">命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#images"><span class="toc-text">images</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#container"><span class="toc-text">container</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#both"><span class="toc-text">both</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#镜像加速器"><span class="toc-text">镜像加速器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#阿里云加速器"><span class="toc-text">阿里云加速器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Docker-中国官方镜像加速"><span class="toc-text">Docker 中国官方镜像加速</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#新手建议"><span class="toc-text">新手建议</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#参考"><span class="toc-text">参考</span></a></li></ol></li></ol>
         </div>
     </div>
 
