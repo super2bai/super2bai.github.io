@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://super2bai.github.io/walkup/SA.html</loc>
+    
+    <lastmod>2018-07-23T14:57:23.169Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://super2bai.github.io/deploy/Tomcat.html</loc>
     
     <lastmod>2018-07-23T08:32:52.886Z</lastmod>
@@ -26,13 +33,6 @@
     <loc>https://super2bai.github.io/Docker/start.html</loc>
     
     <lastmod>2018-07-17T15:27:31.956Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://super2bai.github.io/walkup/SA.html</loc>
-    
-    <lastmod>2018-07-12T03:40:24.989Z</lastmod>
     
   </url>
   
