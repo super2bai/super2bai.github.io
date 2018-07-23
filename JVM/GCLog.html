@@ -1,43 +1,27 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <title> GC日志 · 贰白 </title>
-    <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-<meta name="browsermode" content="application">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="贰白">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="msapplication-navbutton-color" content="#666666">
-<meta name= "format-detection" content="telephone=no" />
-<meta name="keywords" content="nlvi, Nlvi" />
-
-    <link rel="apple-touch-icon"  sizes="72x72"  href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
-    <link rel="apple-touch-icon-precomposed"  sizes="72x72"  href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
-
-
-    <meta name="subtitle" content="苦于探索，全是未知">
-
-
-
-
-    <meta name="keywords" content="JVM, Nlvi" />
-
-<link rel="stylesheet" href="/style/style.css">
-<script src="/script/jquery.min.js"></script>
+  <link rel="stylesheet" href="/style/style.css">
 <script>
-    var CONFIG = {
-        title: "贰白",
-        author: "super2bai",
-        lightbox: true,
-        animate: true
+  var nlviconfig = {
+    title: "贰白",
+    author: "super2bai",
+    baseUrl: "/",
+    theme: {
+      scheme: "banderole",
+      lightbox: true,
+      animate: true,
+      search: false,
+      friends: false,
+      lazy: true
     }
+  }
 </script>
 
 
 
-    <link rel="stylesheet" href="/lightbox/css/lightbox.min.css">
+
+    <link rel="stylesheet" href="/script/lib/lightbox/css/lightbox.min.css">
 
 
 
@@ -52,210 +36,250 @@
 
 
 
-  <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-98059014-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-  ga('create', 'UA-116557847-1', 'auto');
-  ga('send', 'pageview');
+  gtag('config', 'UA-116557847-1');
 </script>
+
+
 
 
 
     <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<script>
-  (adsbygoogle = window.adsbygoogle || []).push({
-    google_ad_client: "ca-pub-1178101469132492",
-    enable_page_level_ads: true
-  });
-</script>
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="browsermode" content="application">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="贰白">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="msapplication-navbutton-color" content="#666666">
+<meta name= "format-detection" content="telephone=no" />
+<meta name="keywords" content="nlvi, Nlvi" />
+
+  <link rel="apple-touch-icon"  sizes="72x72"  href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+  <link rel="apple-touch-icon-precomposed"  sizes="72x72"  href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+
+
+  <meta name="subtitle" content="苦于探索，全是未知">
+
+
+
+
+  <meta name="keywords" content="JVM, Nlvi" />
+
+  <title> GC日志 · 贰白 </title>
 </head>
 <body>
-    <div class="progress">
-    <div class="progress-inner"></div>
+  <div class="progress">
+  <div class="progress-inner"></div>
 </div>
-    <div class="body">
+  
+  
     <div class="tagcloud-mask"></div>  
 <div class="tagcloud" id="tagcloud">
-    <div class="tagcloud-inner">
-        <a href="/tags/3D编辑器/" style="font-size: 14px;">3D编辑器</a> <a href="/tags/Docker/" style="font-size: 14px;">Docker</a> <a href="/tags/Dubbo/" style="font-size: 14px;">Dubbo</a> <a href="/tags/Eclipse/" style="font-size: 14px;">Eclipse</a> <a href="/tags/GHPages/" style="font-size: 14px;">GHPages</a> <a href="/tags/IO/" style="font-size: 14px;">IO</a> <a href="/tags/JDK/" style="font-size: 14px;">JDK</a> <a href="/tags/JVM/" style="font-size: 14px;">JVM</a> <a href="/tags/Linux/" style="font-size: 14px;">Linux</a> <a href="/tags/Python/" style="font-size: 14px;">Python</a> <a href="/tags/Spring/" style="font-size: 14px;">Spring</a> <a href="/tags/Tomcat/" style="font-size: 14px;">Tomcat</a> <a href="/tags/Zookeeper/" style="font-size: 14px;">Zookeeper</a> <a href="/tags/jmeter/" style="font-size: 14px;">jmeter</a> <a href="/tags/mac/" style="font-size: 14px;">mac</a> <a href="/tags/walkup/" style="font-size: 14px;">walkup</a> <a href="/tags/分布式/" style="font-size: 14px;">分布式</a> <a href="/tags/工具/" style="font-size: 14px;">工具</a> <a href="/tags/游戏/" style="font-size: 14px;">游戏</a> <a href="/tags/编码/" style="font-size: 14px;">编码</a> <a href="/tags/部署/" style="font-size: 14px;">部署</a> <a href="/tags/问题/" style="font-size: 14px;">问题</a>
-    </div>
-</div>
-    <header class="header" id="header">
-    <div class="title syuanpi tvIn">
-    <div class="table">
-        <div class="connect">
-            <div class="connect-inner">
-                <span><a href="/">贰白</a></span>
-                
-                    <span id="subtitle">苦于探索，全是未知</span>
-                
-            </div>
-        </div>
-    </div>
-</div>
-    <nav class="main-nav syuanpi tvIn">
-<div class="table">
+  <div class="tagcloud-inner">
+    <a href="/tags/3D编辑器/" style="font-size: 14px;">3D编辑器</a> <a href="/tags/Docker/" style="font-size: 14px;">Docker</a> <a href="/tags/Dubbo/" style="font-size: 14px;">Dubbo</a> <a href="/tags/Eclipse/" style="font-size: 14px;">Eclipse</a> <a href="/tags/GHPages/" style="font-size: 14px;">GHPages</a> <a href="/tags/IO/" style="font-size: 14px;">IO</a> <a href="/tags/JDK/" style="font-size: 14px;">JDK</a> <a href="/tags/JVM/" style="font-size: 14px;">JVM</a> <a href="/tags/Linux/" style="font-size: 14px;">Linux</a> <a href="/tags/Python/" style="font-size: 14px;">Python</a> <a href="/tags/Spring/" style="font-size: 14px;">Spring</a> <a href="/tags/Tomcat/" style="font-size: 14px;">Tomcat</a> <a href="/tags/Zookeeper/" style="font-size: 14px;">Zookeeper</a> <a href="/tags/jmeter/" style="font-size: 14px;">jmeter</a> <a href="/tags/mac/" style="font-size: 14px;">mac</a> <a href="/tags/walkup/" style="font-size: 14px;">walkup</a> <a href="/tags/分布式/" style="font-size: 14px;">分布式</a> <a href="/tags/工具/" style="font-size: 14px;">工具</a> <a href="/tags/游戏/" style="font-size: 14px;">游戏</a> <a href="/tags/编码/" style="font-size: 14px;">编码</a> <a href="/tags/部署/" style="font-size: 14px;">部署</a> <a href="/tags/问题/" style="font-size: 14px;">问题</a>
+  </div>
+</div>  
+  
 
-    <ul class="menu">
+  <div class="container">
+
+    <header class="header" id="header">
+  <div class="header-wrapper">
+    <div class="logo">
+  <div class="logo-inner syuanpi tvIn">
+    <span><a href="/">贰白</a></span>
+    
+      <span id="subtitle">苦于探索，全是未知</span>
+    
+  </div>
+</div>
+    <nav class="main-nav">
         
+  <ul class="main-nav-list syuanpi tvIn">
+  
+    <li class="menu-item">
+      <a href="javascript:;" id="search">
+        <span>搜索</span>
         
+          <span class="menu-item-label">search</span>
         
-            <li class="menu-item">
+      </a>
+    </li>
+  
+  
+    
+      
+    
+    <li class="menu-item">
+      <a href="/" id="article">
+        <span class="base-name">文章</span>
+        
+          <span class="menu-item-label">article</span>
+        
+      </a>
+    </li>  
+  
+    
+      
+    
+    <li class="menu-item">
+      <a href="/archives" id="archives">
+        <span class="base-name">归档</span>
+        
+          <span class="menu-item-label">archives</span>
+        
+      </a>
+    </li>  
+  
+    
+      
+    
+    <li class="menu-item">
+      <a href="javascript:;" id="tags">
+        <span class="base-name">标签</span>
+        
+          <span class="menu-item-label">tags</span>
+        
+      </a>
+    </li>  
+  
+    
+      
+    
+    <li class="menu-item">
+      <a href="/about" id="about">
+        <span class="base-name">关于</span>
+        
+          <span class="menu-item-label">about</span>
+        
+      </a>
+    </li>  
+  
+  </ul>
+  
+</nav>
+    
+    
+  </div>
+</header>
+<div class="mobile-header">
+  <div class="mobile-header-body">
+    <div class="mobile-header-list">
+      
+        
+            <div class="mobile-nav-item">
                 <a href="/">
                     <span>文章</span>
                     
                         <span class="menu-item-label">article</span>
                     
                 </a>
-            </li>
+            </div>
         
+      
         
-        
-            <li class="menu-item">
+            <div class="mobile-nav-item">
                 <a href="/archives">
                     <span>归档</span>
                     
                         <span class="menu-item-label">archives</span>
                     
                 </a>
-            </li>
+            </div>
         
+      
         
+          <div class="mobile-nav-item inner-cloud">
+            <div class="mobile-nav-tag">
+              <a href="javascript:;" id="mobile-tags">
+                <span>标签</span>
+                
+                    <span class="menu-item-label">tags</span>
+                
+              </a>
+            </div>
+            <div class="mobile-nav-tagcloud">
+              <div class="mobile-tagcloud-inner">
+                <a href="/tags/3D编辑器/" style="font-size: 14px;">3D编辑器</a> <a href="/tags/Docker/" style="font-size: 14px;">Docker</a> <a href="/tags/Dubbo/" style="font-size: 14px;">Dubbo</a> <a href="/tags/Eclipse/" style="font-size: 14px;">Eclipse</a> <a href="/tags/GHPages/" style="font-size: 14px;">GHPages</a> <a href="/tags/IO/" style="font-size: 14px;">IO</a> <a href="/tags/JDK/" style="font-size: 14px;">JDK</a> <a href="/tags/JVM/" style="font-size: 14px;">JVM</a> <a href="/tags/Linux/" style="font-size: 14px;">Linux</a> <a href="/tags/Python/" style="font-size: 14px;">Python</a> <a href="/tags/Spring/" style="font-size: 14px;">Spring</a> <a href="/tags/Tomcat/" style="font-size: 14px;">Tomcat</a> <a href="/tags/Zookeeper/" style="font-size: 14px;">Zookeeper</a> <a href="/tags/jmeter/" style="font-size: 14px;">jmeter</a> <a href="/tags/mac/" style="font-size: 14px;">mac</a> <a href="/tags/walkup/" style="font-size: 14px;">walkup</a> <a href="/tags/分布式/" style="font-size: 14px;">分布式</a> <a href="/tags/工具/" style="font-size: 14px;">工具</a> <a href="/tags/游戏/" style="font-size: 14px;">游戏</a> <a href="/tags/编码/" style="font-size: 14px;">编码</a> <a href="/tags/部署/" style="font-size: 14px;">部署</a> <a href="/tags/问题/" style="font-size: 14px;">问题</a>
+              </div>
+            </div>
+          </div>
         
-            <li class="menu-item">
-                <a href="javascript:;" id="tags">
-                    <span>标签</span>
-                    
-                        <span class="menu-item-label">tags</span>
-                    
-                </a>
-            </li>
+      
         
-        
-        
-            <li class="menu-item">
+            <div class="mobile-nav-item">
                 <a href="/about">
                     <span>关于</span>
                     
                         <span class="menu-item-label">about</span>
                     
                 </a>
-            </li>
-        
-        
-    </ul>
-
-</div>
-</nav>
-</header>
-<div class="mobile-header">
-    <div class="mobile-header-body">
-        <div class="mobile-header-list">
-            
-            
-                <div class="mobile-nav-item">
-                    <a href="/">
-                        <span>文章</span>
-                        
-                            <span class="menu-item-label">article</span>
-                        
-                    </a>
-                </div>
-            
-            
-            
-                <div class="mobile-nav-item">
-                    <a href="/archives">
-                        <span>归档</span>
-                        
-                            <span class="menu-item-label">archives</span>
-                        
-                    </a>
-                </div>
-            
-            
-            
-                <div class="mobile-nav-item inner-cloud">
-                    <div class="mobile-nav-tag">
-                        <a href="javascript:;" id="mobile-tags">
-                            <span>标签</span>
-                            
-                                <span class="menu-item-label">tags</span>
-                            
-                        </a>
-                    </div>
-                    <div class="mobile-nav-tagcloud">
-                        <div class="mobile-tagcloud-inner">
-                            <a href="/tags/3D编辑器/" style="font-size: 14px;">3D编辑器</a> <a href="/tags/Docker/" style="font-size: 14px;">Docker</a> <a href="/tags/Dubbo/" style="font-size: 14px;">Dubbo</a> <a href="/tags/Eclipse/" style="font-size: 14px;">Eclipse</a> <a href="/tags/GHPages/" style="font-size: 14px;">GHPages</a> <a href="/tags/IO/" style="font-size: 14px;">IO</a> <a href="/tags/JDK/" style="font-size: 14px;">JDK</a> <a href="/tags/JVM/" style="font-size: 14px;">JVM</a> <a href="/tags/Linux/" style="font-size: 14px;">Linux</a> <a href="/tags/Python/" style="font-size: 14px;">Python</a> <a href="/tags/Spring/" style="font-size: 14px;">Spring</a> <a href="/tags/Tomcat/" style="font-size: 14px;">Tomcat</a> <a href="/tags/Zookeeper/" style="font-size: 14px;">Zookeeper</a> <a href="/tags/jmeter/" style="font-size: 14px;">jmeter</a> <a href="/tags/mac/" style="font-size: 14px;">mac</a> <a href="/tags/walkup/" style="font-size: 14px;">walkup</a> <a href="/tags/分布式/" style="font-size: 14px;">分布式</a> <a href="/tags/工具/" style="font-size: 14px;">工具</a> <a href="/tags/游戏/" style="font-size: 14px;">游戏</a> <a href="/tags/编码/" style="font-size: 14px;">编码</a> <a href="/tags/部署/" style="font-size: 14px;">部署</a> <a href="/tags/问题/" style="font-size: 14px;">问题</a>
-                        </div>
-                    </div>
-                </div>
-            
-            
-            
-                <div class="mobile-nav-item">
-                    <a href="/about">
-                        <span>关于</span>
-                        
-                            <span class="menu-item-label">about</span>
-                        
-                    </a>
-                </div>
-            
-            
-        </div>
-    </div>
-    <div class="mobile-header-nav">
-        <div class="mobile-header-item" id="mobile-left">
-            <div class="header-menu-item">
-                <span class="header-menu-line"></span>
             </div>
-        </div>
-        <h1 class="mobile-header-title">
-            <a href="/">贰白</a>
-        </h1>
-        <div class="mobile-header-item"></div>
+        
+      
     </div>
+  </div>
+  <div class="mobile-header-nav">
+    <div class="mobile-header-item" id="mobile-left">
+      <div class="header-menu-item">
+        <span class="header-menu-line"></span>
+      </div>
+    </div>
+    <h1 class="mobile-header-title">
+      <a href="/">贰白</a>
+    </h1>
+    <div class="mobile-header-item"></div>
+  </div>
 </div>
-
-    <div class="container">
-        <main class="main" id="main">
-            
+    <div class="container-inner">
+      <main class="main" id="main">
+        <div class="main-wrapper">
+          
     
-    <article class="post">
-        <header class="post-header">
-            <div class="post-time syuanpi riseIn-light back-1">
-                <span>2018年5月3日</span>
-                
-                
-                    <span class="post-category"><a href="/categories/JVM/">JVM</a></span>
-                
-                
-            </div>
-            <h1 class="post-title syuanpi riseIn-light back-2">
+  
+  <article class="
+  post
+   is_post 
+  ">
+    <header class="post-header">
+      <div class="post-time syuanpi fadeInUpShort back-1">
+        <div class="post-time-wrapper">
+          <span>2018-05-03</span>
+          
             
-                GC日志
+              <span class="post-category"><a href="/categories/JVM/">JVM</a></span>
             
-            </h1>
+          
+          
             
-                
-                    <div class="post-tags syuanpi riseIn-light back-3">
-                    
-                        <a href="/tags/JVM/">JVM</a>
-                    
-                    </div>
-                
+              <aside class="post-tags syuanpi fadeInUpShort back-3">
+              
+                <a href="/tags/JVM/">JVM</a>
+              
+              </aside>
             
-        </header>
-        <div class="post-content syuanpi riseIn-light back-3">
-            
-                <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>每一种收集器的日志形式都是由它们自身的实现所决定的，格式不一致。</p>
+          
+        </div>
+      </div>
+      <h1 class="post-title syuanpi fadeInUpShort back-2">
+        
+          GC日志
+        
+      </h1>
+    </header>
+    <div class="post-content syuanpi fadeInUpShort back-3">
+      
+        <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>每一种收集器的日志形式都是由它们自身的实现所决定的，格式不一致。</p>
 <a id="more"></a>
 <h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">33.125：[GC[DefNew：3324K-＞152K（3712K），0.0025925secs]3324K-＞152K（11904K），0.0031680 secs]</div></pre></td></tr></table></figure>
 <p>GC发生的时间(虚拟机启动以来经过的秒数)：<code>[</code>停顿类型<code>[</code>发生区域<code>：</code>GC前该内存区域已使用容量<code>-&gt;</code> GC后该内存区域已使用容量(内存区域总容量)<code>,该区域GC所占用的时间(秒)</code> <code>]</code>GC前Java堆已使用容量<code>-&gt;</code>GC后Java堆已使用容量(Java堆总容量)</p>
@@ -302,54 +326,53 @@
 </ul>
 </blockquote>
 
-            
-        
-        </div>
-        
-            
-    <div class="post-reward">
-        <span class="reward-btn" id="reward-btn">赞赏</span>
-        <div class="reward-wrapper" id="reward-wrapper" style="display:none;">
-            
-                
-                
-            
-                
-                <div class="reward-item reward-alipay">
-                    <img src="https://wx2.sinaimg.cn/mw690/8c564d2aly1fpunn3yinhj20py0pyn4i.jpg">
-                </div>
-                
-            
-        </div>
-    </div>
-
-            
-        
-    </article>
+      
     
+    </div>
+    
+      
+  <div class="post-reward">
+    <span class="reward-btn" id="reward-btn">赞赏</span>
+    <div class="reward-wrapper" id="reward-wrapper" style="display:none;">
+      
         
-    <nav class="article-page">
         
-            <a href="/JVM/reference.html" id="art-left" class="art-right">
-                <span class="next-title">
-                    关于对象引用<i class="iconfont icon-right"></i> 
-                </span>
-            </a>
+      
         
+        <div class="reward-item reward-alipay">
+          <img src="https://wx2.sinaimg.cn/mw690/8c564d2aly1fpunn3yinhj20py0pyn4i.jpg">
+        </div>
         
-            <a href="/JVM/GC.html" id="art-right" class="art-left">
-                <span class="prev-title"> 
-                    <i class="iconfont icon-left"></i>垃圾收集器
-                </span>
-            </a>
-        
-    </nav>
+      
+    </div>
+  </div>
 
-        
-    <i id="com-switch" class="iconfont icon-more jumping-in long infinite" style="font-size:24px;display:block;text-align:center;transform:rotate(180deg);"></i>
-    <div class="post-comments" id="post-comments" style="display: block;margin: auto 16px;">
-        
-        
+      
+    
+  </article>
+  
+    
+  <nav class="article-page">
+    
+      <a href="/JVM/reference.html" id="art-left" class="art-left">
+        <span class="next-title">
+          <i class="iconfont icon-left"></i>关于对象引用
+        </span>
+      </a>
+    
+    
+      <a href="/JVM/GC.html" id="art-right" class="art-right">
+        <span class="prev-title"> 
+          垃圾收集器<i class="iconfont icon-right"></i>  
+        </span>
+      </a>
+    
+  </nav>
+
+    
+  <i id="com-switch" class="iconfont icon-more jumping-in long infinite" style="font-size:24px;display:block;text-align:center;transform:rotate(180deg);"></i>
+  <div class="post-comments" id="post-comments" style="display: block;margin: auto 16px;">
+    
 <!-- Gitment Comments -->
 <div id="gitment"></div>
 <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
@@ -366,20 +389,37 @@ var gitment = new Gitment({
 gitment.render('gitment')
 </script>
 
-        
-        
-
-    </div>
-
+    
     
 
+  </div>
 
-        </main>
-        <footer class="footer syuanpi fadeIn" id="footer">
-    <hr>
-    <div class="footer-wrapper">
-        <div class="left">
-            <div class="contact-icon">
+
+  
+  
+    
+  
+  <aside class="post-toc">
+    <span class="title" id="toc-switch"><span>文章导航</span></span>
+    <div class="toc-inner syuanpi back-1" style="display:none;">
+      <li class="title-link"><a href="javascript:;" class="toTop">GC日志</a></li>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#概述"><span class="toc-text">概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#示例"><span class="toc-text">示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其它"><span class="toc-text">其它</span></a></li></ol>
+    </div>
+  </aside>
+
+
+
+  
+
+
+        </div>
+      </main>
+
+      <footer class="footer syuanpi fadeIn" id="footer">
+  <hr>
+  <div class="footer-wrapper">
+    <div class="left">
+      <div class="contact-icon">
     
     
     
@@ -399,9 +439,9 @@ gitment.render('gitment')
         
     
 </div>
-        </div>
-        <div class="right">
-            <div class="copyright">
+    </div>
+    <div class="right">
+      <div class="copyright">
     <div class="info">
         <span>&copy;</span>
         <span>2017 ~ 2018</span>
@@ -427,50 +467,42 @@ gitment.render('gitment')
     </div>
     
 </div>
-        </div>
+
     </div>
+  </div>
 </footer>
     </div>
-    <script src="/script/nlvi.js"></script>
-<script src="/script/search.js"></script>
+  </div>
+  <script src="/script/lib/jquery/jquery-3.2.1.min.js"></script>
 
-    <script src="/lightbox/js/lightbox.min.js"></script>
 
-<script>
-$(document).ready(function(){
-    document.body.addEventListener('touchstart', function () {});
-    $('.progress').hide();
-    $('.body').show();
-    Nlvi.tagcloud();
-    Nlvi.mobileHeader();
-    Nlvi.back2top();
-    Nlvi.smoothScroll();
-    Nlvi.onView();
-    Nlvi.showToc();
-    Nlvi.showComments();
-    Nlvi.showReward();
-    Nlvi.picPos();
+  <script src="/script/lib/lightbox/js/lightbox.min.js"></script>
 
-    !CONFIG.animate && Nlvi.offAnimate();
-    CONFIG.lightbox && Nlvi.onPicBox();
-})
-</script>
-    </div>
-    
-        
-    <div class="post-toc">
-        <span class="title">文章目录</span>
-        <div class="toc-inner syuanpi back-1 fallIn-light">
-            <li class="title-link"><a href="javascript:;" class="toTop">GC日志</a></li>
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#概述"><span class="toc-text">概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#示例"><span class="toc-text">示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其它"><span class="toc-text">其它</span></a></li></ol>
-        </div>
-    </div>
 
-    
-    <div class="backtop syuanpi dead toTop" id="backtop">
+
+  <script src="https://cdn.bootcss.com/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script type="text/x-mathjax-config;executed=true">MathJax.Hub.Config({tex2jax: {inlineMath: [["$","$"], ["\\(","\\)"]]}});</script>
+
+
+
+  <script src="/script/lib/lazyload/lazyload.min.js"></script>
+
+
+
+
+<script src="/script/src/nlvi.js"></script>
+
+  <script src="/script/scheme/banderole.js"></script>
+
+<script src="/script/bootstarp.js"></script>
+
+
+<div class="backtop syuanpi melt toTop" id="backtop">
     <i class="iconfont icon-up"></i>
     <span style="text-align:center;font-family:Georgia;"><span style="font-family:Georgia;" id="scrollpercent">1</span>%</span>
 </div>
-    
+
+
+
 </body>
 </html>
