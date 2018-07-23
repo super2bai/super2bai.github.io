@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <title> Eclipse和Maven那点事儿 · 贰白 </title>
+    <title> 同一个Tomcat多端口多项目部署 · 贰白 </title>
     <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
@@ -22,7 +22,7 @@
 
 
 
-    <meta name="keywords" content="Eclipse, Nlvi" />
+    <meta name="keywords" content="Tomcat, Nlvi" />
 
 <link rel="stylesheet" href="/style/style.css">
 <script src="/script/jquery.min.js"></script>
@@ -231,23 +231,23 @@
     <article class="post">
         <header class="post-header">
             <div class="post-time syuanpi riseIn-light back-1">
-                <span>2018年6月6日</span>
+                <span>2018年7月23日</span>
                 
                 
-                    <span class="post-category"><a href="/categories/Eclipse/">Eclipse</a></span>
+                    <span class="post-category"><a href="/categories/deploy/">deploy</a></span>
                 
                 
             </div>
             <h1 class="post-title syuanpi riseIn-light back-2">
             
-                Eclipse和Maven那点事儿
+                同一个Tomcat多端口多项目部署
             
             </h1>
             
                 
                     <div class="post-tags syuanpi riseIn-light back-3">
                     
-                        <a href="/tags/Eclipse/">Eclipse</a>
+                        <a href="/tags/Tomcat/">Tomcat</a>
                     
                     </div>
                 
@@ -255,35 +255,29 @@
         </header>
         <div class="post-content syuanpi riseIn-light back-3">
             
-                <p>Eclipse中Maven的常规使用介绍</p>
+                <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>当服务器只有一台，又需要将不同环境分开管理，可以选择多Tomcat分别部署不同的项目，也可以选择同一个Tomcat下多端口多项目部署。</p>
 <a id="more"></a>
-<p><strong>Eclipse Maven 目录结构</strong></p>
+<h3 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h3><h4 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h4><p>配置文件位置：<code>$TOMCAT_HOME/conf/server.xml</code></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--The First Project--&gt;</span></div><div class="line"><span class="comment">&lt;!-- 此处name值：1.区别其他项目；2.与下方Engine值保持一致--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">Service</span> <span class="attr">name</span>=<span class="string">"Catalina1"</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!-- 此处port值修改为想用的端口号--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">Connector</span> <span class="attr">port</span>=<span class="string">"8080"</span> <span class="attr">protocol</span>=<span class="string">"HTTP/1.1"</span> <span class="attr">connectionTimeout</span>=<span class="string">"20000"</span> <span class="attr">redirectPort</span>=<span class="string">"8443"</span> /&gt;</span></div><div class="line">    <span class="comment">&lt;!--这个端口是用于进行Tomcat服务器与其它HTTP服务器进行集成时，需要这个连接器，此处不需要，注释掉--&gt;</span></div><div class="line">    <span class="comment">&lt;!-- Define an AJP 1.3 Connector on port 8009 </span></div><div class="line"><span class="comment">    　　&lt;Connector port="8009" protocol="AJP/1.3" redirectPort="8443" /&gt;</span></div><div class="line"><span class="comment">    --&gt;</span></div><div class="line">    <span class="comment">&lt;!-- 与上方Service的name值保持一致--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">Engine</span> <span class="attr">name</span>=<span class="string">"Catalina1"</span> <span class="attr">defaultHost</span>=<span class="string">"localhost"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">Realm</span> <span class="attr">className</span>=<span class="string">"org.apache.catalina.realm.LockOutRealm"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">Realm</span> <span class="attr">className</span>=<span class="string">"org.apache.catalina.realm.UserDatabaseRealm"</span> <span class="attr">resourceName</span>=<span class="string">"UserDatabase"</span>/&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">Realm</span>&gt;</span></div><div class="line">      <span class="comment">&lt;!-- 与上级目录下的文件夹名称保持一致--&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">Host</span> <span class="attr">name</span>=<span class="string">"localhost"</span>  <span class="attr">appBase</span>=<span class="string">"webapps1"</span> <span class="attr">unpackWARs</span>=<span class="string">"true"</span> <span class="attr">autoDeploy</span>=<span class="string">"true"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">Valve</span> <span class="attr">className</span>=<span class="string">"org.apache.catalina.valves.AccessLogValve"</span> <span class="attr">directory</span>=<span class="string">"logs"</span></span></div><div class="line"><span class="tag">               <span class="attr">prefix</span>=<span class="string">"localhost_access_log."</span> <span class="attr">suffix</span>=<span class="string">".txt"</span></span></div><div class="line"><span class="tag">               <span class="attr">pattern</span>=<span class="string">"%h %l %u %t &amp;quot;%r&amp;quot; %s %b"</span> /&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">Host</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">Engine</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">Service</span>&gt;</span></div><div class="line"><span class="comment">&lt;!--The Second Project--&gt;</span></div><div class="line"><span class="comment">&lt;!-- 此处name值：1.区别其他项目；2.与下方Engine值保持一致--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">Service</span> <span class="attr">name</span>=<span class="string">"Catalina2"</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!-- 此处port值修改为想用的端口号--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">Connector</span> <span class="attr">port</span>=<span class="string">"9090"</span> <span class="attr">protocol</span>=<span class="string">"HTTP/1.1"</span> <span class="attr">connectionTimeout</span>=<span class="string">"20000"</span> <span class="attr">redirectPort</span>=<span class="string">"8443"</span> /&gt;</span></div><div class="line">    <span class="comment">&lt;!--这个端口是用于进行Tomcat服务器与其它HTTP服务器进行集成时，需要这个连接器，此处不需要，注释掉--&gt;</span></div><div class="line">    <span class="comment">&lt;!-- Define an AJP 1.3 Connector on port 8009 </span></div><div class="line"><span class="comment">    　　&lt;Connector port="8009" protocol="AJP/1.3" redirectPort="8443" /&gt;</span></div><div class="line"><span class="comment">    --&gt;</span></div><div class="line">    <span class="comment">&lt;!-- 与上方Service的name值保持一致--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">Engine</span> <span class="attr">name</span>=<span class="string">"Catalina2"</span> <span class="attr">defaultHost</span>=<span class="string">"localhost"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">Realm</span> <span class="attr">className</span>=<span class="string">"org.apache.catalina.realm.LockOutRealm"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">Realm</span> <span class="attr">className</span>=<span class="string">"org.apache.catalina.realm.UserDatabaseRealm"</span> <span class="attr">resourceName</span>=<span class="string">"UserDatabase"</span>/&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">Realm</span>&gt;</span></div><div class="line">      <span class="comment">&lt;!-- 与上级目录下的文件夹名称保持一致--&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">Host</span> <span class="attr">name</span>=<span class="string">"localhost"</span>  <span class="attr">appBase</span>=<span class="string">"webapps2"</span> <span class="attr">unpackWARs</span>=<span class="string">"true"</span> <span class="attr">autoDeploy</span>=<span class="string">"true"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">Valve</span> <span class="attr">className</span>=<span class="string">"org.apache.catalina.valves.AccessLogValve"</span> <span class="attr">directory</span>=<span class="string">"logs"</span></span></div><div class="line"><span class="tag">               <span class="attr">prefix</span>=<span class="string">"localhost_access_log."</span> <span class="attr">suffix</span>=<span class="string">".txt"</span></span></div><div class="line"><span class="tag">               <span class="attr">pattern</span>=<span class="string">"%h %l %u %t &amp;quot;%r&amp;quot; %s %b"</span> /&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">Host</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">Engine</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">Service</span>&gt;</span></div></pre></td></tr></table></figure>
+<h5 id="需要修改的地方"><a href="#需要修改的地方" class="headerlink" title="需要修改的地方"></a>需要修改的地方</h5><ul>
+<li>Service 标签 的 name 属性</li>
+<li>端口号( Connector 标签的 port 属性)</li>
+<li>Engine 标签的 name 属性</li>
+<li>Host 标签的 appBase 属性</li>
+<li>注释掉 port为8009的Connector</li>
+</ul>
+<h4 id="复制文件夹"><a href="#复制文件夹" class="headerlink" title="复制文件夹"></a>复制文件夹</h4><p>文件夹位置：<code>$TOMCAT_HOME/webapps</code></p>
 <ul>
-<li>项目右键 Maven -&gt; Disable Maven Nature</li>
-<li>项目右键 Configure -&gt; Convert to Maven Project…</li>
-<li>项目右键 proterties -&gt; Project Facets</li>
-<li>项目右键 Maven -&gt; Update Project</li>
-<li>项目右键Run As -&gt; Maven Clean -&gt; Maven Install</li>
+<li>复制此文件夹</li>
+<li>修改名称分别为上方配置文件中<code>Host</code>节点中<code>appBase</code>中的名称</li>
+<li>把不同项目的<code>war</code>包分别放到两个文件夹下</li>
 </ul>
-<p><strong>Eclipse Maven 无法自动搜索依赖</strong></p>
-<ul>
-<li>Windows -&gt; preferences -&gt; Maven <ul>
-<li>Download repository index updates on startup</li>
+<h3 id="重启Tomcat"><a href="#重启Tomcat" class="headerlink" title="重启Tomcat"></a>重启Tomcat</h3><ul>
+<li>观察日志是否有错误</li>
+<li>测试每一个项目是否能正常访问</li>
+<li>测试每一个项目是否能正常提供数据</li>
 </ul>
-</li>
-</ul>
-<p>后续如果不想更新，再把此项取消勾选即可</p>
-<ul>
-<li>windows -&gt; show view -&gt; maven -&gt; Maven Repositories<ul>
-<li>Global Repositories 右键 -&gt; rebuild index</li>
-</ul>
-</li>
-</ul>
-<p><strong>SVN检出的Maven项目部署到Tomcat下访问404</strong></p>
-<ul>
-<li>检查项目下的.classpath和.project内容</li>
-</ul>
-
+<h3 id="完毕"><a href="#完毕" class="headerlink" title="完毕"></a>完毕</h3>
             
         
         </div>
@@ -312,16 +306,10 @@
         
     <nav class="article-page">
         
-            <a href="/tool/recommend.html" id="art-left" class="art-right">
-                <span class="next-title">
-                    工具推荐<i class="iconfont icon-right"></i> 
-                </span>
-            </a>
         
-        
-            <a href="/issue/discuss.html" id="art-right" class="art-left">
+            <a href="/Docker/start.html" id="art-right" class="art-left">
                 <span class="prev-title"> 
-                    <i class="iconfont icon-left"></i>问题讨论
+                    <i class="iconfont icon-left"></i>Docker入门
                 </span>
             </a>
         
@@ -443,8 +431,8 @@ $(document).ready(function(){
     <div class="post-toc">
         <span class="title">文章目录</span>
         <div class="toc-inner syuanpi back-1 fallIn-light">
-            <li class="title-link"><a href="javascript:;" class="toTop">Eclipse和Maven那点事儿</a></li>
-            
+            <li class="title-link"><a href="javascript:;" class="toTop">同一个Tomcat多端口多项目部署</a></li>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#背景"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#操作"><span class="toc-text">操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#修改配置文件"><span class="toc-text">修改配置文件</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#需要修改的地方"><span class="toc-text">需要修改的地方</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#复制文件夹"><span class="toc-text">复制文件夹</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#重启Tomcat"><span class="toc-text">重启Tomcat</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#完毕"><span class="toc-text">完毕</span></a></li></ol>
         </div>
     </div>
 

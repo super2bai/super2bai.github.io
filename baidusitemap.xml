@@ -4,6 +4,66 @@
 
     
   <url>
+    <loc>https://super2bai.github.io/deploy/Tomcat.html</loc>
+    <lastmod>2018-07-23T07:46:18.863Z</lastmod>
+    <data>
+        <display>
+        <title>同一个Tomcat多端口多项目部署</title>
+        <pubTime>2018-07-23T07:44:10.000Z</pubTime>
+        
+        <tag>Tomcat</tag>
+         
+         
+           
+             
+              <breadCrumb title="deploy" url="https://super2bai.github.io/categories/deploy/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://super2bai.github.io/deploy/windows.html</loc>
+    <lastmod>2018-07-23T07:46:16.396Z</lastmod>
+    <data>
+        <display>
+        <title>Java Web部署到Windows的Tomcat</title>
+        <pubTime>2018-06-22T05:56:50.000Z</pubTime>
+        
+        <tag>部署</tag>
+         
+         
+           
+             
+              <breadCrumb title="deploy" url="https://super2bai.github.io/categories/deploy/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://super2bai.github.io/tool/recommend.html</loc>
+    <lastmod>2018-07-20T08:37:12.284Z</lastmod>
+    <data>
+        <display>
+        <title>工具推荐</title>
+        <pubTime>2018-06-06T07:31:19.000Z</pubTime>
+        
+        <tag>工具</tag>
+         
+         
+           
+             
+              <breadCrumb title="tool" url="https://super2bai.github.io/categories/tool/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://super2bai.github.io/Docker/start.html</loc>
     <lastmod>2018-07-17T15:27:31.956Z</lastmod>
     <data>
@@ -84,26 +144,6 @@
 
     
   <url>
-    <loc>https://super2bai.github.io/tool/recommend.html</loc>
-    <lastmod>2018-06-26T03:26:19.592Z</lastmod>
-    <data>
-        <display>
-        <title>工具推荐</title>
-        <pubTime>2018-06-06T07:31:19.000Z</pubTime>
-        
-        <tag>工具</tag>
-         
-         
-           
-             
-              <breadCrumb title="tool" url="https://super2bai.github.io/categories/tool/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://super2bai.github.io/JVM/decompile.html</loc>
     <lastmod>2018-06-25T13:34:59.601Z</lastmod>
     <data>
@@ -117,26 +157,6 @@
            
              
               <breadCrumb title="JVM" url="https://super2bai.github.io/categories/JVM/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://super2bai.github.io/deploy/windows.html</loc>
-    <lastmod>2018-06-22T05:59:52.410Z</lastmod>
-    <data>
-        <display>
-        <title>Java Web部署到Windows的Tomcat</title>
-        <pubTime>2018-06-22T05:56:50.000Z</pubTime>
-        
-        <tag>部署</tag>
-         
-         
-           
-             
-              <breadCrumb title="deploy" url="https://super2bai.github.io/categories/deploy/"/>
           
         </display>
     </data>
