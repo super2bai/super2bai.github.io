@@ -416,8 +416,8 @@
 <p><strong>mount上去的文件，docker没有读写权限。</strong></p>
 <p>举个例子：</p>
 <p>mount了一个文件夹，但是在docker里面就是无法访问。</p>
-<p><img src="https://wx1.sinaimg.cn/mw690/8c564d2aly1ftcnqg0yuqj20mk03ydgm.jpg" alt=""></p>
-<p>相关搜索关键字：<code>docker privileged=ture</code></p>
+<p><img src="https://wx4.sinaimg.cn/mw690/8c564d2aly1ftl1wnwyg5j20zw06cwkt.jpg" alt=""></p>
+<p>相关搜索关键字：<code>docker privileged=true</code></p>
 <h4 id="Union-File-System联合文件系统"><a href="#Union-File-System联合文件系统" class="headerlink" title="Union File System联合文件系统"></a>Union File System联合文件系统</h4><blockquote>
 <p>联合文件系统（UnionFS）是一种轻量级的高性能分层文件系统，它支持将文件系统中的修改信息作为一次提交，并层层叠加，同时可以将不同目录挂载到同一个虚拟文件系统下，应用看到的是挂载的最终结果。</p>
 <p>在Docker中，只读层及在顶部的读写层的组合被称为<a href="https://docs.docker.com/terms/layer/#union-file-system" target="_blank" rel="external">Union File System</a>（联合文件系统）。</p>
