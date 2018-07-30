@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <link rel="stylesheet" href="/style/style.css">
+<script>
+  var nlviconfig = {
+    title: "贰白",
+    author: "super2bai",
+    baseUrl: "/",
+    theme: {
+      scheme: "banderole",
+      lightbox: true,
+      animate: true,
+      search: ,
+      friends: false,
+      lazy: false
+    }
+  }
+</script>
+
+
+
+
+    <link rel="stylesheet" href="/script/lib/lightbox/css/lightbox.min.css">
+
+
+
+
+    <link rel="stylesheet" href="/syuanpi/syuanpi.min.css">
+
+
+
+
+    <link rel="icon" href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-98059014-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-116557847-1');
+</script>
+
+
+
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="browsermode" content="application">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="贰白">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="msapplication-navbutton-color" content="#666666">
+<meta name= "format-detection" content="telephone=no" />
+<meta name="keywords" content="nlvi, Nlvi" />
+
+  <link rel="apple-touch-icon"  sizes="72x72"  href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+  <link rel="apple-touch-icon-precomposed"  sizes="72x72"  href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+
+
+  <meta name="subtitle" content="苦于探索，全是未知">
+
+
+  <meta name="description" content="苦于探索，全是未知">
+
+
+
+  <meta name="keywords" content="JVM, Nlvi" />
+
+  <title> JDK的可视化工具 · 贰白 </title>
+</head>
+<body>
+  <div class="progress">
+  <div class="progress-inner"></div>
+</div>
+  
+  
+    <div class="tagcloud-mask"></div>  
+<div class="tagcloud" id="tagcloud">
+  <div class="tagcloud-inner">
+    <a href="/tags/3D编辑器/" style="font-size: 14px;">3D编辑器</a> <a href="/tags/Docker/" style="font-size: 14px;">Docker</a> <a href="/tags/Dubbo/" style="font-size: 14px;">Dubbo</a> <a href="/tags/Eclipse/" style="font-size: 14px;">Eclipse</a> <a href="/tags/GHPages/" style="font-size: 14px;">GHPages</a> <a href="/tags/IO/" style="font-size: 14px;">IO</a> <a href="/tags/JDK/" style="font-size: 14px;">JDK</a> <a href="/tags/JVM/" style="font-size: 14px;">JVM</a> <a href="/tags/Linux/" style="font-size: 14px;">Linux</a> <a href="/tags/Python/" style="font-size: 14px;">Python</a> <a href="/tags/Spring/" style="font-size: 14px;">Spring</a> <a href="/tags/Tomcat/" style="font-size: 14px;">Tomcat</a> <a href="/tags/Zookeeper/" style="font-size: 14px;">Zookeeper</a> <a href="/tags/jmeter/" style="font-size: 14px;">jmeter</a> <a href="/tags/mac/" style="font-size: 14px;">mac</a> <a href="/tags/walkup/" style="font-size: 14px;">walkup</a> <a href="/tags/分布式/" style="font-size: 14px;">分布式</a> <a href="/tags/工具/" style="font-size: 14px;">工具</a> <a href="/tags/游戏/" style="font-size: 14px;">游戏</a> <a href="/tags/编码/" style="font-size: 14px;">编码</a> <a href="/tags/部署/" style="font-size: 14px;">部署</a> <a href="/tags/问题/" style="font-size: 14px;">问题</a>
+  </div>
+</div>  
+  
+
+  <div class="container">
+
+    <header class="header" id="header">
+  <div class="header-wrapper">
+    <div class="logo">
+  <div class="logo-inner syuanpi tvIn">
+    <span><a href="/">贰白</a></span>
+    
+      <span id="subtitle">苦于探索，全是未知</span>
+    
+  </div>
+</div>
+    <nav class="main-nav">
+        
+  <ul class="main-nav-list syuanpi tvIn">
+  
+  
+    
+      
+    
+    <li class="menu-item">
+      <a href="/" id="article">
+        <span class="base-name">文章</span>
+        
+          <span class="menu-item-label">article</span>
+        
+      </a>
+    </li>  
+  
+    
+      
+    
+    <li class="menu-item">
+      <a href="/archives" id="archives">
+        <span class="base-name">归档</span>
+        
+          <span class="menu-item-label">archives</span>
+        
+      </a>
+    </li>  
+  
+    
+      
+    
+    <li class="menu-item">
+      <a href="javascript:;" id="tags">
+        <span class="base-name">标签</span>
+        
+          <span class="menu-item-label">tags</span>
+        
+      </a>
+    </li>  
+  
+    
+      
+    
+    <li class="menu-item">
+      <a href="/about" id="about">
+        <span class="base-name">关于</span>
+        
+          <span class="menu-item-label">about</span>
+        
+      </a>
+    </li>  
+  
+  </ul>
+  
+</nav>
+    
+    
+  </div>
+</header>
+<div class="mobile-header">
+  <div class="mobile-header-body">
+    <div class="mobile-header-list">
+      
+        
+            <div class="mobile-nav-item">
+                <a href="/">
+                    <span>文章</span>
+                    
+                        <span class="menu-item-label">article</span>
+                    
+                </a>
+            </div>
+        
+      
+        
+            <div class="mobile-nav-item">
+                <a href="/archives">
+                    <span>归档</span>
+                    
+                        <span class="menu-item-label">archives</span>
+                    
+                </a>
+            </div>
+        
+      
+        
+          <div class="mobile-nav-item inner-cloud">
+            <div class="mobile-nav-tag">
+              <a href="javascript:;" id="mobile-tags">
+                <span>标签</span>
+                
+                    <span class="menu-item-label">tags</span>
+                
+              </a>
+            </div>
+            <div class="mobile-nav-tagcloud">
+              <div class="mobile-tagcloud-inner">
+                <a href="/tags/3D编辑器/" style="font-size: 14px;">3D编辑器</a> <a href="/tags/Docker/" style="font-size: 14px;">Docker</a> <a href="/tags/Dubbo/" style="font-size: 14px;">Dubbo</a> <a href="/tags/Eclipse/" style="font-size: 14px;">Eclipse</a> <a href="/tags/GHPages/" style="font-size: 14px;">GHPages</a> <a href="/tags/IO/" style="font-size: 14px;">IO</a> <a href="/tags/JDK/" style="font-size: 14px;">JDK</a> <a href="/tags/JVM/" style="font-size: 14px;">JVM</a> <a href="/tags/Linux/" style="font-size: 14px;">Linux</a> <a href="/tags/Python/" style="font-size: 14px;">Python</a> <a href="/tags/Spring/" style="font-size: 14px;">Spring</a> <a href="/tags/Tomcat/" style="font-size: 14px;">Tomcat</a> <a href="/tags/Zookeeper/" style="font-size: 14px;">Zookeeper</a> <a href="/tags/jmeter/" style="font-size: 14px;">jmeter</a> <a href="/tags/mac/" style="font-size: 14px;">mac</a> <a href="/tags/walkup/" style="font-size: 14px;">walkup</a> <a href="/tags/分布式/" style="font-size: 14px;">分布式</a> <a href="/tags/工具/" style="font-size: 14px;">工具</a> <a href="/tags/游戏/" style="font-size: 14px;">游戏</a> <a href="/tags/编码/" style="font-size: 14px;">编码</a> <a href="/tags/部署/" style="font-size: 14px;">部署</a> <a href="/tags/问题/" style="font-size: 14px;">问题</a>
+              </div>
+            </div>
+          </div>
+        
+      
+        
+            <div class="mobile-nav-item">
+                <a href="/about">
+                    <span>关于</span>
+                    
+                        <span class="menu-item-label">about</span>
+                    
+                </a>
+            </div>
+        
+      
+    </div>
+  </div>
+  <div class="mobile-header-nav">
+    <div class="mobile-header-item" id="mobile-left">
+      <div class="header-menu-item">
+        <span class="header-menu-line"></span>
+      </div>
+    </div>
+    <h1 class="mobile-header-title">
+      <a href="/">贰白</a>
+    </h1>
+    <div class="mobile-header-item"></div>
+  </div>
+</div>
+    <div class="container-inner">
+      <main class="main" id="main">
+        <div class="main-wrapper">
+          
+    
+  
+  <article class="
+  post
+   is_post 
+  ">
+    <header class="post-header">
+      <div class="post-time syuanpi fadeInUpShort back-1">
+        <div class="post-time-wrapper">
+          <span>2018-07-24</span>
+          
+            
+              <span class="post-category"><a href="/categories/JVM/">JVM</a></span>
+            
+          
+          
+            
+              <aside class="post-tags syuanpi fadeInUpShort back-3">
+              
+                <a href="/tags/JVM/">JVM</a>
+              
+              </aside>
+            
+          
+        </div>
+      </div>
+      <h1 class="post-title syuanpi fadeInUpShort back-2">
+        
+          JDK的可视化工具
+        
+      </h1>
+    </header>
+    <div class="post-content syuanpi fadeInUpShort back-3">
+      
+        <p>对性能瓶颈问题来源定位的可视化工具</p>
+<a id="more"></a>
+<ul>
+<li>OutOfMemoryError</li>
+<li>内存泄漏</li>
+<li>线程死锁</li>
+<li>锁争用(Lock Contention)</li>
+<li>Java进程消耗CPU过高</li>
+</ul>
+<p>在JDK6u7后，VisualVM作为Sun的JDK发行版的标准部分，可以替代例如<code>jinfo</code>、<code>jmap</code>、<code>jstack</code>、<code>jstat</code>和<code>jConsole</code>。</p>
+<h3 id="JConsole"><a href="#JConsole" class="headerlink" title="JConsole"></a><a href="https://docs.oracle.com/javase/8/docs/technotes/guides/management/jconsole.html" target="_blank" rel="external">JConsole</a></h3><h4 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h4><p>版本：JDK1.5+</p>
+<blockquote>
+<p>Java Monitoring and Management Console，基于JMX的可视化监视、管理工具。</p>
+</blockquote>
+<p><strong>JMX</strong>（Java Management Extensions，即管理Java的扩展），这种机制可以方便的管理正在运行中的Java程序。常用于管理线程、内存、日志级别、服务重启、系统环境等。一个JMX管理资源可以是一个Java应用、一个服务或一个设备，它们可以用Java开发，或者至少能用Java进行包装，并且能被置入JMX框架中，从而成为JMX的一个管理构件(Managed Bean)，简称MBean。</p>
+<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><p>命令行中输入<code>jconsole</code>回车，将自动搜索出本机运行的所有进程，双击选择要监控的进程即可，也可以远程连接服务器。</p>
+<ul>
+<li>概述<ul>
+<li>堆内存使用量、线程、类、CPU使用情况</li>
+<li>对着图右击可以保存数据到CVS文件</li>
+</ul>
+</li>
+<li>内存<ul>
+<li>可视化的<code>jstat</code>，用于监视受收集器管理的虚拟机内存的变化趋势</li>
+<li>查看不同内存(堆内存、非堆内存)，使用的GC算法及回收次数和时间</li>
+<li>前提要学习好Java的内存模型</li>
+</ul>
+</li>
+<li>线程<ul>
+<li>可以输入字符串过滤关键线程</li>
+<li>查看某一线程的名称、状态、阻塞和等待的次数、堆栈的信息</li>
+<li>红色：线程数目的峰值；蓝色：当前活动的线程</li>
+<li>检测死锁(D)，有时很有用</li>
+</ul>
+</li>
+<li>类<ul>
+<li>红线：总共加载的类(包括后来卸载的)</li>
+<li>蓝线：当前的类加载</li>
+</ul>
+</li>
+<li>VM摘要<ul>
+<li>看看线程、类、内存、系统、和其它信息</li>
+</ul>
+</li>
+<li>MBean</li>
+</ul>
+<h3 id="VisualVM"><a href="#VisualVM" class="headerlink" title="VisualVM"></a><a href="https://docs.oracle.com/javase/8/docs/technotes/guides/visualvm/index.html" target="_blank" rel="external">VisualVM</a></h3><h4 id="介绍-1"><a href="#介绍-1" class="headerlink" title="介绍"></a>介绍</h4><p>版本：JDK6u7+</p>
+<blockquote>
+<p>不需要被监视的程序基于特殊Agent运行，对程序的实际性能影响很小，可以直接应用在生产环境中。</p>
+<p>通过插件拓展的特性，可以做到：</p>
+<ul>
+<li>显示JVM进程和进程的配置、环境信息(jps、jinfo)</li>
+<li>监视应用程序的CPU、GC、堆、方法区及线程的信息(stat、jstack)</li>
+<li>dump及分析堆转储快照(jmap、jhat)</li>
+<li>方法级的程序运行性能分析，找出被调用最多、运行时间最长的方法</li>
+<li>离线程序快照：收集程序的运行时配置、线程dump、内存dump等信息建立一个快照</li>
+</ul>
+</blockquote>
+<h4 id="使用-1"><a href="#使用-1" class="headerlink" title="使用"></a>使用</h4><ul>
+<li><a href="https://visualvm.github.io/download.html" target="_blank" rel="external">安装</a></li>
+<li>生成堆dmp文件<ul>
+<li><code>Aplications</code>窗口右击节点，选择<code>Heap Dump</code></li>
+<li><code>Monitor</code>，点击<code>Heap Dump</code></li>
+</ul>
+</li>
+<li><code>Profiler</code>中可以对运行期间方法级的CPU和内存进行分析，但会影响程序运行性能，不建议在生产环境使用。<ul>
+<li>CPU：统计每个方法的执行次数、执行耗时</li>
+<li>Memory：统计每个方法关联的对象数及对象所占空间</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>JDK1.5后，如果使用Client模式，在进行Profiler之前，最好在监视程序中加入<code>-Xshare:off</code>来关闭类共享优化。</p>
+<p>Client模式下的虚拟机加入并自动开启了类共享，在多虚拟机进程中共享<code>rt.jar</code>中类数据以提高加载速度和节省内存的优化，但这可能会导致被监视的应用程序崩溃。</p>
+</blockquote>
+<ul>
+<li><code>BTrace</code>动态日志跟踪：在不停止程序运行的前提下，通过热部署技术加入原本并不存在的调试代码，以实现对程序的动态调试<ul>
+<li>打印调用堆栈、参数、返回值</li>
+<li>性能监控、定位连接泄漏和内存泄漏、解决多线程竞争问题</li>
+</ul>
+</li>
+<li><code>Threads</code><ul>
+<li>线程长时间停顿的原因<ul>
+<li>等待外部资源（数据库连接、网络资源、设备资源等）</li>
+<li>死循环</li>
+<li>锁等待（活锁和死锁）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h4><ul>
+<li>插件中心<ul>
+<li>菜单 &gt; Tools &gt; Plugins &gt; Available Plugins &gt; Install</li>
+</ul>
+</li>
+<li>下载插件分发文件(.nbm)<ul>
+<li>菜单 &gt; Tools &gt; Plugins &gt; Downloaded &gt; Add Plugins &gt; 选择.nbm文件 &gt; Install</li>
+</ul>
+</li>
+</ul>
+<h3 id="实例-填充内存"><a href="#实例-填充内存" class="headerlink" title="实例-填充内存"></a>实例-填充内存</h3><ul>
+<li>写代码</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.ArrayList;</div><div class="line"><span class="keyword">import</span> java.util.List;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OOMObject</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">byte</span>[] placeHolder=<span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">64</span>*<span class="number">1024</span>];</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">fillHeap</span><span class="params">(<span class="keyword">int</span> num)</span> <span class="keyword">throws</span> InterruptedException</span>&#123;</div><div class="line">		List&lt;OOMObject&gt; list=<span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;num;i++)&#123;</div><div class="line">			Thread.sleep(<span class="number">50</span>);</div><div class="line">			list.add(<span class="keyword">new</span> OOMObject());</div><div class="line">		&#125;</div><div class="line">		System.gc();</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span><span class="keyword">throws</span> Exception</span>&#123;</div><div class="line">		fillHeap(<span class="number">1000</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>改JVM参数</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">-Xms100m -Xmx100m -XX:+UseSerialGC</div></pre></td></tr></table></figure>
+<ul>
+<li>运行后可看到，内存Eden区呈折线状，整个堆的曲线是平滑向上增长。</li>
+</ul>
+<h3 id="实例-线程死循环-amp-等待"><a href="#实例-线程死循环-amp-等待" class="headerlink" title="实例-线程死循环&amp;等待"></a>实例-线程死循环&amp;等待</h3><ul>
+<li>写代码</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.super2bai.jvm;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.io.BufferedReader;</div><div class="line"><span class="keyword">import</span> java.io.InputStreamReader;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Lock</span> </span>&#123;</div><div class="line">	<span class="comment">/**</span></div><div class="line"><span class="comment">	 * 线程死循环</span></div><div class="line"><span class="comment">	 */</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">createBusyThread</span><span class="params">()</span></span>&#123;</div><div class="line">		Thread thread =<span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</div><div class="line">			</div><div class="line">			<span class="meta">@Override</span></div><div class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">				<span class="keyword">while</span>(<span class="keyword">true</span>);</div><div class="line">				</div><div class="line">			&#125;</div><div class="line">		&#125;,<span class="string">"testBusyThread"</span>);</div><div class="line">		thread.start();</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line"><span class="comment">	 * 线程锁等待</span></div><div class="line"><span class="comment">	 * <span class="doctag">@param</span> lock</span></div><div class="line"><span class="comment">	 */</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">createLockThread</span><span class="params">(<span class="keyword">final</span> Object lock)</span></span>&#123;</div><div class="line">		Thread thread =<span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</div><div class="line">			</div><div class="line">			<span class="meta">@Override</span></div><div class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">				<span class="keyword">synchronized</span> (lock) &#123;</div><div class="line">					<span class="keyword">try</span>&#123;</div><div class="line">						lock.wait();</div><div class="line">					&#125;<span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">						e.printStackTrace();</div><div class="line">					&#125;</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;,<span class="string">"testLockThread"</span>);</div><div class="line">		thread.start();</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception</span>&#123;</div><div class="line">		BufferedReader bufferedReader=<span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(System.in));</div><div class="line">		bufferedReader.readLine();</div><div class="line">		createBusyThread();</div><div class="line">		bufferedReader.readLine();</div><div class="line">		Object object=<span class="keyword">new</span> Object();</div><div class="line">		createLockThread(object);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>运行后，查看VisualVM中的<code>Threads</code>中的<code>main</code>线程，会发现一直在<code>readBytes</code>等待<code>System.in</code>的键盘输入，线程状态为<code>Runnable</code>，线程会被分配运行时间，但<code>readBytes</code>检查到流没有更新时会立刻归还执行令牌，这种等待只消耗很小的CPU资源。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="string">"main"</span> - Thread t@<span class="number">1</span></div><div class="line">   java.lang.Thread.State: RUNNABLE</div><div class="line">	at java.io.FileInputStream.readBytes(Native Method)</div><div class="line">	at java.io.FileInputStream.read(FileInputStream.java:<span class="number">255</span>)</div><div class="line">	at java.io.BufferedInputStream.read1(BufferedInputStream.java:<span class="number">284</span>)</div><div class="line">	at java.io.BufferedInputStream.read(BufferedInputStream.java:<span class="number">345</span>)</div><div class="line">	at sun.nio.cs.StreamDecoder.readBytes(StreamDecoder.java:<span class="number">284</span>)</div><div class="line">	at sun.nio.cs.StreamDecoder.implRead(StreamDecoder.java:<span class="number">326</span>)</div><div class="line">	at sun.nio.cs.StreamDecoder.read(StreamDecoder.java:<span class="number">178</span>)</div><div class="line">	at java.io.InputStreamReader.read(InputStreamReader.java:<span class="number">184</span>)</div><div class="line">	at java.io.BufferedReader.fill(BufferedReader.java:<span class="number">161</span>)</div><div class="line">	at java.io.BufferedReader.readLine(BufferedReader.java:<span class="number">324</span>)</div><div class="line">	at java.io.BufferedReader.readLine(BufferedReader.java:<span class="number">389</span>)</div><div class="line">	at com.super2bai.jvm.Lock.main(Lock.java:<span class="number">45</span>)</div></pre></td></tr></table></figure>
+<ul>
+<li>随便在控制台输入点内容回车后，刷新VisualVM中的<code>Threads</code>，会看到<code>testBusyThread</code>线程，因为一直在执行空循环，所以停留在<code>Lock</code>的15行，也就是<code>while(true);</code>，这时候线程状态为<code>RUNNABLE</code>，而且没有归还线程执行令牌的动作，会在空循环上用尽全部执行时间直到线程切换，这种等待会消耗较多的CPU资源。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="string">"testBusyThread"</span> - Thread t@<span class="number">17</span></div><div class="line">   java.lang.Thread.State: RUNNABLE</div><div class="line">	at com.super2bai.jvm.Lock$<span class="number">1</span>.run(Lock.java:<span class="number">15</span>)</div><div class="line">	at java.lang.Thread.run(Thread.java:<span class="number">748</span>)</div></pre></td></tr></table></figure>
+<ul>
+<li>继续在控制台输入内容后回车，刷新VisualVM中的<code>Threads</code>，会看到<code>testLockThread</code>线程，停留在<code>Lock</code>的33行，也就是<code>lock.wait();</code>，正在等待着lock对象的<code>notify()</code>或<code>notifyAll()</code>方法的出现，线程处于<code>WAITING</code>状态，也就是正常的活锁等待，在被唤醒前不会被分配执行时间，只有lock对象的<code>notify()</code>或<code>notifyALL()</code>方法被调用，便能激活以继续执行。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="string">"testBusyThread"</span> - Thread t@<span class="number">9</span></div><div class="line">   java.lang.Thread.State: WAITING</div><div class="line">	at java.lang.Object.wait(Native Method)</div><div class="line">	- waiting on &lt;<span class="number">753</span>b0264&gt; (a java.lang.Object)</div><div class="line">	at java.lang.Object.wait(Object.java:<span class="number">502</span>)</div><div class="line">	at com.super2bai.jvm.Lock$<span class="number">2</span>.run(Lock.java:<span class="number">33</span>)</div><div class="line">	at java.lang.Thread.run(Thread.java:<span class="number">748</span>)</div></pre></td></tr></table></figure>
+<h3 id="实例-线程死锁"><a href="#实例-线程死锁" class="headerlink" title="实例-线程死锁"></a>实例-线程死锁</h3><ul>
+<li>写代码</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SynAddRunnable</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="keyword">int</span> a, b;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">SynAddRunnable</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.a = a;</div><div class="line">		<span class="keyword">this</span>.b = b;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="comment">/**</span></div><div class="line"><span class="comment">		 * 死锁的原因：&lt;br&gt;</span></div><div class="line"><span class="comment">		 * Integer.valueOf()方法基于减少对象创建次数和节省内存的考虑&lt;br&gt;</span></div><div class="line"><span class="comment">		 * [-128, 127]之间的数字会被缓存&lt;br&gt;</span></div><div class="line"><span class="comment">		 * java.lang.Integer.IntegerCache中high和low的值&lt;br&gt;</span></div><div class="line"><span class="comment">		 * 当传入的值在这个范围内，会直接返回缓存中的对象&lt;br&gt;</span></div><div class="line"><span class="comment">		 * 也就是说，100次一共就只返回了两个不同的对象&lt;br&gt;</span></div><div class="line"><span class="comment">		 * 加入在某个线程的两个synchronized块之间发生了一次线程切换&lt;br&gt;</span></div><div class="line"><span class="comment">		 * 那就会出现线程A等待线程B持有的Integer.valueOf(1)&lt;br&gt;</span></div><div class="line"><span class="comment">		 * 而线程B又等待线程A持有的Integer.valueOf(2)&lt;br&gt;</span></div><div class="line"><span class="comment">		 * 就会发生死锁，互相等待，运行不下去了&lt;br&gt;</span></div><div class="line"><span class="comment">		 */</span></div><div class="line">		<span class="keyword">synchronized</span> (Integer.valueOf(a)) &#123;</div><div class="line">			<span class="keyword">synchronized</span> (Integer.valueOf(b)) &#123;</div><div class="line">				System.out.println(a + b);</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		<span class="comment">// 不用for其实也可以，但死锁概率小。</span></div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++) &#123;</div><div class="line">			<span class="keyword">new</span> Thread(<span class="keyword">new</span> SynAddRunnable(<span class="number">1</span>, <span class="number">2</span>)).start();</div><div class="line">			<span class="keyword">new</span> Thread(<span class="keyword">new</span> SynAddRunnable(<span class="number">2</span>, <span class="number">1</span>)).start();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>运行后，查看JConsole内的线程，点击下方<strong>检测死锁</strong>按钮，会出现新的面板<strong>死锁</strong>，点开任意一个线程，即可看到两个线程互相等待。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">名称: Thread-<span class="number">157</span></div><div class="line">状态: java.lang.Integer@<span class="number">248</span>beb75上的BLOCKED, 拥有者: Thread-<span class="number">158</span></div><div class="line">总阻止数: <span class="number">1</span>, 总等待数: <span class="number">0</span></div><div class="line"></div><div class="line">堆栈跟踪: </div><div class="line">com.super2bai.jvm.thread.SynAddRunnable.run(SynAddRunnable.java:<span class="number">28</span>)</div><div class="line">java.lang.Thread.run(Thread.java:<span class="number">748</span>)</div></pre></td></tr></table></figure>
+<p>和</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">名称: Thread-<span class="number">158</span></div><div class="line">状态: java.lang.Integer@<span class="number">47</span>cf143上的BLOCKED, 拥有者: Thread-<span class="number">157</span></div><div class="line">总阻止数: <span class="number">1</span>, 总等待数: <span class="number">0</span></div><div class="line"></div><div class="line">堆栈跟踪: </div><div class="line">com.super2bai.jvm.thread.SynAddRunnable.run(SynAddRunnable.java:<span class="number">28</span>)</div><div class="line">java.lang.Thread.run(Thread.java:<span class="number">748</span>)</div></pre></td></tr></table></figure>
+<p>Thread-157等待Thread-158持有的Integer对象，而Thread-158也在等待Thread-157持有的Integer对象，这样两个线程就互相卡住，都不存在等到锁释放的希望了。</p>
+<h3 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h3><ul>
+<li>VisualVM功能稍强于Jconsole，VisualVM的高级功能是通过安装插件来拓展</li>
+<li>VisualVM可以在Applications窗口右击程序节点启用“Disable Heap Dump on OOME”，VisualVM将自动生成一个堆转储文件</li>
+</ul>
+<p><img src="https://wx2.sinaimg.cn/mw690/8c564d2aly1ftky8lselyj20l10cxjsj.jpg" alt=""></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://zh.wikipedia.org/wiki/JMX" target="_blank" rel="external">JMX</a></p>
+<p><a href="https://www.ibm.com/developerworks/cn/java/" target="_blank" rel="external">IBM Java开发</a></p>
+
+      
+    
+    </div>
+    
+      
+  <div class="post-reward">
+    <span class="reward-btn" id="reward-btn">赞赏</span>
+    <div class="reward-wrapper" id="reward-wrapper" style="display:none;">
+      
+        
+        
+      
+        
+        <div class="reward-item reward-alipay">
+          <img src="https://wx3.sinaimg.cn/mw690/8c564d2aly1ftkt83thjlj20o60skjzn.jpg">
+        </div>
+        
+      
+    </div>
+  </div>
+
+      
+    
+  </article>
+  
+    
+  <nav class="article-page">
+    
+    
+      <a href="/deploy/Tomcat.html" id="art-right" class="art-right">
+        <span class="prev-title"> 
+          同一个Tomcat多端口多项目部署<i class="iconfont icon-right"></i>  
+        </span>
+      </a>
+    
+  </nav>
+
+    
+  <i id="com-switch" class="iconfont icon-more jumping-in long infinite" style="font-size:24px;display:block;text-align:center;transform:rotate(180deg);"></i>
+  <div class="post-comments" id="post-comments" style="display: block;margin: auto 16px;">
+    
+<!-- Gitment Comments -->
+<div id="gitment"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  owner: "super2bai",
+  repo: 'comment',
+  oauth: {
+    client_id: '37f2293730b41dcb5276',
+    client_secret: 'dbab4955840d4cbc88f1563be04ab676662194e5',
+  },
+})
+gitment.render('gitment')
+</script>
+
+    
+    
+
+  </div>
+
+
+  
+  
+    
+  
+  <aside class="post-toc">
+    <span class="title" id="toc-switch"><span>文章导航</span></span>
+    <div class="toc-inner syuanpi back-1" style="display:none;">
+      <li class="title-link"><a href="javascript:;" class="toTop">JDK的可视化工具</a></li>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#JConsole"><span class="toc-text">JConsole</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用"><span class="toc-text">使用</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#VisualVM"><span class="toc-text">VisualVM</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#介绍-1"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用-1"><span class="toc-text">使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#插件"><span class="toc-text">插件</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实例-填充内存"><span class="toc-text">实例-填充内存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实例-线程死循环-amp-等待"><span class="toc-text">实例-线程死循环&等待</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实例-线程死锁"><span class="toc-text">实例-线程死锁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对比"><span class="toc-text">对比</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考"><span class="toc-text">参考</span></a></li></ol>
+    </div>
+  </aside>
+
+
+
+  
+
+
+        </div>
+      </main>
+
+      <footer class="footer syuanpi fadeIn" id="footer">
+  <hr>
+  <div class="footer-wrapper">
+    <div class="left">
+      <div class="contact-icon">
+    
+    
+    
+    
+    
+    
+    
+    
+        
+            <a href="https://github.com/super2bai" class="iconfont icon-github" title="github"></a>
+        
+        
+        
+        
+        
+        
+        
+    
+</div>
+    </div>
+    <div class="right">
+      <div class="copyright">
+    <div class="info">
+        <span>&copy;</span>
+        <span>2017 ~ 2018</span>
+        <span>❤</span>
+        <span>super2bai</span>
+    </div>
+    <div class="theme">
+        <span>
+            动力来源于
+            <a href="http://hexo.io/" target="_blank">Hexo </a>
+        </span>
+        <span>
+            主题
+            <a href="https://github.com/ColMugX/hexo-theme-Nlvi"> Nlvi </a>
+        </span>
+    </div>
+    
+    <div class="visit_count">
+        <i class="iconfont icon-visit"></i>
+        <span id="busuanzi_value_site_uv"></span>
+        <i class="iconfont icon-people"></i>
+        <span id="busuanzi_value_site_pv"></span>
+    </div>
+    
+</div>
+
+    </div>
+  </div>
+</footer>
+    </div>
+  </div>
+  <script src="/script/lib/jquery/jquery-3.2.1.min.js"></script>
+
+
+  <script src="/script/lib/lightbox/js/lightbox.min.js"></script>
+
+
+
+  <script src="https://cdn.bootcss.com/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script type="text/x-mathjax-config;executed=true">MathJax.Hub.Config({tex2jax: {inlineMath: [["$","$"], ["\\(","\\)"]]}});</script>
+
+
+
+
+
+
+<script src="/script/src/nlvi.js"></script>
+
+  <script src="/script/scheme/banderole.js"></script>
+
+<script src="/script/bootstarp.js"></script>
+
+
+<div class="backtop syuanpi melt toTop" id="backtop">
+    <i class="iconfont icon-up"></i>
+    <span style="text-align:center;font-family:Georgia;"><span style="font-family:Georgia;" id="scrollpercent">1</span>%</span>
+</div>
+
+
+
+</body>
+</html>
