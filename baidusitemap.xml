@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>https://super2bai.github.io/tool/recommend.html</loc>
+    <lastmod>2018-07-30T06:27:15.543Z</lastmod>
+    <data>
+        <display>
+        <title>工具推荐</title>
+        <pubTime>2018-06-06T07:31:19.000Z</pubTime>
+        
+        <tag>工具</tag>
+         
+         
+           
+             
+              <breadCrumb title="tool" url="https://super2bai.github.io/categories/tool/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://super2bai.github.io/Docker/start.html</loc>
     <lastmod>2018-07-24T08:54:10.565Z</lastmod>
     <data>
@@ -77,26 +97,6 @@
            
              
               <breadCrumb title="deploy" url="https://super2bai.github.io/categories/deploy/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://super2bai.github.io/tool/recommend.html</loc>
-    <lastmod>2018-07-20T08:37:12.284Z</lastmod>
-    <data>
-        <display>
-        <title>工具推荐</title>
-        <pubTime>2018-06-06T07:31:19.000Z</pubTime>
-        
-        <tag>工具</tag>
-         
-         
-           
-             
-              <breadCrumb title="tool" url="https://super2bai.github.io/categories/tool/"/>
           
         </display>
     </data>
