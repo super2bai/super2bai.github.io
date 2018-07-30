@@ -13,6 +13,7 @@
       animate: true,
       search: false,
       friends: false,
+      reward: true,
       lazy: false
     }
   }
@@ -49,8 +50,6 @@
 
 
 
-
-    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 <meta charset="UTF-8"/>
@@ -106,17 +105,8 @@
   </div>
 </div>
     <nav class="main-nav">
-        
-  <ul class="main-nav-list syuanpi tvIn">
   
-    <li class="menu-item">
-      <a href="javascript:;" id="search">
-        <span>搜索</span>
-        
-          <span class="menu-item-label">search</span>
-        
-      </a>
-    </li>
+  <ul class="main-nav-list syuanpi tvIn">
   
   
     
@@ -129,7 +119,7 @@
           <span class="menu-item-label">article</span>
         
       </a>
-    </li>  
+    </li>
   
     
       
@@ -141,7 +131,7 @@
           <span class="menu-item-label">archives</span>
         
       </a>
-    </li>  
+    </li>
   
     
       
@@ -153,7 +143,7 @@
           <span class="menu-item-label">tags</span>
         
       </a>
-    </li>  
+    </li>
   
     
       
@@ -165,11 +155,12 @@
           <span class="menu-item-label">about</span>
         
       </a>
-    </li>  
+    </li>
   
   </ul>
   
 </nav>
+
     
     
   </div>
@@ -556,19 +547,15 @@
       
   <div class="post-reward">
     <span class="reward-btn" id="reward-btn">赞赏</span>
-    <div class="reward-wrapper" id="reward-wrapper" style="display:none;">
+    <div class="reward-wrapper syuanpi" id="reward-wrapper" style="display:none;">
       
-        
-        
-      
-        
-        <div class="reward-item reward-alipay">
-          <img src="https://wx3.sinaimg.cn/mw690/8c564d2aly1ftkt83thjlj20o60skjzn.jpg">
-        </div>
-        
+      <div class="reward-item reward-alipay">
+        <img src="https://wx3.sinaimg.cn/mw690/8c564d2aly1ftkt83thjlj20o60skjzn.jpg">
+      </div>
       
     </div>
   </div>
+
 
       
     
@@ -682,13 +669,6 @@ gitment.render('gitment')
         </span>
     </div>
     
-    <div class="visit_count">
-        <i class="iconfont icon-visit"></i>
-        <span id="busuanzi_value_site_uv"></span>
-        <i class="iconfont icon-people"></i>
-        <span id="busuanzi_value_site_pv"></span>
-    </div>
-    
 </div>
 
     </div>
@@ -702,9 +682,6 @@ gitment.render('gitment')
   <script src="/script/lib/lightbox/js/lightbox.min.js"></script>
 
 
-
-  <script src="https://cdn.bootcss.com/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-  <script type="text/x-mathjax-config;executed=true">MathJax.Hub.Config({tex2jax: {inlineMath: [["$","$"], ["\\(","\\)"]]}});</script>
 
 
 
