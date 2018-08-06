@@ -76,12 +76,9 @@
 
 
 
-  <title>
-  贰白
-  
-    | 苦于探索，全是未知
-  
-</title>
+  <meta name="keywords" content="JVM, Nlvi" />
+
+  <title> 故障案例总结 · 贰白 </title>
 </head>
 <body>
   <div class="progress">
@@ -243,15 +240,11 @@
       <main class="main" id="main">
         <div class="main-wrapper">
           
-  
-
-<section class="posts">
-  
     
   
   <article class="
   post
-  
+   is_post 
   ">
     <header class="post-header">
       <div class="post-time syuanpi fadeInUpShort back-1">
@@ -263,18 +256,25 @@
             
           
           
+            
+              <aside class="post-tags syuanpi fadeInUpShort back-3">
+              
+                <a href="/tags/JVM/">JVM</a>
+              
+              </aside>
+            
+          
         </div>
       </div>
       <h1 class="post-title syuanpi fadeInUpShort back-2">
         
-          <a href="/JVM/problem.html">故障案例总结</a>
+          故障案例总结
         
       </h1>
     </header>
     <div class="post-content syuanpi fadeInUpShort back-3">
       
-        
-          <h2 id="高性能硬件上的程序部署策略"><a href="#高性能硬件上的程序部署策略" class="headerlink" title="高性能硬件上的程序部署策略"></a>高性能硬件上的程序部署策略</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>对于交互性强、对停顿时间敏感的系统，可以给Java虚拟机分配超大堆的前提是有把握把应用程序的Full GC频率控制的足够低，至少要低到不会影响用户使用。例如以天为频率就可以通过在深夜执行定时任务来触发Full GC甚至自动重启应用服务器来保持内存可用空间在一个稳定的水平。</p>
+        <h2 id="高性能硬件上的程序部署策略"><a href="#高性能硬件上的程序部署策略" class="headerlink" title="高性能硬件上的程序部署策略"></a>高性能硬件上的程序部署策略</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>对于交互性强、对停顿时间敏感的系统，可以给Java虚拟机分配超大堆的前提是有把握把应用程序的Full GC频率控制的足够低，至少要低到不会影响用户使用。例如以天为频率就可以通过在深夜执行定时任务来触发Full GC甚至自动重启应用服务器来保持内存可用空间在一个稳定的水平。</p>
 <p>控制Full GC频率的关键在于大多数对象的生存时间不应太长，尤其是不能有大批的、长生存时间的大对象产生，这样才能保证老年代的稳定。</p>
 <h3 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h3><p>在高性能硬件上部署程序，目前主要有两种方式：</p>
 <ul>
@@ -337,451 +337,80 @@
 </blockquote>
 <p>如果Shell脚本仅仅是例如获取系统信息这种Java API可以做到的事情，改为用Java API去获取这些信息更好。</p>
 
-        
       
     
     </div>
     
-  </article>
-  
-  
-    
-  
-
-  
-    
-  
-  <article class="
-  post
-  
-  ">
-    <header class="post-header">
-      <div class="post-time syuanpi fadeInUpShort back-1">
-        <div class="post-time-wrapper">
-          <span>2018-07-24</span>
-          
-            
-              <span class="post-category"><a href="/categories/JVM/">JVM</a></span>
-            
-          
-          
-        </div>
+      
+  <div class="post-reward">
+    <span class="reward-btn" id="reward-btn">点这里</span>
+    <div class="reward-wrapper syuanpi" id="reward-wrapper" style="display:none;">
+      
+      <div class="reward-item reward-alipay">
+        <img src="https://wx3.sinaimg.cn/mw690/8c564d2aly1ftkt83thjlj20o60skjzn.jpg">
       </div>
-      <h1 class="post-title syuanpi fadeInUpShort back-2">
-        
-          <a href="/JVM/tool.html">JDK的可视化工具</a>
-        
-      </h1>
-    </header>
-    <div class="post-content syuanpi fadeInUpShort back-3">
       
-        
-          <p>对性能瓶颈问题来源定位的可视化工具</p>
-        
-      
-    
-      <p class="content-link">
-        <a href="/JVM/tool.html#more">
-          <span>继续阅读</span>
-        </a>
-      </p>
-    
     </div>
+  </div>
+
+
+      
     
   </article>
   
-  
     
-  
-
-  
+  <nav class="article-page">
     
-  
-  <article class="
-  post
-  
-  ">
-    <header class="post-header">
-      <div class="post-time syuanpi fadeInUpShort back-1">
-        <div class="post-time-wrapper">
-          <span>2018-07-23</span>
-          
-            
-              <span class="post-category"><a href="/categories/deploy/">deploy</a></span>
-            
-          
-          
-        </div>
-      </div>
-      <h1 class="post-title syuanpi fadeInUpShort back-2">
-        
-          <a href="/deploy/Tomcat.html">同一个Tomcat多端口多项目部署</a>
-        
-      </h1>
-    </header>
-    <div class="post-content syuanpi fadeInUpShort back-3">
-      
-        
-          <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>当服务器只有一台，又需要将不同环境分开管理，可以选择多Tomcat分别部署不同的项目，也可以选择同一个Tomcat下多端口多项目部署。</p>
-        
-      
     
-      <p class="content-link">
-        <a href="/deploy/Tomcat.html#more">
-          <span>继续阅读</span>
-        </a>
-      </p>
+      <a href="/JVM/tool.html" id="art-right" class="art-right">
+        <span class="prev-title"> 
+          JDK的可视化工具<i class="iconfont icon-right"></i>  
+        </span>
+      </a>
     
-    </div>
-    
-  </article>
-  
-  
-    
-  
-
-  
-    
-  
-  <article class="
-  post
-  
-  ">
-    <header class="post-header">
-      <div class="post-time syuanpi fadeInUpShort back-1">
-        <div class="post-time-wrapper">
-          <span>2018-07-16</span>
-          
-            
-              <span class="post-category"><a href="/categories/Docker/">Docker</a></span>
-            
-          
-          
-        </div>
-      </div>
-      <h1 class="post-title syuanpi fadeInUpShort back-2">
-        
-          <a href="/Docker/start.html">Docker入门</a>
-        
-      </h1>
-    </header>
-    <div class="post-content syuanpi fadeInUpShort back-3">
-      
-        
-          <p>没有道理不介绍一下现在流行的Docker</p>
-        
-      
-    
-      <p class="content-link">
-        <a href="/Docker/start.html#more">
-          <span>继续阅读</span>
-        </a>
-      </p>
-    
-    </div>
-    
-  </article>
-  
-  
-    
-  
-
-  
-    
-  
-  <article class="
-  post
-  
-  ">
-    <header class="post-header">
-      <div class="post-time syuanpi fadeInUpShort back-1">
-        <div class="post-time-wrapper">
-          <span>2018-06-29</span>
-          
-            
-              <span class="post-category"><a href="/categories/walkup/">walkup</a></span>
-            
-          
-          
-        </div>
-      </div>
-      <h1 class="post-title syuanpi fadeInUpShort back-2">
-        
-          <a href="/walkup/SA.html">WalkUp签证-南美洲</a>
-        
-      </h1>
-    </header>
-    <div class="post-content syuanpi fadeInUpShort back-3">
-      
-        
-          <blockquote>
-<p>以下为<strong>南美洲篇</strong>签证攻略。</p>
-</blockquote>
-        
-      
-    
-      <p class="content-link">
-        <a href="/walkup/SA.html#more">
-          <span>继续阅读</span>
-        </a>
-      </p>
-    
-    </div>
-    
-  </article>
-  
-  
-    
-  
-
-  
-    
-  
-  <article class="
-  post
-  
-  ">
-    <header class="post-header">
-      <div class="post-time syuanpi fadeInUpShort back-1">
-        <div class="post-time-wrapper">
-          <span>2018-06-28</span>
-          
-            
-              <span class="post-category"><a href="/categories/codec/">codec</a></span>
-            
-          
-          
-        </div>
-      </div>
-      <h1 class="post-title syuanpi fadeInUpShort back-2">
-        
-          <a href="/codec/w2m.html">文本文件从Windows拷贝到Mac乱码</a>
-        
-      </h1>
-    </header>
-    <div class="post-content syuanpi fadeInUpShort back-3">
-      
-        
-          <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>Windows系统下创建的文本文档发送到Mac上打开乱码。</p>
-        
-      
-    
-      <p class="content-link">
-        <a href="/codec/w2m.html#more">
-          <span>继续阅读</span>
-        </a>
-      </p>
-    
-    </div>
-    
-  </article>
-  
-  
-    
-  
-
-  
-    
-  
-  <article class="
-  post
-  
-  ">
-    <header class="post-header">
-      <div class="post-time syuanpi fadeInUpShort back-1">
-        <div class="post-time-wrapper">
-          <span>2018-06-25</span>
-          
-            
-              <span class="post-category"><a href="/categories/JVM/">JVM</a></span>
-            
-          
-          
-        </div>
-      </div>
-      <h1 class="post-title syuanpi fadeInUpShort back-2">
-        
-          <a href="/JVM/decompile.html">JIT&HSDIS查看反编译代码</a>
-        
-      </h1>
-    </header>
-    <div class="post-content syuanpi fadeInUpShort back-3">
-      
-        
-          <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><blockquote>
-<p>Java代码通过编译器编译成字节码(class文件)，由jVM的各个类加载器加载后，根据JVM的启动配置可以进行解释执行和编译执行。</p>
-<p>编译执行是由JIT(Just In Time) Compiler将字节码一次性编译成本地代码来提高执行速度。缺点是编译本身会消耗并且会占用堆外空间(codecache中)，但是一般Server应用内存足够且能够忍受启动时的略微缓慢。</p>
-</blockquote>
-<p>查看源代码对应的字节码：<code>javap</code></p>
-<p>查看汇编代码请继续向下看。</p>
-        
-      
-    
-      <p class="content-link">
-        <a href="/JVM/decompile.html#more">
-          <span>继续阅读</span>
-        </a>
-      </p>
-    
-    </div>
-    
-  </article>
-  
-  
-    
-  
-
-  
-    
-  
-  <article class="
-  post
-  
-  ">
-    <header class="post-header">
-      <div class="post-time syuanpi fadeInUpShort back-1">
-        <div class="post-time-wrapper">
-          <span>2018-06-22</span>
-          
-            
-              <span class="post-category"><a href="/categories/deploy/">deploy</a></span>
-            
-          
-          
-        </div>
-      </div>
-      <h1 class="post-title syuanpi fadeInUpShort back-2">
-        
-          <a href="/deploy/windows.html">Java Web部署到Windows的Tomcat</a>
-        
-      </h1>
-    </header>
-    <div class="post-content syuanpi fadeInUpShort back-3">
-      
-        
-          <p>关键字</p>
-<ul>
-<li>Java Web</li>
-<li>Windows</li>
-<li>Maven</li>
-<li>Tomcat</li>
-<li>部署</li>
-</ul>
-        
-      
-    
-      <p class="content-link">
-        <a href="/deploy/windows.html#more">
-          <span>继续阅读</span>
-        </a>
-      </p>
-    
-    </div>
-    
-  </article>
-  
-  
-    
-  
-
-  
-    
-  
-  <article class="
-  post
-  
-  ">
-    <header class="post-header">
-      <div class="post-time syuanpi fadeInUpShort back-1">
-        <div class="post-time-wrapper">
-          <span>2018-06-06</span>
-          
-            
-              <span class="post-category"><a href="/categories/tool/">tool</a></span>
-            
-          
-          
-        </div>
-      </div>
-      <h1 class="post-title syuanpi fadeInUpShort back-2">
-        
-          <a href="/tool/recommend.html">工具推荐</a>
-        
-      </h1>
-    </header>
-    <div class="post-content syuanpi fadeInUpShort back-3">
-      
-        
-          <p>一些我自己用起来很爽的工具。</p>
-        
-      
-    
-      <p class="content-link">
-        <a href="/tool/recommend.html#more">
-          <span>继续阅读</span>
-        </a>
-      </p>
-    
-    </div>
-    
-  </article>
-  
-  
-    
-  
-
-  
-    
-  
-  <article class="
-  post
-  
-  ">
-    <header class="post-header">
-      <div class="post-time syuanpi fadeInUpShort back-1">
-        <div class="post-time-wrapper">
-          <span>2018-06-06</span>
-          
-            
-              <span class="post-category"><a href="/categories/Eclipse/">Eclipse</a></span>
-            
-          
-          
-        </div>
-      </div>
-      <h1 class="post-title syuanpi fadeInUpShort back-2">
-        
-          <a href="/Eclipse/Maven.html">Eclipse和Maven那点事儿</a>
-        
-      </h1>
-    </header>
-    <div class="post-content syuanpi fadeInUpShort back-3">
-      
-        
-          <p>Eclipse中Maven的常规使用介绍</p>
-        
-      
-    
-      <p class="content-link">
-        <a href="/Eclipse/Maven.html#more">
-          <span>继续阅读</span>
-        </a>
-      </p>
-    
-    </div>
-    
-  </article>
-  
-  
-    
-  
-
-  
-</section>
-  
-  <nav class="pagination">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/">下一页 ></a>
   </nav>
+
+    
+  <i id="com-switch" class="iconfont icon-more jumping-in long infinite" style="font-size:24px;display:block;text-align:center;transform:rotate(180deg);"></i>
+  <div class="post-comments" id="post-comments" style="display: block;margin: auto 16px;">
+    
+<!-- Gitment Comments -->
+<div id="gitment"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  owner: "super2bai",
+  repo: 'comment',
+  oauth: {
+    client_id: '37f2293730b41dcb5276',
+    client_secret: 'dbab4955840d4cbc88f1563be04ab676662194e5',
+  },
+})
+gitment.render('gitment')
+</script>
+
+    
+    
+
+  </div>
+
+
+  
+  
+    
+  
+  <aside class="post-toc">
+    <span class="title" id="toc-switch"><span>文章导航</span></span>
+    <div class="toc-inner syuanpi back-1" style="display:none;">
+      <li class="title-link"><a href="javascript:;" class="toTop">故障案例总结</a></li>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#高性能硬件上的程序部署策略"><span class="toc-text">高性能硬件上的程序部署策略</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#概述"><span class="toc-text">概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方案"><span class="toc-text">方案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#64位JDK来管理大内存"><span class="toc-text">64位JDK来管理大内存</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#问题"><span class="toc-text">问题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#32位集群"><span class="toc-text">32位集群</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#方法"><span class="toc-text">方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#问题-1"><span class="toc-text">问题</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#堆外内存导致的溢出错误"><span class="toc-text">堆外内存导致的溢出错误</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#问题-2"><span class="toc-text">问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#说明"><span class="toc-text">说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#补充"><span class="toc-text">补充</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#外部命令导致系统缓慢"><span class="toc-text">外部命令导致系统缓慢</span></a></li></ol>
+    </div>
+  </aside>
+
+
+
+  
 
 
         </div>
