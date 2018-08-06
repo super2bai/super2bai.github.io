@@ -274,71 +274,15 @@
     <div class="post-content syuanpi fadeInUpShort back-3">
       
         
-          <h2 id="高性能硬件上的程序部署策略"><a href="#高性能硬件上的程序部署策略" class="headerlink" title="高性能硬件上的程序部署策略"></a>高性能硬件上的程序部署策略</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>对于交互性强、对停顿时间敏感的系统，可以给Java虚拟机分配超大堆的前提是有把握把应用程序的Full GC频率控制的足够低，至少要低到不会影响用户使用。例如以天为频率就可以通过在深夜执行定时任务来触发Full GC甚至自动重启应用服务器来保持内存可用空间在一个稳定的水平。</p>
-<p>控制Full GC频率的关键在于大多数对象的生存时间不应太长，尤其是不能有大批的、长生存时间的大对象产生，这样才能保证老年代的稳定。</p>
-<h3 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h3><p>在高性能硬件上部署程序，目前主要有两种方式：</p>
-<ul>
-<li>通过64位JDK来使用大内存</li>
-<li>使用若干个32位虚拟机建立逻辑集群来利用硬件资源</li>
-</ul>
-<h3 id="64位JDK来管理大内存"><a href="#64位JDK来管理大内存" class="headerlink" title="64位JDK来管理大内存"></a>64位JDK来管理大内存</h3><h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><ul>
-<li>内存回收导致的长时间停顿</li>
-<li>现阶段，64位JDK的性能测试结果普遍低于32位JDK</li>
-<li>需要保证程序足够稳定（因为这种应用要是产生堆溢出几乎就无法产生堆转储快照，快照文件10+GB，无法进行分析）</li>
-<li>64位消耗的内存比32位大（指针膨胀、数据类型对齐补白等因素 ）</li>
-</ul>
-<h3 id="32位集群"><a href="#32位集群" class="headerlink" title="32位集群"></a>32位集群</h3><h4 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h4><p>一台物理机器上启动多个应用服务器进程，采用不同的端口，前端搭建负载均衡器，反向代理分配请求，使用无session的亲和式集群。</p>
-<blockquote>
-<p>亲和式集群：均衡器按一定的规则算法（一般根据SessionID分配）将一个固定的请求永远分配到固定的一个节点处理。</p>
-</blockquote>
-<p>由于一台物理机器，所以无需考虑下列问题：</p>
-<ul>
-<li>状态保留</li>
-<li>热转移</li>
-<li>精准的负载均衡</li>
-</ul>
-<h4 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h4><ul>
-<li>尽量避免节点竞争全局的资源<ul>
-<li>磁盘竞争：各个节点如果同时反问某个磁盘文件（并发写操作），很容易导致IO异常</li>
-</ul>
-</li>
-<li>很难最高效率地利用某些资源池<ul>
-<li>连接池：一般都是在各个节点建立独立的连接池，这会导致一些节点池满了，而另外一个节点仍有较多空余。尽管可以使用集中式JNDI，但又一定复杂性并且可能带来额外的性能开销</li>
-</ul>
-</li>
-<li>各个节点仍然不可避免的受到32位的内存限制<ul>
-<li>在32位Windows平台中每个进程只能使用2GB的内存，考虑到堆外内存开销，堆一般最多只能开到1.5G。在某些Linux或UNIX系统中，可以提升到3G乃至接近4G的内存，但32位中仍受到最高4G内存的限制</li>
-</ul>
-</li>
-<li>大量使用本地缓存<ul>
-<li>大量使用HashMap作为K/V缓存的应用，在逻辑集群中会造成较大的内存浪费，因为每个逻辑节点都有一份缓存，可以考虑把本地缓存改为集中式</li>
-</ul>
-</li>
-</ul>
-<h2 id="堆外内存导致的溢出错误"><a href="#堆外内存导致的溢出错误" class="headerlink" title="堆外内存导致的溢出错误"></a>堆外内存导致的溢出错误</h2><h3 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[org.eclipose.jetty.util.log] handle fialed java.lang.OutOfMemoryError:null</div><div class="line">    at sun.misc.Unsafe.allocateMemory(Native Method)</div><div class="line">    at java.nio.DirectByteBuffer.&lt;init&gt;(DirectByteBuffer.java:99)</div><div class="line">    at java.nio.ByteBuffer.allocateDirect(ByteBuffer.java:288)</div></pre></td></tr></table></figure>
-<h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><p>NIO操作需要使用到Direct Memory内存，垃圾收集进行时，虚拟机虽然会对Direct Memory进行回收，但是Direct Memory只能等待老年代满了后Full GC，然后顺便清理内存的废弃对象。不然只能等到抛出内存溢出异常时，先<code>catch</code>掉，再在<code>catch</code>块里调用<code>System.gc()</code>。如果<code>-XX:DisableExplicitGC</code>被打开，虚拟机会忽略掉手动调用GC的代码，使得 System.gc()的调用就会变成一个空调用，完全不会触发任何GC，就只能在堆中还有许多空闲内存时，抛出内存溢出异常了。</p>
-<h3 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h3><p>除了Java堆和永久代外，还有其它地方也会占用较多的内存，所有的内存总和受到操作系统进程最大内存的限制</p>
-<ul>
-<li>Direct Memory：可通过<code>-XX:MaxDirectMemorySize</code>调整大小，内存不足时抛出<code>OutOfMemoryError</code>或者<code>OutOfMemoryError:Direct buffer memory</code></li>
-<li>线程堆栈：可通过<code>-Xss</code>调整大小，内存不足时抛出<code>StackOverflowError</code>(纵向无法分配，即无法分配新的栈帧)或者<code>OutOfMemoryError: unable to create new native thread</code>(横向无法分配，即无法建立新的线程)</li>
-<li>Socket缓冲区：每个Socket连接都有Receive和Send两个缓存去，分别占大约37KB和25KB内存<del>数字来源？求科普</del>，连接多的话这块内存占用也比较可观。如果无法分配，则可能回抛出<code>IOException: Too many open files</code>异常</li>
-<li>JNI代码：如果代码中使用JNI调用本地库，本地库所使用的内存也不在堆中</li>
-<li>虚拟机和GC：执行时会消耗一定内存</li>
-</ul>
-<h2 id="外部命令导致系统缓慢"><a href="#外部命令导致系统缓慢" class="headerlink" title="外部命令导致系统缓慢"></a>外部命令导致系统缓慢</h2><p>如果Java程序执行时需要调用外部Shell脚本，通过<code>Runtime.getRuntime().exec()</code>虽然可以达到目的，但在虚拟机中是非常消耗资源的操作，即使外部命令本身能很快执行完毕，频繁调用时创建进程的开销也非常可观。</p>
-<blockquote>
-<p>Java虚拟机执行这个命令的过程是：</p>
-<ul>
-<li>克隆一个和当前虚拟机拥有一样环境变量的进行</li>
-<li>用新的进程执行命令</li>
-<li>退出这个进程</li>
-</ul>
-<p>频繁执行时，系统的消耗会很大，不仅是CPU，内存负担也很重</p>
-</blockquote>
-<p>如果Shell脚本仅仅是例如获取系统信息这种Java API可以做到的事情，改为用Java API去获取这些信息更好。</p>
-
+          <p>实际运行中的解决方案</p>
         
       
+    
+      <p class="content-link">
+        <a href="/JVM/problem.html#more">
+          <span>继续阅读</span>
+        </a>
+      </p>
     
     </div>
     
