@@ -289,12 +289,18 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Eclipse start in 6310ms</div></pre></td></tr></table></figure>
 <p>其实显示的就是上面代码的那句话。</p>
 <h4 id="导出"><a href="#导出" class="headerlink" title="导出"></a>导出</h4><p><code>Export</code> - <code>Deployable plug-ins and fragments</code>。在<code>Directory</code>中选择目标路径，<code>finish</code>后会产生一个<code>plugins</code>目录，<code>com.super2bai.showtime_1.0.0.201808072217.jar</code>，将此jar包复制到eclipse目录下的plugins目录下，再次启动eclipse便可以看到eclipse启动耗时。</p>
-<h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><p><strong>导出后的插件不起作用</strong></p>
+<h4 id="问题及解决"><a href="#问题及解决" class="headerlink" title="问题及解决"></a>问题及解决</h4><p><strong>导出后的插件不起作用</strong></p>
 <p>按照上述<strong>导出</strong>操作，再次启动eclipse时，并没有显示耗时的弹窗。</p>
+<p><strong>解决一</strong></p>
 <blockquote>
 <p>找到eclipse目录下configuration目录下的org.eclipse.update目录，删除org.eclipse.update目录。</p>
 </blockquote>
-<p>在安装新的插件以前，启动过eclipse，在org.eclipse.update目录下记录了插件的历史更新情况，只记忆了以前的拆建更新情况，而新安装的插件并不记录，所以将其删除掉，会重新扫描所有插件。</p>
+<p>在安装新的插件以前，启动过eclipse，在org.eclipse.update目录下记录了插件的历史更新情况，只记忆了以前的插件更新情况，而新安装的插件并不记录，所以将其删除掉，会重新扫描所有插件。</p>
+<p><strong>解决二</strong></p>
+<blockquote>
+<p>找到eclipse目录下configuration目录下的config.ini文件，添加一行<code>osgi.checkConfiguration=true</code></p>
+</blockquote>
+<p>会寻找并安装新插件，新插件启用后，就可以把该行去掉，不然每次启动时间会变长。</p>
 
       
     
@@ -363,7 +369,7 @@ gitment.render('gitment')
     <span class="title" id="toc-switch"><span>文章导航</span></span>
     <div class="toc-inner syuanpi back-1" style="display:none;">
       <li class="title-link"><a href="javascript:;" class="toTop">获取eclipse启动耗时</a></li>
-      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#下载"><span class="toc-text">下载</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建项目"><span class="toc-text">创建项目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#写代码"><span class="toc-text">写代码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#修改plugin-xml"><span class="toc-text">修改plugin.xml</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#运行"><span class="toc-text">运行</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#导出"><span class="toc-text">导出</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#问题"><span class="toc-text">问题</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#下载"><span class="toc-text">下载</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建项目"><span class="toc-text">创建项目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#写代码"><span class="toc-text">写代码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#修改plugin-xml"><span class="toc-text">修改plugin.xml</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#运行"><span class="toc-text">运行</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#导出"><span class="toc-text">导出</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#问题及解决"><span class="toc-text">问题及解决</span></a></li></ol>
     </div>
   </aside>
 
