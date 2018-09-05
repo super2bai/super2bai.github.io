@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://super2bai.github.io/JVM/metaspace.html</loc>
+    
+    <lastmod>2018-09-05T10:58:57.832Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://super2bai.github.io/travel/IM.html</loc>
     
     <lastmod>2018-08-23T13:23:44.635Z</lastmod>
@@ -313,13 +320,6 @@
     <loc>https://super2bai.github.io/JVM/layout.html</loc>
     
     <lastmod>2018-05-23T03:36:18.660Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://super2bai.github.io/JVM/metaspace.html</loc>
-    
-    <lastmod>2018-05-23T03:36:08.600Z</lastmod>
     
   </url>
   

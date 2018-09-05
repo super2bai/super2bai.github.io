@@ -290,7 +290,7 @@
 <li>GC性能改进，使得无需GC暂停和特定元数据迭代器的并发类数据分配成为可能</li>
 <li>支持进一步优化，诸如G1并发类卸载</li>
 </ul>
-<p>所以如果对<code>PermGen</code>熟悉，那么所需要知道就是，不管在Java8以前的版本中<code>PermGen</code>有什么(类的名称和字段，类方法的字节码，常亮翅，JIT优化等等)，现在都分配在<code>Metaspace</code>中。</p>
+<p>所以如果对<code>PermGen</code>熟悉，那么所需要知道就是，不管在Java8以前的版本中<code>PermGen</code>有什么(类的名称和字段，类方法的字节码，常量池，JIT优化等等)，现在都分配在<code>Metaspace</code>中。</p>
 <blockquote>
 <p>元空间大小要求取决于加载的类的数量以及这些类声明的大小，所以很容易看到导致<code>java.lang.OutOfMemoryError:Metaspace</code>异常的主要原因，要么是类太多，要么是太大的类被加载到<code>Metaspace</code>。</p>
 </blockquote>
