@@ -4,8 +4,28 @@
 
     
   <url>
-    <loc>https://super2bai.github.io/JVM/class.html</loc>
-    <lastmod>2018-09-05T14:35:18.726Z</lastmod>
+    <loc>https://super2bai.github.io/JVM/classDetail1.html</loc>
+    <lastmod>2018-09-06T15:16:03.738Z</lastmod>
+    <data>
+        <display>
+        <title>Class文件详述(1)</title>
+        <pubTime>2018-09-05T15:08:57.000Z</pubTime>
+        
+        <tag>JVM</tag>
+         
+         
+           
+             
+              <breadCrumb title="JVM" url="https://super2bai.github.io/categories/JVM/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://super2bai.github.io/JVM/classSummary.html</loc>
+    <lastmod>2018-09-06T15:15:56.318Z</lastmod>
     <data>
         <display>
         <title>Class文件概述</title>

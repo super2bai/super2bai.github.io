@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://super2bai.github.io/JVM/class.html</loc>
+    <loc>https://super2bai.github.io/JVM/classDetail1.html</loc>
     
-    <lastmod>2018-09-05T14:35:18.726Z</lastmod>
+    <lastmod>2018-09-06T15:16:03.738Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://super2bai.github.io/JVM/classSummary.html</loc>
+    
+    <lastmod>2018-09-06T15:15:56.318Z</lastmod>
     
   </url>
   
