@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <link rel="stylesheet" href="/style/style.css">
+<script>
+  var nlviconfig = {
+    title: "贰白",
+    author: "super2bai",
+    baseUrl: "/",
+    theme: {
+      scheme: "banderole",
+      lightbox: true,
+      animate: true,
+      search: false,
+      friends: false,
+      reward: true,
+      lazy: false
+    }
+  }
+</script>
+
+
+
+
+    <link rel="stylesheet" href="/script/lib/lightbox/css/lightbox.min.css">
+
+
+
+
+    <link rel="stylesheet" href="/syuanpi/syuanpi.min.css">
+
+
+
+
+    <link rel="icon" href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-98059014-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-116557847-1');
+</script>
+
+
+
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="browsermode" content="application">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="贰白">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="msapplication-navbutton-color" content="#666666">
+<meta name= "format-detection" content="telephone=no" />
+<meta name="keywords" content="nlvi, Nlvi" />
+
+  <link rel="apple-touch-icon"  sizes="72x72"  href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+  <link rel="apple-touch-icon-precomposed"  sizes="72x72"  href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+
+
+  <meta name="subtitle" content="苦于探索，全是未知">
+
+
+  <meta name="description" content="苦于探索，全是未知">
+
+
+
+  <meta name="keywords" content="JVM, Nlvi" />
+
+  <title> Class文件详述(2) · 贰白 </title>
+</head>
+<body>
+  <div class="progress">
+  <div class="progress-inner"></div>
+</div>
+  
+  
+    <div class="tagcloud-mask"></div>  
+<div class="tagcloud" id="tagcloud">
+  <div class="tagcloud-inner">
+    <a href="/tags/3D编辑器/" style="font-size: 14px;">3D编辑器</a> <a href="/tags/Docker/" style="font-size: 14px;">Docker</a> <a href="/tags/Dubbo/" style="font-size: 14px;">Dubbo</a> <a href="/tags/Eclipse/" style="font-size: 14px;">Eclipse</a> <a href="/tags/GHPages/" style="font-size: 14px;">GHPages</a> <a href="/tags/IO/" style="font-size: 14px;">IO</a> <a href="/tags/JDK/" style="font-size: 14px;">JDK</a> <a href="/tags/JVM/" style="font-size: 14px;">JVM</a> <a href="/tags/Linux/" style="font-size: 14px;">Linux</a> <a href="/tags/Python/" style="font-size: 14px;">Python</a> <a href="/tags/Spring/" style="font-size: 14px;">Spring</a> <a href="/tags/Tomcat/" style="font-size: 14px;">Tomcat</a> <a href="/tags/Zookeeper/" style="font-size: 14px;">Zookeeper</a> <a href="/tags/jmeter/" style="font-size: 14px;">jmeter</a> <a href="/tags/mac/" style="font-size: 14px;">mac</a> <a href="/tags/walkup/" style="font-size: 14px;">walkup</a> <a href="/tags/分布式/" style="font-size: 14px;">分布式</a> <a href="/tags/工具/" style="font-size: 14px;">工具</a> <a href="/tags/旅游/" style="font-size: 14px;">旅游</a> <a href="/tags/游戏/" style="font-size: 14px;">游戏</a> <a href="/tags/编码/" style="font-size: 14px;">编码</a> <a href="/tags/部署/" style="font-size: 14px;">部署</a> <a href="/tags/问题/" style="font-size: 14px;">问题</a>
+  </div>
+</div>  
+  
+
+  <div class="container">
+
+    <header class="header" id="header">
+  <div class="header-wrapper">
+    <div class="logo">
+  <div class="logo-inner syuanpi tvIn">
+    <span><a href="/">贰白</a></span>
+    
+      <span id="subtitle">苦于探索，全是未知</span>
+    
+  </div>
+</div>
+    <nav class="main-nav">
+  
+  <ul class="main-nav-list syuanpi tvIn">
+  
+  
+    
+      
+    
+    <li class="menu-item">
+      <a href="/" id="article">
+        <span class="base-name">文章</span>
+        
+          <span class="menu-item-label">article</span>
+        
+      </a>
+    </li>
+  
+    
+      
+    
+    <li class="menu-item">
+      <a href="/archives" id="archives">
+        <span class="base-name">归档</span>
+        
+          <span class="menu-item-label">archives</span>
+        
+      </a>
+    </li>
+  
+    
+      
+    
+    <li class="menu-item">
+      <a href="javascript:;" id="tags">
+        <span class="base-name">标签</span>
+        
+          <span class="menu-item-label">tags</span>
+        
+      </a>
+    </li>
+  
+    
+      
+    
+    <li class="menu-item">
+      <a href="/about" id="about">
+        <span class="base-name">关于</span>
+        
+          <span class="menu-item-label">about</span>
+        
+      </a>
+    </li>
+  
+  </ul>
+  
+</nav>
+
+    
+    
+  </div>
+</header>
+<div class="mobile-header">
+  <div class="mobile-header-body">
+    <div class="mobile-header-list">
+      
+        
+            <div class="mobile-nav-item">
+                <a href="/">
+                    <span>文章</span>
+                    
+                        <span class="menu-item-label">article</span>
+                    
+                </a>
+            </div>
+        
+      
+        
+            <div class="mobile-nav-item">
+                <a href="/archives">
+                    <span>归档</span>
+                    
+                        <span class="menu-item-label">archives</span>
+                    
+                </a>
+            </div>
+        
+      
+        
+          <div class="mobile-nav-item inner-cloud">
+            <div class="mobile-nav-tag">
+              <a href="javascript:;" id="mobile-tags">
+                <span>标签</span>
+                
+                    <span class="menu-item-label">tags</span>
+                
+              </a>
+            </div>
+            <div class="mobile-nav-tagcloud">
+              <div class="mobile-tagcloud-inner">
+                <a href="/tags/3D编辑器/" style="font-size: 14px;">3D编辑器</a> <a href="/tags/Docker/" style="font-size: 14px;">Docker</a> <a href="/tags/Dubbo/" style="font-size: 14px;">Dubbo</a> <a href="/tags/Eclipse/" style="font-size: 14px;">Eclipse</a> <a href="/tags/GHPages/" style="font-size: 14px;">GHPages</a> <a href="/tags/IO/" style="font-size: 14px;">IO</a> <a href="/tags/JDK/" style="font-size: 14px;">JDK</a> <a href="/tags/JVM/" style="font-size: 14px;">JVM</a> <a href="/tags/Linux/" style="font-size: 14px;">Linux</a> <a href="/tags/Python/" style="font-size: 14px;">Python</a> <a href="/tags/Spring/" style="font-size: 14px;">Spring</a> <a href="/tags/Tomcat/" style="font-size: 14px;">Tomcat</a> <a href="/tags/Zookeeper/" style="font-size: 14px;">Zookeeper</a> <a href="/tags/jmeter/" style="font-size: 14px;">jmeter</a> <a href="/tags/mac/" style="font-size: 14px;">mac</a> <a href="/tags/walkup/" style="font-size: 14px;">walkup</a> <a href="/tags/分布式/" style="font-size: 14px;">分布式</a> <a href="/tags/工具/" style="font-size: 14px;">工具</a> <a href="/tags/旅游/" style="font-size: 14px;">旅游</a> <a href="/tags/游戏/" style="font-size: 14px;">游戏</a> <a href="/tags/编码/" style="font-size: 14px;">编码</a> <a href="/tags/部署/" style="font-size: 14px;">部署</a> <a href="/tags/问题/" style="font-size: 14px;">问题</a>
+              </div>
+            </div>
+          </div>
+        
+      
+        
+            <div class="mobile-nav-item">
+                <a href="/about">
+                    <span>关于</span>
+                    
+                        <span class="menu-item-label">about</span>
+                    
+                </a>
+            </div>
+        
+      
+    </div>
+  </div>
+  <div class="mobile-header-nav">
+    <div class="mobile-header-item" id="mobile-left">
+      <div class="header-menu-item">
+        <span class="header-menu-line"></span>
+      </div>
+    </div>
+    <h1 class="mobile-header-title">
+      <a href="/">贰白</a>
+    </h1>
+    <div class="mobile-header-item"></div>
+  </div>
+</div>
+    <div class="container-inner">
+      <main class="main" id="main">
+        <div class="main-wrapper">
+          
+    
+  
+  <article class="
+  post
+   is_post 
+  ">
+    <header class="post-header">
+      <div class="post-time syuanpi fadeInUpShort back-1">
+        <div class="post-time-wrapper">
+          <span>2018-09-10</span>
+          
+            
+              <span class="post-category"><a href="/categories/JVM/">JVM</a></span>
+            
+          
+          
+            
+              <aside class="post-tags syuanpi fadeInUpShort back-3">
+              
+                <a href="/tags/JVM/">JVM</a>
+              
+              </aside>
+            
+          
+        </div>
+      </div>
+      <h1 class="post-title syuanpi fadeInUpShort back-2">
+        
+          Class文件详述(2)
+        
+      </h1>
+    </header>
+    <div class="post-content syuanpi fadeInUpShort back-3">
+      
+        <ul>
+<li>类索引、父类索引与接口索引集合</li>
+<li>字段表集合</li>
+<li>方法表集合</li>
+<li>属性表集合</li>
+</ul>
+<a id="more"></a>
+<p>由于上一篇文章中实例代码没有声明字段，所以本篇内容变更示例代码</p>
+<p><strong>源码</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> test;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> m;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">inc</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> m + <span class="number">1</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>class文件</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div></pre></td><td class="code"><pre><div class="line"><span class="function">CA FE BA <span class="title">BE</span><span class="params">(Class魔数)</span></span></div><div class="line"><span class="function">--------------版本号-------------------</span></div><div class="line"><span class="function">00 00（次版本号） </span></div><div class="line"><span class="function">00 35（主版本号)</span></div><div class="line"><span class="function">--------------常量池-------------------</span></div><div class="line"><span class="function">00 13（十进制19，18个常量） </span></div><div class="line"><span class="function">--1--</span></div><div class="line"><span class="function">0<span class="title">A</span><span class="params">(十进制<span class="number">10</span>，CONSTANT_Methodref_info)</span></span></div><div class="line"><span class="function">00 04<span class="params">(<span class="number">4</span>，指向声明方法的类描述符CONSTANT_Class_info的索引项)</span></span></div><div class="line"><span class="function">00 0<span class="title">F</span><span class="params">(<span class="number">15</span>，指向名称及类型描述符CONSTANT_NameAndType_info的索引项)</span></span></div><div class="line"><span class="function">--2--    </span></div><div class="line"><span class="function">09<span class="params">(十进制<span class="number">9</span>,CONSTANT_Fieldref_info)</span></span></div><div class="line"><span class="function">00 03<span class="params">(<span class="number">3</span>，指向声明字段的类或者接口描述符CONSTANT_Class_info的索引项)</span> </span></div><div class="line"><span class="function">00 10<span class="params">(<span class="number">16</span>，指向名称及类型描述符CONSTANT_NameAndType_info的索引项)</span></span></div><div class="line"><span class="function">--3--    </span></div><div class="line"><span class="function">07<span class="params">(CONSTANT_Class_info)</span></span></div><div class="line"><span class="function">00 11<span class="params">(常量池中第<span class="number">17</span>项)</span></span></div><div class="line"><span class="function">--4--</span></div><div class="line"><span class="function">07<span class="params">(CONSTANT_Class_info)</span> </span></div><div class="line"><span class="function">00 12<span class="params">(常量池中第<span class="number">18</span>项)</span></span></div><div class="line"><span class="function">--5--</span></div><div class="line"><span class="function">01<span class="params">(CONSTANT_Utf8_info)</span></span></div><div class="line"><span class="function">00 01<span class="params">(字符串长度是<span class="number">1</span>字节)</span></span></div><div class="line"><span class="function">6<span class="title">D</span><span class="params">(十进制<span class="number">109</span>，字母m)</span></span></div><div class="line"><span class="function">--6--</span></div><div class="line"><span class="function">01<span class="params">(CONSTANT_Utf8_info)</span></span></div><div class="line"><span class="function">00 01<span class="params">(字符串长度是<span class="number">1</span>字节)</span></span></div><div class="line"><span class="function">49（十进制73，字母I)</span></div><div class="line"><span class="function">--7--</span></div><div class="line"><span class="function">01<span class="params">(CONSTANT_Utf8_info)</span></span></div><div class="line"><span class="function">00 06<span class="params">(字符串长度是<span class="number">6</span>字节)</span></span></div><div class="line"><span class="function">3C 69 6E 69 74 3E（&lt;init&gt;）</span></div><div class="line"><span class="function">--8--</span></div><div class="line"><span class="function">01<span class="params">(CONSTANT_Utf8_info)</span></span></div><div class="line"><span class="function">00 03<span class="params">(字符串长度是<span class="number">3</span>字节)</span></span></div><div class="line"><span class="function">28 29 56<span class="params">(()</span>v)</span></div><div class="line"><span class="function">--9--    </span></div><div class="line"><span class="function">01<span class="params">(CONSTANT_Utf8_info)</span></span></div><div class="line"><span class="function">0004<span class="params">(字符串长度是<span class="number">4</span>字节)</span></span></div><div class="line"><span class="function">43 6F 64 65<span class="params">(Code)</span></span></div><div class="line"><span class="function">--10-- </span></div><div class="line"><span class="function">01<span class="params">(CONSTANT_Utf8_info)</span></span></div><div class="line"><span class="function">00 0<span class="title">F</span><span class="params">(字符串长度是<span class="number">15</span>字节)</span></span></div><div class="line"><span class="function">4C 69 6E 65 4E 75 6D 62 65 72 54 61 62 6C 65<span class="params">(LineNumberTable)</span></span></div><div class="line"><span class="function">--11-- </span></div><div class="line"><span class="function">01<span class="params">(CONSTANT_Utf8_info)</span></span></div><div class="line"><span class="function">00 03<span class="params">(字符串长度是<span class="number">3</span>字节)</span></span></div><div class="line"><span class="function">69 6E 63<span class="params">(inc)</span></span></div><div class="line"><span class="function">--12-- </span></div><div class="line"><span class="function">01<span class="params">(CONSTANT_Utf8_info)</span></span></div><div class="line"><span class="function">00 03<span class="params">(字符串长度是<span class="number">3</span>字节)</span></span></div><div class="line"><span class="function">28 29 49<span class="params">(()</span>I)</span></div><div class="line"><span class="function">--13--</span></div><div class="line"><span class="function">01<span class="params">(CONSTANT_Utf8_info)</span></span></div><div class="line"><span class="function">00 0<span class="title">A</span><span class="params">(字符串长度是<span class="number">10</span>字节)</span> </span></div><div class="line"><span class="function">53 6F 75 72 63 65 46 69 6C 65<span class="params">(SourceFile)</span></span></div><div class="line"><span class="function">--14--</span></div><div class="line"><span class="function">01<span class="params">(CONSTANT_Utf8_info)</span></span></div><div class="line"><span class="function">00 0<span class="title">E</span><span class="params">(字符串长度是<span class="number">14</span>字节)</span> </span></div><div class="line"><span class="function">54 65 73 74 43 6C 61 73 73 2E 6A 61 76 61<span class="params">( TestClass.java)</span></span></div><div class="line"><span class="function">--15--   </span></div><div class="line"><span class="function">0<span class="title">C</span><span class="params">(CONSTANT_NameAndType_info)</span></span></div><div class="line"><span class="function">00 07<span class="params">(<span class="number">7</span>，指向该字段或方法名称常量项的索引,&lt;init&gt;)</span></span></div><div class="line"><span class="function">00 08<span class="params">(<span class="number">8</span>，指向该字段或方法描述符常量项的索引,()</span>v)</span></div><div class="line"><span class="function">--16--  </span></div><div class="line"><span class="function">0<span class="title">C</span><span class="params">(CONSTANT_NameAndType_info)</span></span></div><div class="line"><span class="function">00 05<span class="params">(<span class="number">5</span>，指向该字段或方法名称常量项的索引,m)</span></span></div><div class="line"><span class="function">00 06<span class="params">(<span class="number">6</span>，指向该字段或方法描述符常量项的索引,I)</span> </span></div><div class="line"><span class="function">--17--  </span></div><div class="line"><span class="function">01<span class="params">(CONSTANT_Utf8_info)</span></span></div><div class="line"><span class="function">00 0<span class="title">E</span><span class="params">(字符串长度是<span class="number">14</span>字节)</span></span></div><div class="line"><span class="function">74 65 73 74 2F 54 65 73 74 43 6C 61 73 73<span class="params">(test/TestClass)</span></span></div><div class="line"><span class="function">--18--  </span></div><div class="line"><span class="function">01<span class="params">(CONSTANT_Utf8_info)</span></span></div><div class="line"><span class="function">00 10<span class="params">(字符串长度是<span class="number">16</span>字节)</span> </span></div><div class="line"><span class="function">6A 61 76 61 2F 6C 61 6E 67 2F 4F 62 6A 65 63 74<span class="params">(java/lang/Object)</span></span></div><div class="line"><span class="function">--------------访问标志-------------------</span></div><div class="line"><span class="function">00 21<span class="params">(ACC_PUBLIC、ACC_SUPER，<span class="number">0x0001</span>|<span class="number">0x0020</span>=<span class="number">0x0021</span>)</span>  </span></div><div class="line"><span class="function">--------------类索引-------------------</span></div><div class="line"><span class="function">00 03<span class="params">(<span class="number">3</span>，this_class，类索引为<span class="number">3</span>，常量池中第<span class="number">3</span>项：test/TestClass)</span></span></div><div class="line"><span class="function">--------------父类索引-------------------    </span></div><div class="line"><span class="function">00 04<span class="params">(<span class="number">4</span>，super_class，父类索引为<span class="number">4</span>，常量池中第<span class="number">4</span>项：java/lang/Object)</span></span></div><div class="line"><span class="function"><span class="params">(类索引、父类索引各自指向CONSTANT_Class_info的类描述符常量，通过CONSTANT_Class_info类型的常量中的索引值可以找到定义在CONSTANT_Utf8_info类型的常量中的全限定名字符串）</span></span></div><div class="line"><span class="function"><span class="params">--------------接口索引-------------------</span></span></div><div class="line"><span class="function"><span class="params"><span class="number">00</span> <span class="number">00</span>(<span class="number">0</span>，interfaces_count，接口计数器，表示索引表的容量)</span></span></div><div class="line"><span class="function">--------------字段表集合-------------------</span></div><div class="line"><span class="function">00 01（计数器容量：定义了1个字段）</span></div><div class="line"><span class="function">00 02 <span class="params">(访问标志：ACC_PRIVATE）</span></span></div><div class="line"><span class="function"><span class="params"><span class="number">00</span> <span class="number">05</span>(<span class="number">5</span>，指向该字段或方法名称常量项的索引,m)</span></span></div><div class="line"><span class="function">00 06<span class="params">(<span class="number">6</span>，descriptor_index,I,<span class="keyword">int</span>)</span></span></div><div class="line"><span class="function">00 00<span class="params">(属性表计数器)</span> </span></div><div class="line"><span class="function">--------------方法表集合-------------------       </span></div><div class="line"><span class="function">00 02<span class="params">(计数器容量：<span class="number">2</span>个方法,inc()</span>和编译器增加的实例构造器&lt;init&gt;)</span></div><div class="line"><span class="function">00 01<span class="params">(访问标志：ACC_PUBLIC)</span> </span></div><div class="line"><span class="function">00 07<span class="params">(名称索引：常量池第<span class="number">7</span>项,&lt;init&gt;)</span></span></div><div class="line"><span class="function">00 08<span class="params">(描述符索引：常量池第<span class="number">8</span>项,()</span>v)</span></div><div class="line"><span class="function">00 01<span class="params">(属性表计数器：<span class="number">1</span>项属性)</span></span></div><div class="line"><span class="function">--------------属性表集合------------------- </span></div><div class="line"><span class="function">---Code属性开始---       </span></div><div class="line"><span class="function">00 09<span class="params">(attribute_name_index：常量池第<span class="number">9</span>项，Code)</span></span></div><div class="line"><span class="function">00 00 00 1<span class="title">D</span><span class="params">(attribute_length：<span class="number">29</span>)</span></span></div><div class="line"><span class="function">00 01<span class="params">(max_stack：<span class="number">1</span>)</span></span></div><div class="line"><span class="function">00 01<span class="params">(max_locals：<span class="number">1</span>)</span> </span></div><div class="line"><span class="function">00 00 00 05<span class="params">(code_length：<span class="number">5</span>)</span></span></div><div class="line"><span class="function">---       </span></div><div class="line"><span class="function">2<span class="title">A</span><span class="params">(对应指令为aload_0，将低<span class="number">0</span>个Slot槽位为reference类型的本地变量推送到栈的顶端)</span></span></div><div class="line"><span class="function"><span class="title">B7</span><span class="params">(对应指令为invokespecial，将栈顶的reference类型的数据所指向的对象作为方法的接收者，调用此对象的实例构造方法。这条指令带有一个u2类型的参数，为具体调用的哪一个方法，指向常量池中一个 </span></span></div><div class="line"><span class="function"><span class="params">CONSTANT_Methodref_info类型常量，即此方法的符号应用。 )</span></span></div><div class="line"><span class="function">00 01<span class="params">(方法的符号引用,常量池中第<span class="number">1</span>项,java/lang/Object &lt;init&gt;V)</span></span></div><div class="line"><span class="function"><span class="title">B1</span><span class="params">(对应指令为return，含义为返回此方法，返回值为<span class="keyword">void</span>。这条指令执行完后当前方法结束)</span></span></div><div class="line"><span class="function">---       </span></div><div class="line"><span class="function">00 00<span class="params">(exception_table_length)</span></span></div><div class="line"><span class="function">00 01<span class="params">(attributes_count：<span class="number">1</span>)</span></span></div><div class="line"><span class="function">---       </span></div><div class="line"><span class="function">00 0<span class="title">A</span><span class="params">(十进制：<span class="number">10</span>,常量池中第<span class="number">10</span>项,LineNumberTable)</span></span></div><div class="line"><span class="function">00 00 00 06<span class="params">(属性长度：<span class="number">6</span>)</span></span></div><div class="line"><span class="function">00 01<span class="params">(line_number_table_length：<span class="number">1</span>)</span> </span></div><div class="line"><span class="function">00 00<span class="params">(字节码编号：<span class="number">0</span>)</span></span></div><div class="line"><span class="function">00 03<span class="params">(Java源码行号：<span class="number">3</span>)</span></span></div><div class="line"><span class="function">---Code属性结束---  </span></div><div class="line"><span class="function">00 01<span class="params">(<span class="keyword">public</span>)</span></span></div><div class="line"><span class="function">00 0<span class="title">B</span><span class="params">(name_index：<span class="number">11</span>,inc)</span></span></div><div class="line"><span class="function">00 0<span class="title">C</span><span class="params">(description_index:<span class="number">12</span>,()</span>I)</span></div><div class="line"><span class="function">00 01<span class="params">(属性计数器：<span class="number">1</span>)</span> </span></div><div class="line"><span class="function">---Code属性开始---    </span></div><div class="line"><span class="function">00 09<span class="params">(属性名称：常量池第<span class="number">9</span>项，Code)</span></span></div><div class="line"><span class="function">00 00 00 1<span class="title">F</span><span class="params">(属性长度：<span class="number">31</span>)</span></span></div><div class="line"><span class="function">00 02<span class="params">(max_stack：<span class="number">2</span>)</span></span></div><div class="line"><span class="function">00 01<span class="params">(max_locals：<span class="number">1</span>)</span></span></div><div class="line"><span class="function">00 00 00 07<span class="params">(code_length：<span class="number">7</span>)</span></span></div><div class="line"><span class="function">2<span class="title">A</span><span class="params">(对应指令为aload_0，将低<span class="number">0</span>个Slot槽位为reference类型的本地变量推送到栈的顶端)</span></span></div><div class="line"><span class="function"><span class="title">B4</span><span class="params">(getfield,获取对象字段的值)</span></span></div><div class="line"><span class="function">00 02<span class="params">(方法的符号引用,常量池中第<span class="number">2</span>项,m和i)</span></span></div><div class="line"><span class="function">04<span class="params">(iconst_1,<span class="number">1</span>(<span class="keyword">int</span>)</span>值入栈)  </span></div><div class="line"><span class="function">60<span class="params">(iadd,将栈顶两<span class="keyword">int</span>类型数相加，结果入栈)</span></span></div><div class="line"><span class="function"><span class="title">AC</span><span class="params">(ireturn,返回<span class="keyword">int</span>类型值)</span></span></div><div class="line"><span class="function">00 00<span class="params">(exception_table_length)</span></span></div><div class="line"><span class="function">00 01<span class="params">(attribute_count)</span></span></div><div class="line"><span class="function">00 0<span class="title">A</span><span class="params">(十进制：<span class="number">10</span>,常量池中第<span class="number">10</span>项,LineNumberTable)</span></span></div><div class="line"><span class="function">00 00 00 06<span class="params">(属性长度：<span class="number">6</span>)</span></span></div><div class="line"><span class="function">00 01<span class="params">(line_number_table_length：<span class="number">1</span>)</span> </span></div><div class="line"><span class="function">00 00<span class="params">(字节码编号：<span class="number">0</span>)</span></span></div><div class="line"><span class="function">00 07<span class="params">(Java源码行号：<span class="number">7</span>)</span></span></div><div class="line"><span class="function">---Code属性结束---       </span></div><div class="line"><span class="function">--sourceFile--       </span></div><div class="line"><span class="function">00 01<span class="params">(<span class="keyword">public</span>)</span></span></div><div class="line"><span class="function">00 0<span class="title">D</span><span class="params">(name_index：<span class="number">13</span>,SourceFile)</span> </span></div><div class="line"><span class="function">00 00 00 02<span class="params">(attribute_index:<span class="number">2</span>)</span></span></div><div class="line"><span class="function">00 0<span class="title">E</span> <span class="params">(soucefile_index:<span class="number">14</span>,TestClass.java)</span></span></div></pre></td></tr></table></figure>
+<h3 id="类索引-this-class"><a href="#类索引-this-class" class="headerlink" title="类索引(this_class)"></a>类索引(this_class)</h3><h4 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h4><ul>
+<li>确定这个类的全限定名</li>
+<li>指向CONSTANT_Class_info的类描述符常量，通过CONSTANT_Class_info类型的常量中的索引值可以找到定义在CONSTANT_Utf8_info类型的常量中的全限定名字符串</li>
+</ul>
+<h4 id="位置"><a href="#位置" class="headerlink" title="位置"></a>位置</h4><p>访问标志之后</p>
+<h4 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h4><ul>
+<li>一个u2类型的数据</li>
+</ul>
+<h4 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="number">00</span> <span class="number">01</span>(<span class="number">1</span>，this_class，类索引为<span class="number">1</span>，常量池中第一项：test/Test)</div></pre></td></tr></table></figure>
+<h3 id="父类索引-super-class"><a href="#父类索引-super-class" class="headerlink" title="父类索引(super_class)"></a>父类索引(super_class)</h3><h4 id="作用-1"><a href="#作用-1" class="headerlink" title="作用"></a>作用</h4><ul>
+<li>确定这个类的父类全限定名</li>
+<li>父类索引各自指向CONSTANT_Class_info的类描述符常量，通过CONSTANT_Class_info类型的常量中的索引值可以找到定义在CONSTANT_Utf8_info类型的常量中的全限定名字符串</li>
+</ul>
+<h4 id="位置-1"><a href="#位置-1" class="headerlink" title="位置"></a>位置</h4><ul>
+<li>类索引之后</li>
+</ul>
+<h4 id="内容-1"><a href="#内容-1" class="headerlink" title="内容"></a>内容</h4><ul>
+<li>一个u2类型的数据</li>
+</ul>
+<h4 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h4><ul>
+<li>Java不允许多重继承，父类索引只有一个</li>
+<li>除了<code>java.lang.Object</code>之外，所有类都有父类，父类都不为0</li>
+</ul>
+<h4 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="number">00</span> <span class="number">03</span>(<span class="number">3</span>，super_class，父类索引为<span class="number">3</span>，常量池中第三项：java/lang/Object)</div></pre></td></tr></table></figure>
+<h3 id="接口索引集合-interfaces"><a href="#接口索引集合-interfaces" class="headerlink" title="接口索引集合(interfaces)"></a>接口索引集合(interfaces)</h3><h4 id="作用-2"><a href="#作用-2" class="headerlink" title="作用"></a>作用</h4><ul>
+<li>描述这个类实现了哪些接口<ul>
+<li>这些被实现的接口将按<code>implements</code>语句(如果类本身是一个接口，则应当是extends语句)后的接口顺序从左到右排列在接口索引集合中</li>
+</ul>
+</li>
+</ul>
+<h4 id="位置-2"><a href="#位置-2" class="headerlink" title="位置"></a>位置</h4><p>父类索引之后</p>
+<h4 id="内容-2"><a href="#内容-2" class="headerlink" title="内容"></a>内容</h4><ul>
+<li>u2类型的数据：接口计数器interfaces_count<ul>
+<li>表示索引表的容量</li>
+<li>如果没有实现任何接口，则为0</li>
+</ul>
+</li>
+</ul>
+<h4 id="实例-2"><a href="#实例-2" class="headerlink" title="实例"></a>实例</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">00 00(0，interfaces_count，接口计数器，表示索引表的容量，0为没有实现任何接口)</div></pre></td></tr></table></figure>
+<blockquote>
+<p>Class文件中由这三项数据来确定这个类的继承关系</p>
+</blockquote>
+<h3 id="字段表集合"><a href="#字段表集合" class="headerlink" title="字段表集合"></a>字段表集合</h3><h4 id="作用-3"><a href="#作用-3" class="headerlink" title="作用"></a>作用</h4><p>字段表<code>field_info</code>，用来描述接口或者类中声明的变量</p>
+<p>字段<code>field</code>，包括类级变量以及实例级变量，但不包括在方法内部声明的局部变量</p>
+<h4 id="位置-3"><a href="#位置-3" class="headerlink" title="位置"></a>位置</h4><p>接口索引后</p>
+<h4 id="内容-3"><a href="#内容-3" class="headerlink" title="内容"></a>内容</h4><ul>
+<li>字段的作用域(public、private、protected)</li>
+<li>是实例变量还是类变量(static修饰符)</li>
+<li>可变性(final)</li>
+<li>并发可见性(volatile，是否强制从主内存读写)</li>
+<li>是否被序列化(transient修饰符)</li>
+</ul>
+<p>上述各个修饰符都是布尔值，用标志位来表示</p>
+<ul>
+<li>字段名字</li>
+<li>字段的数据类型</li>
+</ul>
+<p>上述内容不固定，只能引用常量池中的常量来描述。</p>
+<p><strong>字段表结构见下表</strong></p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>名称</th>
+<th>数量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>u2</td>
+<td>access_flags</td>
+<td>1</td>
+</tr>
+<tr>
+<td>u2</td>
+<td>name_index</td>
+<td>1</td>
+</tr>
+<tr>
+<td>u2</td>
+<td>descriptor_index</td>
+<td>1</td>
+</tr>
+<tr>
+<td>u2</td>
+<td>attributes_count</td>
+<td>1</td>
+</tr>
+<tr>
+<td>attributes_info</td>
+<td>attributes</td>
+<td>attributes_count</td>
+</tr>
+</tbody>
+</table>
+<p><strong>access_flags字段访问标志见下表</strong></p>
+<table>
+<thead>
+<tr>
+<th>标志名称</th>
+<th>标志值</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ACC_PUBLIC</td>
+<td>0x0001</td>
+<td>字段是否public</td>
+</tr>
+<tr>
+<td>ACC_PRIVATE</td>
+<td>0x0002</td>
+<td>字段是否private</td>
+</tr>
+<tr>
+<td>ACC_PROTECTED</td>
+<td>0x0004</td>
+<td>字段是否protected</td>
+</tr>
+<tr>
+<td>ACC_STATIC</td>
+<td>0x0008</td>
+<td>字段是否static</td>
+</tr>
+<tr>
+<td>ACC_FINAL</td>
+<td>0x0010</td>
+<td>字段是否final</td>
+</tr>
+<tr>
+<td>ACC_VOLATILE</td>
+<td>0x0040</td>
+<td>字段是否volatile</td>
+</tr>
+<tr>
+<td>ACC_TRANSIENT</td>
+<td>0x0080</td>
+<td>字段是否transient</td>
+</tr>
+<tr>
+<td>ACC_SYNTHETIC</td>
+<td>0x1000</td>
+<td>字段是否由编译器自动产生的</td>
+</tr>
+<tr>
+<td>ACC_ENUM</td>
+<td>0x4000</td>
+<td>字段是否enum</td>
+</tr>
+</tbody>
+</table>
+<h4 id="特点-1"><a href="#特点-1" class="headerlink" title="特点"></a>特点</h4><ul>
+<li><code>ACC_PUBLIC</code>、<code>ACC_PRIVATE</code>、<code>ACC_PROTECTED</code>三者只能选其一</li>
+<li><code>ACC_FINAL</code>、<code>ACC_VOLATILE</code>二者只能选其一</li>
+<li>接口中字段必须有<code>ACC_PUBLIC</code>、<code>ACC_STATIC</code>、<code>ACC_FINAL</code>标志，Java语言规则决定。</li>
+</ul>
+<h4 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h4><ul>
+<li><code>name_index</code><ul>
+<li>对常量池的引用</li>
+<li>字段的简单名称</li>
+</ul>
+</li>
+<li><code>descriptor_index</code><ul>
+<li>对常量池的引用</li>
+<li>字段和方法的描述符</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<ul>
+<li>全限定名<ul>
+<li>test/TestClass</li>
+<li>用<code>;</code>分隔</li>
+</ul>
+</li>
+<li>简单名称<ul>
+<li>没有类型和参数修饰的方法或者字段名称</li>
+<li><code>m</code>和<code>inc</code></li>
+</ul>
+</li>
+<li>描述符<ul>
+<li>用来描述字段的数据类型、方法的参数列表（数量、类型、顺序）、返回值</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<ul>
+<li>描述符标识字符含义表</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>标识字符</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>B</td>
+<td>byte</td>
+</tr>
+<tr>
+<td>C</td>
+<td>char</td>
+</tr>
+<tr>
+<td>D</td>
+<td>double</td>
+</tr>
+<tr>
+<td>F</td>
+<td>float</td>
+</tr>
+<tr>
+<td>I</td>
+<td>int</td>
+</tr>
+<tr>
+<td>J</td>
+<td>long</td>
+</tr>
+<tr>
+<td>S</td>
+<td>short</td>
+</tr>
+<tr>
+<td>Z</td>
+<td>boolean</td>
+</tr>
+<tr>
+<td>V</td>
+<td>void</td>
+</tr>
+<tr>
+<td>L</td>
+<td>对象类型，如Ljava/lang/Object</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>基本数据类型及无返回值：大写字母</li>
+<li>对象类型：L+对象的全限定名</li>
+<li>数组：每一维度用一个前置的<code>[</code><ul>
+<li><code>int[]</code> &gt; <code>[I</code></li>
+<li><code>java.lang.String[][]</code> &gt; <code>[[Ljava/lang/String;</code></li>
+</ul>
+</li>
+<li><p>方法：</p>
+<ul>
+<li>顺序：先参数列表，后返回值<ul>
+<li><code>void inc()</code> &gt; <code>()V</code></li>
+<li><code>java.lang.String toString()</code> &gt; <code>()Ljava/lang/String;</code></li>
+<li><code>int testF(char[] args1, int arg2 , char[] arg3)</code> &gt; <code>([CI[C)I</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>字段表中不会列出超类或者父接口中继承而来的字段</p>
+</li>
+<li><p>但有可能列出原本Java代码中不存在的字段</p>
+<ul>
+<li>内部类中为了保持对外部类的访问性，会自动添加指向外部类实例的字段</li>
+</ul>
+</li>
+<li><p>Java语言中字段是无法重载的，两个字段的数据类型、修饰符不管是否相同，都必须使用不一样的名称，但是对于字节码来讲，如果两个字段的描述符不一致，那字段重名就是合法的</p>
+</li>
+</ul>
+<h4 id="实例-3"><a href="#实例-3" class="headerlink" title="实例"></a>实例</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">--------------字段表集合-------------------</div><div class="line"><span class="number">00</span> <span class="number">01</span>（计数器容量：定义了<span class="number">1</span>个字段）</div><div class="line"><span class="number">00</span> <span class="number">02</span> (访问标志：ACC_PRIVATE）</div><div class="line"><span class="number">00</span> <span class="number">05</span>(<span class="number">5</span>，指向该字段或方法名称常量项的索引,m)</div><div class="line"><span class="number">00</span> <span class="number">06</span>(<span class="number">6</span>，descriptor_index,I,<span class="keyword">int</span>)</div><div class="line"><span class="number">00</span> <span class="number">00</span>(属性表计数器)</div></pre></td></tr></table></figure>
+<h3 id="方法表集合"><a href="#方法表集合" class="headerlink" title="方法表集合"></a>方法表集合</h3><h4 id="作用-4"><a href="#作用-4" class="headerlink" title="作用"></a>作用</h4><p><code>method_info</code>,对方法的描述</p>
+<h4 id="位置-4"><a href="#位置-4" class="headerlink" title="位置"></a>位置</h4><p>字段表之后</p>
+<h4 id="内容-4"><a href="#内容-4" class="headerlink" title="内容"></a>内容</h4><p><strong>方法表结构见下表</strong></p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>名称</th>
+<th>数量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>u2</td>
+<td>access_flags</td>
+<td>1</td>
+</tr>
+<tr>
+<td>u2</td>
+<td>name_index</td>
+<td>1</td>
+</tr>
+<tr>
+<td>u2</td>
+<td>descriptor_index</td>
+<td>1</td>
+</tr>
+<tr>
+<td>u2</td>
+<td>attributes_count</td>
+<td>1</td>
+</tr>
+<tr>
+<td>attributes_info</td>
+<td>attributes</td>
+<td>attributes_count</td>
+</tr>
+</tbody>
+</table>
+<p><strong>方法访问标志见下表</strong></p>
+<table>
+<thead>
+<tr>
+<th>标志名称</th>
+<th>标志值</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ACC_PUBLIC</td>
+<td>0x0001</td>
+<td>方法是否public</td>
+</tr>
+<tr>
+<td>ACC_PRIVATE</td>
+<td>0x0002</td>
+<td>方法是否private</td>
+</tr>
+<tr>
+<td>ACC_PROTECTED</td>
+<td>0x0004</td>
+<td>方法是否protected</td>
+</tr>
+<tr>
+<td>ACC_STATIC</td>
+<td>0x0008</td>
+<td>方法是否static</td>
+</tr>
+<tr>
+<td>ACC_FINAL</td>
+<td>0x0010</td>
+<td>方法是否final</td>
+</tr>
+<tr>
+<td>ACC_SYNCHRONIZED</td>
+<td>0x0020</td>
+<td>方法是否synchronized</td>
+</tr>
+<tr>
+<td>ACC_BRIDGE</td>
+<td>0x0040</td>
+<td>方法是否由编译器产生的桥接方法</td>
+</tr>
+<tr>
+<td>ACC_VARARGS</td>
+<td>0x0080</td>
+<td>方法是否接受不定参数</td>
+</tr>
+<tr>
+<td>ACC_NATIVE</td>
+<td>0x0100</td>
+<td>方法是否native</td>
+</tr>
+<tr>
+<td>ACC_ABSTRACT</td>
+<td>0x0400</td>
+<td>方法是否abstract</td>
+</tr>
+<tr>
+<td>ACC_STRICTFP</td>
+<td>0x0800</td>
+<td>方法是否strictfp</td>
+</tr>
+<tr>
+<td>ACC_SYNTHETIC</td>
+<td>0x1000</td>
+<td>方法是否由编译器自动产生</td>
+</tr>
+</tbody>
+</table>
+<h4 id="说明-1"><a href="#说明-1" class="headerlink" title="说明"></a>说明</h4><ul>
+<li><p>方法里的代码，经过编译器编译成字节码指令后，存在方法属性表集合中一个名为<code>Code</code>的属性里面，之后有详解</p>
+</li>
+<li><p>如果父类方法在子类中没有被重写(Override)，方法表集合中就不会出现来自父类的方法信息</p>
+</li>
+<li><p>可能会出现由编译器自动添加的方法，之后有详解</p>
+<ul>
+<li>最典型：类构造器<code>&lt;clinit&gt;</code></li>
+<li>实例构造器<code>&lt;init&gt;</code></li>
+</ul>
+</li>
+<li><p><a href="https://docs.oracle.com/javase/specs/jvms/se10/jvms10.pdf" target="_blank" rel="external">根据虚拟机规范中对重载的定义(4.7.9)</a>，特征签名就是一个方法中各个参数在常量池中的字段符号引用的集合(不包含返回值)，也就是说无法只依靠返回值的不同来对一个已有方法进行重载。但是<strong>在Class文件格式中</strong>，特征签名只要描述符不是完全一致的两个方法也可以共存，也就是说，如果两个方法有相同的名称和特征签名，但返回值不同，那么也是可以合法共存于同意Class文件中。</p>
+</li>
+</ul>
+<h4 id="实例-4"><a href="#实例-4" class="headerlink" title="实例"></a>实例</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">--------------方法表集合-------------------       </div><div class="line"><span class="number">00</span> <span class="number">02</span>(计数器容量：<span class="number">2</span>个方法,inc()和编译器增加的实例构造器&lt;init&gt;)</div><div class="line"><span class="number">00</span> <span class="number">01</span>(访问标志：ACC_PUBLIC) </div><div class="line"><span class="number">00</span> <span class="number">07</span>(名称索引：常量池第<span class="number">7</span>项,&lt;init&gt;)</div><div class="line"><span class="number">00</span> <span class="number">08</span>(描述符索引：常量池第<span class="number">8</span>项,()v)</div><div class="line"><span class="number">00</span> <span class="number">01</span>(属性表计数器：<span class="number">1</span>项属性)</div></pre></td></tr></table></figure>
+<h3 id="属性表集合"><a href="#属性表集合" class="headerlink" title="属性表集合"></a>属性表集合</h3><h4 id="作用-5"><a href="#作用-5" class="headerlink" title="作用"></a>作用</h4><p><code>attribute_info</code>，用于描述某些场景专有的信息</p>
+<h4 id="位置-5"><a href="#位置-5" class="headerlink" title="位置"></a>位置</h4><p>方法表之后</p>
+<h4 id="内容-5"><a href="#内容-5" class="headerlink" title="内容"></a>内容</h4><p>为了能正确解析Class文件，<a href="https://docs.oracle.com/javase/specs/jvms/se10/jvms10.pdf" target="_blank" rel="external">在最新的JVM规范中，预定义了一些属性4.7</a>。</p>
+<p><strong>其中，4个属性对于Java正确解释类文件至关重要</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性名称</th>
+<th>使用位置</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Code</td>
+<td>方法表</td>
+<td>Java代码编译成的字节码指令</td>
+</tr>
+<tr>
+<td>ConstantValue</td>
+<td>字段表</td>
+<td>final关键字定义的常量值</td>
+</tr>
+<tr>
+<td>StackMapTable</td>
+<td>Code属性</td>
+<td>方法的局部变量描述</td>
+</tr>
+<tr>
+<td>BootstrapMethods</td>
+<td>类文件</td>
+<td>JDK1.7新增，用于保存invokedynamic指令引用的引导方法限定符</td>
+</tr>
+</tbody>
+</table>
+<p><strong>其中，9个属性对JVM解释Class文件不重要，但对Java SE的类库或者工具解释Class文件有用，可选</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性名称</th>
+<th>使用位置</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Exceptions</td>
+<td>方法表</td>
+<td>方法抛出的异常</td>
+</tr>
+<tr>
+<td>InnerClasses</td>
+<td>类文件</td>
+<td>内部类列表</td>
+</tr>
+<tr>
+<td>EnclosingMethod</td>
+<td>类文件</td>
+<td>仅当一个类为局部类或者匿名类时才能拥有这个属性，标识着歌类所在的外围方法</td>
+</tr>
+<tr>
+<td>Synthetic</td>
+<td>类、方法表、字段表</td>
+<td>标识方法或字段为编译器自动生成的</td>
+</tr>
+<tr>
+<td>Signature</td>
+<td>类、方法表、字段表</td>
+<td>JDK1.5新增，用于支持泛型情况下的方法签名。在Java语言中，任何类、接口、初始化方法或成员的泛型签名如果包含了类型变量或参数化类型，由于Java的泛型采用擦除法实现，在为了避免类型信息被擦除后导致签名混乱，这个属性会记录泛型签名信息。</td>
+</tr>
+<tr>
+<td>SourceFile</td>
+<td>类文件</td>
+<td>记录源文件名称</td>
+</tr>
+<tr>
+<td>LineNumberTable</td>
+<td>Code属性</td>
+<td>Java源码的行号与字节码指令的对应关系</td>
+</tr>
+<tr>
+<td>LocalVariableTable</td>
+<td>类</td>
+<td>方法的局部变量描述</td>
+</tr>
+<tr>
+<td>LocalVariableTypeTable</td>
+<td>类</td>
+<td>JDK1.5新增，它使用特征签名代替描述符，是为了引入泛型语法后能描述泛型参数化类型而添加</td>
+</tr>
+</tbody>
+</table>
+<p><strong>其中，13个属性对JVM解释Class文件不重要，但包含有关类文件的元数据，这些元数据要么由Java SE平台的类库公开，要么由工具提供，可选</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性名称</th>
+<th>使用位置</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SourceDebugExtension</td>
+<td>类</td>
+<td>JDK1.6新增，用于存储额外的调试信息。譬如在进行JSP文件调试时，无法通过Java堆栈定位到JSP文件的行号，JSR-45规范为这些非Java语言编写，却需要编译成字节码并运行在JVM中的程序提供了一个进行调试的标准机制。</td>
+</tr>
+<tr>
+<td>Deprecated</td>
+<td>类、方法表、字段表</td>
+<td>被声明为deprecated的方法和字段</td>
+</tr>
+<tr>
+<td>RuntimeVisibleAnnotations</td>
+<td>类、方法表、字段表</td>
+<td>JDK1.5新增，为动态注解提供支持，用于指明哪些注解是运行时(反射调用)可见的</td>
+</tr>
+<tr>
+<td>RuntimeInvisibleAnnotations</td>
+<td>类、方法表、字段表</td>
+<td>JDK1.5新增，为动态注解提供支持，用于指明哪些注解是运行时(反射调用)不可见的</td>
+</tr>
+<tr>
+<td>RuntimeVisibleParameterAnnotations</td>
+<td>方法表</td>
+<td>JDK1.5新增，用于指明哪些方法参数是运行时(反射调用)可见的</td>
+</tr>
+<tr>
+<td>RuntimeInvisibleParameterAnnotations</td>
+<td>方法表</td>
+<td>JDK1.5新增，用于指明哪些方法参数是运行时(反射调用)不可见的</td>
+</tr>
+<tr>
+<td>RuntimeVisibleTypeAnnotations</td>
+<td>类、方法表、字段表、Code属性</td>
+<td>可变长度属性，记录使用的类型运行时可见注释。还记录泛型类、接口、方法和构造函数的类型参数声明的注释。最多有一个。</td>
+</tr>
+<tr>
+<td>RuntimeInvisibleTypeAnnotations</td>
+<td>类、方法表、字段表、Code属性</td>
+<td>可变长度属性，记录使用的类型运行时不可见注释。还记录泛型类、接口、方法和构造函数的类型参数声明的注释。最多有一个。</td>
+</tr>
+<tr>
+<td>AnnotationDefault</td>
+<td>方法表</td>
+<td>可变长度属性，记录使用的注释类型元素的默认值，最多只有一个</td>
+</tr>
+<tr>
+<td>MethodParameters</td>
+<td>方法表</td>
+<td>可变长度属性，记录有关方法的形式参数的信息，例如它们的名称，最多只有一个</td>
+</tr>
+<tr>
+<td>Module</td>
+<td>类的属性表</td>
+<td>可变长度属性，记录模块所需的模块；模块导出和打开的包；以及模块使用和提供的服务，最多只有一个</td>
+</tr>
+<tr>
+<td>ModulePackages</td>
+<td>类的属性表</td>
+<td>可变长度属性，记录模块属性导出或打开的模块的所有包，以及记录在Module属性中的服务实现的所有包，还可以记录模块中既不导出也不打开或包含服务实现的包</td>
+</tr>
+<tr>
+<td>ModuleMainClass</td>
+<td>类的属性表</td>
+<td>固定长度属性，记录模块的主类</td>
+</tr>
+</tbody>
+</table>
+<p><strong>属性表结构</strong></p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>名称</th>
+<th>数量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>u2</td>
+<td>attribute_name_index</td>
+<td>1</td>
+</tr>
+<tr>
+<td>u4</td>
+<td>attribute_length</td>
+<td>1</td>
+</tr>
+<tr>
+<td>u1</td>
+<td>info</td>
+<td>attribute_length</td>
+</tr>
+</tbody>
+</table>
+<h4 id="说明-2"><a href="#说明-2" class="headerlink" title="说明"></a>说明</h4><ul>
+<li><p>不要求各个属性表具有严格顺序，并且只要不与已有属性名重复，任何人实现的编译器都可以向属性表中写入自己定义的属性信息，JVM运行时会忽略掉不认识的属性</p>
+</li>
+<li><p>每个属性的名称需要从常量池中引用一个<code>CONSTANT_Utf8_info</code>类型的常量来表示，属性之的结构可以完全自定义，只需要通过一个u4长度的属性说明占用的位数即可。</p>
+</li>
+<li>具体属性格式可查询<a href="https://docs.oracle.com/javase/specs/jvms/se10/jvms10.pdf" target="_blank" rel="external">JVM规范(4.7.2-4.7.27)</a></li>
+</ul>
+<h4 id="实例-5"><a href="#实例-5" class="headerlink" title="实例"></a>实例</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line">---Code属性开始---       </div><div class="line"><span class="number">00</span> <span class="number">09</span>(attribute_name_index：常量池第<span class="number">9</span>项，Code)</div><div class="line"><span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">1</span>D(attribute_length：<span class="number">29</span>)</div><div class="line"><span class="number">00</span> <span class="number">01</span>(max_stack：<span class="number">1</span>)</div><div class="line"><span class="number">00</span> <span class="number">01</span>(max_locals：<span class="number">1</span>) </div><div class="line"><span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">05</span>(code_length：<span class="number">5</span>)</div><div class="line">---       </div><div class="line"><span class="number">2</span>A(对应指令为aload_0，将低<span class="number">0</span>个Slot槽位为reference类型的本地变量推送到栈的顶端)</div><div class="line">B7(对应指令为invokespecial，将栈顶的reference类型的数据所指向的对象作为方法的接收者，调用此对象的实例构造方法。这条指令带有一个u2类型的参数，为具体调用的哪一个方法，指向常量池中一个 </div><div class="line">CONSTANT_Methodref_info类型常量，即此方法的符号应用。 )</div><div class="line"><span class="number">00</span> <span class="number">01</span>(方法的符号引用,常量池中第<span class="number">1</span>项,java/lang/Object &lt;init&gt;V)</div><div class="line">B1(对应指令为<span class="keyword">return</span>，含义为返回此方法，返回值为<span class="keyword">void</span>。这条指令执行完后当前方法结束)</div><div class="line">---       </div><div class="line"><span class="number">00</span> <span class="number">00</span>(exception_table_length)</div><div class="line"><span class="number">00</span> <span class="number">01</span>(attributes_count：<span class="number">1</span>)</div><div class="line">---       </div><div class="line"><span class="number">00</span> <span class="number">0</span>A(十进制：<span class="number">10</span>,常量池中第<span class="number">10</span>项,LineNumberTable)</div><div class="line"><span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">06</span>(属性长度：<span class="number">6</span>)</div><div class="line"><span class="number">00</span> <span class="number">01</span>(line_number_table_length：<span class="number">1</span>) </div><div class="line"><span class="number">00</span> <span class="number">00</span>(字节码编号：<span class="number">0</span>)</div><div class="line"><span class="number">00</span> <span class="number">03</span>(Java源码行号：<span class="number">3</span>)</div><div class="line">---Code属性结束---  </div><div class="line"><span class="number">00</span> <span class="number">01</span>(<span class="keyword">public</span>)</div><div class="line"><span class="number">00</span> <span class="number">0</span>B(name_index：<span class="number">11</span>,inc)</div><div class="line"><span class="number">00</span> <span class="number">0</span>C(description_index:<span class="number">12</span>,()I)</div><div class="line"><span class="number">00</span> <span class="number">01</span>(属性计数器：<span class="number">1</span>) </div><div class="line">---Code属性开始---    </div><div class="line"><span class="number">00</span> <span class="number">09</span>(属性名称：常量池第<span class="number">9</span>项，Code)</div><div class="line"><span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">1F</span>(属性长度：<span class="number">31</span>)</div><div class="line"><span class="number">00</span> <span class="number">02</span>(max_stack：<span class="number">2</span>)</div><div class="line"><span class="number">00</span> <span class="number">01</span>(max_locals：<span class="number">1</span>)</div><div class="line"><span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">07</span>(code_length：<span class="number">7</span>)</div><div class="line"><span class="number">2</span>A(对应指令为aload_0，将低<span class="number">0</span>个Slot槽位为reference类型的本地变量推送到栈的顶端)</div><div class="line">B4(getfield,获取对象字段的值)</div><div class="line"><span class="number">00</span> <span class="number">02</span>(方法的符号引用,常量池中第<span class="number">2</span>项,m和i)</div><div class="line"><span class="number">04</span>(iconst_1,<span class="number">1</span>(<span class="keyword">int</span>)值入栈)  </div><div class="line"><span class="number">60</span>(iadd,将栈顶两<span class="keyword">int</span>类型数相加，结果入栈)</div><div class="line">AC(ireturn,返回<span class="keyword">int</span>类型值)</div><div class="line"><span class="number">00</span> <span class="number">00</span>(exception_table_length)</div><div class="line"><span class="number">00</span> <span class="number">01</span>(attribute_count)</div><div class="line"><span class="number">00</span> <span class="number">0</span>A(十进制：<span class="number">10</span>,常量池中第<span class="number">10</span>项,LineNumberTable)</div><div class="line"><span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">06</span>(属性长度：<span class="number">6</span>)</div><div class="line"><span class="number">00</span> <span class="number">01</span>(line_number_table_length：<span class="number">1</span>) </div><div class="line"><span class="number">00</span> <span class="number">00</span>(字节码编号：<span class="number">0</span>)</div><div class="line"><span class="number">00</span> <span class="number">07</span>(Java源码行号：<span class="number">7</span>)</div><div class="line">---Code属性结束---       </div><div class="line">--sourceFile--       </div><div class="line"><span class="number">00</span> <span class="number">01</span>(<span class="keyword">public</span>)</div><div class="line"><span class="number">00</span> <span class="number">0</span>D(name_index：<span class="number">13</span>,SourceFile) </div><div class="line"><span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">02</span>(attribute_index:<span class="number">2</span>)</div><div class="line"><span class="number">00</span> <span class="number">0</span>E (soucefile_index:<span class="number">14</span>,TestClass.java)</div></pre></td></tr></table></figure>
+<h3 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h3><p><a href="https://chrome.google.com/webstore/detail/binary-converter/nmmgiednmhaeepkimifjolpedolomdhk" target="_blank" rel="external">Chrome Plugin-Binary Converter</a></p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p><a href="https://docs.oracle.com/javase/specs/jvms/se10/jvms10.pdf" target="_blank" rel="external">JVM规范-JDK1.10</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Java_bytecode_instruction_listings" target="_blank" rel="external">Java bytecode instruction listings</a></p>
+
+      
+    
+    </div>
+    
+      
+  <div class="post-reward">
+    <span class="reward-btn" id="reward-btn">点这里</span>
+    <div class="reward-wrapper syuanpi" id="reward-wrapper" style="display:none;">
+      
+      <div class="reward-item reward-alipay">
+        <img src="https://wx3.sinaimg.cn/mw690/8c564d2aly1ftkt83thjlj20o60skjzn.jpg">
+      </div>
+      
+    </div>
+  </div>
+
+
+      
+    
+  </article>
+  
+    
+  <nav class="article-page">
+    
+    
+      <a href="/JVM/classDetail1.html" id="art-right" class="art-right">
+        <span class="prev-title"> 
+          Class文件详述(1)<i class="iconfont icon-right"></i>  
+        </span>
+      </a>
+    
+  </nav>
+
+    
+  <i id="com-switch" class="iconfont icon-more jumping-in long infinite" style="font-size:24px;display:block;text-align:center;transform:rotate(180deg);"></i>
+  <div class="post-comments" id="post-comments" style="display: block;margin: auto 16px;">
+    
+<!-- Gitment Comments -->
+<div id="gitment"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  owner: "super2bai",
+  repo: 'comment',
+  oauth: {
+    client_id: '37f2293730b41dcb5276',
+    client_secret: 'dbab4955840d4cbc88f1563be04ab676662194e5',
+  },
+})
+gitment.render('gitment')
+</script>
+
+    
+    
+
+  </div>
+
+
+  
+  
+    
+  
+  <aside class="post-toc">
+    <span class="title" id="toc-switch"><span>文章导航</span></span>
+    <div class="toc-inner syuanpi back-1" style="display:none;">
+      <li class="title-link"><a href="javascript:;" class="toTop">Class文件详述(2)</a></li>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#类索引-this-class"><span class="toc-text">类索引(this_class)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#作用"><span class="toc-text">作用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#位置"><span class="toc-text">位置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#内容"><span class="toc-text">内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#实例"><span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#父类索引-super-class"><span class="toc-text">父类索引(super_class)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#作用-1"><span class="toc-text">作用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#位置-1"><span class="toc-text">位置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#内容-1"><span class="toc-text">内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#特点"><span class="toc-text">特点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#实例-1"><span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#接口索引集合-interfaces"><span class="toc-text">接口索引集合(interfaces)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#作用-2"><span class="toc-text">作用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#位置-2"><span class="toc-text">位置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#内容-2"><span class="toc-text">内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#实例-2"><span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字段表集合"><span class="toc-text">字段表集合</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#作用-3"><span class="toc-text">作用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#位置-3"><span class="toc-text">位置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#内容-3"><span class="toc-text">内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#特点-1"><span class="toc-text">特点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#说明"><span class="toc-text">说明</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#实例-3"><span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法表集合"><span class="toc-text">方法表集合</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#作用-4"><span class="toc-text">作用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#位置-4"><span class="toc-text">位置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#内容-4"><span class="toc-text">内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#说明-1"><span class="toc-text">说明</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#实例-4"><span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#属性表集合"><span class="toc-text">属性表集合</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#作用-5"><span class="toc-text">作用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#位置-5"><span class="toc-text">位置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#内容-5"><span class="toc-text">内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#说明-2"><span class="toc-text">说明</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#实例-5"><span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#工具"><span class="toc-text">工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考资料"><span class="toc-text">参考资料</span></a></li></ol>
+    </div>
+  </aside>
+
+
+
+  
+
+
+        </div>
+      </main>
+
+      <footer class="footer syuanpi fadeIn" id="footer">
+  <hr>
+  <div class="footer-wrapper">
+    <div class="left">
+      <div class="contact-icon">
+    
+    
+    
+    
+    
+    
+    
+    
+        
+            <a href="https://github.com/super2bai" class="iconfont icon-github" title="github"></a>
+        
+        
+        
+        
+        
+        
+        
+    
+</div>
+    </div>
+    <div class="right">
+      <div class="copyright">
+    <div class="info">
+        <span>&copy;</span>
+        <span>2017 ~ 2018</span>
+        <span>❤</span>
+        <span>super2bai</span>
+    </div>
+    <div class="theme">
+        <span>
+            动力来源于
+            <a href="http://hexo.io/" target="_blank">Hexo </a>
+        </span>
+        <span>
+            主题
+            <a href="https://github.com/ColMugX/hexo-theme-Nlvi"> Nlvi </a>
+        </span>
+    </div>
+    
+    <div class="visit_count">
+        <i class="iconfont icon-visit"></i>
+        <span id="busuanzi_value_site_uv"></span>
+        <i class="iconfont icon-people"></i>
+        <span id="busuanzi_value_site_pv"></span>
+    </div>
+    
+</div>
+
+    </div>
+  </div>
+</footer>
+    </div>
+  </div>
+  <script src="/script/lib/jquery/jquery-3.2.1.min.js"></script>
+
+
+  <script src="/script/lib/lightbox/js/lightbox.min.js"></script>
+
+
+
+
+
+
+
+
+<script src="/script/src/nlvi.js"></script>
+
+  <script src="/script/scheme/banderole.js"></script>
+
+<script src="/script/bootstarp.js"></script>
+
+
+<div class="backtop syuanpi melt toTop" id="backtop">
+    <i class="iconfont icon-up"></i>
+    <span style="text-align:center;font-family:Georgia;"><span style="font-family:Georgia;" id="scrollpercent">1</span>%</span>
+</div>
+
+
+
+</body>
+</html>
