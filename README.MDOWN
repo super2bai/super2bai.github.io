@@ -18,7 +18,7 @@
 
 Java相关
 
-* Spring
+* [Spring](https://super2bai.github.io/tags/Spring/)
   * [Spring Framework](https://super2bai.github.io/Spring/framework.html)
   * Spring Boot
     * [初体验](https://super2bai.github.io/Spring/first.html)
@@ -26,12 +26,12 @@ Java相关
     * [MVC](https://super2bai.github.io/Spring/MVC.html)
     * [JDBC](https://super2bai.github.io/Spring/JDBC.html)
     * [Validation](https://super2bai.github.io/Spring/validation.html)
-* Dubbo
+* [Dubbo](https://super2bai.github.io/tags/Dubbo/)
   * [初体验](https://super2bai.github.io/Dubbo/dubbofirst.html)
   * [配置](https://super2bai.github.io/Dubbo/config.html)
   * [最佳实践](https://super2bai.github.io/Dubbo/best.html)
   * [主干源码](https://super2bai.github.io/Dubbo/best.html)
-* Zookeeper
+* [Zookeeper](https://super2bai.github.io/tags/Zookeeper/)
   * [初体验](https://super2bai.github.io/zk/start.html)
   * [搭建集群](https://super2bai.github.io/zk/zoos.html)
   * [配置文件](https://super2bai.github.io/zk/config.html)
@@ -44,35 +44,62 @@ Java相关
   * [curator场景封装](https://super2bai.github.io/zk/interface.html)
   * [原理](https://super2bai.github.io/zk/analyze.html)
   * [ZAB协议](https://super2bai.github.io/zk/ZAB.html)
-* JDK
+* [JDK](https://super2bai.github.io/tags/JDK/)
   * [Mac切换JDK版本](https://super2bai.github.io/JDK/jdkVersion.html)
-* JVM
+* [JVM](https://super2bai.github.io/tags/JVM/)
   * [Mac编译openJDK9](https://super2bai.github.io/JVM/build.html)
+  * [内存区域](https://super2bai.github.io/JVM/memory.html)
+  * [中对象的创建](https://super2bai.github.io/JVM/create.html)
+  * [中对象的内存布局](https://super2bai.github.io/JVM/layout.html)
+  * [对象的访问定位](https://super2bai.github.io/JVM/position.html)
+  * [堆溢出](https://super2bai.github.io/JVM/heap.html)
+  * [虚拟机栈和本地方法栈溢出](https://super2bai.github.io/JVM/stack.html)
+  * [元数据区溢出](https://super2bai.github.io/JVM/metaspace.html)
+  * [垃圾收集器](https://super2bai.github.io/JVM/GC.html)
+  * [GC日志](https://super2bai.github.io/JVM/GCLog.html)
+  * [对象引用](https://super2bai.github.io/JVM/reference.html)
+  * [垃圾收集算法](https://super2bai.github.io/JVM/gcAlgo.html)
+  * [HotSpot的算法实现](https://super2bai.github.io/JVM/GCAlgoImpl.html)
+  * [内存分配与回收策略](https://super2bai.github.io/JVM/memStrategy.html)
+  * [JDK的命令行工具](https://super2bai.github.io/JVM/cmdTools.html)
+  * [JIT&HSDIS查看反编译代码](https://super2bai.github.io/JVM/decompile.html)
+  * [JDK的可视化工具](https://super2bai.github.io/JVM/tool.html)
+  * [故障案例总结](https://super2bai.github.io/JVM/problem.html)
+  * Class文件
+    * [概述](https://super2bai.github.io/JVM/classSummary.html)
+    * [魔数、版本号、常量池、访问标志](https://super2bai.github.io/JVM/classDetail1.html)
+    * [类、父类和接口索引，字段表、方法表、属性表](https://super2bai.github.io/JVM/classDetail2.html)
 
 ---
 
 IDE及应用服务器相关
 
-* Eclipse
-* Tomcat
+* [Eclipse](https://super2bai.github.io/tags/Eclipse/)
+  * [Eclipse和Maven那点事儿](https://super2bai.github.io/Eclipse/Maven.html)
+  * [获取Eclipse启动耗时](https://super2bai.github.io/Eclipse/plugin.html)
+* [Tomcat](https://super2bai.github.io/tags/Tomcat/)
+  * [同一个Tomcat多端口多项目部署](https://super2bai.github.io/deploy/Tomcat.html)
 
 ---
 
 容器相关
 
 * Docker
+  * [入门](https://super2bai.github.io/Docker/start.html)
 
 ---
 
 服务器相关
 
 * Linux
+  * [Linux环境变量文件](https://super2bai.github.io/Linux/varFile.html)
 
 ---
 
 测试相关
 
 * jmeter
+  * [入门](https://super2bai.github.io/jmeter/start.html)
 
 ---
 
@@ -92,27 +119,35 @@ IO相关
 
 分布式相关
 
+* [基础知识](https://super2bai.github.io/distributed/basic.html)
+* [事务解决方案](https://super2bai.github.io/distributed/solution.html)
+
 ---
 
 编码相关
+
+* [文本文件从Windows拷贝到Mac乱码](https://super2bai.github.io/codec/w2m.html)
 
 ---
 
 部署相关
 
+* [Java Web部署到Windows的Tomcat](https://super2bai.github.io/deploy/windows.html)
+
 ---
 
 Python相关
 
+* [入门](https://super2bai.github.io/Python/start.html)
+* [基础](https://super2bai.github.io/Python/basis.html)
+
 ---
 
-
-
-
+[问题讨论](https://super2bai.github.io/issue/discuss.html)
 
 #### 2.旅游
 
-* 北京-内蒙9天自驾
+* [北京-内蒙9天自驾](https://super2bai.github.io/travel/IM.html)
 
 #### 3.其他
 
@@ -120,25 +155,47 @@ Python相关
 
 APP
 
-- walkup攻略
+- [Walkup攻略](https://super2bai.github.io/tags/walkup/)
+  - [亚洲](https://super2bai.github.io/walkup/Asia.html)
+  - [欧洲](https://super2bai.github.io/walkup/Europe.html)
+  - [南极洲](https://super2bai.github.io/walkup/Antarctica.html)
+  - [非洲](https://super2bai.github.io/walkup/Africa.html)
+  - [北美洲](https://super2bai.github.io/walkup/NA.html)
+  - [南美洲](https://super2bai.github.io/walkup/SA.html)
 
 ---
 
 工具
+
+* [工具推荐](https://super2bai.github.io/tool/recommend.html)
 
 ---
 
 博客搭建
 
+* [hexo+github=blog](https://super2bai.github.io/GHPages/blog.html)
+* [Hexo站点地图](https://super2bai.github.io/GHPages/sitemap.html)
+
 ---
 
 Mac
+
+* [显示隐藏文件](https://super2bai.github.io/mac/showHide.html)
 
 ---
 
 游戏
 
----
+* [游戏分类](https://super2bai.github.io/game/type.html)
 
-工具
 
+
+### 五、感谢
+
+etworker、dinfer
+
+### 六、其他
+
+如果觉得有帮助，不如众筹请我喝杯咖啡吧～
+
+![](https://wx3.sinaimg.cn/mw690/8c564d2aly1ftkt83thjlj20o60skjzn.jpg)
