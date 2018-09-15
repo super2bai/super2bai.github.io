@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://super2bai.github.io/JVM/build.html</loc>
+    
+    <lastmod>2018-09-15T15:32:51.697Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://super2bai.github.io/JVM/classDetail2.html</loc>
     
     <lastmod>2018-09-15T13:54:08.759Z</lastmod>
@@ -383,13 +390,6 @@
     <loc>https://super2bai.github.io/JVM/create.html</loc>
     
     <lastmod>2018-05-23T03:35:07.115Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://super2bai.github.io/JVM/build.html</loc>
-    
-    <lastmod>2018-05-23T03:35:01.271Z</lastmod>
     
   </url>
   
