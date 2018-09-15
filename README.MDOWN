@@ -1,0 +1,108 @@
+### 一、关于
+
+个人博客
+
+### 二、搭建
+
+[Hexo](https://hexo.io/)+[hexo-theme-Nlvi](https://github.com/ColMugX/hexo-theme-Nlvi)
+
+### 三、托管
+
+[GitHub](https://github.com/)
+
+### 四、内容
+
+#### 1.技术
+
+---
+
+Java相关
+
+* Spring
+* Dubbo
+* Zookeeper
+* JDK
+
+---
+
+IDE及应用服务器相关
+
+* Eclipse
+* Tomcat
+
+---
+
+容器相关
+
+* Docker
+
+---
+
+服务器相关
+
+* Linux
+
+---
+
+测试相关
+
+* jmeter
+
+---
+
+游戏开发相关
+
+* 3D编辑器
+
+---
+
+IO相关
+
+---
+
+分布式相关
+
+---
+
+编码相关
+
+---
+
+部署相关
+
+---
+
+Python相关
+
+---
+
+
+
+
+
+#### 2.旅游
+
+#### 3.其他
+
+---
+
+APP相关
+
+- walkup攻略
+
+---
+
+工具相关
+
+---
+
+博客搭建相关
+
+---
+
+Mac相关
+
+---
+
+游戏相关
+
