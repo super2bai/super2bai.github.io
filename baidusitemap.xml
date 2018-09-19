@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>https://super2bai.github.io/JVM/bytecode.html</loc>
+    <lastmod>2018-09-19T12:53:20.892Z</lastmod>
+    <data>
+        <display>
+        <title>字节码指令</title>
+        <pubTime>2018-09-17T12:51:52.000Z</pubTime>
+        
+        <tag>JVM</tag>
+         
+         
+           
+             
+              <breadCrumb title="JVM" url="https://super2bai.github.io/categories/JVM/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://super2bai.github.io/JVM/build.html</loc>
     <lastmod>2018-09-15T15:32:51.697Z</lastmod>
     <data>

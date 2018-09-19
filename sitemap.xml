@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://super2bai.github.io/JVM/bytecode.html</loc>
+    
+    <lastmod>2018-09-19T12:53:20.892Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://super2bai.github.io/JVM/build.html</loc>
     
     <lastmod>2018-09-15T15:32:51.697Z</lastmod>
