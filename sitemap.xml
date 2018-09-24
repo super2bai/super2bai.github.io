@@ -2,16 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://super2bai.github.io/JVM/bytecode.html</loc>
+    <loc>https://super2bai.github.io/asm/bisis.html</loc>
     
-    <lastmod>2018-09-24T13:35:56.177Z</lastmod>
+    <lastmod>2018-09-24T13:49:17.514Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://super2bai.github.io/JVM/clzloadtime.html</loc>
     
-    <lastmod>2018-09-24T13:35:54.604Z</lastmod>
+    <lastmod>2018-09-24T13:49:02.304Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://super2bai.github.io/JVM/bytecode.html</loc>
+    
+    <lastmod>2018-09-24T13:35:56.177Z</lastmod>
     
   </url>
   

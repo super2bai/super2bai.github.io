@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <link rel="stylesheet" href="/style/style.css">
+<script>
+  var nlviconfig = {
+    title: "贰白",
+    author: "super2bai",
+    baseUrl: "/",
+    theme: {
+      scheme: "banderole",
+      lightbox: true,
+      animate: true,
+      search: false,
+      friends: false,
+      reward: true,
+      lazy: false
+    }
+  }
+</script>
+
+
+
+
+    <link rel="stylesheet" href="/script/lib/lightbox/css/lightbox.min.css">
+
+
+
+
+    <link rel="stylesheet" href="/syuanpi/syuanpi.min.css">
+
+
+
+
+    <link rel="icon" href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-98059014-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-116557847-1');
+</script>
+
+
+
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="browsermode" content="application">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="贰白">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="msapplication-navbutton-color" content="#666666">
+<meta name= "format-detection" content="telephone=no" />
+<meta name="keywords" content="nlvi, Nlvi" />
+
+  <link rel="apple-touch-icon"  sizes="72x72"  href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+  <link rel="apple-touch-icon-precomposed"  sizes="72x72"  href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+
+
+  <meta name="subtitle" content="苦于探索，全是未知">
+
+
+  <meta name="description" content="苦于探索，全是未知">
+
+
+
+  <meta name="keywords" content="汇编, Nlvi" />
+
+  <title> 汇编基础知识 · 贰白 </title>
+</head>
+<body>
+  <div class="progress">
+  <div class="progress-inner"></div>
+</div>
+  
+  
+    <div class="tagcloud-mask"></div>  
+<div class="tagcloud" id="tagcloud">
+  <div class="tagcloud-inner">
+    <a href="/tags/3D编辑器/" style="font-size: 14px;">3D编辑器</a> <a href="/tags/Docker/" style="font-size: 14px;">Docker</a> <a href="/tags/Dubbo/" style="font-size: 14px;">Dubbo</a> <a href="/tags/Eclipse/" style="font-size: 14px;">Eclipse</a> <a href="/tags/GHPages/" style="font-size: 14px;">GHPages</a> <a href="/tags/IO/" style="font-size: 14px;">IO</a> <a href="/tags/JDK/" style="font-size: 14px;">JDK</a> <a href="/tags/JVM/" style="font-size: 14px;">JVM</a> <a href="/tags/Linux/" style="font-size: 14px;">Linux</a> <a href="/tags/Python/" style="font-size: 14px;">Python</a> <a href="/tags/Spring/" style="font-size: 14px;">Spring</a> <a href="/tags/Tomcat/" style="font-size: 14px;">Tomcat</a> <a href="/tags/Zookeeper/" style="font-size: 14px;">Zookeeper</a> <a href="/tags/jmeter/" style="font-size: 14px;">jmeter</a> <a href="/tags/mac/" style="font-size: 14px;">mac</a> <a href="/tags/walkup/" style="font-size: 14px;">walkup</a> <a href="/tags/分布式/" style="font-size: 14px;">分布式</a> <a href="/tags/工具/" style="font-size: 14px;">工具</a> <a href="/tags/旅游/" style="font-size: 14px;">旅游</a> <a href="/tags/汇编/" style="font-size: 14px;">汇编</a> <a href="/tags/游戏/" style="font-size: 14px;">游戏</a> <a href="/tags/编码/" style="font-size: 14px;">编码</a> <a href="/tags/部署/" style="font-size: 14px;">部署</a> <a href="/tags/问题/" style="font-size: 14px;">问题</a>
+  </div>
+</div>  
+  
+
+  <div class="container">
+
+    <header class="header" id="header">
+  <div class="header-wrapper">
+    <div class="logo">
+  <div class="logo-inner syuanpi tvIn">
+    <span><a href="/">贰白</a></span>
+    
+      <span id="subtitle">苦于探索，全是未知</span>
+    
+  </div>
+</div>
+    <nav class="main-nav">
+  
+  <ul class="main-nav-list syuanpi tvIn">
+  
+  
+    
+      
+    
+    <li class="menu-item">
+      <a href="/" id="article">
+        <span class="base-name">文章</span>
+        
+          <span class="menu-item-label">article</span>
+        
+      </a>
+    </li>
+  
+    
+      
+    
+    <li class="menu-item">
+      <a href="/archives" id="archives">
+        <span class="base-name">归档</span>
+        
+          <span class="menu-item-label">archives</span>
+        
+      </a>
+    </li>
+  
+    
+      
+    
+    <li class="menu-item">
+      <a href="javascript:;" id="tags">
+        <span class="base-name">标签</span>
+        
+          <span class="menu-item-label">tags</span>
+        
+      </a>
+    </li>
+  
+    
+      
+    
+    <li class="menu-item">
+      <a href="/about" id="about">
+        <span class="base-name">关于</span>
+        
+          <span class="menu-item-label">about</span>
+        
+      </a>
+    </li>
+  
+  </ul>
+  
+</nav>
+
+    
+    
+  </div>
+</header>
+<div class="mobile-header">
+  <div class="mobile-header-body">
+    <div class="mobile-header-list">
+      
+        
+            <div class="mobile-nav-item">
+                <a href="/">
+                    <span>文章</span>
+                    
+                        <span class="menu-item-label">article</span>
+                    
+                </a>
+            </div>
+        
+      
+        
+            <div class="mobile-nav-item">
+                <a href="/archives">
+                    <span>归档</span>
+                    
+                        <span class="menu-item-label">archives</span>
+                    
+                </a>
+            </div>
+        
+      
+        
+          <div class="mobile-nav-item inner-cloud">
+            <div class="mobile-nav-tag">
+              <a href="javascript:;" id="mobile-tags">
+                <span>标签</span>
+                
+                    <span class="menu-item-label">tags</span>
+                
+              </a>
+            </div>
+            <div class="mobile-nav-tagcloud">
+              <div class="mobile-tagcloud-inner">
+                <a href="/tags/3D编辑器/" style="font-size: 14px;">3D编辑器</a> <a href="/tags/Docker/" style="font-size: 14px;">Docker</a> <a href="/tags/Dubbo/" style="font-size: 14px;">Dubbo</a> <a href="/tags/Eclipse/" style="font-size: 14px;">Eclipse</a> <a href="/tags/GHPages/" style="font-size: 14px;">GHPages</a> <a href="/tags/IO/" style="font-size: 14px;">IO</a> <a href="/tags/JDK/" style="font-size: 14px;">JDK</a> <a href="/tags/JVM/" style="font-size: 14px;">JVM</a> <a href="/tags/Linux/" style="font-size: 14px;">Linux</a> <a href="/tags/Python/" style="font-size: 14px;">Python</a> <a href="/tags/Spring/" style="font-size: 14px;">Spring</a> <a href="/tags/Tomcat/" style="font-size: 14px;">Tomcat</a> <a href="/tags/Zookeeper/" style="font-size: 14px;">Zookeeper</a> <a href="/tags/jmeter/" style="font-size: 14px;">jmeter</a> <a href="/tags/mac/" style="font-size: 14px;">mac</a> <a href="/tags/walkup/" style="font-size: 14px;">walkup</a> <a href="/tags/分布式/" style="font-size: 14px;">分布式</a> <a href="/tags/工具/" style="font-size: 14px;">工具</a> <a href="/tags/旅游/" style="font-size: 14px;">旅游</a> <a href="/tags/汇编/" style="font-size: 14px;">汇编</a> <a href="/tags/游戏/" style="font-size: 14px;">游戏</a> <a href="/tags/编码/" style="font-size: 14px;">编码</a> <a href="/tags/部署/" style="font-size: 14px;">部署</a> <a href="/tags/问题/" style="font-size: 14px;">问题</a>
+              </div>
+            </div>
+          </div>
+        
+      
+        
+            <div class="mobile-nav-item">
+                <a href="/about">
+                    <span>关于</span>
+                    
+                        <span class="menu-item-label">about</span>
+                    
+                </a>
+            </div>
+        
+      
+    </div>
+  </div>
+  <div class="mobile-header-nav">
+    <div class="mobile-header-item" id="mobile-left">
+      <div class="header-menu-item">
+        <span class="header-menu-line"></span>
+      </div>
+    </div>
+    <h1 class="mobile-header-title">
+      <a href="/">贰白</a>
+    </h1>
+    <div class="mobile-header-item"></div>
+  </div>
+</div>
+    <div class="container-inner">
+      <main class="main" id="main">
+        <div class="main-wrapper">
+          
+    
+  
+  <article class="
+  post
+   is_post 
+  ">
+    <header class="post-header">
+      <div class="post-time syuanpi fadeInUpShort back-1">
+        <div class="post-time-wrapper">
+          <span>2018-09-23</span>
+          
+            
+              <span class="post-category"><a href="/categories/asm/">asm</a></span>
+            
+          
+          
+            
+              <aside class="post-tags syuanpi fadeInUpShort back-3">
+              
+                <a href="/tags/汇编/">汇编</a>
+              
+              </aside>
+            
+          
+        </div>
+      </div>
+      <h1 class="post-title syuanpi fadeInUpShort back-2">
+        
+          汇编基础知识
+        
+      </h1>
+    </header>
+    <div class="post-content syuanpi fadeInUpShort back-3">
+      
+        <p>背景及组成</p>
+<a id="more"></a>
+<ul>
+<li>汇编语言是直接在硬件之上工作的编程语言，首先要了解硬件系统的结构，才能有效地应用汇编语言对其编程</li>
+<li>关于PC机及CPU无力结构和编程结构的全面研究，在《微机原理与接口》中进行；对计算机一般的结构、功能、性能的研究在一门称为《组成原理》的理论层次更高的课程中进行。汇编课程的研究重点放在如何利用硬件系统的编程结构和指令集有效灵活地控制系统进行工作</li>
+</ul>
+<h4 id="机器语言"><a href="#机器语言" class="headerlink" title="机器语言"></a>机器语言</h4><ul>
+<li>机器语言是机器指令的集合。机器指令展开来讲就是一台机器可以正确执行的命令。电子计算机的机器指令是一列二进制数字。计算机将之转变为一列高低电平，以使计算机的电子器件受到驱动，进行运算。</li>
+</ul>
+<h4 id="汇编语言的产生"><a href="#汇编语言的产生" class="headerlink" title="汇编语言的产生"></a>汇编语言的产生</h4><ul>
+<li>汇编语言的主体是汇编指令。汇编指令和机器指令的差别在于指令的表示方法上。汇编指令是机器指令便于记忆的书写格式</li>
+<li>寄存器，简单来讲是CPU中可以存储数据的器件</li>
+<li>一个能够将汇编指令转换成机器指令的翻译程序为编译器。程序员用汇编语言写出源程序，再用汇编编译器将其编译为机器码，由计算机最终执行</li>
+</ul>
+<h4 id="汇编语言的组成"><a href="#汇编语言的组成" class="headerlink" title="汇编语言的组成"></a>汇编语言的组成</h4><ul>
+<li>汇编语言由三类指令组成<ul>
+<li>汇编指令：机器码的助记符，有对应的机器码<ul>
+<li>汇编语言的核心</li>
+</ul>
+</li>
+<li>伪指令：没有对应的机器码，由编译器执行，计算机并不执行</li>
+<li>其他符号：如+、-、*、/等，又编译器识别， 没有对应的机器码</li>
+</ul>
+</li>
+</ul>
+<h4 id="存储器"><a href="#存储器" class="headerlink" title="存储器"></a>存储器</h4><ul>
+<li>指令和数据在存储器中存放，也就是内存。<ul>
+<li>离开了内存，性能再好的CPU也无法工作</li>
+<li>磁盘上的数据如果不读到内存中，就无法被CPU使用</li>
+</ul>
+</li>
+</ul>
+<h4 id="指令和数据"><a href="#指令和数据" class="headerlink" title="指令和数据"></a>指令和数据</h4><ul>
+<li>在内存中，二者都是二进制信息。</li>
+</ul>
+<h4 id="存储单元"><a href="#存储单元" class="headerlink" title="存储单元"></a>存储单元</h4><ul>
+<li>存储器被划分成若干个存储单元，每个存储单元从0开始编号<ul>
+<li>例如一个存储器有128个存储单元，编号为0～127</li>
+</ul>
+</li>
+<li>一个存储单元能存储一个Byte，即8个二进制位。<ul>
+<li>一个存储器有128个存储单元，它可以存储128Byte</li>
+</ul>
+</li>
+<li>微机存储器的容量是以字节为最小单位来计算的</li>
+</ul>
+<h4 id="CPU对存储器的读写"><a href="#CPU对存储器的读写" class="headerlink" title="CPU对存储器的读写"></a>CPU对存储器的读写</h4><ul>
+<li>CPU要从内存中读数据，首先要指定存储单元的地址。也就是说它要先确定要读取哪一个存储单元中的数据</li>
+<li>CPU在读写数据时还要指明，要对哪一个器件进行操作，进行哪种操作，是从中读出数据，还是向里面写入数据</li>
+<li>CPU要向进行数据的读写，必须和外部器件(芯片)进行交互<ul>
+<li>存储单元的地址(地址信息)</li>
+<li>器件的选择，读或写的命令(控制信息)</li>
+<li>读或写的数据(数据信息)</li>
+</ul>
+</li>
+<li>电子计算机能处理、传输的信息都是电信号，电信号当然要用导线传送。在计算机中专门有连接CPU和其他芯片的导线，通常称为总线。</li>
+<li>总线从逻辑上又分为3种<ul>
+<li>地址总线</li>
+<li>控制总线</li>
+<li>数据总线</li>
+</ul>
+</li>
+</ul>
+<h4 id="地址总线"><a href="#地址总线" class="headerlink" title="地址总线"></a>地址总线</h4><ul>
+<li>CPU是通过地址总线来指定存储器单元的。可见地址总线上能传送多少个不同的信息，CPU就可以对多少个存储单元进行寻址</li>
+<li>一个CPU有N根地址总线，则可以说这个CPU的地址总线宽度为N。这样的CPU最多可以寻找2的N次方个内存单元</li>
+<li>寻址能力(KB)=2的地址总线根数次方</li>
+</ul>
+<p><del>地址总线上发送的地址信息.jpg</del></p>
+<h4 id="数据总线"><a href="#数据总线" class="headerlink" title="数据总线"></a>数据总线</h4><ul>
+<li>CPU与内存或其他器件之间的数据传送是通过数据总线来进行的。</li>
+<li>数据总线宽度决定了CPU和外界的数据传送速度</li>
+<li>8根数据总线一次可传送一个8位二进制(一个字节)数据，16根总线一次可传送两个字节</li>
+<li>一根数据总线一次可传送1位二进制</li>
+</ul>
+<h4 id="控制总线"><a href="#控制总线" class="headerlink" title="控制总线"></a>控制总线</h4><ul>
+<li>CPU对外部器件的控制是通过控制总线来进行的。控制总线是个总称，它是一些不同控制线的集合。有多少根控制总线，就意味着CPU提供了对外部器件的多少种控制。所以，控制总线的宽度决定了CPU对外部器件的控制能力</li>
+</ul>
+<h4 id="检测点"><a href="#检测点" class="headerlink" title="检测点"></a>检测点</h4><p>Q：1个CPU的寻址能力为8KB，那么它的地址总线的宽度为13位</p>
+<p>A：</p>
+<ul>
+<li>一个存储单元能存储1Byte</li>
+<li>一个CPU有N个地址总线，那么最多寻找2的N次方个存储单元(Byte)</li>
+<li>题目中寻址能力为8KB=1024*8=8192Byte</li>
+<li>2的N次方=8192Byte，N=13</li>
+</ul>
+<h4 id="内存地址空间-概述"><a href="#内存地址空间-概述" class="headerlink" title="内存地址空间(概述)"></a>内存地址空间(概述)</h4><ul>
+<li>一个CPU的地址总线宽度为10，那么可以寻址2的10次方=1024个内存单元，这1024个可寻到的内存单元就构成这个CPU的内存地址空间。</li>
+</ul>
+<h4 id="主板"><a href="#主板" class="headerlink" title="主板"></a>主板</h4><ul>
+<li>每一台PC机中，都有一个主板，主板上有核心器件和一些主要器件，通过总线相连(地址总线、数据总线、控制总线)</li>
+<li>器件包括：CPU、存储器、外围芯片组、扩展插槽(RAM内存条和各类接口卡)</li>
+</ul>
+<h4 id="接口卡"><a href="#接口卡" class="headerlink" title="接口卡"></a>接口卡</h4><ul>
+<li>CPU对外部设备(显示器、音箱等)都不能直接控制，直接控制这些设备进行工作的插在扩展插槽上的接口卡</li>
+<li>扩展插槽通过总线和CPU相连，所以接口卡也通过总线同CPU相连</li>
+<li>CPU通过总看向接口卡发送命令，接口卡根据CPU的命令控制外设进行工作。</li>
+</ul>
+<h4 id="各类存储器芯片"><a href="#各类存储器芯片" class="headerlink" title="各类存储器芯片"></a>各类存储器芯片</h4><ul>
+<li>一台PC机中，装有多个存储器芯片，这些存储器芯片从物理连接上看是独立的，不同的器件。</li>
+<li>从读写属性上看分为两类：随机存储器(RAM)和只读存储器(ROM)</li>
+<li>随机存储器RAM：可读可写、必须带电、关机后存储内容丢失</li>
+<li>只读存储器ROM：只能读取不能写入，关机后存储内容不丢失</li>
+</ul>
+<h5 id="随机存储器"><a href="#随机存储器" class="headerlink" title="随机存储器"></a>随机存储器</h5><ul>
+<li>存放供CPU使用的绝大部分程序和数据</li>
+<li>主随机存储器一般由两个位置上的RAM组成<ul>
+<li>装在主板上的RAM</li>
+<li>插在扩展卡槽上的RAM</li>
+</ul>
+</li>
+</ul>
+<h5 id="装有BIOS的ROM"><a href="#装有BIOS的ROM" class="headerlink" title="装有BIOS的ROM"></a>装有BIOS的ROM</h5><ul>
+<li>BIOS是由主办和各类接口卡(显卡、网卡等)厂商提供的软件系统，可以通过它利用该硬件设备进行最基本的输入输出</li>
+<li>在主板和某些接口卡上插有存储相应BIOS的ROM</li>
+</ul>
+<h5 id="接口卡上的RAM"><a href="#接口卡上的RAM" class="headerlink" title="接口卡上的RAM"></a>接口卡上的RAM</h5><ul>
+<li>某些接口卡需要对大批量输入、输出数据进行暂时存储，在其上装有RAM<ul>
+<li>最典型的是显卡上RAM，一般称为显存。显卡随时将显存中的数据向显示器上输出。也就是说，将需要显示的内容写入显存，就会出现在显示器上</li>
+</ul>
+</li>
+</ul>
+<h4 id="内存地址空间"><a href="#内存地址空间" class="headerlink" title="内存地址空间"></a>内存地址空间</h4><ul>
+<li>CPU在操作所有物理存储器时，把他们都当做内存来对待，总的看作一个由若干存储单元组成的逻辑存储器，也就是内存地址空间。每个物理存储器在这个逻辑存储器中占有一段地址段，即一段地址空间。</li>
+<li>内存地址空间的大小受CPU地址总线宽度的限制。</li>
+<li>在基于一个计算机硬件系统编程时，必须知道这个系统中的内存地址空间分配情况</li>
+<li>想在某类存储器中读写数据时，必须知道它的第一个单元的地址和最后一个单元的地址，才能保证读写操作时在预期的存储器中进行</li>
+<li>不同的计算机系统的内存地址空间的分配情况时不同的</li>
+</ul>
+
+      
+    
+    </div>
+    
+      
+  <div class="post-reward">
+    <span class="reward-btn" id="reward-btn">点这里</span>
+    <div class="reward-wrapper syuanpi" id="reward-wrapper" style="display:none;">
+      
+      <div class="reward-item reward-alipay">
+        <img src="https://wx3.sinaimg.cn/mw690/8c564d2aly1ftkt83thjlj20o60skjzn.jpg">
+      </div>
+      
+    </div>
+  </div>
+
+
+      
+    
+  </article>
+  
+    
+  <nav class="article-page">
+    
+    
+      <a href="/JVM/clzloadtime.html" id="art-right" class="art-right">
+        <span class="prev-title"> 
+          虚拟机类加载时机<i class="iconfont icon-right"></i>  
+        </span>
+      </a>
+    
+  </nav>
+
+    
+  <i id="com-switch" class="iconfont icon-more jumping-in long infinite" style="font-size:24px;display:block;text-align:center;transform:rotate(180deg);"></i>
+  <div class="post-comments" id="post-comments" style="display: block;margin: auto 16px;">
+    
+<!-- Gitment Comments -->
+<div id="gitment"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  owner: "super2bai",
+  repo: 'comment',
+  oauth: {
+    client_id: '37f2293730b41dcb5276',
+    client_secret: 'dbab4955840d4cbc88f1563be04ab676662194e5',
+  },
+})
+gitment.render('gitment')
+</script>
+
+    
+    
+
+  </div>
+
+
+  
+  
+    
+  
+  <aside class="post-toc">
+    <span class="title" id="toc-switch"><span>文章导航</span></span>
+    <div class="toc-inner syuanpi back-1" style="display:none;">
+      <li class="title-link"><a href="javascript:;" class="toTop">汇编基础知识</a></li>
+      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#机器语言"><span class="toc-text">机器语言</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#汇编语言的产生"><span class="toc-text">汇编语言的产生</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#汇编语言的组成"><span class="toc-text">汇编语言的组成</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#存储器"><span class="toc-text">存储器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#指令和数据"><span class="toc-text">指令和数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#存储单元"><span class="toc-text">存储单元</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CPU对存储器的读写"><span class="toc-text">CPU对存储器的读写</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#地址总线"><span class="toc-text">地址总线</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#数据总线"><span class="toc-text">数据总线</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#控制总线"><span class="toc-text">控制总线</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#检测点"><span class="toc-text">检测点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#内存地址空间-概述"><span class="toc-text">内存地址空间(概述)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#主板"><span class="toc-text">主板</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#接口卡"><span class="toc-text">接口卡</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#各类存储器芯片"><span class="toc-text">各类存储器芯片</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#随机存储器"><span class="toc-text">随机存储器</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#装有BIOS的ROM"><span class="toc-text">装有BIOS的ROM</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#接口卡上的RAM"><span class="toc-text">接口卡上的RAM</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#内存地址空间"><span class="toc-text">内存地址空间</span></a></li></ol>
+    </div>
+  </aside>
+
+
+
+  
+
+
+        </div>
+      </main>
+
+      <footer class="footer syuanpi fadeIn" id="footer">
+  <hr>
+  <div class="footer-wrapper">
+    <div class="left">
+      <div class="contact-icon">
+    
+    
+    
+    
+    
+    
+    
+    
+        
+            <a href="https://github.com/super2bai" class="iconfont icon-github" title="github"></a>
+        
+        
+        
+        
+        
+        
+        
+    
+</div>
+    </div>
+    <div class="right">
+      <div class="copyright">
+    <div class="info">
+        <span>&copy;</span>
+        <span>2017 ~ 2018</span>
+        <span>❤</span>
+        <span>super2bai</span>
+    </div>
+    <div class="theme">
+        <span>
+            动力来源于
+            <a href="http://hexo.io/" target="_blank">Hexo </a>
+        </span>
+        <span>
+            主题
+            <a href="https://github.com/ColMugX/hexo-theme-Nlvi"> Nlvi </a>
+        </span>
+    </div>
+    
+    <div class="visit_count">
+        <i class="iconfont icon-visit"></i>
+        <span id="busuanzi_value_site_uv"></span>
+        <i class="iconfont icon-people"></i>
+        <span id="busuanzi_value_site_pv"></span>
+    </div>
+    
+</div>
+
+    </div>
+  </div>
+</footer>
+    </div>
+  </div>
+  <script src="/script/lib/jquery/jquery-3.2.1.min.js"></script>
+
+
+  <script src="/script/lib/lightbox/js/lightbox.min.js"></script>
+
+
+
+
+
+
+
+
+<script src="/script/src/nlvi.js"></script>
+
+  <script src="/script/scheme/banderole.js"></script>
+
+<script src="/script/bootstarp.js"></script>
+
+
+<div class="backtop syuanpi melt toTop" id="backtop">
+    <i class="iconfont icon-up"></i>
+    <span style="text-align:center;font-family:Georgia;"><span style="font-family:Georgia;" id="scrollpercent">1</span>%</span>
+</div>
+
+
+
+</body>
+</html>
