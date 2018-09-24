@@ -5,11 +5,31 @@
     
   <url>
     <loc>https://super2bai.github.io/JVM/bytecode.html</loc>
-    <lastmod>2018-09-19T14:49:31.387Z</lastmod>
+    <lastmod>2018-09-24T13:35:56.177Z</lastmod>
     <data>
         <display>
         <title>字节码指令</title>
         <pubTime>2018-09-17T12:51:52.000Z</pubTime>
+        
+        <tag>JVM</tag>
+         
+         
+           
+             
+              <breadCrumb title="JVM" url="https://super2bai.github.io/categories/JVM/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://super2bai.github.io/JVM/clzloadtime.html</loc>
+    <lastmod>2018-09-24T13:35:54.604Z</lastmod>
+    <data>
+        <display>
+        <title>虚拟机类加载时机</title>
+        <pubTime>2018-09-24T13:33:22.000Z</pubTime>
         
         <tag>JVM</tag>
          
