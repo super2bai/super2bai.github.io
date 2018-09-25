@@ -76,11 +76,9 @@
 
 
 
-  <title>
-  
-    归档 · 贰白
-  
-</title>
+  <meta name="keywords" content="汇编, Nlvi" />
+
+  <title> Mac汇编环境搭建 · 贰白 </title>
 </head>
 <body>
   <div class="progress">
@@ -243,171 +241,134 @@
         <div class="main-wrapper">
           
     
-    <div class="archive syuanpi fadeInUp" id="archive">
-        
-            <h1 class="archive-title">Total</h1>
-            <span class="archive-num">一共有 78 篇文章</span>
-        
-        <div class="archive-list">
-            <ul>
-        
+  
+  <article class="
+  post
+   is_post 
+  ">
+    <header class="post-header">
+      <div class="post-time syuanpi fadeInUpShort back-1">
+        <div class="post-time-wrapper">
+          <span>2018-09-25</span>
+          
             
-                
-                
-                
-                    
-                     
-                        <h2 class="archive-year"> 2018 </h2>
-                    
-                
+              <span class="post-category"><a href="/categories/asm/">asm</a></span>
             
+          
+          
             
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    06-29
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/walkup/SA.html">WalkUp签证-南美洲</a>
-                </span>
-            </li>
-
-        
+              <aside class="post-tags syuanpi fadeInUpShort back-3">
+              
+                <a href="/tags/汇编/">汇编</a>
+              
+              </aside>
             
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    06-28
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/codec/w2m.html">文本文件从Windows拷贝到Mac乱码</a>
-                </span>
-            </li>
-
-        
-            
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    06-25
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/JVM/decompile.html">JIT&HSDIS查看反编译代码</a>
-                </span>
-            </li>
-
-        
-            
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    06-22
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/deploy/windows.html">Java Web部署到Windows的Tomcat</a>
-                </span>
-            </li>
-
-        
-            
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    06-06
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/tool/recommend.html">工具推荐</a>
-                </span>
-            </li>
-
-        
-            
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    06-06
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/Eclipse/Maven.html">Eclipse和Maven那点事儿</a>
-                </span>
-            </li>
-
-        
-            
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    06-01
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/issue/discuss.html">问题讨论</a>
-                </span>
-            </li>
-
-        
-            
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    06-01
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/mac/showHide.html">mac显示隐藏文件</a>
-                </span>
-            </li>
-
-        
-            </ul>
+          
         </div>
+      </div>
+      <h1 class="post-title syuanpi fadeInUpShort back-2">
+        
+          Mac汇编环境搭建
+        
+      </h1>
+    </header>
+    <div class="post-content syuanpi fadeInUpShort back-3">
+      
+        <p>s</p>
+<p>实在懒得开俩本学汇编…就在Mac搭了一个</p>
+<h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><ul>
+<li>下载<a href="https://www.dosbox.com/" target="_blank" rel="external">DOSBox</a></li>
+<li>下载MASM5(自行搜索)</li>
+</ul>
+<p>自行安装Dosbox</p>
+<p>Masm5.zip下载好后解压</p>
+<h3 id="挂载"><a href="#挂载" class="headerlink" title="挂载"></a>挂载</h3><p>打开Dosbox</p>
+<p>输入命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mount c masm5解压路径</div></pre></td></tr></table></figure>
+<p>然后就可以使用诸如debug等命令了</p>
+<h3 id="汇编开发"><a href="#汇编开发" class="headerlink" title="汇编开发"></a>汇编开发</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">;完整段的Hello World程序</div><div class="line">DATAS  SEGMENT</div><div class="line">     STRING  DB  &apos;Hello World!&apos;,13,10,&apos;$&apos;</div><div class="line">     ;定义了一个字符串,标号是STRING，其值是字符串首字符的地址。</div><div class="line">     ;DB表示的是字符串中每个字符的都是一个字节，每往后加1的时候，地址偏移量加1.</div><div class="line">     ;13 CR 回车</div><div class="line">     ;10 LF 换行</div><div class="line">     ;$作为字符串的结束符</div><div class="line">DATAS  ENDS</div><div class="line"></div><div class="line">CODES  SEGMENT</div><div class="line">     ASSUME    CS:CODES,DS:DATAS</div><div class="line">     </div><div class="line">START:</div><div class="line">     MOV  AX,DATAS</div><div class="line">     MOV  DS,AX</div><div class="line">     </div><div class="line">     LEA  DX,STRING;LEA 获取偏移量,并将其存入DX</div><div class="line">     </div><div class="line">     MOV  AH,9</div><div class="line">     INT  21H ;INT 21H是DOS中断的调用，其执行的操作根据AH里面的值来确定。</div><div class="line">               ;9，表示的是输出字符串，其地址为DS:DX</div><div class="line">    ;4CH带返回码结束</div><div class="line">     MOV  AH,4CH</div><div class="line">     INT  21H</div><div class="line">CODES  ENDS</div><div class="line">    END   START</div></pre></td></tr></table></figure>
+<p>保存文件<code>test.asm</code>到masm5路径下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">masm test.asm</div></pre></td></tr></table></figure>
+<p>三次回车</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">link test.obj</div></pre></td></tr></table></figure>
+<p>三次回车</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">test.exe</div></pre></td></tr></table></figure>
+<p>完事儿</p>
+
+      
+    
     </div>
     
-  <nav class="pagination">
-      <span class="page-number current">1</span>
+      
+  <div class="post-reward">
+    <span class="reward-btn" id="reward-btn">点这里</span>
+    <div class="reward-wrapper syuanpi" id="reward-wrapper" style="display:none;">
+      
+      <div class="reward-item reward-alipay">
+        <img src="https://wx3.sinaimg.cn/mw690/8c564d2aly1ftkt83thjlj20o60skjzn.jpg">
+      </div>
+      
+    </div>
+  </div>
+
+
+      
+    
+  </article>
+  
+    
+  <nav class="article-page">
+    
+    
+      <a href="/asm/register.html" id="art-right" class="art-right">
+        <span class="prev-title"> 
+          汇编之寄存器<i class="iconfont icon-right"></i>  
+        </span>
+      </a>
+    
   </nav>
 
+    
+  <i id="com-switch" class="iconfont icon-more jumping-in long infinite" style="font-size:24px;display:block;text-align:center;transform:rotate(180deg);"></i>
+  <div class="post-comments" id="post-comments" style="display: block;margin: auto 16px;">
+    
+<!-- Gitment Comments -->
+<div id="gitment"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  owner: "super2bai",
+  repo: 'comment',
+  oauth: {
+    client_id: '37f2293730b41dcb5276',
+    client_secret: 'dbab4955840d4cbc88f1563be04ab676662194e5',
+  },
+})
+gitment.render('gitment')
+</script>
+
+    
+    
+
+  </div>
+
+
+  
+  
+    
+  
+  <aside class="post-toc">
+    <span class="title" id="toc-switch"><span>文章导航</span></span>
+    <div class="toc-inner syuanpi back-1" style="display:none;">
+      <li class="title-link"><a href="javascript:;" class="toTop">Mac汇编环境搭建</a></li>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#下载"><span class="toc-text">下载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#挂载"><span class="toc-text">挂载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#汇编开发"><span class="toc-text">汇编开发</span></a></li></ol>
+    </div>
+  </aside>
+
+
+
+  
 
 
         </div>
