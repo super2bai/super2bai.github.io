@@ -18,7 +18,7 @@
 
 * [基础知识](https://super2bai.github.io/asm/bisis.html)
 * [寄存器](https://super2bai.github.io/asm/register.html)
-* 
+* [Mac汇编环境搭建](https://super2bai.github.io/asm/macEnv.html)
 
 ---
 
