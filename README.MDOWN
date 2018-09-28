@@ -111,13 +111,6 @@ IDE及应用服务器相关
 
 ---
 
-游戏开发相关
-
-* 3D编辑器
-  * [简述做3D编辑器相关的概念问题](https://super2bai.github.io/3DEditor/make.html)
-
----
-
 IO相关
 
 * [AIO](https://super2bai.github.io/IO/AIO.html)
@@ -150,8 +143,6 @@ Python相关
 * [基础](https://super2bai.github.io/Python/basis.html)
 
 ---
-
-[问题讨论](https://super2bai.github.io/issue/discuss.html)
 
 #### 2.旅游
 
