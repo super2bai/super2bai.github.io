@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <link rel="stylesheet" href="/style/style.css">
+<script>
+  var nlviconfig = {
+    title: "贰白",
+    author: "super2bai",
+    baseUrl: "/",
+    theme: {
+      scheme: "banderole",
+      lightbox: true,
+      animate: true,
+      search: false,
+      friends: false,
+      reward: true,
+      lazy: false
+    }
+  }
+</script>
+
+
+
+
+    <link rel="stylesheet" href="/script/lib/lightbox/css/lightbox.min.css">
+
+
+
+
+    <link rel="stylesheet" href="/syuanpi/syuanpi.min.css">
+
+
+
+
+    <link rel="icon" href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-98059014-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-116557847-1');
+</script>
+
+
+
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="browsermode" content="application">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="贰白">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="msapplication-navbutton-color" content="#666666">
+<meta name= "format-detection" content="telephone=no" />
+<meta name="keywords" content="nlvi, Nlvi" />
+
+  <link rel="apple-touch-icon"  sizes="72x72"  href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+  <link rel="apple-touch-icon-precomposed"  sizes="72x72"  href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+
+
+  <meta name="subtitle" content="苦于探索，全是未知">
+
+
+  <meta name="description" content="苦于探索，全是未知">
+
+
+
+  <meta name="keywords" content="JVM, Nlvi" />
+
+  <title> 类加载的过程 · 贰白 </title>
+</head>
+<body>
+  <div class="progress">
+  <div class="progress-inner"></div>
+</div>
+  
+  
+    <div class="tagcloud-mask"></div>  
+<div class="tagcloud" id="tagcloud">
+  <div class="tagcloud-inner">
+    <a href="/tags/Docker/" style="font-size: 14px;">Docker</a> <a href="/tags/Dubbo/" style="font-size: 14px;">Dubbo</a> <a href="/tags/Eclipse/" style="font-size: 14px;">Eclipse</a> <a href="/tags/GHPages/" style="font-size: 14px;">GHPages</a> <a href="/tags/IO/" style="font-size: 14px;">IO</a> <a href="/tags/JDK/" style="font-size: 14px;">JDK</a> <a href="/tags/JVM/" style="font-size: 14px;">JVM</a> <a href="/tags/Linux/" style="font-size: 14px;">Linux</a> <a href="/tags/Python/" style="font-size: 14px;">Python</a> <a href="/tags/Spring/" style="font-size: 14px;">Spring</a> <a href="/tags/Tomcat/" style="font-size: 14px;">Tomcat</a> <a href="/tags/Zookeeper/" style="font-size: 14px;">Zookeeper</a> <a href="/tags/jmeter/" style="font-size: 14px;">jmeter</a> <a href="/tags/mac/" style="font-size: 14px;">mac</a> <a href="/tags/walkup/" style="font-size: 14px;">walkup</a> <a href="/tags/分布式/" style="font-size: 14px;">分布式</a> <a href="/tags/工具/" style="font-size: 14px;">工具</a> <a href="/tags/旅游/" style="font-size: 14px;">旅游</a> <a href="/tags/汇编/" style="font-size: 14px;">汇编</a> <a href="/tags/游戏/" style="font-size: 14px;">游戏</a> <a href="/tags/编码/" style="font-size: 14px;">编码</a> <a href="/tags/部署/" style="font-size: 14px;">部署</a>
+  </div>
+</div>  
+  
+
+  <div class="container">
+
+    <header class="header" id="header">
+  <div class="header-wrapper">
+    <div class="logo">
+  <div class="logo-inner syuanpi tvIn">
+    <span><a href="/">贰白</a></span>
+    
+      <span id="subtitle">苦于探索，全是未知</span>
+    
+  </div>
+</div>
+    <nav class="main-nav">
+  
+  <ul class="main-nav-list syuanpi tvIn">
+  
+  
+    
+      
+    
+    <li class="menu-item">
+      <a href="/" id="article">
+        <span class="base-name">文章</span>
+        
+          <span class="menu-item-label">article</span>
+        
+      </a>
+    </li>
+  
+    
+      
+    
+    <li class="menu-item">
+      <a href="/archives" id="archives">
+        <span class="base-name">归档</span>
+        
+          <span class="menu-item-label">archives</span>
+        
+      </a>
+    </li>
+  
+    
+      
+    
+    <li class="menu-item">
+      <a href="javascript:;" id="tags">
+        <span class="base-name">标签</span>
+        
+          <span class="menu-item-label">tags</span>
+        
+      </a>
+    </li>
+  
+    
+      
+    
+    <li class="menu-item">
+      <a href="/about" id="about">
+        <span class="base-name">关于</span>
+        
+          <span class="menu-item-label">about</span>
+        
+      </a>
+    </li>
+  
+  </ul>
+  
+</nav>
+
+    
+    
+  </div>
+</header>
+<div class="mobile-header">
+  <div class="mobile-header-body">
+    <div class="mobile-header-list">
+      
+        
+            <div class="mobile-nav-item">
+                <a href="/">
+                    <span>文章</span>
+                    
+                        <span class="menu-item-label">article</span>
+                    
+                </a>
+            </div>
+        
+      
+        
+            <div class="mobile-nav-item">
+                <a href="/archives">
+                    <span>归档</span>
+                    
+                        <span class="menu-item-label">archives</span>
+                    
+                </a>
+            </div>
+        
+      
+        
+          <div class="mobile-nav-item inner-cloud">
+            <div class="mobile-nav-tag">
+              <a href="javascript:;" id="mobile-tags">
+                <span>标签</span>
+                
+                    <span class="menu-item-label">tags</span>
+                
+              </a>
+            </div>
+            <div class="mobile-nav-tagcloud">
+              <div class="mobile-tagcloud-inner">
+                <a href="/tags/Docker/" style="font-size: 14px;">Docker</a> <a href="/tags/Dubbo/" style="font-size: 14px;">Dubbo</a> <a href="/tags/Eclipse/" style="font-size: 14px;">Eclipse</a> <a href="/tags/GHPages/" style="font-size: 14px;">GHPages</a> <a href="/tags/IO/" style="font-size: 14px;">IO</a> <a href="/tags/JDK/" style="font-size: 14px;">JDK</a> <a href="/tags/JVM/" style="font-size: 14px;">JVM</a> <a href="/tags/Linux/" style="font-size: 14px;">Linux</a> <a href="/tags/Python/" style="font-size: 14px;">Python</a> <a href="/tags/Spring/" style="font-size: 14px;">Spring</a> <a href="/tags/Tomcat/" style="font-size: 14px;">Tomcat</a> <a href="/tags/Zookeeper/" style="font-size: 14px;">Zookeeper</a> <a href="/tags/jmeter/" style="font-size: 14px;">jmeter</a> <a href="/tags/mac/" style="font-size: 14px;">mac</a> <a href="/tags/walkup/" style="font-size: 14px;">walkup</a> <a href="/tags/分布式/" style="font-size: 14px;">分布式</a> <a href="/tags/工具/" style="font-size: 14px;">工具</a> <a href="/tags/旅游/" style="font-size: 14px;">旅游</a> <a href="/tags/汇编/" style="font-size: 14px;">汇编</a> <a href="/tags/游戏/" style="font-size: 14px;">游戏</a> <a href="/tags/编码/" style="font-size: 14px;">编码</a> <a href="/tags/部署/" style="font-size: 14px;">部署</a>
+              </div>
+            </div>
+          </div>
+        
+      
+        
+            <div class="mobile-nav-item">
+                <a href="/about">
+                    <span>关于</span>
+                    
+                        <span class="menu-item-label">about</span>
+                    
+                </a>
+            </div>
+        
+      
+    </div>
+  </div>
+  <div class="mobile-header-nav">
+    <div class="mobile-header-item" id="mobile-left">
+      <div class="header-menu-item">
+        <span class="header-menu-line"></span>
+      </div>
+    </div>
+    <h1 class="mobile-header-title">
+      <a href="/">贰白</a>
+    </h1>
+    <div class="mobile-header-item"></div>
+  </div>
+</div>
+    <div class="container-inner">
+      <main class="main" id="main">
+        <div class="main-wrapper">
+          
+    
+  
+  <article class="
+  post
+   is_post 
+  ">
+    <header class="post-header">
+      <div class="post-time syuanpi fadeInUpShort back-1">
+        <div class="post-time-wrapper">
+          <span>2018-09-26</span>
+          
+            
+              <span class="post-category"><a href="/categories/JVM/">JVM</a></span>
+            
+          
+          
+            
+              <aside class="post-tags syuanpi fadeInUpShort back-3">
+              
+                <a href="/tags/JVM/">JVM</a>
+              
+              </aside>
+            
+          
+        </div>
+      </div>
+      <h1 class="post-title syuanpi fadeInUpShort back-2">
+        
+          类加载的过程
+        
+      </h1>
+    </header>
+    <div class="post-content syuanpi fadeInUpShort back-3">
+      
+        <p>类加载的全过程，加载、验证、准备、解析和初始化</p>
+<a id="more"></a>
+<h3 id="加载"><a href="#加载" class="headerlink" title="加载"></a>加载</h3><ul>
+<li>JVM要完成<ul>
+<li>通过一个类的全限定名来获取定义此类的二进制字节流</li>
+<li>将这个字节流所代表的静态存储结构转化为方法区的运行时数据结构</li>
+<li>在内存中生成一个代表这个类的<code>java.lang.Class</code>对象，作为方法区这个类的各种数据的访问入口</li>
+</ul>
+</li>
+</ul>
+<h4 id="获取二进制字节流"><a href="#获取二进制字节流" class="headerlink" title="获取二进制字节流"></a>获取二进制字节流</h4><ul>
+<li>二进制来源可以有多种<ul>
+<li>zip：JAR、EAR、WAR</li>
+<li>网络：Applet</li>
+<li>运行时计算生成：动态代理</li>
+<li>其他文件生成：：JSP</li>
+<li>数据库：中间件服务器(SAP Netweaver)把程序安装到数据库中来完成程序代码在进群间的分发</li>
+<li>…</li>
+</ul>
+</li>
+<li>非数组类的类加载器<ul>
+<li>系统提供的引导类加载器</li>
+<li>自定义的类加载器(重写一个类加载器的<code>loadClass()</code>方法)</li>
+</ul>
+</li>
+<li>数组类<ul>
+<li>由JVM直接创建</li>
+<li>数组类的元素类型(去除所有维度的类型)最终时要靠类加载器去创建</li>
+<li>创建过程原则<ul>
+<li>如果数组的组件类型(Componen Type,去除一个维度的类型)是引用类型，那就递归采用默认加载过程去加载这个组件类型，数组C将在加载该组件类型的类加载器的类名称空间上被标识</li>
+<li>如果数组的组件类型不是引用类型(如<code>int[]</code>)，JVM将会把数组C标记为与引导类加载器关联</li>
+<li>数组类的可见性与它的组件类型的可见性一致，如果组件类型不是引用类型，那数组类的可见性将默认为public</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>加载阶段完成后</p>
+<ul>
+<li>JVM外部的二进制字节流就按照JVM所需的格式存储在方法区之中(格式自定义，JVM规范未规定)</li>
+<li>内存中实例化一个<code>java.lang.Class</code>类的对象，作为程序访问这些类型数据的外部接口</li>
+</ul>
+</blockquote>
+<p><strong>加载阶段与连接阶段的部分内容是交叉进行的，但开始时间是固定的先后顺序</strong></p>
+<h3 id="连接-验证"><a href="#连接-验证" class="headerlink" title="连接(验证)"></a>连接(验证)</h3><h4 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h4><p>为了确保Class文件的字节流中包含的信息符合当前虚拟机的要求，并且不会危害虚拟机自身的安全</p>
+<h4 id="文件格式验证"><a href="#文件格式验证" class="headerlink" title="文件格式验证"></a>文件格式验证</h4><h5 id="目的-1"><a href="#目的-1" class="headerlink" title="目的"></a>目的</h5><ul>
+<li><p>字节流是否符合Class文件格式的规范</p>
+<ul>
+<li>能够正常解析及存储在方法区内，格式上符合描述一个Java类型信息的要求</li>
+</ul>
+</li>
+<li><p>能被当前版本的虚拟机处理</p>
+</li>
+</ul>
+<h5 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h5><p>基于二进制字节流</p>
+<h5 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h5><ul>
+<li>是否以0xCAFEBABE开头</li>
+<li>主、次版本号是否在当前虚拟机处理范围之内</li>
+<li>常量池的常量中是否有不被支持的常量类型(检查常量tag标志)</li>
+<li>指向常量的各种索引值中是否有指向不存在的常量或不符合类型的常量</li>
+<li>CONSTATNT_Utf8_info型的常量中是否有不符合UFT8编码的数据</li>
+<li>Class文件中各个部分及文件本身是否有被删除的或附加的信息</li>
+<li>…</li>
+</ul>
+<h4 id="元数据验证"><a href="#元数据验证" class="headerlink" title="元数据验证"></a>元数据验证</h4><h5 id="目的-2"><a href="#目的-2" class="headerlink" title="目的"></a>目的</h5><p>保证其描述的信息符合Java语言规范的要求</p>
+<h5 id="对象-1"><a href="#对象-1" class="headerlink" title="对象"></a>对象</h5><p>类的元数据(字节码描述的信息进行语义分析)</p>
+<h5 id="操作-1"><a href="#操作-1" class="headerlink" title="操作"></a>操作</h5><ul>
+<li>这个类是否有父类</li>
+<li>父类是否即成了不允许被继承(final)的类</li>
+<li>这个类如果不是抽象类，是否实现了父类或接口之中要求实现的所有方法</li>
+<li>类中的字段、方法是否与父类产生矛盾(覆盖父类的final字段、不合法的方法重载)</li>
+</ul>
+<h4 id="字节码验证"><a href="#字节码验证" class="headerlink" title="字节码验证"></a>字节码验证</h4><h5 id="目的-3"><a href="#目的-3" class="headerlink" title="目的"></a>目的</h5><p>通过数据流和控制流分析，确保语义是合法的、符合逻辑的</p>
+<h5 id="对象-2"><a href="#对象-2" class="headerlink" title="对象"></a>对象</h5><p>类的方法体</p>
+<h5 id="操作-2"><a href="#操作-2" class="headerlink" title="操作"></a>操作</h5><ul>
+<li><p>保证任何时刻操作数栈的数据类型与指令代码序列都能配合工作</p>
+<ul>
+<li>操作数栈int类型，使用时却按long类型加载到本地变量表之中</li>
+</ul>
+</li>
+<li><p>保证跳转指令不会跳转到方法体以外的字节码指令上</p>
+</li>
+<li>保证方法体中的类型转换是有效的<ul>
+<li>可以把一个子类对象赋值给父类，是安全的，反之不安全</li>
+</ul>
+</li>
+</ul>
+<h5 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h5><p>如果一个类方法体的字节码没有通过字节码验证，那肯定是有问题；但如果一个方法体通过了字节码验证，也不能说明其一定就是安全的。通过程序去校验程序逻辑是无法做到绝对准确的。</p>
+<h5 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h5><p>方法体的Code属性的属性表增加<code>StackMapTable</code>属性。</p>
+<p>它描述了方法体中所有的基本块开始时本地变量表和操作数栈应有的状态，在字节码验证器件，就不需要推导这些状态的合法性，只需要检查表中的状态是否合法即可。</p>
+<p>具体可参考<a href="http://hllvm.group.iteye.com/group/topic/26545" target="_blank" rel="external">R大的回答</a></p>
+<h4 id="符号引用验证"><a href="#符号引用验证" class="headerlink" title="符号引用验证"></a>符号引用验证</h4><h5 id="目的-4"><a href="#目的-4" class="headerlink" title="目的"></a>目的</h5><p>对类自身以外的信息(常量池中的各种符号引用)进行匹配行校验，确保解析动作能正常执行，否则抛出<code>java.lang.IncompatibleClassChangeError</code>异常的子类</p>
+<h5 id="时机"><a href="#时机" class="headerlink" title="时机"></a>时机</h5><p>将符号引用转化(解析时转化)为直接引用时</p>
+<h5 id="对象-3"><a href="#对象-3" class="headerlink" title="对象"></a>对象</h5><p>符号引用</p>
+<h5 id="操作-3"><a href="#操作-3" class="headerlink" title="操作"></a>操作</h5><ul>
+<li>符号引用中通过字符串描述的全限定名是否能找到对应的类</li>
+<li>在执行类中是否存在符合方法的字段描述符以及简单名称所描述的方法和字段</li>
+<li>符号引用中的类、字段、方法的访问性是否可被当前类访问</li>
+<li>…</li>
+</ul>
+<h5 id="说明-1"><a href="#说明-1" class="headerlink" title="说明"></a>说明</h5><p>可通过<code>-Xveerify:none</code>参数关闭大部分类验证措施，缩短类加载时间</p>
+<h3 id="连接-准备"><a href="#连接-准备" class="headerlink" title="连接(准备)"></a>连接(准备)</h3><h4 id="操作-4"><a href="#操作-4" class="headerlink" title="操作"></a>操作</h4><ul>
+<li>正式为类变量(static)分配内存(方法区)<ul>
+<li>实例变量将随着对象一起分配在Java堆中</li>
+</ul>
+</li>
+<li>设置类变量初始值(默认值，如int为0)<ul>
+<li>赋值操作(<code>putstatic</code>指令)在程序被编译后，存放于类构造器<code>&lt;clinit&gt;</code>方法中，也就是初始化阶段</li>
+</ul>
+</li>
+</ul>
+<h4 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> value=<span class="number">123</span>;</div></pre></td></tr></table></figure>
+<p>符合上述描述，此阶段赋值为0</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> value=<span class="number">123</span>;</div></pre></td></tr></table></figure>
+<p>准备阶段变量<code>value</code>就会被初始化为<code>ConstatntCalue</code>属性所指定的值(123)</p>
+<h3 id="连接-解析"><a href="#连接-解析" class="headerlink" title="连接(解析)"></a>连接(解析)</h3><h4 id="目的-5"><a href="#目的-5" class="headerlink" title="目的"></a>目的</h4><p>将常量池内的符号引用替换为直接引用</p>
+<blockquote>
+<p><strong>符号引用Symbolic References</strong>：以一组符号来描述所引用的目标，可以是任何形式的字面量，只要使用时能无歧义的定位到目标即可。内存布局无关。引用目标不一定被加载到内存中。</p>
+<p><strong>直接引用Direct References</strong>：可以是直接指向目标的指针、相对偏移量或是一个能简洁定位到目标的句柄。内存布局相关。引用目标一定被加载到内存中。</p>
+</blockquote>
+<h4 id="时机-1"><a href="#时机-1" class="headerlink" title="时机"></a>时机</h4><ul>
+<li>执行用于操作符号引用的字节码指令之前，自定义实现时机<ul>
+<li>类被加载器加载时</li>
+<li>一个符号引用将被使用钱</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">anewarray、checkcast、getfield、getstatic、<span class="keyword">instanceof</span>、invokedynamic、invokeinterface、invokespecial、invokestatic、invokevirtual、ldc、ldc_w、multianewarray、<span class="keyword">new</span>、putfield、putstatic</div></pre></td></tr></table></figure>
+<h4 id="说明-2"><a href="#说明-2" class="headerlink" title="说明"></a>说明</h4><h5 id="invokedynamic"><a href="#invokedynamic" class="headerlink" title="invokedynamic"></a><code>invokedynamic</code></h5><ul>
+<li>当碰到某个前面已经由<code>invokedynamic</code>指令触发过解析的符号引用时，并不意味着这个解析结果对其他<code>invokedynamic</code>指令同样生效。</li>
+<li><code>invokedynamic</code>指令的目的就是用于动态语言支持，其对应的引用称为“动态调用点限定符Dynamic Call Site Specifier”<ul>
+<li>必须等到程序运行到这条指令时，解析动作才能进行。</li>
+</ul>
+</li>
+</ul>
+<h5 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h5><ul>
+<li><p>虚拟机实现可以堆第一次解析的结果进行缓存(在运行时常量池中记录直接引用，并把常量标识为已解析状态)，从而避免重复解析。</p>
+</li>
+<li><p>只需要保证在同一个实体中，如果一个符号引用之前已经被成功解析过，那么后续的引用解析请求就应当一致成功；如果第一次失败了，其他指令对这个符号一用的解析请求也应该收到相同的异常。</p>
+</li>
+</ul>
+<h4 id="对象-4"><a href="#对象-4" class="headerlink" title="对象"></a>对象</h4><ul>
+<li><p>类或接口CONSTANT_Class_info</p>
+</li>
+<li><p>字段CONSTANT_fieldref_info</p>
+</li>
+<li><p>类方法CONSTANT_Methodref_info</p>
+</li>
+<li><p>接口方法CONSTANT_InterfaceMethodRef_info</p>
+</li>
+<li><p>方法类型CONSTANT_MethodType_info</p>
+<ul>
+<li>介绍后续补充</li>
+</ul>
+</li>
+<li><p>方法句柄CONSTANT_MethodHandle_info</p>
+<ul>
+<li>介绍后续补充</li>
+</ul>
+</li>
+<li><p>调用点限定符CONSTANT_InvokeDynamic_info</p>
+<ul>
+<li>介绍后续补充</li>
+</ul>
+</li>
+</ul>
+<h4 id="类或接口解析"><a href="#类或接口解析" class="headerlink" title="类或接口解析"></a>类或接口解析</h4><blockquote>
+<p>假设当前代码所处的类为D，要把一个从未解析过的符号引用N解析为一个类或接口的C的直接引用</p>
+</blockquote>
+<ul>
+<li><p>如果C不是数组类型，虚拟机会把代表N的全限定名传递给D的类加载器去加载C类。</p>
+<ul>
+<li>在加载过程中，由于元数据验证、字节码验证的需要，又可能触发其他相关类的加载动作(加载其父类)</li>
+<li>如果出现问题，解析阶段将失败</li>
+</ul>
+</li>
+<li><p>如果C是数组类型</p>
+<ul>
+<li>数组的元素类型为对象，如<code>[Ljava/lang/Integer</code>，需要加载的就是<code>java.lang.Integer</code>，虚拟机生成一个代表此数组维度和元素的数组对象</li>
+<li>如果前面步骤没有出现异常，那么C在虚拟机中时机上已经成为一个有效的类或接口，但在解析完成之间还有符号引用验证，确认D是否有权限访问C，如不具备，则抛出<code>java.lang.IllegalAccessError</code>异常</li>
+</ul>
+</li>
+</ul>
+<h4 id="字段解析"><a href="#字段解析" class="headerlink" title="字段解析"></a>字段解析</h4><h5 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h5><blockquote>
+<p>要解析一个未被解析过的字段符号引用，首先会解析字段所属的类或接口的符号引用，设为C，然后JVM会从这个类开始逐级往父类或接口找与这个字段相匹配的字段</p>
+</blockquote>
+<ul>
+<li>C本身包含名称与描述符都匹配的字段，返回字段的直接引用，查找结束</li>
+<li>C中实现了接口，按照继承关系从下往上搜索父接口，有则返回，查找结束</li>
+<li>C有父类，按照继承关系从下往上搜索父类，有则返回，查找结束</li>
+<li>都没找到，抛出<code>java.lang.NoSuchFieldError</code>异常</li>
+</ul>
+<h5 id="验证权限"><a href="#验证权限" class="headerlink" title="验证权限"></a>验证权限</h5><p>是否具备访问权限，不具备则抛出<code>java.lang.IllegalAccessError</code>异常</p>
+<h4 id="类方法解析"><a href="#类方法解析" class="headerlink" title="类方法解析"></a>类方法解析</h4><h5 id="查找-1"><a href="#查找-1" class="headerlink" title="查找"></a>查找</h5><blockquote>
+<p>解析方法所属的类或接口的符号引用C，解析成功，进行类方法的搜索</p>
+</blockquote>
+<ul>
+<li>如果C解析为接口，则抛出<code>java.lang.IncompatibleClassChangeError</code>异常</li>
+<li>在类C中找到是否有简单名称和描述符都匹配的方法，有则返回直接引用，查找结束</li>
+<li>类C的父类中递归查找，有则返回，查找结束</li>
+<li>类C实现的接口列表以及父接口之中递归查找，如果有，说明C是抽象类，直接抛出<code>java.lang.AbstractMethodError</code>异常</li>
+<li>都没找到，抛出<code>java.lang.NoSuchMethodError</code>异常</li>
+</ul>
+<h5 id="验证权限-1"><a href="#验证权限-1" class="headerlink" title="验证权限"></a>验证权限</h5><p>是否具备访问权限，不具备则抛出<code>java.lang.IllegalAccessError</code>异常</p>
+<h4 id="接口方法解析"><a href="#接口方法解析" class="headerlink" title="接口方法解析"></a>接口方法解析</h4><blockquote>
+<p>先解析出接口方法所属的类或接口的符号引用C，解析成功，进行接口方法的搜索</p>
+</blockquote>
+<ul>
+<li>如果C解析为类，则抛出<code>java.lang.IncompatibleClassChangeError</code>异常</li>
+<li>在接口C中查找，有则返回，查找结束</li>
+<li>在接口C的父接口中递归查找，直到<code>java.lang.Object</code>类(包含此类)，有则返回，查找结束</li>
+<li>都没找到，抛出<code>java.lang.NoSuchMethodError</code>异常</li>
+</ul>
+<p><strong>接口方法默认为public，所以应当不会抛出<code>java.lang.IllegalAccessError</code>异常</strong></p>
+<h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><blockquote>
+<p> 最后一步，真正执行类中定义的Java程序代码，执行类构造器<code>&lt;clinit&gt;()</code>方法</p>
+</blockquote>
+<h4 id="lt-clinit-gt-特点"><a href="#lt-clinit-gt-特点" class="headerlink" title="&lt;clinit&gt;()特点"></a><code>&lt;clinit&gt;()</code>特点</h4><ul>
+<li>由编译器自动收集类中的所有类变量的<strong>赋值动作</strong>和<strong>静态语句块(static)</strong>中的语句<strong>合并</strong>产生的<ul>
+<li>收集顺序：源文件中出现的顺序</li>
+<li>静态语句块中只能访问到定义在之前的变量，定义在后面的变量，在静态语句块中可以赋值，不能访问(使用)</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> Class Test&#123;</div><div class="line">    <span class="keyword">static</span>&#123;</div><div class="line">        <span class="comment">//正常编译</span></div><div class="line">        i = <span class="number">0</span>;	</div><div class="line">        <span class="comment">//编译器提示：Illegal forward reference</span></div><div class="line">        System.out.println(i);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">static</span> <span class="keyword">int</span> i = <span class="number">1</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>父类中定义的静态语句块优于子类的变量赋值操作</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Parent</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> A = <span class="number">1</span>;</div><div class="line"></div><div class="line">    <span class="keyword">static</span> &#123;</div><div class="line">        A = <span class="number">2</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Sub</span> <span class="keyword">extends</span> <span class="title">Parent</span> </span>&#123;</div><div class="line">        <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> B = A;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        <span class="comment">//2</span></div><div class="line">        System.out.println(Sub.B);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li><p>对于类或接口来说不是必需的</p>
+<ul>
+<li>没有静态语句块，也没有对变量的赋值操作，可以不生成</li>
+</ul>
+</li>
+<li><p>接口中不能使用静态语句块，但仍然有变量初始化的赋值操作</p>
+<ul>
+<li>执行接口的<code>&lt;clinit&gt;()</code>方法不需要先执行父接口的<code>&lt;clinit&gt;()</code>方法</li>
+<li>只有当父接口中定义的变量使用时，才初始化父接口</li>
+<li>接口的实现类在初始化时也不会执行接口的<code>&lt;clinit&gt;()</code>方法</li>
+</ul>
+</li>
+<li><p>JVM保证一个类的<code>&lt;clinit&gt;()</code>方法在多线程环境中被正确的加锁、同步</p>
+<ul>
+<li>只有一个线程去执行这个类的<code>&lt;clinit&gt;()</code>方法，其他线程阻塞，直至方法执行完毕</li>
+<li>如果<code>&lt;clinit&gt;()</code>方法方法中有耗时很长的操作，就可能造成多进程阻塞。</li>
+</ul>
+</li>
+</ul>
+
+      
+    
+    </div>
+    
+      
+  <div class="post-reward">
+    <span class="reward-btn" id="reward-btn">点这里</span>
+    <div class="reward-wrapper syuanpi" id="reward-wrapper" style="display:none;">
+      
+      <div class="reward-item reward-alipay">
+        <img src="https://wx3.sinaimg.cn/mw690/8c564d2aly1ftkt83thjlj20o60skjzn.jpg">
+      </div>
+      
+    </div>
+  </div>
+
+
+      
+    
+  </article>
+  
+    
+  <nav class="article-page">
+    
+    
+      <a href="/asm/macEnv.html" id="art-right" class="art-right">
+        <span class="prev-title"> 
+          Mac汇编环境搭建<i class="iconfont icon-right"></i>  
+        </span>
+      </a>
+    
+  </nav>
+
+    
+  <i id="com-switch" class="iconfont icon-more jumping-in long infinite" style="font-size:24px;display:block;text-align:center;transform:rotate(180deg);"></i>
+  <div class="post-comments" id="post-comments" style="display: block;margin: auto 16px;">
+    
+<!-- Gitment Comments -->
+<div id="gitment"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  owner: "super2bai",
+  repo: 'comment',
+  oauth: {
+    client_id: '37f2293730b41dcb5276',
+    client_secret: 'dbab4955840d4cbc88f1563be04ab676662194e5',
+  },
+})
+gitment.render('gitment')
+</script>
+
+    
+    
+
+  </div>
+
+
+  
+  
+    
+  
+  <aside class="post-toc">
+    <span class="title" id="toc-switch"><span>文章导航</span></span>
+    <div class="toc-inner syuanpi back-1" style="display:none;">
+      <li class="title-link"><a href="javascript:;" class="toTop">类加载的过程</a></li>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#加载"><span class="toc-text">加载</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#获取二进制字节流"><span class="toc-text">获取二进制字节流</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#连接-验证"><span class="toc-text">连接(验证)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#目的"><span class="toc-text">目的</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#文件格式验证"><span class="toc-text">文件格式验证</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#目的-1"><span class="toc-text">目的</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#对象"><span class="toc-text">对象</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#操作"><span class="toc-text">操作</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#元数据验证"><span class="toc-text">元数据验证</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#目的-2"><span class="toc-text">目的</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#对象-1"><span class="toc-text">对象</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#操作-1"><span class="toc-text">操作</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#字节码验证"><span class="toc-text">字节码验证</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#目的-3"><span class="toc-text">目的</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#对象-2"><span class="toc-text">对象</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#操作-2"><span class="toc-text">操作</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#说明"><span class="toc-text">说明</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#优化"><span class="toc-text">优化</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#符号引用验证"><span class="toc-text">符号引用验证</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#目的-4"><span class="toc-text">目的</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#时机"><span class="toc-text">时机</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#对象-3"><span class="toc-text">对象</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#操作-3"><span class="toc-text">操作</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#说明-1"><span class="toc-text">说明</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#连接-准备"><span class="toc-text">连接(准备)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#操作-4"><span class="toc-text">操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#实例"><span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#连接-解析"><span class="toc-text">连接(解析)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#目的-5"><span class="toc-text">目的</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#时机-1"><span class="toc-text">时机</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#说明-2"><span class="toc-text">说明</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#invokedynamic"><span class="toc-text">invokedynamic</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#其他"><span class="toc-text">其他</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#对象-4"><span class="toc-text">对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#类或接口解析"><span class="toc-text">类或接口解析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#字段解析"><span class="toc-text">字段解析</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#查找"><span class="toc-text">查找</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#验证权限"><span class="toc-text">验证权限</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#类方法解析"><span class="toc-text">类方法解析</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#查找-1"><span class="toc-text">查找</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#验证权限-1"><span class="toc-text">验证权限</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#接口方法解析"><span class="toc-text">接口方法解析</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化"><span class="toc-text">初始化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#lt-clinit-gt-特点"><span class="toc-text"><clinit>()特点</span></a></li></ol></li></ol>
+    </div>
+  </aside>
+
+
+
+  
+
+
+        </div>
+      </main>
+
+      <footer class="footer syuanpi fadeIn" id="footer">
+  <hr>
+  <div class="footer-wrapper">
+    <div class="left">
+      <div class="contact-icon">
+    
+    
+    
+    
+    
+    
+    
+    
+        
+            <a href="https://github.com/super2bai" class="iconfont icon-github" title="github"></a>
+        
+        
+        
+        
+        
+        
+        
+    
+</div>
+    </div>
+    <div class="right">
+      <div class="copyright">
+    <div class="info">
+        <span>&copy;</span>
+        <span>2017 ~ 2018</span>
+        <span>❤</span>
+        <span>super2bai</span>
+    </div>
+    <div class="theme">
+        <span>
+            动力来源于
+            <a href="http://hexo.io/" target="_blank">Hexo </a>
+        </span>
+        <span>
+            主题
+            <a href="https://github.com/ColMugX/hexo-theme-Nlvi"> Nlvi </a>
+        </span>
+    </div>
+    
+    <div class="visit_count">
+        <i class="iconfont icon-visit"></i>
+        <span id="busuanzi_value_site_uv"></span>
+        <i class="iconfont icon-people"></i>
+        <span id="busuanzi_value_site_pv"></span>
+    </div>
+    
+</div>
+
+    </div>
+  </div>
+</footer>
+    </div>
+  </div>
+  <script src="/script/lib/jquery/jquery-3.2.1.min.js"></script>
+
+
+  <script src="/script/lib/lightbox/js/lightbox.min.js"></script>
+
+
+
+
+
+
+
+
+<script src="/script/src/nlvi.js"></script>
+
+  <script src="/script/scheme/banderole.js"></script>
+
+<script src="/script/bootstarp.js"></script>
+
+
+<div class="backtop syuanpi melt toTop" id="backtop">
+    <i class="iconfont icon-up"></i>
+    <span style="text-align:center;font-family:Georgia;"><span style="font-family:Georgia;" id="scrollpercent">1</span>%</span>
+</div>
+
+
+
+</body>
+</html>
