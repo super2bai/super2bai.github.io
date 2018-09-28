@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>https://super2bai.github.io/Dubbo/config.html</loc>
+    <lastmod>2018-09-27T15:43:48.380Z</lastmod>
+    <data>
+        <display>
+        <title>dubbo配置详解</title>
+        <pubTime>2017-11-04T05:47:23.000Z</pubTime>
+        
+        <tag>Dubbo</tag>
+         
+         
+           
+             
+              <breadCrumb title="Dubbo" url="https://super2bai.github.io/categories/Dubbo/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://super2bai.github.io/asm/macEnv.html</loc>
     <lastmod>2018-09-25T15:54:17.911Z</lastmod>
     <data>
@@ -484,26 +504,6 @@
 
     
   <url>
-    <loc>https://super2bai.github.io/issue/discuss.html</loc>
-    <lastmod>2018-06-01T15:16:53.379Z</lastmod>
-    <data>
-        <display>
-        <title>问题讨论</title>
-        <pubTime>2018-06-01T15:13:30.000Z</pubTime>
-        
-        <tag>问题</tag>
-         
-         
-           
-             
-              <breadCrumb title="issue" url="https://super2bai.github.io/categories/issue/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://super2bai.github.io/mac/showHide.html</loc>
     <lastmod>2018-06-01T14:48:00.752Z</lastmod>
     <data>
@@ -517,26 +517,6 @@
            
              
               <breadCrumb title="mac" url="https://super2bai.github.io/categories/mac/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://super2bai.github.io/3DEditor/make.html</loc>
-    <lastmod>2018-05-30T14:21:39.355Z</lastmod>
-    <data>
-        <display>
-        <title>如何做3D编辑器概述</title>
-        <pubTime>2018-05-30T14:15:04.000Z</pubTime>
-        
-        <tag>3D编辑器</tag>
-         
-         
-           
-             
-              <breadCrumb title="3DEditor" url="https://super2bai.github.io/categories/3DEditor/"/>
           
         </display>
     </data>
@@ -1297,26 +1277,6 @@
            
              
               <breadCrumb title="IO" url="https://super2bai.github.io/categories/IO/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://super2bai.github.io/Dubbo/config.html</loc>
-    <lastmod>2018-05-23T03:34:18.796Z</lastmod>
-    <data>
-        <display>
-        <title>dubbo配置详解</title>
-        <pubTime>2017-11-04T05:47:23.000Z</pubTime>
-        
-        <tag>Dubbo</tag>
-         
-         
-           
-             
-              <breadCrumb title="Dubbo" url="https://super2bai.github.io/categories/Dubbo/"/>
           
         </display>
     </data>
