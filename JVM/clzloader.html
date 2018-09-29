@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <link rel="stylesheet" href="/style/style.css">
+<script>
+  var nlviconfig = {
+    title: "贰白",
+    author: "super2bai",
+    baseUrl: "/",
+    theme: {
+      scheme: "banderole",
+      lightbox: true,
+      animate: true,
+      search: false,
+      friends: false,
+      reward: true,
+      lazy: false
+    }
+  }
+</script>
+
+
+
+
+    <link rel="stylesheet" href="/script/lib/lightbox/css/lightbox.min.css">
+
+
+
+
+    <link rel="stylesheet" href="/syuanpi/syuanpi.min.css">
+
+
+
+
+    <link rel="icon" href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-98059014-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-116557847-1');
+</script>
+
+
+
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="browsermode" content="application">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="贰白">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="msapplication-navbutton-color" content="#666666">
+<meta name= "format-detection" content="telephone=no" />
+<meta name="keywords" content="nlvi, Nlvi" />
+
+  <link rel="apple-touch-icon"  sizes="72x72"  href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+  <link rel="apple-touch-icon-precomposed"  sizes="72x72"  href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+
+
+  <meta name="subtitle" content="苦于探索，全是未知">
+
+
+  <meta name="description" content="苦于探索，全是未知">
+
+
+
+  <meta name="keywords" content="JVM, Nlvi" />
+
+  <title> 类加载器 · 贰白 </title>
+</head>
+<body>
+  <div class="progress">
+  <div class="progress-inner"></div>
+</div>
+  
+  
+    <div class="tagcloud-mask"></div>  
+<div class="tagcloud" id="tagcloud">
+  <div class="tagcloud-inner">
+    <a href="/tags/Docker/" style="font-size: 14px;">Docker</a> <a href="/tags/Dubbo/" style="font-size: 14px;">Dubbo</a> <a href="/tags/Eclipse/" style="font-size: 14px;">Eclipse</a> <a href="/tags/GHPages/" style="font-size: 14px;">GHPages</a> <a href="/tags/IO/" style="font-size: 14px;">IO</a> <a href="/tags/JDK/" style="font-size: 14px;">JDK</a> <a href="/tags/JVM/" style="font-size: 14px;">JVM</a> <a href="/tags/Linux/" style="font-size: 14px;">Linux</a> <a href="/tags/Python/" style="font-size: 14px;">Python</a> <a href="/tags/Spring/" style="font-size: 14px;">Spring</a> <a href="/tags/Tomcat/" style="font-size: 14px;">Tomcat</a> <a href="/tags/Zookeeper/" style="font-size: 14px;">Zookeeper</a> <a href="/tags/jmeter/" style="font-size: 14px;">jmeter</a> <a href="/tags/mac/" style="font-size: 14px;">mac</a> <a href="/tags/walkup/" style="font-size: 14px;">walkup</a> <a href="/tags/分布式/" style="font-size: 14px;">分布式</a> <a href="/tags/工具/" style="font-size: 14px;">工具</a> <a href="/tags/旅游/" style="font-size: 14px;">旅游</a> <a href="/tags/汇编/" style="font-size: 14px;">汇编</a> <a href="/tags/游戏/" style="font-size: 14px;">游戏</a> <a href="/tags/编码/" style="font-size: 14px;">编码</a> <a href="/tags/部署/" style="font-size: 14px;">部署</a>
+  </div>
+</div>  
+  
+
+  <div class="container">
+
+    <header class="header" id="header">
+  <div class="header-wrapper">
+    <div class="logo">
+  <div class="logo-inner syuanpi tvIn">
+    <span><a href="/">贰白</a></span>
+    
+      <span id="subtitle">苦于探索，全是未知</span>
+    
+  </div>
+</div>
+    <nav class="main-nav">
+  
+  <ul class="main-nav-list syuanpi tvIn">
+  
+  
+    
+      
+    
+    <li class="menu-item">
+      <a href="/" id="article">
+        <span class="base-name">文章</span>
+        
+          <span class="menu-item-label">article</span>
+        
+      </a>
+    </li>
+  
+    
+      
+    
+    <li class="menu-item">
+      <a href="/archives" id="archives">
+        <span class="base-name">归档</span>
+        
+          <span class="menu-item-label">archives</span>
+        
+      </a>
+    </li>
+  
+    
+      
+    
+    <li class="menu-item">
+      <a href="javascript:;" id="tags">
+        <span class="base-name">标签</span>
+        
+          <span class="menu-item-label">tags</span>
+        
+      </a>
+    </li>
+  
+    
+      
+    
+    <li class="menu-item">
+      <a href="/about" id="about">
+        <span class="base-name">关于</span>
+        
+          <span class="menu-item-label">about</span>
+        
+      </a>
+    </li>
+  
+  </ul>
+  
+</nav>
+
+    
+    
+  </div>
+</header>
+<div class="mobile-header">
+  <div class="mobile-header-body">
+    <div class="mobile-header-list">
+      
+        
+            <div class="mobile-nav-item">
+                <a href="/">
+                    <span>文章</span>
+                    
+                        <span class="menu-item-label">article</span>
+                    
+                </a>
+            </div>
+        
+      
+        
+            <div class="mobile-nav-item">
+                <a href="/archives">
+                    <span>归档</span>
+                    
+                        <span class="menu-item-label">archives</span>
+                    
+                </a>
+            </div>
+        
+      
+        
+          <div class="mobile-nav-item inner-cloud">
+            <div class="mobile-nav-tag">
+              <a href="javascript:;" id="mobile-tags">
+                <span>标签</span>
+                
+                    <span class="menu-item-label">tags</span>
+                
+              </a>
+            </div>
+            <div class="mobile-nav-tagcloud">
+              <div class="mobile-tagcloud-inner">
+                <a href="/tags/Docker/" style="font-size: 14px;">Docker</a> <a href="/tags/Dubbo/" style="font-size: 14px;">Dubbo</a> <a href="/tags/Eclipse/" style="font-size: 14px;">Eclipse</a> <a href="/tags/GHPages/" style="font-size: 14px;">GHPages</a> <a href="/tags/IO/" style="font-size: 14px;">IO</a> <a href="/tags/JDK/" style="font-size: 14px;">JDK</a> <a href="/tags/JVM/" style="font-size: 14px;">JVM</a> <a href="/tags/Linux/" style="font-size: 14px;">Linux</a> <a href="/tags/Python/" style="font-size: 14px;">Python</a> <a href="/tags/Spring/" style="font-size: 14px;">Spring</a> <a href="/tags/Tomcat/" style="font-size: 14px;">Tomcat</a> <a href="/tags/Zookeeper/" style="font-size: 14px;">Zookeeper</a> <a href="/tags/jmeter/" style="font-size: 14px;">jmeter</a> <a href="/tags/mac/" style="font-size: 14px;">mac</a> <a href="/tags/walkup/" style="font-size: 14px;">walkup</a> <a href="/tags/分布式/" style="font-size: 14px;">分布式</a> <a href="/tags/工具/" style="font-size: 14px;">工具</a> <a href="/tags/旅游/" style="font-size: 14px;">旅游</a> <a href="/tags/汇编/" style="font-size: 14px;">汇编</a> <a href="/tags/游戏/" style="font-size: 14px;">游戏</a> <a href="/tags/编码/" style="font-size: 14px;">编码</a> <a href="/tags/部署/" style="font-size: 14px;">部署</a>
+              </div>
+            </div>
+          </div>
+        
+      
+        
+            <div class="mobile-nav-item">
+                <a href="/about">
+                    <span>关于</span>
+                    
+                        <span class="menu-item-label">about</span>
+                    
+                </a>
+            </div>
+        
+      
+    </div>
+  </div>
+  <div class="mobile-header-nav">
+    <div class="mobile-header-item" id="mobile-left">
+      <div class="header-menu-item">
+        <span class="header-menu-line"></span>
+      </div>
+    </div>
+    <h1 class="mobile-header-title">
+      <a href="/">贰白</a>
+    </h1>
+    <div class="mobile-header-item"></div>
+  </div>
+</div>
+    <div class="container-inner">
+      <main class="main" id="main">
+        <div class="main-wrapper">
+          
+    
+  
+  <article class="
+  post
+   is_post 
+  ">
+    <header class="post-header">
+      <div class="post-time syuanpi fadeInUpShort back-1">
+        <div class="post-time-wrapper">
+          <span>2018-09-29</span>
+          
+            
+              <span class="post-category"><a href="/categories/JVM/">JVM</a></span>
+            
+          
+          
+            
+              <aside class="post-tags syuanpi fadeInUpShort back-3">
+              
+                <a href="/tags/JVM/">JVM</a>
+              
+              </aside>
+            
+          
+        </div>
+      </div>
+      <h1 class="post-title syuanpi fadeInUpShort back-2">
+        
+          类加载器
+        
+      </h1>
+    </header>
+    <div class="post-content syuanpi fadeInUpShort back-3">
+      
+        <p>是时候介绍一下那些把Java类加载到内存中的家伙了</p>
+<a id="more"></a>
+<h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><blockquote>
+<p>实现“通过一个类的全限定名来获取描述此类的二进制字节流”的代码模块</p>
+</blockquote>
+<h3 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h3><p>Java语言的创新，领域包括：</p>
+<ul>
+<li><p>类层次划分</p>
+</li>
+<li><p>OSGi(Open Service Gateway Initiative)</p>
+<ul>
+<li>Java动态化模块化系统的一系列规范</li>
+<li>支持模块热部署，方便模块管理</li>
+</ul>
+</li>
+<li><p>热部署</p>
+</li>
+<li><p>代码加密</p>
+</li>
+</ul>
+<h3 id="类与加载器"><a href="#类与加载器" class="headerlink" title="类与加载器"></a>类与加载器</h3><blockquote>
+<p> 对于任意一个类，都需要由加载它的<strong>类加载器</strong>和<strong>这个类本身</strong>一同确定其在JVM中的<strong>唯一性</strong></p>
+</blockquote>
+<ul>
+<li>比较两个类是否相等，只有在这两个类是由同一个类加载器加载的前提下才有意义<ul>
+<li>相同Class文件</li>
+<li>同一个JVM加载</li>
+<li>不同类加载器加载</li>
+<li><strong>必定不相等</strong><ul>
+<li>Class对象的<code>equal()</code>、<code>isAssignableFrom()</code>、<code>isInstance()</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><ul>
+<li><p>启动类加载器Bootstrap ClassLoader</p>
+<ul>
+<li>C++实现</li>
+<li>虚拟机自身的一部分</li>
+</ul>
+</li>
+<li><p>其他类加载器(扩展类加载器Extension ClassLoader、应用程序类加载器Application ClassLoader)</p>
+<ul>
+<li>Java实现</li>
+<li>独立于虚拟机</li>
+<li>继承抽象类<code>java.lang.ClassLoader</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="Bootstrap-ClassLoader"><a href="#Bootstrap-ClassLoader" class="headerlink" title="Bootstrap ClassLoader"></a>Bootstrap ClassLoader</h4><ul>
+<li><p>加载路径</p>
+<ul>
+<li><code>&lt;JAVA_HOME&gt;\lib</code></li>
+<li><code>-Xbootclasspath</code>指定的路径中被虚拟机识别的(按名称)</li>
+</ul>
+</li>
+<li><p>说明</p>
+<ul>
+<li>无法被Java程序直接引用<ul>
+<li>自定义加载器时，如果想使用此加载器加载，直接使用<code>null</code>即可</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="Extension-ClassLoader"><a href="#Extension-ClassLoader" class="headerlink" title="Extension ClassLoader"></a>Extension ClassLoader</h4><ul>
+<li>加载路径<ul>
+<li><code>&lt;JAVA_HOME&gt;\lib\ext</code></li>
+<li><code>java.ext.dirs</code>系统变量指定的路径中所有类库</li>
+</ul>
+</li>
+<li>说明<ul>
+<li>可以被Java程序直接使用</li>
+<li><code>sun.misc.Launcher$ExtClassLoader</code>实现</li>
+</ul>
+</li>
+</ul>
+<h3 id="Application-ClassLoader"><a href="#Application-ClassLoader" class="headerlink" title="Application ClassLoader"></a>Application ClassLoader</h3><ul>
+<li>加载路径<ul>
+<li>用户类路径<code>ClassPath</code>所指定的类库</li>
+</ul>
+</li>
+<li>说明<ul>
+<li>可以被Java程序直接使用</li>
+<li><code>sun.misc.Launcher$AppClassLoader</code>实现</li>
+<li>ClassLoader中<code>getSystemClassLoader()</code>方法的返回值</li>
+<li>如果没有自定义过类加载器，则默认此类加载器</li>
+</ul>
+</li>
+</ul>
+<h3 id="双亲委派模型"><a href="#双亲委派模型" class="headerlink" title="双亲委派模型"></a>双亲委派模型</h3><ul>
+<li>启动类加载器Bootstrap ClassLoader<ul>
+<li>扩展类加载器Extension ClassLoader<ul>
+<li>应用程序类加载器Application ClassLoader<ul>
+<li>自定义类加载器User ClassLoader</li>
+<li>自定义类加载器User ClassLoader</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h4><ul>
+<li>除了顶层的启动类加载器外，其余皆有父类加载器</li>
+<li>父子是组合(Composition)关系</li>
+<li>JDK 1.2+</li>
+</ul>
+<h4 id="工作流程"><a href="#工作流程" class="headerlink" title="工作流程"></a>工作流程</h4><ul>
+<li>一个类加载器收到类加载的请求</li>
+<li>逐层委派给父类加载器完成</li>
+<li>传送到顶层的启动类加载器中</li>
+<li>父类加载器没有找到时，子类加载器尝试自己加载</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//java.lang.ClassLoader#loadClass</span></div><div class="line"><span class="keyword">protected</span> Class&lt;?&gt; loadClass(String name, <span class="keyword">boolean</span> resolve)</div><div class="line">        <span class="keyword">throws</span> ClassNotFoundException</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">synchronized</span> (getClassLoadingLock(name)) &#123;</div><div class="line">            <span class="comment">// 首先，检查此类是否已经被加载过</span></div><div class="line">            Class&lt;?&gt; c = findLoadedClass(name);</div><div class="line">            <span class="keyword">if</span> (c == <span class="keyword">null</span>) &#123;</div><div class="line">                <span class="keyword">long</span> t0 = System.nanoTime();</div><div class="line">                <span class="keyword">try</span> &#123;</div><div class="line">                    <span class="keyword">if</span> (parent != <span class="keyword">null</span>) &#123;</div><div class="line">                        c = parent.loadClass(name, <span class="keyword">false</span>);</div><div class="line">                    &#125; <span class="keyword">else</span> &#123; </div><div class="line">                        c = findBootstrapClassOrNull(name);</div><div class="line">                    &#125;</div><div class="line">                &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</div><div class="line">                    <span class="comment">// 父类加载器未找到则抛出ClassNotFoundException异常</span></div><div class="line">                &#125;</div><div class="line"></div><div class="line">                <span class="keyword">if</span> (c == <span class="keyword">null</span>) &#123;</div><div class="line">                    <span class="comment">// 父类加载器无法加载时，自己才加载</span></div><div class="line">                    <span class="keyword">long</span> t1 = System.nanoTime();</div><div class="line">                    c = findClass(name);</div><div class="line"></div><div class="line">                    <span class="comment">// this is the defining class loader; record the stats</span></div><div class="line">                    sun.misc.PerfCounter.getParentDelegationTime().addTime(t1 - t0);</div><div class="line">                    sun.misc.PerfCounter.getFindClassTime().addElapsedTimeFrom(t1);</div><div class="line">                    sun.misc.PerfCounter.getFindClasses().increment();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span> (resolve) &#123;</div><div class="line">                resolveClass(c);</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> c;</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><ul>
+<li>Java类随着类加载器一起具备了一种带有优先级的层次关系</li>
+<li>保证了Java程序的稳定运行</li>
+</ul>
+<h3 id="破坏双亲委派模型"><a href="#破坏双亲委派模型" class="headerlink" title="破坏双亲委派模型"></a>破坏双亲委派模型</h3><h4 id="loadClass"><a href="#loadClass" class="headerlink" title="loadClass()"></a>loadClass()</h4><ul>
+<li><p>在JDK 1.2之前，双亲委派模型出现前，用户继承<code>java.lang.ClassLoader</code>唯一目的就是重写<code>loadClass()</code>方法，因为虚拟机在进行类加载的时候会调用加载器的私有方法<code>loadClassInternal()</code>，也就是调用自己的<code>loadClass()</code>。</p>
+</li>
+<li><p>双亲委派模型出现在JDK 1.2，而类加载器和抽象类<code>java.lang.ClassLoader</code>在JDK 1.0就有，为了向前兼容，在JDK 1.2中的<code>java.lang.ClassLoader</code>增加了<code>protected</code>的<code>findClass()</code>方法，应当把自定义的类加载逻辑写到这个方法中，在<code>loadClass()</code>里，如果父加载器加载失败，则会调用自己的<code>findClass()</code>方法来完成加载，可以保证自定义的类加载器是符合双亲委派模型。</p>
+</li>
+</ul>
+<h4 id="自身缺陷"><a href="#自身缺陷" class="headerlink" title="自身缺陷"></a>自身缺陷</h4><p>基础类是作为被用户代码调用的API，但如果需要回调用户的代码时，Bootstrap ClassLoader不认识这些代码也就无法完成加载动作，怎么办呢？ 例如JNDI服务</p>
+<blockquote>
+<p>JNDI服务：</p>
+<ul>
+<li>JDK 1.3 ：rt.jar</li>
+<li>对资源进行集中管理和查找</li>
+<li>需要调用独立厂商实现并部署在应用程序的<code>ClassPath</code>下的JNDI接口提供者(SPI)的代码</li>
+</ul>
+</blockquote>
+<p>这时候就需要线程上下文类加载器(Thread Context ClassLoader) 来载入需要的Class</p>
+<ul>
+<li>通过<code>java.lang.Thread</code>类的<code>setContextClassLoader()</code>方法进行设置</li>
+<li>创建线程时未设置，则从父线程中继承</li>
+<li>如果全局都没有设置，默认为Application ClassLoader</li>
+</ul>
+<p>线程上下文类加载器其实就是父类加载器委托子类加载器完成加载动作</p>
+<ul>
+<li>父类加载器可以获得当前线程的Context ClassLoader，可能是它的子类加载器也可能是其他类加载器，父类加载器可以从其获得所需的Class，也就打破了只能向父类加载器请求的限制。</li>
+</ul>
+<p>这个机制就满足了classpath是在运行时才确定，并且由定制的类加载器加载。由Application ClassLoader加载的class可以通过Thread Context ClassLoader获得定制的类加载器并载入特定的Class。</p>
+<p><strong>Java中所有涉及SPI的加载动作基本都采用这种方式，如JNDI、JDBC、JCE、JAXB和JBI等</strong></p>
+<h4 id="追求程序的动态性"><a href="#追求程序的动态性" class="headerlink" title="追求程序的动态性"></a>追求程序的动态性</h4><blockquote>
+<p>动态性：代码热替换HotSwap、模块热部署(Hot Deployment)</p>
+</blockquote>
+<p>模块化之争：</p>
+<ul>
+<li><p>Sun</p>
+<ul>
+<li><code>JSR-294</code>(Java语言改进的模块化支持)</li>
+<li><code>JSR-277</code>(Java模块化系统)</li>
+</ul>
+</li>
+<li><p>JCP</p>
+<ul>
+<li><a href="https://jcp.org/en/jsr/detail?id=291" target="_blank" rel="external">JSR-291(OSGI R4)</a></li>
+</ul>
+</li>
+</ul>
+<p>最终，JCP赢了。不知道OSGI是啥，<a href="http://osgi.com.cn/article/7289372" target="_blank" rel="external">请看这篇文章</a></p>
+<blockquote>
+<p>OSGI联盟给出的最新OSGI定义是The Dynamic Module System for Java，即面向Java的动态模块化系统。</p>
+<p>OSGI实现模块化热部署的关键是自定义的类加载器机制的实现。</p>
+<p>也就是说，每一个程序模块(Bundle)都有独自的类加载器，当需要更换一个Bundle时，就把Bundle和类加载器一起换掉，实现代码的热替换。</p>
+</blockquote>
+<p>OSGI使用更为复杂的网状结构，不使用双亲委派模型的树状接口。</p>
+<ul>
+<li>当收到类加载请求时，OSGI对类搜索的操作<ul>
+<li>将以<code>java.*</code>开头的类委派给父类加载器加载</li>
+<li>否则，将委派列表名单内的类委派给父类加载器</li>
+<li>否则，将Import列表中的类委派给Export这个类的Bundle的类加载器加载</li>
+<li>否则，查找当前Bundle的ClassPath，使用自己的类加载器加载</li>
+<li>否则，查找类是否在自己的Fragment Bundle中，如果在，则委派给Fragment Bundle的类加载器加载</li>
+<li>否则，查找Dynamic Import列表的Bundle，委派给对应的Bundle的类加载器加载</li>
+<li>否则，类查找失败</li>
+</ul>
+</li>
+</ul>
+<p><strong>想掌握类加载器的精髓，就搞懂OSGI的实现吧</strong></p>
+
+      
+    
+    </div>
+    
+      
+  <div class="post-reward">
+    <span class="reward-btn" id="reward-btn">点这里</span>
+    <div class="reward-wrapper syuanpi" id="reward-wrapper" style="display:none;">
+      
+      <div class="reward-item reward-alipay">
+        <img src="https://wx3.sinaimg.cn/mw690/8c564d2aly1ftkt83thjlj20o60skjzn.jpg">
+      </div>
+      
+    </div>
+  </div>
+
+
+      
+    
+  </article>
+  
+    
+  <nav class="article-page">
+    
+    
+      <a href="/JVM/clzloadpcs.html" id="art-right" class="art-right">
+        <span class="prev-title"> 
+          类加载的过程<i class="iconfont icon-right"></i>  
+        </span>
+      </a>
+    
+  </nav>
+
+    
+  <i id="com-switch" class="iconfont icon-more jumping-in long infinite" style="font-size:24px;display:block;text-align:center;transform:rotate(180deg);"></i>
+  <div class="post-comments" id="post-comments" style="display: block;margin: auto 16px;">
+    
+<!-- Gitment Comments -->
+<div id="gitment"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  owner: "super2bai",
+  repo: 'comment',
+  oauth: {
+    client_id: '37f2293730b41dcb5276',
+    client_secret: 'dbab4955840d4cbc88f1563be04ab676662194e5',
+  },
+})
+gitment.render('gitment')
+</script>
+
+    
+    
+
+  </div>
+
+
+  
+  
+    
+  
+  <aside class="post-toc">
+    <span class="title" id="toc-switch"><span>文章导航</span></span>
+    <div class="toc-inner syuanpi back-1" style="display:none;">
+      <li class="title-link"><a href="javascript:;" class="toTop">类加载器</a></li>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#特性"><span class="toc-text">特性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#类与加载器"><span class="toc-text">类与加载器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分类"><span class="toc-text">分类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Bootstrap-ClassLoader"><span class="toc-text">Bootstrap ClassLoader</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Extension-ClassLoader"><span class="toc-text">Extension ClassLoader</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Application-ClassLoader"><span class="toc-text">Application ClassLoader</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#双亲委派模型"><span class="toc-text">双亲委派模型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#特点"><span class="toc-text">特点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#工作流程"><span class="toc-text">工作流程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#优点"><span class="toc-text">优点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#破坏双亲委派模型"><span class="toc-text">破坏双亲委派模型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#loadClass"><span class="toc-text">loadClass()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#自身缺陷"><span class="toc-text">自身缺陷</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#追求程序的动态性"><span class="toc-text">追求程序的动态性</span></a></li></ol></li></ol>
+    </div>
+  </aside>
+
+
+
+  
+
+
+        </div>
+      </main>
+
+      <footer class="footer syuanpi fadeIn" id="footer">
+  <hr>
+  <div class="footer-wrapper">
+    <div class="left">
+      <div class="contact-icon">
+    
+    
+    
+    
+    
+    
+    
+    
+        
+            <a href="https://github.com/super2bai" class="iconfont icon-github" title="github"></a>
+        
+        
+        
+        
+        
+        
+        
+    
+</div>
+    </div>
+    <div class="right">
+      <div class="copyright">
+    <div class="info">
+        <span>&copy;</span>
+        <span>2017 ~ 2018</span>
+        <span>❤</span>
+        <span>super2bai</span>
+    </div>
+    <div class="theme">
+        <span>
+            动力来源于
+            <a href="http://hexo.io/" target="_blank">Hexo </a>
+        </span>
+        <span>
+            主题
+            <a href="https://github.com/ColMugX/hexo-theme-Nlvi"> Nlvi </a>
+        </span>
+    </div>
+    
+    <div class="visit_count">
+        <i class="iconfont icon-visit"></i>
+        <span id="busuanzi_value_site_uv"></span>
+        <i class="iconfont icon-people"></i>
+        <span id="busuanzi_value_site_pv"></span>
+    </div>
+    
+</div>
+
+    </div>
+  </div>
+</footer>
+    </div>
+  </div>
+  <script src="/script/lib/jquery/jquery-3.2.1.min.js"></script>
+
+
+  <script src="/script/lib/lightbox/js/lightbox.min.js"></script>
+
+
+
+
+
+
+
+
+<script src="/script/src/nlvi.js"></script>
+
+  <script src="/script/scheme/banderole.js"></script>
+
+<script src="/script/bootstarp.js"></script>
+
+
+<div class="backtop syuanpi melt toTop" id="backtop">
+    <i class="iconfont icon-up"></i>
+    <span style="text-align:center;font-family:Georgia;"><span style="font-family:Georgia;" id="scrollpercent">1</span>%</span>
+</div>
+
+
+
+</body>
+</html>
