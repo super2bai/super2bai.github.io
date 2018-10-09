@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://super2bai.github.io/JVM/stackFrame.html</loc>
+    
+    <lastmod>2018-10-09T16:32:12.642Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://super2bai.github.io/JVM/gcAlgo.html</loc>
+    
+    <lastmod>2018-10-09T14:40:44.777Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://super2bai.github.io/JVM/clzloader.html</loc>
     
     <lastmod>2018-09-29T15:23:16.442Z</lastmod>
@@ -320,13 +334,6 @@
     <loc>https://super2bai.github.io/GHPages/hello.html</loc>
     
     <lastmod>2018-05-24T16:09:18.850Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://super2bai.github.io/JVM/gcAlgo.html</loc>
-    
-    <lastmod>2018-05-23T10:25:26.646Z</lastmod>
     
   </url>
   
