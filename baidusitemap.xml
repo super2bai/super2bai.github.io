@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>https://super2bai.github.io/JVM/callMethod.html</loc>
+    <lastmod>2018-10-24T16:31:27.016Z</lastmod>
+    <data>
+        <display>
+        <title>方法调用</title>
+        <pubTime>2018-10-24T16:29:27.000Z</pubTime>
+        
+        <tag>JVM</tag>
+         
+         
+           
+             
+              <breadCrumb title="JVM" url="https://super2bai.github.io/categories/JVM/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://super2bai.github.io/JVM/stackFrame.html</loc>
     <lastmod>2018-10-09T16:48:15.467Z</lastmod>
     <data>

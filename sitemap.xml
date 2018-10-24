@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://super2bai.github.io/JVM/callMethod.html</loc>
+    
+    <lastmod>2018-10-24T16:31:27.016Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://super2bai.github.io/JVM/stackFrame.html</loc>
     
     <lastmod>2018-10-09T16:48:15.467Z</lastmod>
