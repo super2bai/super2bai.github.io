@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://super2bai.github.io/tool/recommend.html</loc>
+    
+    <lastmod>2018-10-29T07:53:59.159Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://super2bai.github.io/JVM/callMethod.html</loc>
     
     <lastmod>2018-10-24T16:31:27.016Z</lastmod>
@@ -145,13 +152,6 @@
     <loc>https://super2bai.github.io/JVM/tool.html</loc>
     
     <lastmod>2018-07-30T09:34:02.261Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://super2bai.github.io/tool/recommend.html</loc>
-    
-    <lastmod>2018-07-30T06:27:15.543Z</lastmod>
     
   </url>
   
