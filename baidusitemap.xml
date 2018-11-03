@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>https://super2bai.github.io/concurrent/challenge.html</loc>
+    <lastmod>2018-11-03T18:17:49.146Z</lastmod>
+    <data>
+        <display>
+        <title>并发编程的挑战</title>
+        <pubTime>2018-11-01T18:06:27.000Z</pubTime>
+        
+        <tag>concurrent</tag>
+         
+         
+           
+             
+              <breadCrumb title="concurrent" url="https://super2bai.github.io/categories/concurrent/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://super2bai.github.io/MySQL/null.html</loc>
     <lastmod>2018-11-03T17:02:38.664Z</lastmod>
     <data>
