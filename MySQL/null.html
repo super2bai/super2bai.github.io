@@ -76,11 +76,9 @@
 
 
 
-  <title>
-  
-    归档 · 贰白
-  
-</title>
+  <meta name="keywords" content="MySQL, Nlvi" />
+
+  <title> MySQL编码及排序规则 · 贰白 </title>
 </head>
 <body>
   <div class="progress">
@@ -243,153 +241,164 @@
         <div class="main-wrapper">
           
     
-    <div class="archive syuanpi fadeInUp" id="archive">
-        
-            <h1 class="archive-title">Total</h1>
-            <span class="archive-num">一共有 83 篇文章</span>
-        
-        <div class="archive-list">
-            <ul>
-        
+  
+  <article class="
+  post
+   is_post 
+  ">
+    <header class="post-header">
+      <div class="post-time syuanpi fadeInUpShort back-1">
+        <div class="post-time-wrapper">
+          <span>2018-11-04</span>
+          
             
-                
-                
-                
-                    
-                     
-                        <h2 class="archive-year"> 2018 </h2>
-                    
-                
+              <span class="post-category"><a href="/categories/MySQL/">MySQL</a></span>
             
+          
+          
             
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    06-29
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/walkup/SA.html">WalkUp签证-南美洲</a>
-                </span>
-            </li>
-
-        
+              <aside class="post-tags syuanpi fadeInUpShort back-3">
+              
+                <a href="/tags/MySQL/">MySQL</a>
+              
+              </aside>
             
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    06-28
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/codec/w2m.html">文本文件从Windows拷贝到Mac乱码</a>
-                </span>
-            </li>
-
-        
-            
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    06-25
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/JVM/decompile.html">JIT&HSDIS查看反编译代码</a>
-                </span>
-            </li>
-
-        
-            
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    06-22
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/deploy/windows.html">Java Web部署到Windows的Tomcat</a>
-                </span>
-            </li>
-
-        
-            
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    06-06
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/tool/recommend.html">工具推荐</a>
-                </span>
-            </li>
-
-        
-            
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    06-06
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/Eclipse/Maven.html">Eclipse和Maven那点事儿</a>
-                </span>
-            </li>
-
-        
-            
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    06-01
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/mac/showHide.html">mac显示隐藏文件</a>
-                </span>
-            </li>
-
-        
-            </ul>
+          
         </div>
+      </div>
+      <h1 class="post-title syuanpi fadeInUpShort back-2">
+        
+          MySQL编码及排序规则
+        
+      </h1>
+    </header>
+    <div class="post-content syuanpi fadeInUpShort back-3">
+      
+        <p>MySQL5.5.3是道分水岭</p>
+<a id="more"></a>
+<h2 id="编码"><a href="#编码" class="headerlink" title="编码"></a>编码</h2><blockquote>
+<p>代码点（Code Point)：Unicode是属于编码字符集（CCS）的范围。Unicode所做的事情就是将我们需要表示的字符表中的每个字符映射成一个数字，这个数字被称为相应字符的码点（code point）。例如“严”字在Unicode中对应的码点是U+0x4E25</p>
+</blockquote>
+<h3 id="相同点"><a href="#相同点" class="headerlink" title="相同点"></a>相同点</h3><ul>
+<li>相同代码值</li>
+<li>相同编码</li>
+<li>相同长度</li>
+</ul>
+<h3 id="UTF8mb3"><a href="#UTF8mb3" class="headerlink" title="UTF8mb3"></a>UTF8mb3</h3><ul>
+<li>变长编码</li>
+<li>存储一个代码点需要1-3字节</li>
+<li>不能存储所有Unicode代码点，只支持0x000到0xFFFF，也就是BMP(Basic Multilingual Plane)</li>
+</ul>
+<blockquote>
+<p>BMP：基本多文种平面，也成第零平面(Plane 0)，是Unicode中的一个编码区段，几乎包含现代语言的字符，和大量符号。目的是支持对于书写使用的先前字符集的统一。</p>
+</blockquote>
+<h3 id="UTF8mb4"><a href="#UTF8mb4" class="headerlink" title="UTF8mb4"></a>UTF8mb4</h3><ul>
+<li>补充字符<ul>
+<li>支持存储例如emoji</li>
+</ul>
+</li>
+<li>存储一个代码点需要4字节</li>
+<li>MySQL5.5.3+</li>
+</ul>
+<p><strong>BTW, MariaDB也应该使用UTF8mb4</strong></p>
+<h2 id="排序规则"><a href="#排序规则" class="headerlink" title="排序规则"></a>排序规则</h2><blockquote>
+<p>ci：case insensitive，大小写不敏感</p>
+<p>cs：case sensitive，大小写不敏感</p>
+<p>bin：二进制，大小写敏感</p>
+</blockquote>
+<h3 id="utf8mb4-general-ci"><a href="#utf8mb4-general-ci" class="headerlink" title="utf8mb4_general_ci"></a>utf8mb4_general_ci</h3><ul>
+<li><p>校对速度快，准确度稍差</p>
+</li>
+<li><p>一般语言用</p>
+</li>
+<li>不支持扩展</li>
+<li>MySQL8</li>
+</ul>
+<h3 id="utf8mb4-unicode-ci"><a href="#utf8mb4-unicode-ci" class="headerlink" title="utf8mb4_unicode_ci"></a>utf8mb4_unicode_ci</h3><ul>
+<li><p>校对速度稍慢，准确度高</p>
+</li>
+<li><p>含有德语、法语或俄语</p>
+</li>
+<li>支持扩展<ul>
+<li>把一个字母看作与其它字母组合相等</li>
+</ul>
+</li>
+</ul>
+
+      
+    
     </div>
     
-  <nav class="pagination">
-      <span class="page-number current">1</span>
+      
+  <div class="post-reward">
+    <span class="reward-btn" id="reward-btn">点这里</span>
+    <div class="reward-wrapper syuanpi" id="reward-wrapper" style="display:none;">
+      
+      <div class="reward-item reward-alipay">
+        <img src="https://wx3.sinaimg.cn/mw690/8c564d2aly1ftkt83thjlj20o60skjzn.jpg">
+      </div>
+      
+    </div>
+  </div>
+
+
+      
+    
+  </article>
+  
+    
+  <nav class="article-page">
+    
+    
+      <a href="/MySQL/fieldType.html" id="art-right" class="art-right">
+        <span class="prev-title"> 
+          MySQL中Text与Varchar<i class="iconfont icon-right"></i>  
+        </span>
+      </a>
+    
   </nav>
 
+    
+  <i id="com-switch" class="iconfont icon-more jumping-in long infinite" style="font-size:24px;display:block;text-align:center;transform:rotate(180deg);"></i>
+  <div class="post-comments" id="post-comments" style="display: block;margin: auto 16px;">
+    
+<!-- Gitment Comments -->
+<div id="gitment"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  owner: "super2bai",
+  repo: 'comment',
+  oauth: {
+    client_id: '37f2293730b41dcb5276',
+    client_secret: 'dbab4955840d4cbc88f1563be04ab676662194e5',
+  },
+})
+gitment.render('gitment')
+</script>
+
+    
+    
+
+  </div>
+
+
+  
+  
+    
+  
+  <aside class="post-toc">
+    <span class="title" id="toc-switch"><span>文章导航</span></span>
+    <div class="toc-inner syuanpi back-1" style="display:none;">
+      <li class="title-link"><a href="javascript:;" class="toTop">MySQL编码及排序规则</a></li>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#编码"><span class="toc-text">编码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#相同点"><span class="toc-text">相同点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#UTF8mb3"><span class="toc-text">UTF8mb3</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#UTF8mb4"><span class="toc-text">UTF8mb4</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#排序规则"><span class="toc-text">排序规则</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#utf8mb4-general-ci"><span class="toc-text">utf8mb4_general_ci</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#utf8mb4-unicode-ci"><span class="toc-text">utf8mb4_unicode_ci</span></a></li></ol></li></ol>
+    </div>
+  </aside>
+
+
+
+  
 
 
         </div>
