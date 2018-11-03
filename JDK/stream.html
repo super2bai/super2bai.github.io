@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <link rel="stylesheet" href="/style/style.css">
+<script>
+  var nlviconfig = {
+    title: "贰白",
+    author: "super2bai",
+    baseUrl: "/",
+    theme: {
+      scheme: "banderole",
+      lightbox: true,
+      animate: true,
+      search: false,
+      friends: false,
+      reward: true,
+      lazy: false
+    }
+  }
+</script>
+
+
+
+
+    <link rel="stylesheet" href="/script/lib/lightbox/css/lightbox.min.css">
+
+
+
+
+    <link rel="stylesheet" href="/syuanpi/syuanpi.min.css">
+
+
+
+
+    <link rel="icon" href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-98059014-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-116557847-1');
+</script>
+
+
+
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="browsermode" content="application">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="贰白">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="msapplication-navbutton-color" content="#666666">
+<meta name= "format-detection" content="telephone=no" />
+<meta name="keywords" content="nlvi, Nlvi" />
+
+  <link rel="apple-touch-icon"  sizes="72x72"  href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+  <link rel="apple-touch-icon-precomposed"  sizes="72x72"  href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+
+
+  <meta name="subtitle" content="苦于探索，全是未知">
+
+
+  <meta name="description" content="苦于探索，全是未知">
+
+
+
+  <meta name="keywords" content="JDK, Nlvi" />
+
+  <title> Java8-Stream · 贰白 </title>
+</head>
+<body>
+  <div class="progress">
+  <div class="progress-inner"></div>
+</div>
+  
+  
+    <div class="tagcloud-mask"></div>  
+<div class="tagcloud" id="tagcloud">
+  <div class="tagcloud-inner">
+    <a href="/tags/Docker/" style="font-size: 14px;">Docker</a> <a href="/tags/Dubbo/" style="font-size: 14px;">Dubbo</a> <a href="/tags/Eclipse/" style="font-size: 14px;">Eclipse</a> <a href="/tags/GHPages/" style="font-size: 14px;">GHPages</a> <a href="/tags/IO/" style="font-size: 14px;">IO</a> <a href="/tags/JDK/" style="font-size: 14px;">JDK</a> <a href="/tags/JVM/" style="font-size: 14px;">JVM</a> <a href="/tags/Linux/" style="font-size: 14px;">Linux</a> <a href="/tags/Python/" style="font-size: 14px;">Python</a> <a href="/tags/Spring/" style="font-size: 14px;">Spring</a> <a href="/tags/Tomcat/" style="font-size: 14px;">Tomcat</a> <a href="/tags/Zookeeper/" style="font-size: 14px;">Zookeeper</a> <a href="/tags/jmeter/" style="font-size: 14px;">jmeter</a> <a href="/tags/mac/" style="font-size: 14px;">mac</a> <a href="/tags/walkup/" style="font-size: 14px;">walkup</a> <a href="/tags/分布式/" style="font-size: 14px;">分布式</a> <a href="/tags/工具/" style="font-size: 14px;">工具</a> <a href="/tags/旅游/" style="font-size: 14px;">旅游</a> <a href="/tags/汇编/" style="font-size: 14px;">汇编</a> <a href="/tags/游戏/" style="font-size: 14px;">游戏</a> <a href="/tags/编码/" style="font-size: 14px;">编码</a> <a href="/tags/部署/" style="font-size: 14px;">部署</a>
+  </div>
+</div>  
+  
+
+  <div class="container">
+
+    <header class="header" id="header">
+  <div class="header-wrapper">
+    <div class="logo">
+  <div class="logo-inner syuanpi tvIn">
+    <span><a href="/">贰白</a></span>
+    
+      <span id="subtitle">苦于探索，全是未知</span>
+    
+  </div>
+</div>
+    <nav class="main-nav">
+  
+  <ul class="main-nav-list syuanpi tvIn">
+  
+  
+    
+      
+    
+    <li class="menu-item">
+      <a href="/" id="article">
+        <span class="base-name">文章</span>
+        
+          <span class="menu-item-label">article</span>
+        
+      </a>
+    </li>
+  
+    
+      
+    
+    <li class="menu-item">
+      <a href="/archives" id="archives">
+        <span class="base-name">归档</span>
+        
+          <span class="menu-item-label">archives</span>
+        
+      </a>
+    </li>
+  
+    
+      
+    
+    <li class="menu-item">
+      <a href="javascript:;" id="tags">
+        <span class="base-name">标签</span>
+        
+          <span class="menu-item-label">tags</span>
+        
+      </a>
+    </li>
+  
+    
+      
+    
+    <li class="menu-item">
+      <a href="/about" id="about">
+        <span class="base-name">关于</span>
+        
+          <span class="menu-item-label">about</span>
+        
+      </a>
+    </li>
+  
+  </ul>
+  
+</nav>
+
+    
+    
+  </div>
+</header>
+<div class="mobile-header">
+  <div class="mobile-header-body">
+    <div class="mobile-header-list">
+      
+        
+            <div class="mobile-nav-item">
+                <a href="/">
+                    <span>文章</span>
+                    
+                        <span class="menu-item-label">article</span>
+                    
+                </a>
+            </div>
+        
+      
+        
+            <div class="mobile-nav-item">
+                <a href="/archives">
+                    <span>归档</span>
+                    
+                        <span class="menu-item-label">archives</span>
+                    
+                </a>
+            </div>
+        
+      
+        
+          <div class="mobile-nav-item inner-cloud">
+            <div class="mobile-nav-tag">
+              <a href="javascript:;" id="mobile-tags">
+                <span>标签</span>
+                
+                    <span class="menu-item-label">tags</span>
+                
+              </a>
+            </div>
+            <div class="mobile-nav-tagcloud">
+              <div class="mobile-tagcloud-inner">
+                <a href="/tags/Docker/" style="font-size: 14px;">Docker</a> <a href="/tags/Dubbo/" style="font-size: 14px;">Dubbo</a> <a href="/tags/Eclipse/" style="font-size: 14px;">Eclipse</a> <a href="/tags/GHPages/" style="font-size: 14px;">GHPages</a> <a href="/tags/IO/" style="font-size: 14px;">IO</a> <a href="/tags/JDK/" style="font-size: 14px;">JDK</a> <a href="/tags/JVM/" style="font-size: 14px;">JVM</a> <a href="/tags/Linux/" style="font-size: 14px;">Linux</a> <a href="/tags/Python/" style="font-size: 14px;">Python</a> <a href="/tags/Spring/" style="font-size: 14px;">Spring</a> <a href="/tags/Tomcat/" style="font-size: 14px;">Tomcat</a> <a href="/tags/Zookeeper/" style="font-size: 14px;">Zookeeper</a> <a href="/tags/jmeter/" style="font-size: 14px;">jmeter</a> <a href="/tags/mac/" style="font-size: 14px;">mac</a> <a href="/tags/walkup/" style="font-size: 14px;">walkup</a> <a href="/tags/分布式/" style="font-size: 14px;">分布式</a> <a href="/tags/工具/" style="font-size: 14px;">工具</a> <a href="/tags/旅游/" style="font-size: 14px;">旅游</a> <a href="/tags/汇编/" style="font-size: 14px;">汇编</a> <a href="/tags/游戏/" style="font-size: 14px;">游戏</a> <a href="/tags/编码/" style="font-size: 14px;">编码</a> <a href="/tags/部署/" style="font-size: 14px;">部署</a>
+              </div>
+            </div>
+          </div>
+        
+      
+        
+            <div class="mobile-nav-item">
+                <a href="/about">
+                    <span>关于</span>
+                    
+                        <span class="menu-item-label">about</span>
+                    
+                </a>
+            </div>
+        
+      
+    </div>
+  </div>
+  <div class="mobile-header-nav">
+    <div class="mobile-header-item" id="mobile-left">
+      <div class="header-menu-item">
+        <span class="header-menu-line"></span>
+      </div>
+    </div>
+    <h1 class="mobile-header-title">
+      <a href="/">贰白</a>
+    </h1>
+    <div class="mobile-header-item"></div>
+  </div>
+</div>
+    <div class="container-inner">
+      <main class="main" id="main">
+        <div class="main-wrapper">
+          
+    
+  
+  <article class="
+  post
+   is_post 
+  ">
+    <header class="post-header">
+      <div class="post-time syuanpi fadeInUpShort back-1">
+        <div class="post-time-wrapper">
+          <span>2018-10-27</span>
+          
+            
+              <span class="post-category"><a href="/categories/JDK/">JDK</a></span>
+            
+          
+          
+            
+              <aside class="post-tags syuanpi fadeInUpShort back-3">
+              
+                <a href="/tags/JDK/">JDK</a>
+              
+              </aside>
+            
+          
+        </div>
+      </div>
+      <h1 class="post-title syuanpi fadeInUpShort back-2">
+        
+          Java8-Stream
+        
+      </h1>
+    </header>
+    <div class="post-content syuanpi fadeInUpShort back-3">
+      
+        <ul>
+<li>Java8核心新特性<ul>
+<li>Stream流</li>
+<li>Optional</li>
+<li>Lambda匿名函数</li>
+<li>默认方法</li>
+</ul>
+</li>
+</ul>
+<p>本篇重点介绍Stream</p>
+<a id="more"></a>
+<h3 id="Stream流"><a href="#Stream流" class="headerlink" title="Stream流"></a>Stream流</h3><blockquote>
+<p>从支持数据处理操作的源，生成的元素序列</p>
+<ul>
+<li>元素序列：流提供接口，可以访问特定元素类型的一组有序值，流的目的在于表达计算</li>
+<li>源：流会使用一个提供数据的源，如集合、数组或输入/输出资源</li>
+<li>数据处理操作：提供类似于数据库的操作，以及函数式编程语言中的常用操作(filter、map、reduce、find、match、sort等)，串行或并行均支持</li>
+<li>并行：很多流操作本身会返回一个流，这样多个操作就可以链接起来，形成一个流水线(可以进行延迟和短路等优化)</li>
+<li>内部迭代：流的迭代操作是在后台进行的</li>
+</ul>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment">  * 返回低热量菜肴的名称，并按照卡路里排序</span></div><div class="line"><span class="comment">  * parallelStream():得到一个并行流</span></div><div class="line"><span class="comment">  * filter:过滤</span></div><div class="line"><span class="comment">  * map:将元素转换成其他形式或提取信息</span></div><div class="line"><span class="comment">  * limit:阶段流，使其元素不超过给定数量</span></div><div class="line"><span class="comment">  * sort:排序</span></div><div class="line"><span class="comment">  * collect:将流转换为其他形式</span></div><div class="line"><span class="comment">  */</span></div><div class="line">List&lt;String&gt; lowCaloricDishesName = </div><div class="line">				menu.parallelStream()</div><div class="line">				.filter(d -&gt; d.getCalories() &lt; <span class="number">400</span>)</div><div class="line">				.sorted(comparing(Dishes::getCalories))</div><div class="line">				.map(Dish::getName)</div><div class="line">				.collect(toList());</div></pre></td></tr></table></figure>
+<h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><ul>
+<li>声明性<ul>
+<li>简洁易读</li>
+<li>想要完成什么，而不是说明如何实现一个操作（利用循环和if条件等控制流语句）</li>
+</ul>
+</li>
+<li>可复合：灵活</li>
+<li>可并行：性能更好</li>
+</ul>
+<h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><ul>
+<li><p><code>debug</code>时需要将将语句切换为多行(例如以<code>.</code>换行)才可以打断点</p>
+</li>
+<li><p>只能遍历一次</p>
+<ul>
+<li><code>s.forEach</code>第二次调用会报<code>java.lang.IllegalStateException: stream has already been operated upon or closed</code>异常</li>
+</ul>
+</li>
+</ul>
+<h4 id="与集合对比"><a href="#与集合对比" class="headerlink" title="与集合对比"></a>与集合对比</h4><ul>
+<li>存储<ul>
+<li>集合：内存中的数据结构，包含所有值</li>
+<li>流：概念上固定的(不能添加或删除)</li>
+</ul>
+</li>
+<li>计算时机<ul>
+<li>集合：元素需先计算出来才能成为集合的一部分</li>
+<li>流：按需计算，只有在有需要时才会计算值</li>
+</ul>
+</li>
+<li>创建<ul>
+<li>集合：急切创建，先装满再处理</li>
+<li>流：延迟创建，需要时再计算值</li>
+</ul>
+</li>
+<li>迭代<ul>
+<li>集合：外部迭代(<code>for-each</code>)</li>
+<li>流：内部迭代(透明并行、优化处理顺序)</li>
+</ul>
+</li>
+</ul>
+<h4 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h4><ul>
+<li>中间操作<ul>
+<li>可以连接起来的流操作<ul>
+<li><code>filter</code>、<code>map</code>、<code>limit</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>终端操作<ul>
+<li>结果为不是流的值</li>
+</ul>
+</li>
+</ul>
+<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><hr>
+<h5 id="筛选和切片"><a href="#筛选和切片" class="headerlink" title="筛选和切片"></a>筛选和切片</h5><p><strong>筛选(distinct)</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//2、4</span></div><div class="line">List&lt;Integer&gt; list = Arrays.asList(<span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">4</span>);</div><div class="line">list.stream()</div><div class="line">    .filter(integer -&gt; integer % <span class="number">2</span> == <span class="number">0</span>)</div><div class="line">    .distinct()</div><div class="line">    .forEach(System.out::println);</div></pre></td></tr></table></figure>
+<p><strong>截短流limit</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//2    </span></div><div class="line">List&lt;Integer&gt; list = Arrays.asList(<span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">4</span>);</div><div class="line">list.stream()</div><div class="line">    .filter(integer -&gt; integer % <span class="number">2</span> == <span class="number">0</span>)</div><div class="line">    .limit(<span class="number">1</span>)</div><div class="line">    .forEach(System.out::println);</div></pre></td></tr></table></figure>
+<p><strong>跳过skip</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//4        </span></div><div class="line">List&lt;Integer&gt; list = Arrays.asList(<span class="number">2</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">3</span>);</div><div class="line">list.stream()</div><div class="line">    .filter(integer -&gt; integer % <span class="number">2</span> == <span class="number">0</span>)</div><div class="line">    .skip(<span class="number">2</span>)</div><div class="line">    .forEach(System.out::println);</div></pre></td></tr></table></figure>
+<hr>
+<h5 id="映射"><a href="#映射" class="headerlink" title="映射"></a>映射</h5><p><strong>map</strong></p>
+<p>创建一个新版本</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">List&lt;String&gt; dishNames = menu.stream()</div><div class="line">    .map(Dish::getName)</div><div class="line">    .collect(toList());</div></pre></td></tr></table></figure>
+<p><strong>flatmap</strong></p>
+<p>将结果合并为一个流</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">List&lt;String&gt; uniqueCharacters =</div><div class="line">    words.stream()</div><div class="line">         .map(w -&gt; w.split(<span class="string">""</span>))</div><div class="line">         .flatMap(Arrays::stream)</div><div class="line">         .distinct()</div><div class="line">         .collect(Collectors.toList());</div></pre></td></tr></table></figure>
+<h5 id="查找和匹配"><a href="#查找和匹配" class="headerlink" title="查找和匹配"></a>查找和匹配</h5><ul>
+<li>短路<ul>
+<li>allMatch：流中的元素是否都能匹配</li>
+<li>anyMatch：流中的元素是否有一个元素能匹配</li>
+<li>noneMatch：确保流中没有任何元素匹配</li>
+</ul>
+</li>
+<li>findFirst：返回第一个匹配的值（并行流上限制多）</li>
+<li>findAny：返回任意匹配的值（并行流上限制少）</li>
+</ul>
+<h5 id="规约"><a href="#规约" class="headerlink" title="规约"></a>规约</h5><p><strong>元素求和</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// reduce(初始值,BinaryOperator&lt;T&gt;来将两个元素结合起来产生一个新值)</span></div><div class="line"><span class="keyword">int</span> sum = numbers.stream().reduce(<span class="number">0</span>, (a, b) -&gt; a + b);</div><div class="line"><span class="comment">// 代码更简洁</span></div><div class="line"><span class="keyword">int</span> sum = numbers.stream().reduce(<span class="number">0</span>, Integer::sum);</div><div class="line"><span class="comment">// Optional用于流中没有元素的情况</span></div><div class="line">Optional&lt;Integer&gt; sum = numbers.stream().reduce((a, b) -&gt; (a + b));</div></pre></td></tr></table></figure>
+<p><strong>最大值</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">numbers.stream().reduce(<span class="number">0</span>, Integer::max);</div></pre></td></tr></table></figure>
+<p><strong>最小值</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">numbers.stream().reduce(<span class="number">0</span>, Integer::min);</div></pre></td></tr></table></figure>
+<h4 id="流类型"><a href="#流类型" class="headerlink" title="流类型"></a>流类型</h4><blockquote>
+<p>数值流、多种来源流(文件、数组)、无限流</p>
+</blockquote>
+<h5 id="数值流"><a href="#数值流" class="headerlink" title="数值流"></a>数值流</h5><blockquote>
+<p>避免暗含的装箱成本</p>
+</blockquote>
+<ul>
+<li><code>IntStream</code>：<code>mapToInt</code>、<code>OptionalInt</code></li>
+<li><code>DoubleStream</code>：<code>mapToDouble</code>、<code>OptionalDouble</code></li>
+<li><code>LongStream</code>：<code>mapToLong</code>、<code>OptionalLong</code></li>
+</ul>
+<blockquote>
+<p>数值流转换为一般流可用<code>boxed()</code>方法</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Stream&lt;Integer&gt; stream = intStream.boxed();</div></pre></td></tr></table></figure>
+<p><strong>数值范围</strong></p>
+<ul>
+<li>可用于<code>IntStream</code>和<code>LongStream</code><ul>
+<li><code>range</code>：不包含结束值</li>
+<li><code>rangeClosed</code>：包含结束值</li>
+</ul>
+</li>
+</ul>
+<h5 id="多种来源流-文件、数组"><a href="#多种来源流-文件、数组" class="headerlink" title="多种来源流(文件、数组)"></a>多种来源流(文件、数组)</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 创建流</span></div><div class="line">Stream&lt;String&gt; stream = Stream.of(<span class="string">"Java"</span>, <span class="string">"Lambdas"</span>);</div><div class="line"></div><div class="line"><span class="comment">// 创建空流</span></div><div class="line">Stream&lt;String&gt; stream = Stream.empty();</div><div class="line"></div><div class="line"><span class="comment">// 数组创建流</span></div><div class="line"><span class="keyword">int</span>[] numbers = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;</div><div class="line"><span class="keyword">int</span> sum = Arrays.stream(numbers).sum();</div><div class="line"></div><div class="line"><span class="comment">// 由文件创建流</span></div><div class="line"><span class="keyword">long</span> uniqueWords = <span class="number">0</span>;</div><div class="line"><span class="keyword">try</span> (Stream&lt;String&gt; lines = Files.lines(Paths.get(<span class="string">"data.txt"</span>), Charset.defaultCharset()))&#123;</div><div class="line">    uniqueWords = lines.flatMap(line -&gt; Arrays.stream(line.split(<span class="string">""</span>))).distinct().count();</div><div class="line">&#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h5 id="无限流"><a href="#无限流" class="headerlink" title="无限流"></a>无限流</h5><ul>
+<li><code>Stream.iterate</code><ul>
+<li>需要依次生成一系列值<ul>
+<li>斐波那契数列</li>
+</ul>
+</li>
+<li>对象无可变状态</li>
+</ul>
+</li>
+</ul>
+<p><strong>应该使用limit(n)来对流加以限制，防止一直计算</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Stream.iterate(<span class="number">0</span>, n -&gt; n + <span class="number">2</span>)</div><div class="line">      .limit(<span class="number">10</span>)</div><div class="line">      .forEach(System.out::println);</div></pre></td></tr></table></figure>
+<ul>
+<li><code>Stream.generate</code><ul>
+<li>按需生成</li>
+<li>对象有可变的状态</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Stream.generate(Math::random)</div><div class="line">         .limit(<span class="number">5</span>)</div><div class="line">         .forEach(System.out::println);</div></pre></td></tr></table></figure>
+<h4 id="收集数据"><a href="#收集数据" class="headerlink" title="收集数据"></a>收集数据</h4><h5 id="区分"><a href="#区分" class="headerlink" title="区分"></a>区分</h5><ul>
+<li>Collection<ul>
+<li>Java集合的祖先接口</li>
+</ul>
+</li>
+<li>Collections<ul>
+<li><code>java.util</code>包下的工具类</li>
+<li>内置各种处理集合的静态方法</li>
+</ul>
+</li>
+<li>Collector<ul>
+<li>接口</li>
+<li>创建常见常见收集器实例<ul>
+<li><code>Collectors.counting()</code>：计数</li>
+<li><code>Collectors.maxBy()</code>：求最大</li>
+<li><code>Collectors.minBy()</code>：求最小</li>
+<li><code>Collectors.summingInt()</code>：汇总</li>
+<li><code>Collectors.averaginInt()</code>：求平均值</li>
+<li><code>Collectors.joining()</code>：拼接字符串</li>
+<li><code>Collectors.reducing(startValue, lambda, BinaryOperator)</code>：规约</li>
+<li><code>Collectors.groupingBy(lambda)</code>：分组</li>
+<li><code>Collectors.partitioningBy(lambda)</code>：分区</li>
+</ul>
+</li>
+<li>功能<ul>
+<li>将流元素规约和汇总为一个值</li>
+<li>元素分组</li>
+<li>元素分区</li>
+</ul>
+</li>
+<li><code>Collectors.toList()</code></li>
+</ul>
+</li>
+<li>collect<ul>
+<li><code>java.util.stream.Stream#collec</code></li>
+<li>负责收集流</li>
+<li>适合表达可变容器上的规约</li>
+</ul>
+</li>
+<li>Collections<ul>
+<li>集合类的工具类<ul>
+<li>排序</li>
+<li>搜索</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>Optional<ul>
+<li>isPresent()：包含值的时候返回true，否则返回false</li>
+<li>get()：在值存在时返回，否则抛出一个<code>NoSuchElement</code>异常</li>
+<li>orElse(T other)：会在值存在时返回，否则返回一个默认值</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>处理流的方式分为惰性求值和及早求值，对流的处理通常包括一系列的惰性求值和一个及早求值，流遇到及早求值时，才会真正的遍历和执行</li>
+<li>函数式编程时，函数应该是没有副作用的，对象不应该被修改，如果需要修改对象，则采用map方法</li>
+</ul>
+
+      
+    
+    </div>
+    
+      
+  <div class="post-reward">
+    <span class="reward-btn" id="reward-btn">点这里</span>
+    <div class="reward-wrapper syuanpi" id="reward-wrapper" style="display:none;">
+      
+      <div class="reward-item reward-alipay">
+        <img src="https://wx3.sinaimg.cn/mw690/8c564d2aly1ftkt83thjlj20o60skjzn.jpg">
+      </div>
+      
+    </div>
+  </div>
+
+
+      
+    
+  </article>
+  
+    
+  <nav class="article-page">
+    
+    
+      <a href="/JVM/callMethod.html" id="art-right" class="art-right">
+        <span class="prev-title"> 
+          方法调用<i class="iconfont icon-right"></i>  
+        </span>
+      </a>
+    
+  </nav>
+
+    
+  <i id="com-switch" class="iconfont icon-more jumping-in long infinite" style="font-size:24px;display:block;text-align:center;transform:rotate(180deg);"></i>
+  <div class="post-comments" id="post-comments" style="display: block;margin: auto 16px;">
+    
+<!-- Gitment Comments -->
+<div id="gitment"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  owner: "super2bai",
+  repo: 'comment',
+  oauth: {
+    client_id: '37f2293730b41dcb5276',
+    client_secret: 'dbab4955840d4cbc88f1563be04ab676662194e5',
+  },
+})
+gitment.render('gitment')
+</script>
+
+    
+    
+
+  </div>
+
+
+  
+  
+    
+  
+  <aside class="post-toc">
+    <span class="title" id="toc-switch"><span>文章导航</span></span>
+    <div class="toc-inner syuanpi back-1" style="display:none;">
+      <li class="title-link"><a href="javascript:;" class="toTop">Java8-Stream</a></li>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Stream流"><span class="toc-text">Stream流</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#优点"><span class="toc-text">优点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#缺点"><span class="toc-text">缺点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#与集合对比"><span class="toc-text">与集合对比</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#操作"><span class="toc-text">操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用"><span class="toc-text">使用</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#筛选和切片"><span class="toc-text">筛选和切片</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#映射"><span class="toc-text">映射</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#查找和匹配"><span class="toc-text">查找和匹配</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#规约"><span class="toc-text">规约</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#流类型"><span class="toc-text">流类型</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#数值流"><span class="toc-text">数值流</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#多种来源流-文件、数组"><span class="toc-text">多种来源流(文件、数组)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#无限流"><span class="toc-text">无限流</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#收集数据"><span class="toc-text">收集数据</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#区分"><span class="toc-text">区分</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </aside>
+
+
+
+  
+
+
+        </div>
+      </main>
+
+      <footer class="footer syuanpi fadeIn" id="footer">
+  <hr>
+  <div class="footer-wrapper">
+    <div class="left">
+      <div class="contact-icon">
+    
+    
+    
+    
+    
+    
+    
+    
+        
+            <a href="https://github.com/super2bai" class="iconfont icon-github" title="github"></a>
+        
+        
+        
+        
+        
+        
+        
+    
+</div>
+    </div>
+    <div class="right">
+      <div class="copyright">
+    <div class="info">
+        <span>&copy;</span>
+        <span>2017 ~ 2018</span>
+        <span>❤</span>
+        <span>super2bai</span>
+    </div>
+    <div class="theme">
+        <span>
+            动力来源于
+            <a href="http://hexo.io/" target="_blank">Hexo </a>
+        </span>
+        <span>
+            主题
+            <a href="https://github.com/ColMugX/hexo-theme-Nlvi"> Nlvi </a>
+        </span>
+    </div>
+    
+    <div class="visit_count">
+        <i class="iconfont icon-visit"></i>
+        <span id="busuanzi_value_site_uv"></span>
+        <i class="iconfont icon-people"></i>
+        <span id="busuanzi_value_site_pv"></span>
+    </div>
+    
+</div>
+
+    </div>
+  </div>
+</footer>
+    </div>
+  </div>
+  <script src="/script/lib/jquery/jquery-3.2.1.min.js"></script>
+
+
+  <script src="/script/lib/lightbox/js/lightbox.min.js"></script>
+
+
+
+
+
+
+
+
+<script src="/script/src/nlvi.js"></script>
+
+  <script src="/script/scheme/banderole.js"></script>
+
+<script src="/script/bootstarp.js"></script>
+
+
+<div class="backtop syuanpi melt toTop" id="backtop">
+    <i class="iconfont icon-up"></i>
+    <span style="text-align:center;font-family:Georgia;"><span style="font-family:Georgia;" id="scrollpercent">1</span>%</span>
+</div>
+
+
+
+</body>
+</html>
