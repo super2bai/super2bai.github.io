@@ -76,11 +76,9 @@
 
 
 
-  <title>
-  
-    归档 · 贰白
-  
-</title>
+  <meta name="keywords" content="concurrent, Nlvi" />
+
+  <title> Volatile · 贰白 </title>
 </head>
 <body>
   <div class="progress">
@@ -243,81 +241,220 @@
         <div class="main-wrapper">
           
     
-    <div class="archive syuanpi fadeInUp" id="archive">
-        
-            <h1 class="archive-title">Total</h1>
-            <span class="archive-num">一共有 85 篇文章</span>
-        
-        <div class="archive-list">
-            <ul>
-        
+  
+  <article class="
+  post
+   is_post 
+  ">
+    <header class="post-header">
+      <div class="post-time syuanpi fadeInUpShort back-1">
+        <div class="post-time-wrapper">
+          <span>2018-11-04</span>
+          
             
-                
-                
-                
-                    
-                     
-                        <h2 class="archive-year"> 2018 </h2>
-                    
-                
+              <span class="post-category"><a href="/categories/concurrent/">concurrent</a></span>
             
+          
+          
             
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    07-24
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/JVM/tool.html">JDK的可视化工具</a>
-                </span>
-            </li>
-
-        
+              <aside class="post-tags syuanpi fadeInUpShort back-3">
+              
+                <a href="/tags/concurrent/">concurrent</a>
+              
+              </aside>
             
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    07-23
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/deploy/Tomcat.html">同一个Tomcat多端口多项目部署</a>
-                </span>
-            </li>
-
-        
-            
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    07-16
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/Docker/start.html">Docker入门</a>
-                </span>
-            </li>
-
-        
-            </ul>
+          
         </div>
+      </div>
+      <h1 class="post-title syuanpi fadeInUpShort back-2">
+        
+          Volatile
+        
+      </h1>
+    </header>
+    <div class="post-content syuanpi fadeInUpShort back-3">
+      
+        <a id="more"></a>
+<blockquote>
+<p><code>volatile</code>时轻量级的<code>sychronize</code>，在多处理器开发中保证了<strong>共享变量</strong>的可见性。</p>
+<p>当一个线程修改一个共享变量时，另外一个线程能读到这个修改的值。</p>
+<p>如果<code>volatile</code>使用恰当，比<code>sychronized</code>的使用和执行成本更低，因为它不会引起线程上下文的切换和调度。</p>
+</blockquote>
+<h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>Java语言允许线程访问共享变量，为了确保共享变量能被准确和一致地更新，线程应该确保通过<strong>排他锁</strong>单独获取这个变量</p>
+<p>线程内存模型确保所有线程看到这个变量的值是一致的</p>
+<p><strong>相关CPU术语</strong></p>
+<table>
+<thead>
+<tr>
+<th>术语</th>
+<th>英文</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>内存屏障</td>
+<td>memory barriers</td>
+<td>一组处理器指令，实现对内存操作的顺序限制</td>
+</tr>
+<tr>
+<td>缓存行</td>
+<td>cache line</td>
+<td>CPU高速缓存中可以分配的最小存储单位。处理器填写缓存行时会加载整个缓存行，现代CPU需要执行几百次CPU指令</td>
+</tr>
+<tr>
+<td>原子操作</td>
+<td>atomic operations</td>
+<td>不可中断的一个或一系列操作</td>
+</tr>
+<tr>
+<td>缓存填充</td>
+<td>cache line fill</td>
+<td>当处理器识别到从内存中读取操作数是可缓存的，处理器读取整个高速缓存行到适当的缓存(L1,L2,L3或所有)</td>
+</tr>
+<tr>
+<td>缓存命中</td>
+<td>cache hit</td>
+<td>如果进行高速缓存行填充操作的内存位置仍然是下次处理器访问的地址时，处理器从缓存中读取操作数，而不是从内存读取</td>
+</tr>
+<tr>
+<td>写命中</td>
+<td>write hit</td>
+<td>当处理器将操作数写回道一个内存缓存的区域时，它首先会检查这个缓存的内存地址是否在缓存行中，如果存在，则处理器将这个操作数写回到缓存，而不是内存</td>
+</tr>
+<tr>
+<td>写缺失</td>
+<td>write misses the  cache</td>
+<td>一个有效的缓存行被写入到不存在的内存区域</td>
+</tr>
+</tbody>
+</table>
+<h3 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h3><ul>
+<li>处理器保证原子操作有两种机制<ul>
+<li>总线锁定</li>
+<li>缓存一致性<ul>
+<li>当某块CPU对缓存中的数据进行了操作之后，就通知其它CPU放弃存储在它们内部的缓存，或者从主内存中重新读取</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>有<code>volatile</code>修饰的共享变量进行写操作时，JVM会向处理器发送一条<code>Lock</code>前缀的指令，在多处理器下，为了保证各个处理器的缓存是一致的，就会实现缓存一致性协议，每个处理器通过嗅探在总线上传播的数据来检查缓存的值是不是过期了，当处理器发现缓存行对应的内存地址被修改，就会将当前处理器的缓存行设置成无效状态，当处理器对这个数据进行修改时，会重新从系统内存中把数据读到处理器缓存里。</p>
+<ul>
+<li><p>Lock前缀的指令在多核处理器下的作用</p>
+<ul>
+<li>将当前处理器缓存行的数据写回到系统内存<ul>
+<li>Intel486和Pentium处理器，处理器可以独占任何共享内存，锁住总线，导致其它CPU不能访问总线，也就不能访问系统内存</li>
+<li>P6和目前的处理器中，会锁定这块内存区域的缓存并回写到内存，并使用缓存一致性机制来确保修改的原子性，此操作被称为“缓存锁定”，缓存一致性机制会阻止同时修改由两个以上处理器缓存的内存区域数据</li>
+</ul>
+</li>
+<li>这个写回内存的操作会使在其它CPU里缓存了该内存地址的数据无效<ul>
+<li>IA-32和Intel 64处理器使用MESI控制协议去维护内部缓存和其它处理器缓存的一致性，能够嗅探其它处理器访问系统内存和它们的内部缓存，通过嗅探一个处理器来检测其它处理器打算写内存地址，而改地址处于共享状态，那么正在嗅探的处理器使它的缓存行无效，在下次访问相同内存地址时，强制执行缓存行填充</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><a href="https://en.wikipedia.org/wiki/MESI_protocol" target="_blank" rel="external">MESI</a>：也称伊利诺斯协议(伊利诺斯州立大学提出)，是一种广泛使用的支持写回策略的缓存一致性协议。分别对应缓存的4种状态：Modified修改、Exclusive独占、Shared共享、Invalid无效。</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h3><p>对于经常要写入缓存的操作，考虑到缓存锁会影响写入的效率。</p>
+<p>对于i7，酷睿等处理器，高速缓存行是64字节，不支持部分填充缓存行，这也就意味着，当队列大小不足64字节的时候(引用结点)，这个时候，有可能会把头结点和尾结点读取到同一个缓存行中，那么当一个处理器锁定缓存行之后，其他处理器进行入队和出队操作的时候，就必须排队等待，这就影响了程序的执行效率，这个时候，就有人将队列的结点增加空属性来修改成64字节。这就可以使得你在操作某个结点的时候，其他处理器不需要排队等待缓存锁的释放。</p>
+<ul>
+<li>以下场景不适合使用<ul>
+<li>缓存行非64字节宽的处理器<ul>
+<li>P6系列和奔腾处理器，L1和L2高速缓存行时32字节宽</li>
+</ul>
+</li>
+<li>共享变量不会被频繁写<ul>
+<li>因为使用追加字节的方式需要处理器读取更多的字节到高速缓冲区，本身会带来性能消耗，如果共享变量不会被频繁写，锁的几率也就很小，也就没有必要通过追加字节的方式来避免相互锁定</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h3><p>Doug lea在对LinkedTransferQueue的<a href="http://gee.cs.oswego.edu/cgi-bin/viewcvs.cgi/jsr166/src/main/java/util/concurrent/LinkedTransferQueue.java?revision=1.7&amp;view=markup" target="_blank" rel="external">JSR 166 - 1.7修正</a>中使用填充字节的方式，<a href="http://gee.cs.oswego.edu/cgi-bin/viewcvs.cgi/jsr166/src/main/java/util/concurrent/LinkedTransferQueue.java?revision=1.8&amp;view=markup" target="_blank" rel="external">JSR 166 - 1.8</a>中就取消了这种方式，目前还不敢肯定的说出变化的原因，希望大佬指教，super2bai@gmail.com</p>
+<ul>
+<li><p><a href="http://gee.cs.oswego.edu/cgi-bin/viewcvs.cgi/jsr166/src/main/java/util/concurrent/LinkedTransferQueue.java?r1=1.7&amp;r2=1.8" target="_blank" rel="external">1.7&amp;1.8比较记录</a></p>
+</li>
+<li><p><a href="http://gee.cs.oswego.edu/cgi-bin/viewcvs.cgi/jsr166/src/main/java/util/concurrent/LinkedTransferQueue.java?view=log" target="_blank" rel="external">LinkedTransferQueue变更记录</a></p>
+</li>
+</ul>
+
+      
+    
     </div>
     
-  <nav class="pagination">
-      <span class="page-number current">1</span>
+      
+  <div class="post-reward">
+    <span class="reward-btn" id="reward-btn">点这里</span>
+    <div class="reward-wrapper syuanpi" id="reward-wrapper" style="display:none;">
+      
+      <div class="reward-item reward-alipay">
+        <img src="https://wx3.sinaimg.cn/mw690/8c564d2aly1ftkt83thjlj20o60skjzn.jpg">
+      </div>
+      
+    </div>
+  </div>
+
+
+      
+    
+  </article>
+  
+    
+  <nav class="article-page">
+    
+    
+      <a href="/concurrent/challenge.html" id="art-right" class="art-right">
+        <span class="prev-title"> 
+          并发编程的挑战<i class="iconfont icon-right"></i>  
+        </span>
+      </a>
+    
   </nav>
 
+    
+  <i id="com-switch" class="iconfont icon-more jumping-in long infinite" style="font-size:24px;display:block;text-align:center;transform:rotate(180deg);"></i>
+  <div class="post-comments" id="post-comments" style="display: block;margin: auto 16px;">
+    
+<!-- Gitment Comments -->
+<div id="gitment"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  owner: "super2bai",
+  repo: 'comment',
+  oauth: {
+    client_id: '37f2293730b41dcb5276',
+    client_secret: 'dbab4955840d4cbc88f1563be04ab676662194e5',
+  },
+})
+gitment.render('gitment')
+</script>
+
+    
+    
+
+  </div>
+
+
+  
+  
+    
+  
+  <aside class="post-toc">
+    <span class="title" id="toc-switch"><span>文章导航</span></span>
+    <div class="toc-inner syuanpi back-1" style="display:none;">
+      <li class="title-link"><a href="javascript:;" class="toTop">Volatile</a></li>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义"><span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现原理"><span class="toc-text">实现原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#优化"><span class="toc-text">优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#备注"><span class="toc-text">备注</span></a></li></ol>
+    </div>
+  </aside>
+
+
+
+  
 
 
         </div>
