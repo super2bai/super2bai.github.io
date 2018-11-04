@@ -484,26 +484,6 @@
 
     
   <url>
-    <loc>https://super2bai.github.io/Eclipse/plugin.html</loc>
-    <lastmod>2018-08-08T09:15:39.428Z</lastmod>
-    <data>
-        <display>
-        <title>获取Eclipse启动耗时</title>
-        <pubTime>2018-08-07T14:13:06.000Z</pubTime>
-        
-        <tag>Eclipse</tag>
-         
-         
-           
-             
-              <breadCrumb title="Eclipse" url="https://super2bai.github.io/categories/Eclipse/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://super2bai.github.io/JVM/problem.html</loc>
     <lastmod>2018-08-06T15:45:21.823Z</lastmod>
     <data>
@@ -657,26 +637,6 @@
            
              
               <breadCrumb title="JVM" url="https://super2bai.github.io/categories/JVM/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://super2bai.github.io/Eclipse/Maven.html</loc>
-    <lastmod>2018-06-06T04:04:28.930Z</lastmod>
-    <data>
-        <display>
-        <title>Eclipse和Maven那点事儿</title>
-        <pubTime>2018-06-06T03:57:27.000Z</pubTime>
-        
-        <tag>Eclipse</tag>
-         
-         
-           
-             
-              <breadCrumb title="Eclipse" url="https://super2bai.github.io/categories/Eclipse/"/>
           
         </display>
     </data>
