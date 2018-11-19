@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://super2bai.github.io/concurrent/synchronized.html</loc>
+    
+    <lastmod>2018-11-19T14:18:20.866Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://super2bai.github.io/concurrent/volatile.html</loc>
     
     <lastmod>2018-11-04T14:34:21.086Z</lastmod>

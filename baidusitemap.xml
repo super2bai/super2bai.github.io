@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>https://super2bai.github.io/concurrent/synchronized.html</loc>
+    <lastmod>2018-11-19T14:18:20.866Z</lastmod>
+    <data>
+        <display>
+        <title>synchronized原理与应用</title>
+        <pubTime>2018-11-08T06:58:10.000Z</pubTime>
+        
+        <tag>concurrent</tag>
+         
+         
+           
+             
+              <breadCrumb title="concurrent" url="https://super2bai.github.io/categories/concurrent/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://super2bai.github.io/concurrent/volatile.html</loc>
     <lastmod>2018-11-04T14:34:21.086Z</lastmod>
     <data>

@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <link rel="stylesheet" href="/style/style.css">
+<script>
+  var nlviconfig = {
+    title: "贰白",
+    author: "super2bai",
+    baseUrl: "/",
+    theme: {
+      scheme: "banderole",
+      lightbox: true,
+      animate: true,
+      search: false,
+      friends: false,
+      reward: true,
+      lazy: false
+    }
+  }
+</script>
+
+
+
+
+    <link rel="stylesheet" href="/script/lib/lightbox/css/lightbox.min.css">
+
+
+
+
+    <link rel="stylesheet" href="/syuanpi/syuanpi.min.css">
+
+
+
+
+    <link rel="icon" href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-98059014-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-116557847-1');
+</script>
+
+
+
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="browsermode" content="application">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="贰白">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="msapplication-navbutton-color" content="#666666">
+<meta name= "format-detection" content="telephone=no" />
+<meta name="keywords" content="nlvi, Nlvi" />
+
+  <link rel="apple-touch-icon"  sizes="72x72"  href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+  <link rel="apple-touch-icon-precomposed"  sizes="72x72"  href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+
+
+  <meta name="subtitle" content="苦于探索，全是未知">
+
+
+  <meta name="description" content="苦于探索，全是未知">
+
+
+
+  <meta name="keywords" content="concurrent, Nlvi" />
+
+  <title> synchronized原理与应用 · 贰白 </title>
+</head>
+<body>
+  <div class="progress">
+  <div class="progress-inner"></div>
+</div>
+  
+  
+    <div class="tagcloud-mask"></div>  
+<div class="tagcloud" id="tagcloud">
+  <div class="tagcloud-inner">
+    <a href="/tags/Docker/" style="font-size: 14px;">Docker</a> <a href="/tags/Dubbo/" style="font-size: 14px;">Dubbo</a> <a href="/tags/GHPages/" style="font-size: 14px;">GHPages</a> <a href="/tags/IO/" style="font-size: 14px;">IO</a> <a href="/tags/JDK/" style="font-size: 14px;">JDK</a> <a href="/tags/JVM/" style="font-size: 14px;">JVM</a> <a href="/tags/Linux/" style="font-size: 14px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 14px;">MySQL</a> <a href="/tags/Python/" style="font-size: 14px;">Python</a> <a href="/tags/Spring/" style="font-size: 14px;">Spring</a> <a href="/tags/Zookeeper/" style="font-size: 14px;">Zookeeper</a> <a href="/tags/concurrent/" style="font-size: 14px;">concurrent</a> <a href="/tags/jmeter/" style="font-size: 14px;">jmeter</a> <a href="/tags/mac/" style="font-size: 14px;">mac</a> <a href="/tags/walkup/" style="font-size: 14px;">walkup</a> <a href="/tags/分布式/" style="font-size: 14px;">分布式</a> <a href="/tags/工具/" style="font-size: 14px;">工具</a> <a href="/tags/旅游/" style="font-size: 14px;">旅游</a> <a href="/tags/汇编/" style="font-size: 14px;">汇编</a> <a href="/tags/编码/" style="font-size: 14px;">编码</a>
+  </div>
+</div>  
+  
+
+  <div class="container">
+
+    <header class="header" id="header">
+  <div class="header-wrapper">
+    <div class="logo">
+  <div class="logo-inner syuanpi tvIn">
+    <span><a href="/">贰白</a></span>
+    
+      <span id="subtitle">苦于探索，全是未知</span>
+    
+  </div>
+</div>
+    <nav class="main-nav">
+  
+  <ul class="main-nav-list syuanpi tvIn">
+  
+  
+    
+      
+    
+    <li class="menu-item">
+      <a href="/" id="article">
+        <span class="base-name">文章</span>
+        
+          <span class="menu-item-label">article</span>
+        
+      </a>
+    </li>
+  
+    
+      
+    
+    <li class="menu-item">
+      <a href="/archives" id="archives">
+        <span class="base-name">归档</span>
+        
+          <span class="menu-item-label">archives</span>
+        
+      </a>
+    </li>
+  
+    
+      
+    
+    <li class="menu-item">
+      <a href="javascript:;" id="tags">
+        <span class="base-name">标签</span>
+        
+          <span class="menu-item-label">tags</span>
+        
+      </a>
+    </li>
+  
+    
+      
+    
+    <li class="menu-item">
+      <a href="/about" id="about">
+        <span class="base-name">关于</span>
+        
+          <span class="menu-item-label">about</span>
+        
+      </a>
+    </li>
+  
+  </ul>
+  
+</nav>
+
+    
+    
+  </div>
+</header>
+<div class="mobile-header">
+  <div class="mobile-header-body">
+    <div class="mobile-header-list">
+      
+        
+            <div class="mobile-nav-item">
+                <a href="/">
+                    <span>文章</span>
+                    
+                        <span class="menu-item-label">article</span>
+                    
+                </a>
+            </div>
+        
+      
+        
+            <div class="mobile-nav-item">
+                <a href="/archives">
+                    <span>归档</span>
+                    
+                        <span class="menu-item-label">archives</span>
+                    
+                </a>
+            </div>
+        
+      
+        
+          <div class="mobile-nav-item inner-cloud">
+            <div class="mobile-nav-tag">
+              <a href="javascript:;" id="mobile-tags">
+                <span>标签</span>
+                
+                    <span class="menu-item-label">tags</span>
+                
+              </a>
+            </div>
+            <div class="mobile-nav-tagcloud">
+              <div class="mobile-tagcloud-inner">
+                <a href="/tags/Docker/" style="font-size: 14px;">Docker</a> <a href="/tags/Dubbo/" style="font-size: 14px;">Dubbo</a> <a href="/tags/GHPages/" style="font-size: 14px;">GHPages</a> <a href="/tags/IO/" style="font-size: 14px;">IO</a> <a href="/tags/JDK/" style="font-size: 14px;">JDK</a> <a href="/tags/JVM/" style="font-size: 14px;">JVM</a> <a href="/tags/Linux/" style="font-size: 14px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 14px;">MySQL</a> <a href="/tags/Python/" style="font-size: 14px;">Python</a> <a href="/tags/Spring/" style="font-size: 14px;">Spring</a> <a href="/tags/Zookeeper/" style="font-size: 14px;">Zookeeper</a> <a href="/tags/concurrent/" style="font-size: 14px;">concurrent</a> <a href="/tags/jmeter/" style="font-size: 14px;">jmeter</a> <a href="/tags/mac/" style="font-size: 14px;">mac</a> <a href="/tags/walkup/" style="font-size: 14px;">walkup</a> <a href="/tags/分布式/" style="font-size: 14px;">分布式</a> <a href="/tags/工具/" style="font-size: 14px;">工具</a> <a href="/tags/旅游/" style="font-size: 14px;">旅游</a> <a href="/tags/汇编/" style="font-size: 14px;">汇编</a> <a href="/tags/编码/" style="font-size: 14px;">编码</a>
+              </div>
+            </div>
+          </div>
+        
+      
+        
+            <div class="mobile-nav-item">
+                <a href="/about">
+                    <span>关于</span>
+                    
+                        <span class="menu-item-label">about</span>
+                    
+                </a>
+            </div>
+        
+      
+    </div>
+  </div>
+  <div class="mobile-header-nav">
+    <div class="mobile-header-item" id="mobile-left">
+      <div class="header-menu-item">
+        <span class="header-menu-line"></span>
+      </div>
+    </div>
+    <h1 class="mobile-header-title">
+      <a href="/">贰白</a>
+    </h1>
+    <div class="mobile-header-item"></div>
+  </div>
+</div>
+    <div class="container-inner">
+      <main class="main" id="main">
+        <div class="main-wrapper">
+          
+    
+  
+  <article class="
+  post
+   is_post 
+  ">
+    <header class="post-header">
+      <div class="post-time syuanpi fadeInUpShort back-1">
+        <div class="post-time-wrapper">
+          <span>2018-11-08</span>
+          
+            
+              <span class="post-category"><a href="/categories/concurrent/">concurrent</a></span>
+            
+          
+          
+            
+              <aside class="post-tags syuanpi fadeInUpShort back-3">
+              
+                <a href="/tags/concurrent/">concurrent</a>
+              
+              </aside>
+            
+          
+        </div>
+      </div>
+      <h1 class="post-title syuanpi fadeInUpShort back-2">
+        
+          synchronized原理与应用
+        
+      </h1>
+    </header>
+    <div class="post-content syuanpi fadeInUpShort back-3">
+      
+        <p>偏向锁、轻量锁和锁的存储结构</p>
+<a id="more"></a>
+<ul>
+<li>Sychronized实现同步的基础，也就是Java中的每一个对象都可以作为锁<ul>
+<li>同步方法，锁是当前实例对象</li>
+<li>静态同步方法，锁是当前类的Class对象</li>
+<li>同步方法块，锁是sychronized括号里配置的对象</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>Synchonized在JVM里的实现原理<ul>
+<li>基于进入和退出Monitor对象来实现方法同步和代码块同步<ul>
+<li>代码块同步：monitorenter、monitorexit</li>
+<li>方法同步：JVM规范未明确，也可以使用上述两个命令实现</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>monitorenter指令是在变异后插入到同步代码块的开始位置</p>
+<p>monitorexit是插入到方法结束处和异常处</p>
+<p>JVM要保证每个monitorenter必须有对应的monitorexit与之配对</p>
+<p>任何对象都有一个monitor与之关联，当且只有一个monitor被持有后，它将处于锁定状态。</p>
+<p>线程执行到monitorenter指令时，将会尝试获取对象所对应的monitor的所有权，即尝试获取对象的所</p>
+</blockquote>
+<h3 id="对象头"><a href="#对象头" class="headerlink" title="对象头"></a>对象头</h3><blockquote>
+<p>sychronized存储在对象头里</p>
+<ul>
+<li>数组<ul>
+<li>3个字宽(word)存储对象头</li>
+</ul>
+</li>
+<li>非数组<ul>
+<li>2字宽存储对象头</li>
+</ul>
+</li>
+</ul>
+<p>字宽Word：定义位长度的单位，取决于计算机结构和操作系统。</p>
+<p>32位：1字宽为4字节，即32bit</p>
+<p>64位：1字宽8字节，即64bit</p>
+</blockquote>
+<h4 id="对象头长度"><a href="#对象头长度" class="headerlink" title="对象头长度"></a>对象头长度</h4><table>
+<thead>
+<tr>
+<th>长度</th>
+<th>内容</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>32/64bit</td>
+<td>Mark Word</td>
+<td>存储对象的hashCode、分代年龄和锁标记位</td>
+</tr>
+<tr>
+<td>32/64bit</td>
+<td>Class Metadata Address</td>
+<td>存储到对象类型数据的指针</td>
+</tr>
+<tr>
+<td>32/64bit</td>
+<td>Array Length</td>
+<td>数组的长度(如果当前是数组)</td>
+</tr>
+</tbody>
+</table>
+<h4 id="对象头的存储结构"><a href="#对象头的存储结构" class="headerlink" title="对象头的存储结构"></a>对象头的存储结构</h4><p><strong>32bit</strong></p>
+<table>
+<thead>
+<tr>
+<th>锁状态</th>
+<th>25bit</th>
+<th>4bit</th>
+<th>1bit是否是偏向锁</th>
+<th>2bit锁标识位</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>无锁状态</td>
+<td>对象的hashCode</td>
+<td>对象分代年龄</td>
+<td>0</td>
+<td>01</td>
+</tr>
+</tbody>
+</table>
+<p><strong>64bit</strong></p>
+<table>
+<thead>
+<tr>
+<th>锁状态</th>
+<th>25bit</th>
+<th>31bit</th>
+<th>1bit</th>
+<th>4bit</th>
+<th>1bit</th>
+<th>2bit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>锁状态</td>
+<td></td>
+<td></td>
+<td>cms_free</td>
+<td>分代年龄</td>
+<td>偏向锁</td>
+<td>锁标识位</td>
+</tr>
+<tr>
+<td>无锁</td>
+<td>unused</td>
+<td>hashCode</td>
+<td></td>
+<td></td>
+<td>0</td>
+<td>01</td>
+</tr>
+<tr>
+<td>偏向锁</td>
+<td>ThreadID(54bit)Epoch(2bit)</td>
+<td>同左</td>
+<td></td>
+<td></td>
+<td>1</td>
+<td>01</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Mark Word状态变化</strong></p>
+<p><img src="https://wx1.sinaimg.cn/mw690/8c564d2agy1fxcbziwwsrj21bm0940u3.jpg" alt=""></p>
+<h3 id="锁的升级与对比"><a href="#锁的升级与对比" class="headerlink" title="锁的升级与对比"></a>锁的升级与对比</h3><h4 id="偏向锁"><a href="#偏向锁" class="headerlink" title="偏向锁"></a>偏向锁</h4><blockquote>
+<p>JDK1.6+</p>
+<p>当一个线程访问同步块并获取锁时，会在对象头和栈帧中的锁记录里存储锁偏向的线程ID。</p>
+</blockquote>
+<h5 id="出现原因"><a href="#出现原因" class="headerlink" title="出现原因"></a>出现原因</h5><p>大多数情况下，锁不仅不存在多线程竞争，而且总是由同一线程多次获得，为了让线程获得锁的代价更低而引入</p>
+<h5 id="加锁"><a href="#加锁" class="headerlink" title="加锁"></a>加锁</h5><ul>
+<li>记录偏向锁的线程在进入和退出同步块时不需要进行CAS操作来加锁和解锁，只需要简单测试对象头的Mark Word里是否存储着指向当前线程的偏向锁。<ul>
+<li>测试成功：表示线程已经获得了锁</li>
+<li>测试失败：需要测试Mark Word中偏向锁的标识是否为1(表示当前是偏向锁)<ul>
+<li>无：使用CAS竞争锁</li>
+<li>有：尝试使用CAS将对象头的偏向锁指向当前线程</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="解锁"><a href="#解锁" class="headerlink" title="解锁"></a>解锁</h5><blockquote>
+<p>机制：等到竞争才释放</p>
+<p>时机：全局安全点(在这个时间点上没有正在执行的字节码)</p>
+</blockquote>
+<ul>
+<li>暂停拥有偏向锁的线程</li>
+<li>检查持有偏向锁的线程是否活着<ul>
+<li>是：拥有偏向锁的栈会被执行，便利偏向对象的锁记录，栈中的锁记录和对象头的Mark Word要么重新偏向于其它线程，要么恢复到无锁或者标记对象不适合作为偏向锁</li>
+<li>否：将对象头设置成无锁状态</li>
+</ul>
+</li>
+<li>唤醒暂停的线程</li>
+</ul>
+<h5 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">-XX:-UseBiastedLocking:启用/禁用(禁用后，默认进入轻量级锁状态)</div><div class="line">-XX:BiasedLockingStartupDelay=0:关闭启动延迟</div></pre></td></tr></table></figure>
+<h4 id="轻量级锁"><a href="#轻量级锁" class="headerlink" title="轻量级锁"></a>轻量级锁</h4><h5 id="加锁-1"><a href="#加锁-1" class="headerlink" title="加锁"></a>加锁</h5><ul>
+<li>线程执行同步块之前，JVM会在当前线程的栈帧中创建存储锁记录的空间，并将对象头重的Mark Word复制到锁记录中，也就是<code>Displaced Mark Word</code></li>
+<li>线程尝试使用CAS将对象头中的Mark Word替换为指向锁记录的指针<ul>
+<li>成功：当前线程获得锁</li>
+<li>失败：存在与其它线程竞争锁，当前线程尝试使用自旋来获取锁</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>自旋会消耗CPU，为了避免无用的自旋(获得锁的线程阻塞住了)，一旦锁升级成重量级锁，就不会再恢复到轻量级锁状态。</p>
+</blockquote>
+<h5 id="解锁-1"><a href="#解锁-1" class="headerlink" title="解锁"></a>解锁</h5><ul>
+<li>使用原子的CAS操作将<code>Displaced Mark Word</code>替换回到对象头<ul>
+<li>成功：表示没有竞争发生</li>
+<li>失败：当前锁存在竞争，锁就会膨胀成重量级锁</li>
+</ul>
+</li>
+</ul>
+<h4 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h4><table>
+<thead>
+<tr>
+<th>锁</th>
+<th>优点</th>
+<th>缺点</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>偏向锁</td>
+<td>加锁和解锁不需要额外消耗(和执行非同步方法相比仅存在纳秒级的差距)</td>
+<td>如果线程间存在锁竞争，会带来额外的锁撤销的消耗</td>
+<td>只有一个线程访问同步块</td>
+</tr>
+<tr>
+<td>轻量级锁</td>
+<td>竞争的线程不会阻塞，提高了程序的响应速度</td>
+<td>如果始终得不到锁竞争的线程，使用自旋会消耗CPU</td>
+<td>追求响应时间，同步块执行速度非常快</td>
+</tr>
+<tr>
+<td>重量级锁</td>
+<td>线程竞争不使用自旋，不会消耗CPU</td>
+<td>线程阻塞，响应时间缓慢</td>
+<td>追求吞吐量，同步块执行速度较长</td>
+</tr>
+</tbody>
+</table>
+<h3 id="原子操作的实现原理"><a href="#原子操作的实现原理" class="headerlink" title="原子操作的实现原理"></a>原子操作的实现原理</h3><blockquote>
+<p>原子atomic：不能被进一步分割的最小粒子</p>
+<p>原子操作atomic operation：不可被中断的一个或一系列操作</p>
+</blockquote>
+<h4 id="术语"><a href="#术语" class="headerlink" title="术语"></a>术语</h4><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>英文</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>缓存行</td>
+<td>Cache Line</td>
+<td>缓存的最小操作单位</td>
+</tr>
+<tr>
+<td>比较并交换</td>
+<td>Compare and Swap</td>
+<td>CAS操作需要输入两个数值，一个旧值(操作前的值)，和一个新值，比较旧值有无发生变化，没有发生变化才交换成新值，否则不交换</td>
+</tr>
+<tr>
+<td>CPU流水线</td>
+<td>CPU pipeline</td>
+<td>在CPU中由5~6个不同功能的电路单元组成一条指令处理流水线，然后将一条X86指令分成5~6步后再由这些电路单元分别执行，这样就能实现在一个CPU时钟周期完成一条指令，因此提高CPU的运算速度</td>
+</tr>
+<tr>
+<td>内存顺序冲突</td>
+<td>Memory order violation</td>
+<td>一般是由假共享引起的，假共享是指多个CPU同时修改同一个缓存行的不同部分而引起其中一个CPU的操作无效，这时CPU必须清空流水线</td>
+</tr>
+</tbody>
+</table>
+<h4 id="CPU实现"><a href="#CPU实现" class="headerlink" title="CPU实现"></a>CPU实现</h4><blockquote>
+<p>32位IA-32处理器使用基于对缓存加锁或总线加锁</p>
+<p>Pentium 6和最新的处理自动保证单处理器对<strong>同一个缓存行</strong>里进行16/32/64位的操作是原子的，但是复杂的操作不能自动保证其原子性(跨总线宽度、跨多个缓存行和跨页表的访问)，处理器提供<strong>总线锁定</strong>和<strong>缓存锁定</strong>两个机制来保证复杂处理的原子性。</p>
+</blockquote>
+<h5 id="总线锁"><a href="#总线锁" class="headerlink" title="总线锁"></a>总线锁</h5><blockquote>
+<p>使用处理器提供的一个<code>LOCK#</code>信号，当一个处理器在总线上输出此信号时，其它处理器的请求将被阻塞住，那么该处理器可以独占共享内存。</p>
+</blockquote>
+<h5 id="缓存锁"><a href="#缓存锁" class="headerlink" title="缓存锁"></a>缓存锁</h5><p>频繁使用的内存会缓存在处理器的L1、L2和L3高速缓存里。</p>
+<blockquote>
+<p>内存区域如果被缓存在处理器的缓存行中，并且在Lock操作期间被锁定，那么当它执行锁操作回写到内存时，处理器修改内部的内存地址，并允许它的缓存一致性机制来保证操作的原子性（缓存一致性机制会阻止同时修改由两个以上处理器缓存的内存区域数据，当其它处理器回写已被锁定的缓存行的数据时，会使缓存行无效）</p>
+</blockquote>
+<ul>
+<li>两种情况不会使用缓存锁<ul>
+<li>不能被缓存在处理器内部、操作跨多个缓存行时，处理器会调用总线锁定</li>
+<li>处理器不支持缓存锁定(Intel 486和Pentium)</li>
+</ul>
+</li>
+</ul>
+<h4 id="Java实现"><a href="#Java实现" class="headerlink" title="Java实现"></a>Java实现</h4><blockquote>
+<p>通过锁和循环CAS的方式来实现原子操作</p>
+</blockquote>
+<ul>
+<li>循环CAS实现原子操作<ul>
+<li>利用处理器的<code>CMPXCHG</code>指令</li>
+<li>自旋CAS实现的基本思路：循环进行CAS操作直到成功为止</li>
+</ul>
+</li>
+<li>CAS实现原子操作的三大问题<ul>
+<li>ABA：使用版本号<ul>
+<li>AtomicStampedReference：检查引用和标志</li>
+</ul>
+</li>
+<li>循环时间长开销大<ul>
+<li>如果JVM能支持处理器提供的<code>pause</code>指令，效率会有一定提升<ul>
+<li>延迟流水线执行指令，使CPU不会消耗过多的执行资源</li>
+<li>避免在退出循环的时候因内存顺序冲突而引起CPU流水线被清空，从而提高CPU的执行效率</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>只能保证一个共享变量的原子操作<ul>
+<li>循环CAS操作无法保证对多个共享变量的操作，除了锁以外，还可以将多个共享变量合并成一个共享变量来操作，Java 1.5，JDK提供了<code>AtomicReference</code>类来保证引用对象的原子性，就可以把多个变量放在一个对象里来进行CAS操作</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>使用锁机制保证原子操作<ul>
+<li>偏向锁、轻量级锁和互斥锁</li>
+<li>除了偏向锁，JVM实现锁的方式都用了循环CAS</li>
+</ul>
+</li>
+</ul>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://www.quora.com/What-is-the-difference-between-a-word-and-a-byte" target="_blank" rel="external">Quora-What is the difference between a word and a byte?</a></p>
+<p><a href="https://www.oracle.com/technetwork/java/biasedlocking-oopsla2006-wp-149958.pdf" target="_blank" rel="external">Oracle-Biased Locking</a></p>
+<h3 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h3><ul>
+<li>Markdown的表格真得很一言难尽</li>
+</ul>
+
+      
+    
+    </div>
+    
+      
+  <div class="post-reward">
+    <span class="reward-btn" id="reward-btn">点这里</span>
+    <div class="reward-wrapper syuanpi" id="reward-wrapper" style="display:none;">
+      
+      <div class="reward-item reward-alipay">
+        <img src="https://wx3.sinaimg.cn/mw690/8c564d2aly1ftkt83thjlj20o60skjzn.jpg">
+      </div>
+      
+    </div>
+  </div>
+
+
+      
+    
+  </article>
+  
+    
+  <nav class="article-page">
+    
+    
+      <a href="/concurrent/volatile.html" id="art-right" class="art-right">
+        <span class="prev-title"> 
+          Volatile<i class="iconfont icon-right"></i>  
+        </span>
+      </a>
+    
+  </nav>
+
+    
+  <i id="com-switch" class="iconfont icon-more jumping-in long infinite" style="font-size:24px;display:block;text-align:center;transform:rotate(180deg);"></i>
+  <div class="post-comments" id="post-comments" style="display: block;margin: auto 16px;">
+    
+<!-- Gitment Comments -->
+<div id="gitment"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  owner: "super2bai",
+  repo: 'comment',
+  oauth: {
+    client_id: '37f2293730b41dcb5276',
+    client_secret: 'dbab4955840d4cbc88f1563be04ab676662194e5',
+  },
+})
+gitment.render('gitment')
+</script>
+
+    
+    
+
+  </div>
+
+
+  
+  
+    
+  
+  <aside class="post-toc">
+    <span class="title" id="toc-switch"><span>文章导航</span></span>
+    <div class="toc-inner syuanpi back-1" style="display:none;">
+      <li class="title-link"><a href="javascript:;" class="toTop">synchronized原理与应用</a></li>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#对象头"><span class="toc-text">对象头</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#对象头长度"><span class="toc-text">对象头长度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#对象头的存储结构"><span class="toc-text">对象头的存储结构</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#锁的升级与对比"><span class="toc-text">锁的升级与对比</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#偏向锁"><span class="toc-text">偏向锁</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#出现原因"><span class="toc-text">出现原因</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#加锁"><span class="toc-text">加锁</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#解锁"><span class="toc-text">解锁</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#参数"><span class="toc-text">参数</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#轻量级锁"><span class="toc-text">轻量级锁</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#加锁-1"><span class="toc-text">加锁</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#解锁-1"><span class="toc-text">解锁</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#对比"><span class="toc-text">对比</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原子操作的实现原理"><span class="toc-text">原子操作的实现原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#术语"><span class="toc-text">术语</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CPU实现"><span class="toc-text">CPU实现</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#总线锁"><span class="toc-text">总线锁</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#缓存锁"><span class="toc-text">缓存锁</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Java实现"><span class="toc-text">Java实现</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考"><span class="toc-text">参考</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其它"><span class="toc-text">其它</span></a></li></ol>
+    </div>
+  </aside>
+
+
+
+  
+
+
+        </div>
+      </main>
+
+      <footer class="footer syuanpi fadeIn" id="footer">
+  <hr>
+  <div class="footer-wrapper">
+    <div class="left">
+      <div class="contact-icon">
+    
+    
+    
+    
+    
+    
+    
+    
+        
+            <a href="https://github.com/super2bai" class="iconfont icon-github" title="github"></a>
+        
+        
+        
+        
+        
+        
+        
+    
+</div>
+    </div>
+    <div class="right">
+      <div class="copyright">
+    <div class="info">
+        <span>&copy;</span>
+        <span>2017 ~ 2018</span>
+        <span>❤</span>
+        <span>super2bai</span>
+    </div>
+    <div class="theme">
+        <span>
+            动力来源于
+            <a href="http://hexo.io/" target="_blank">Hexo </a>
+        </span>
+        <span>
+            主题
+            <a href="https://github.com/ColMugX/hexo-theme-Nlvi"> Nlvi </a>
+        </span>
+    </div>
+    
+    <div class="visit_count">
+        <i class="iconfont icon-visit"></i>
+        <span id="busuanzi_value_site_uv"></span>
+        <i class="iconfont icon-people"></i>
+        <span id="busuanzi_value_site_pv"></span>
+    </div>
+    
+</div>
+
+    </div>
+  </div>
+</footer>
+    </div>
+  </div>
+  <script src="/script/lib/jquery/jquery-3.2.1.min.js"></script>
+
+
+  <script src="/script/lib/lightbox/js/lightbox.min.js"></script>
+
+
+
+
+
+
+
+
+<script src="/script/src/nlvi.js"></script>
+
+  <script src="/script/scheme/banderole.js"></script>
+
+<script src="/script/bootstarp.js"></script>
+
+
+<div class="backtop syuanpi melt toTop" id="backtop">
+    <i class="iconfont icon-up"></i>
+    <span style="text-align:center;font-family:Georgia;"><span style="font-family:Georgia;" id="scrollpercent">1</span>%</span>
+</div>
+
+
+
+</body>
+</html>
