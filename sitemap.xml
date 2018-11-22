@@ -2,30 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://super2bai.github.io/concurrent/synchronized.html</loc>
+    <loc>https://super2bai.github.io/concurrency/JMM.html</loc>
     
-    <lastmod>2018-11-19T14:18:20.866Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://super2bai.github.io/concurrent/volatile.html</loc>
-    
-    <lastmod>2018-11-04T14:34:21.086Z</lastmod>
+    <lastmod>2018-11-22T14:28:37.757Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://super2bai.github.io/concurrent/challenge.html</loc>
+    <loc>https://super2bai.github.io/concurrency/synchronized.html</loc>
     
-    <lastmod>2018-11-03T18:17:49.146Z</lastmod>
+    <lastmod>2018-11-19T14:26:46.480Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://super2bai.github.io/MySQL/null.html</loc>
+    <loc>https://super2bai.github.io/concurrency/volatile.html</loc>
     
-    <lastmod>2018-11-03T17:02:38.664Z</lastmod>
+    <lastmod>2018-11-19T14:26:34.247Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://super2bai.github.io/concurrency/challenge.html</loc>
+    
+    <lastmod>2018-11-19T14:26:13.121Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://super2bai.github.io/MySQL/sort.html</loc>
+    
+    <lastmod>2018-11-19T14:24:53.119Z</lastmod>
     
   </url>
   

@@ -57,6 +57,7 @@ Java相关
   * [ZAB协议](https://super2bai.github.io/zk/ZAB.html)
 * [JDK](https://super2bai.github.io/tags/JDK/)
   * [Mac切换JDK版本](https://super2bai.github.io/JDK/jdkVersion.html)
+  * [Java8-Stream](https://super2bai.github.io/JDK/stream.html)
 * [JVM](https://super2bai.github.io/tags/JVM/)
   * [Mac编译openJDK9](https://super2bai.github.io/JVM/build.html)
   * [内存区域](https://super2bai.github.io/JVM/memory.html)
@@ -82,6 +83,10 @@ Java相关
     * [类、父类和接口索引，字段表、方法表、属性表](https://super2bai.github.io/JVM/classDetail2.html)
   * [字节码指令](https://super2bai.github.io/JVM/bytecode.html)
   * [虚拟机类加载时机](https://super2bai.github.io/JVM/clzloadtime.html)
+* 并发
+  * [挑战](https://super2bai.github.io/concurrent/challenge.html)
+  * [Volatile](https://super2bai.github.io/concurrent/volatile.html)
+  * [Synchronized](https://super2bai.github.io/concurrent/synchronized.html)
 
 ---
 
@@ -139,6 +144,13 @@ IO相关
 部署相关
 
 * [Java Web部署到Windows的Tomcat](https://super2bai.github.io/deploy/windows.html)
+
+---
+
+数据库相关
+
+* [MySQL中Text与Varchar](https://super2bai.github.io/MySQL/fieldType.html)
+* [MySQL编码及排序规则](https://super2bai.github.io/MySQL/sort.html)
 
 ---
 
