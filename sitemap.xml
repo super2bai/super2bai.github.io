@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://super2bai.github.io/concurrency/reorder.html</loc>
+    
+    <lastmod>2018-11-22T16:57:45.234Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://super2bai.github.io/concurrency/JMM.html</loc>
     
-    <lastmod>2018-11-22T14:28:37.757Z</lastmod>
+    <lastmod>2018-11-22T16:03:37.748Z</lastmod>
     
   </url>
   

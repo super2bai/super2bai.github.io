@@ -274,7 +274,11 @@
     </header>
     <div class="post-content syuanpi fadeInUpShort back-3">
       
-        <h3 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h3><h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><p>线程(并发执行的活动实体)之间的<strong>通信</strong>和<strong>同步</strong>，Java的并发采用的是共享内存模型</p>
+        <blockquote>
+<p>Java内存模型(即Java Memory Model，简称JMM)本身是一种抽象的概念，并不真实存在，它描述的是一组规则或规范，通过这组规范定义了程序中各个变量（包括实例字段，静态字段和构成数组对象的元素）的访问方式。</p>
+</blockquote>
+<a id="more"></a>
+<h3 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h3><h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><p>线程(并发执行的活动实体)之间的<strong>通信</strong>和<strong>同步</strong>，Java的并发采用的是共享内存模型</p>
 <blockquote>
 <ul>
 <li><p>通信：线程之间以何种机制来交换信息</p>
@@ -428,6 +432,12 @@
   
     
   <nav class="article-page">
+    
+      <a href="/concurrency/reorder.html" id="art-left" class="art-left">
+        <span class="next-title">
+          <i class="iconfont icon-left"></i>重排序
+        </span>
+      </a>
     
     
       <a href="/concurrency/synchronized.html" id="art-right" class="art-right">

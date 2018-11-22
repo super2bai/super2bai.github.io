@@ -4,8 +4,28 @@
 
     
   <url>
+    <loc>https://super2bai.github.io/concurrency/reorder.html</loc>
+    <lastmod>2018-11-22T16:57:45.234Z</lastmod>
+    <data>
+        <display>
+        <title>重排序</title>
+        <pubTime>2018-11-22T14:29:36.000Z</pubTime>
+        
+        <tag>并发</tag>
+         
+         
+           
+             
+              <breadCrumb title="concurrency" url="https://super2bai.github.io/categories/concurrency/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://super2bai.github.io/concurrency/JMM.html</loc>
-    <lastmod>2018-11-22T14:28:37.757Z</lastmod>
+    <lastmod>2018-11-22T16:03:37.748Z</lastmod>
     <data>
         <display>
         <title>Java内存模型</title>
