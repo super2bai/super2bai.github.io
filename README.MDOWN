@@ -92,7 +92,12 @@ Java相关
 
 ---
 
+Git相关
 
+* git与oh-my-zsh
+  * 自带的git命令的alias
+
+---
 
 IDE及应用服务器相关
 
