@@ -341,7 +341,7 @@
 <ul>
 <li>类型定义<ul>
 <li>集合类型：如果数据库没有查询到值，就new一个空集合Safes.of()包装一下</li>
-<li>对象类型：接口定义改为Optional，结果使用Optional.of()包装，Optional使用guava的(实现了序列化)</li>
+<li>对象类型：接口定义改为Optional，返回值使用Optional.of()包装，Optional使用guava的(实现了序列化)</li>
 </ul>
 </li>
 <li>执行保存的方法统一返回主键值</li>
@@ -451,6 +451,51 @@
 <li>例如循环某个list，判断当前一条的某个值等于固定值时采取操作，可以替换为先将list转为以判断的值为key的map，直接根据固定值从map中取到对应的信息，从而避免无效的循环次数</li>
 </ul>
 </li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>三方工具</p>
+<ul>
+<li><p>java 8</p>
+<ul>
+<li>Java8中新特性使用比较多的是collection与stream的结合。</li>
+</ul>
+</li>
+<li><p>Guava</p>
+<ul>
+<li>Splitter</li>
+<li>Joiner</li>
+<li>Lists,</li>
+<li>Maps</li>
+<li>Sets,</li>
+<li>Multimap</li>
+<li>Rangexxx</li>
+<li>Table</li>
+<li>ImmuableXXX</li>
+<li>Collections2</li>
+<li>Preconditions</li>
+<li>FluentIterable</li>
+<li>Files(可选）</li>
+</ul>
+</li>
+<li><p>Apache common  lang3</p>
+<ul>
+<li>StringUtils</li>
+<li>NumberUtils</li>
+</ul>
+</li>
+<li><p>Apache collection4</p>
+<ul>
+<li>ListUtils</li>
+<li>CollectionUtils</li>
+<li>MapUtils</li>
+<li>SetUtils</li>
+</ul>
+</li>
+<li><p>使用场景</p>
+<ul>
+<li>建议先使用java8 stream处理，如果stream没有合适的工具，然后从guava和apache中查找有没有合适的工具。</li>
 </ul>
 </li>
 </ul>
