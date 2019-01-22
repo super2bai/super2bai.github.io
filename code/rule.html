@@ -341,7 +341,7 @@
 <ul>
 <li>类型定义<ul>
 <li>集合类型：如果数据库没有查询到值，就new一个空集合Safes.of()包装一下</li>
-<li>对象类型：接口定义改为Optional，结果使用Optional.of()包装，Optional使用guava的</li>
+<li>对象类型：接口定义改为Optional，结果使用Optional.of()包装，Optional使用guava的(实现了序列化)</li>
 </ul>
 </li>
 <li>执行保存的方法统一返回主键值</li>
