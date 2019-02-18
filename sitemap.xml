@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://super2bai.github.io/GHPages/blog.html</loc>
+    
+    <lastmod>2019-02-18T03:26:11.788Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://super2bai.github.io/code/rule.html</loc>
     
     <lastmod>2019-01-22T11:49:17.299Z</lastmod>
@@ -383,13 +390,6 @@
     <loc>https://super2bai.github.io/GHPages/sitemap.html</loc>
     
     <lastmod>2018-05-25T07:34:49.764Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://super2bai.github.io/GHPages/blog.html</loc>
-    
-    <lastmod>2018-05-24T16:09:26.384Z</lastmod>
     
   </url>
   
