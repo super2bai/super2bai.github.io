@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <link rel="stylesheet" href="/style/style.css">
+<script>
+  var nlviconfig = {
+    title: "贰白",
+    author: "super2bai",
+    baseUrl: "/",
+    theme: {
+      scheme: "banderole",
+      lightbox: true,
+      animate: true,
+      search: false,
+      friends: false,
+      reward: true,
+      lazy: false
+    }
+  }
+</script>
+
+
+
+
+    <link rel="stylesheet" href="/script/lib/lightbox/css/lightbox.min.css">
+
+
+
+
+    <link rel="stylesheet" href="/syuanpi/syuanpi.min.css">
+
+
+
+
+    <link rel="icon" href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-98059014-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-116557847-1');
+</script>
+
+
+
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="browsermode" content="application">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="贰白">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="msapplication-navbutton-color" content="#666666">
+<meta name= "format-detection" content="telephone=no" />
+<meta name="keywords" content="nlvi, Nlvi" />
+
+  <link rel="apple-touch-icon"  sizes="72x72"  href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+  <link rel="apple-touch-icon-precomposed"  sizes="72x72"  href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+
+
+  <meta name="subtitle" content="苦于探索，全是未知">
+
+
+  <meta name="description" content="苦于探索，全是未知">
+
+
+
+  <meta name="keywords" content="MySQL, Nlvi" />
+
+  <title> SQL语句优化 · 贰白 </title>
+</head>
+<body>
+  <div class="progress">
+  <div class="progress-inner"></div>
+</div>
+  
+  
+    <div class="tagcloud-mask"></div>  
+<div class="tagcloud" id="tagcloud">
+  <div class="tagcloud-inner">
+    <a href="/tags/Data-Structures/" style="font-size: 14px;">Data Structures</a> <a href="/tags/Docker/" style="font-size: 14px;">Docker</a> <a href="/tags/Dubbo/" style="font-size: 14px;">Dubbo</a> <a href="/tags/GHPages/" style="font-size: 14px;">GHPages</a> <a href="/tags/IO/" style="font-size: 14px;">IO</a> <a href="/tags/JDK/" style="font-size: 14px;">JDK</a> <a href="/tags/JVM/" style="font-size: 14px;">JVM</a> <a href="/tags/Linux/" style="font-size: 14px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 14px;">MySQL</a> <a href="/tags/Python/" style="font-size: 14px;">Python</a> <a href="/tags/Spring/" style="font-size: 14px;">Spring</a> <a href="/tags/Zookeeper/" style="font-size: 14px;">Zookeeper</a> <a href="/tags/code/" style="font-size: 14px;">code</a> <a href="/tags/git/" style="font-size: 14px;">git</a> <a href="/tags/jmeter/" style="font-size: 14px;">jmeter</a> <a href="/tags/mac/" style="font-size: 14px;">mac</a> <a href="/tags/walkup/" style="font-size: 14px;">walkup</a> <a href="/tags/分布式/" style="font-size: 14px;">分布式</a> <a href="/tags/工具/" style="font-size: 14px;">工具</a> <a href="/tags/并发/" style="font-size: 14px;">并发</a> <a href="/tags/旅游/" style="font-size: 14px;">旅游</a> <a href="/tags/汇编/" style="font-size: 14px;">汇编</a> <a href="/tags/编码/" style="font-size: 14px;">编码</a>
+  </div>
+</div>  
+  
+
+  <div class="container">
+
+    <header class="header" id="header">
+  <div class="header-wrapper">
+    <div class="logo">
+  <div class="logo-inner syuanpi tvIn">
+    <span><a href="/">贰白</a></span>
+    
+      <span id="subtitle">苦于探索，全是未知</span>
+    
+  </div>
+</div>
+    <nav class="main-nav">
+  
+  <ul class="main-nav-list syuanpi tvIn">
+  
+  
+    
+      
+    
+    <li class="menu-item">
+      <a href="/" id="article">
+        <span class="base-name">文章</span>
+        
+          <span class="menu-item-label">article</span>
+        
+      </a>
+    </li>
+  
+    
+      
+    
+    <li class="menu-item">
+      <a href="/archives" id="archives">
+        <span class="base-name">归档</span>
+        
+          <span class="menu-item-label">archives</span>
+        
+      </a>
+    </li>
+  
+    
+      
+    
+    <li class="menu-item">
+      <a href="javascript:;" id="tags">
+        <span class="base-name">标签</span>
+        
+          <span class="menu-item-label">tags</span>
+        
+      </a>
+    </li>
+  
+    
+      
+    
+    <li class="menu-item">
+      <a href="/about" id="about">
+        <span class="base-name">关于</span>
+        
+          <span class="menu-item-label">about</span>
+        
+      </a>
+    </li>
+  
+  </ul>
+  
+</nav>
+
+    
+    
+  </div>
+</header>
+<div class="mobile-header">
+  <div class="mobile-header-body">
+    <div class="mobile-header-list">
+      
+        
+            <div class="mobile-nav-item">
+                <a href="/">
+                    <span>文章</span>
+                    
+                        <span class="menu-item-label">article</span>
+                    
+                </a>
+            </div>
+        
+      
+        
+            <div class="mobile-nav-item">
+                <a href="/archives">
+                    <span>归档</span>
+                    
+                        <span class="menu-item-label">archives</span>
+                    
+                </a>
+            </div>
+        
+      
+        
+          <div class="mobile-nav-item inner-cloud">
+            <div class="mobile-nav-tag">
+              <a href="javascript:;" id="mobile-tags">
+                <span>标签</span>
+                
+                    <span class="menu-item-label">tags</span>
+                
+              </a>
+            </div>
+            <div class="mobile-nav-tagcloud">
+              <div class="mobile-tagcloud-inner">
+                <a href="/tags/Data-Structures/" style="font-size: 14px;">Data Structures</a> <a href="/tags/Docker/" style="font-size: 14px;">Docker</a> <a href="/tags/Dubbo/" style="font-size: 14px;">Dubbo</a> <a href="/tags/GHPages/" style="font-size: 14px;">GHPages</a> <a href="/tags/IO/" style="font-size: 14px;">IO</a> <a href="/tags/JDK/" style="font-size: 14px;">JDK</a> <a href="/tags/JVM/" style="font-size: 14px;">JVM</a> <a href="/tags/Linux/" style="font-size: 14px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 14px;">MySQL</a> <a href="/tags/Python/" style="font-size: 14px;">Python</a> <a href="/tags/Spring/" style="font-size: 14px;">Spring</a> <a href="/tags/Zookeeper/" style="font-size: 14px;">Zookeeper</a> <a href="/tags/code/" style="font-size: 14px;">code</a> <a href="/tags/git/" style="font-size: 14px;">git</a> <a href="/tags/jmeter/" style="font-size: 14px;">jmeter</a> <a href="/tags/mac/" style="font-size: 14px;">mac</a> <a href="/tags/walkup/" style="font-size: 14px;">walkup</a> <a href="/tags/分布式/" style="font-size: 14px;">分布式</a> <a href="/tags/工具/" style="font-size: 14px;">工具</a> <a href="/tags/并发/" style="font-size: 14px;">并发</a> <a href="/tags/旅游/" style="font-size: 14px;">旅游</a> <a href="/tags/汇编/" style="font-size: 14px;">汇编</a> <a href="/tags/编码/" style="font-size: 14px;">编码</a>
+              </div>
+            </div>
+          </div>
+        
+      
+        
+            <div class="mobile-nav-item">
+                <a href="/about">
+                    <span>关于</span>
+                    
+                        <span class="menu-item-label">about</span>
+                    
+                </a>
+            </div>
+        
+      
+    </div>
+  </div>
+  <div class="mobile-header-nav">
+    <div class="mobile-header-item" id="mobile-left">
+      <div class="header-menu-item">
+        <span class="header-menu-line"></span>
+      </div>
+    </div>
+    <h1 class="mobile-header-title">
+      <a href="/">贰白</a>
+    </h1>
+    <div class="mobile-header-item"></div>
+  </div>
+</div>
+    <div class="container-inner">
+      <main class="main" id="main">
+        <div class="main-wrapper">
+          
+    
+  
+  <article class="
+  post
+   is_post 
+  ">
+    <header class="post-header">
+      <div class="post-time syuanpi fadeInUpShort back-1">
+        <div class="post-time-wrapper">
+          <span>2019-02-20</span>
+          
+            
+              <span class="post-category"><a href="/categories/MySQL/">MySQL</a></span>
+            
+          
+          
+            
+              <aside class="post-tags syuanpi fadeInUpShort back-3">
+              
+                <a href="/tags/MySQL/">MySQL</a>
+              
+              </aside>
+            
+          
+        </div>
+      </div>
+      <h1 class="post-title syuanpi fadeInUpShort back-2">
+        
+          SQL语句优化
+        
+      </h1>
+    </header>
+    <div class="post-content syuanpi fadeInUpShort back-3">
+      
+        <p>优化SQL的前提是：SQL写的正确</p>
+<a id="more"></a>
+<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><h3 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h3><ul>
+<li>多查少改的列</li>
+<li>数据差异化大的列</li>
+<li>索引会降低insert及update效率(重建索引)，最好不要超过6个</li>
+</ul>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><ul>
+<li><p>如果该索引是复合索引，那么必须使用到该索引中的第一个字段作为条件时，并且应尽可能的让字段顺序与索引顺序相一致</p>
+</li>
+<li><p>不在索引列上使用函数，将结果直接计算出来后再进行比较</p>
+</li>
+<li>禁止更新clustered索引数据列，因为clustered索引数据列的顺序就是表记录的物理存储顺序，一旦该列值改变将导致整个表记录的顺序的调整，会耗费相当大的资源。<ul>
+<li>指定为PRIMARY KEY或UNIQUE约束创建聚集或非聚集索引。PRIMARY KEY 约束默认为 CLUSTERED；UNIQUE约束默认为 NONCLUSTERED。如果表中已存在聚集约束或索引，那么在 ALTER TABLE 中就不能指定 CLUSTERED。如果表中已存在聚集约束或索引，PRIMARY KEY 约束默认为 NONCLUSTERED。</li>
+</ul>
+</li>
+<li>尽量不要包含多个列的排序，如果需要最好给这些列创建复合索引。</li>
+</ul>
+<ul>
+<li>正确书写where条件<ul>
+<li>尽量不使用<ul>
+<li>操作符<code>!=</code>、<code>&lt;&gt;</code>、<code>!&lt;</code>、<code>!&gt;</code></li>
+<li>判断：<code>is null</code>或<code>is not null</code>、<code>NOT</code>、<code>NOT EXISTS</code>、<code>NOT IN</code>、<code>NOT LIKE</code></li>
+<li>连接条件：<code>where a or b</code>，用<code>union</code>或<code>union all</code>替代</li>
+<li>通配符：<code>%a%</code></li>
+</ul>
+</li>
+<li>对字段进行表达式操作<ul>
+<li><code>where num/2=100</code> -&gt; <code>where num=200</code></li>
+</ul>
+</li>
+<li>对字段进行函数操作<ul>
+<li><code>substring(name,1,3)=&#39;abc&#39;</code> -&gt; <code>where name like &#39;abc%&#39;</code></li>
+</ul>
+</li>
+<li><code>=</code>左边进行函数、算术运算或其他表达式运算</li>
+<li>将能减少结果集数量的条件放最左侧</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>慎重使用<code>in</code>和<code>not in</code><ul>
+<li>连续数值，用<code>between</code>替代<code>in</code></li>
+<li><code>exists</code>或<code>not exists</code>替代</li>
+<li><code>left join</code>替代</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>判断是否存在符合条件的数据<ul>
+<li>利用<code>limit 1</code>、<code>top 1</code>取得一行</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>只查询真正需要的数据<ul>
+<li>用实际使用的数据列名替代<code>*</code></li>
+<li>如果只需要很少的行数，用<code>limit</code>来限制返回数量<ul>
+<li>查询是否存在符合条件的数据</li>
+<li>分页查询</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">--wrong</span></div><div class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="keyword">users</span> <span class="keyword">WHERE</span> age &gt; <span class="number">20</span>;</div><div class="line"><span class="comment">--right</span></div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">id</span>, last_name, sex, age <span class="keyword">FROM</span> <span class="keyword">users</span> <span class="keyword">WHERE</span> age &gt; <span class="number">20</span>;</div><div class="line"></div><div class="line"><span class="comment">--wrong</span></div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span>, price <span class="keyword">FROM</span> products;</div><div class="line"><span class="comment">--right</span></div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span>, price <span class="keyword">FROM</span> products <span class="keyword">LIMIT</span> <span class="number">10</span>;</div></pre></td></tr></table></figure>
+<ul>
+<li>减少不必要的子查询</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">---wrong</span></div><div class="line"><span class="keyword">SELECT</span> user_id, last_name <span class="keyword">FROM</span> <span class="keyword">users</span> <span class="keyword">WHERE</span> <span class="keyword">EXISTS</span> (<span class="keyword">SELECT</span> * <span class="keyword">FROM</span> donationuser <span class="keyword">WHERE</span> donationuser.user_id = users.user_id);</div><div class="line"><span class="comment">---right</span></div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> users.user_id <span class="keyword">FROM</span> <span class="keyword">users</span> <span class="keyword">INNER</span> <span class="keyword">JOIN</span> donationuser <span class="keyword">ON</span> users.user_id = donationuser.user_id;</div></pre></td></tr></table></figure>
+<p>需要结合使用场景，如果查询大部分行，使用<code>inner join</code>效率更高。</p>
+<ul>
+<li><code>like</code>优化<ul>
+<li>左通配符是否必须</li>
+<li>使用全文搜索替代(MySQL 5.7+，支持中文)</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">---wrong</span></div><div class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="keyword">users</span> <span class="keyword">WHERE</span> <span class="keyword">name</span> <span class="keyword">LIKE</span> <span class="string">'%bar%'</span>;</div><div class="line"><span class="comment">---right</span></div><div class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="keyword">users</span> <span class="keyword">WHERE</span> <span class="keyword">name</span> <span class="keyword">LIKE</span> <span class="string">'bar%'</span>;</div></pre></td></tr></table></figure>
+<ul>
+<li>尽量用 union all替换 union<ul>
+<li>涉及排序，增加运算量</li>
+<li>确认不可能出现重复结果或不在乎重复时</li>
+</ul>
+</li>
+<li>避免类型转换，数据库将不使用索引<ul>
+<li>非要类型转换，在传入的参数上进行转换</li>
+</ul>
+</li>
+<li>尽量使用数字型字段<ul>
+<li>若只含数值信息的字段尽量不要设计为字符型，这会降低查询和连接的性能，并会增加存储开销。这是因为引擎在处理查询和连接时会逐个比较字符串中每一个字符，而对于数字型而言只需要比较一次就够了。</li>
+</ul>
+</li>
+<li>尽可能的使用 varchar/nvarchar 代替 char/nchar <ul>
+<li>因为首先变长字段存储空间小，可以节省存储空间，其次对于查询来说，在一个相对较小的字段内搜索效率显然要高些。</li>
+</ul>
+</li>
+<li><code>limit</code>优化</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">---很快</span></div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">id</span> <span class="keyword">FROM</span> A <span class="keyword">LIMIT</span> <span class="number">1000</span>,<span class="number">10</span></div><div class="line"><span class="comment">---很慢</span></div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">id</span> <span class="keyword">FROM</span> A <span class="keyword">LIMIT</span> <span class="number">90000</span>,<span class="number">10</span></div><div class="line"><span class="comment">---优化</span></div><div class="line"><span class="comment">---用索引</span></div><div class="line"><span class="keyword">select</span> <span class="keyword">id</span> <span class="keyword">from</span> A <span class="keyword">order</span> <span class="keyword">by</span> <span class="keyword">id</span> <span class="keyword">limit</span> <span class="number">90000</span>,<span class="number">10</span>;</div><div class="line"><span class="comment">---用between替换</span></div><div class="line"><span class="keyword">select</span> <span class="keyword">id</span> <span class="keyword">from</span> A <span class="keyword">order</span> <span class="keyword">by</span> <span class="keyword">id</span>  <span class="keyword">between</span> <span class="number">10000000</span> <span class="keyword">and</span> <span class="number">10000010</span>;</div></pre></td></tr></table></figure>
+<ul>
+<li>批量插入优化</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">---wrong</span></div><div class="line"><span class="keyword">INSERT</span> <span class="keyword">into</span> person(<span class="keyword">name</span>,age) <span class="keyword">values</span>(<span class="string">'A'</span>,<span class="number">14</span>)</div><div class="line"><span class="keyword">INSERT</span> <span class="keyword">into</span> person(<span class="keyword">name</span>,age) <span class="keyword">values</span>(<span class="string">'B'</span>,<span class="number">14</span>)</div><div class="line"><span class="keyword">INSERT</span> <span class="keyword">into</span> person(<span class="keyword">name</span>,age) <span class="keyword">values</span>(<span class="string">'C'</span>,<span class="number">14</span>)</div><div class="line"><span class="comment">---right</span></div><div class="line"><span class="keyword">INSERT</span> <span class="keyword">into</span> person(<span class="keyword">name</span>,age) <span class="keyword">values</span>(<span class="string">'A'</span>,<span class="number">14</span>),(<span class="string">'B'</span>,<span class="number">14</span>),(<span class="string">'C'</span>,<span class="number">14</span>),</div></pre></td></tr></table></figure>
+<ul>
+<li>查询语句不知道效率如何，建议使用<code>EXPLAIN</code>。</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">--查询语句如何运行</span></div><div class="line"><span class="keyword">EXPLAIN</span> <span class="keyword">sql</span></div><div class="line"><span class="comment">--当使用EXTENDED关键字时，EXPLAIN产生附加信息，可以用SHOW WARNINGS浏览。该信息显示优化器限定SELECT语句中的表和列名，重写并且执行优化规则后SELECT语句是什么样子，并且还可能包括优化过程的其它注解。在MySQL5.0及更新的版本里都可以使用，在MySQL5.1里它有额外增加了一个过滤列(filtered)。</span></div><div class="line"><span class="keyword">EXPLAIN</span> <span class="keyword">EXTENDED</span> <span class="keyword">sql</span></div><div class="line"><span class="comment">--JSON格式显示结果</span></div><div class="line"><span class="keyword">EXPLAIN</span> <span class="keyword">FORMAT</span>=<span class="keyword">JSON</span> (<span class="number">5.6</span>新特性)</div></pre></td></tr></table></figure>
+<p>例如：</p>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>select_type</th>
+<th>table</th>
+<th>partitions</th>
+<th>type</th>
+<th>possible_keys</th>
+<th>key</th>
+<th>key_len</th>
+<th>ref</th>
+<th>rows</th>
+<th>filtered</th>
+<th>Extra</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>SIMPLE</td>
+<td>new12306</td>
+<td>null</td>
+<td>ALL</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>7141154</td>
+<td>100.0</td>
+<td>null</td>
+</tr>
+</tbody>
+</table>
+<p>解释：</p>
+<table>
+<thead>
+<tr>
+<th><strong>id</strong></th>
+<th>SELECT识别符。这是SELECT的查询序列号</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>select_type</strong></td>
+<td>SELECT类型,可以为以下任何一种:<br><strong>SIMPLE</strong>:简单SELECT(不使用UNION或子查询) <br><strong>PRIMARY</strong>:最外面的SELECT <br><strong>UNION</strong>:UNION中的第二个或后面的SELECT语句 <br><strong>DEPENDENT UNION</strong>:UNION中的第二个或后面的SELECT语句,取决于外面的查询 <br><strong>UNION RESULT</strong>:UNION 的结果 <br><strong>SUBQUERY</strong>:子查询中的第一个SELECT <br><strong>DEPENDENT SUBQUERY</strong>:子查询中的第一个SELECT,取决于外面的查询 <br><strong>DERIVED</strong>:导出表的SELECT(FROM子句的子查询)</td>
+</tr>
+<tr>
+<td><strong>table</strong></td>
+<td>输出的行所引用的表</td>
+</tr>
+<tr>
+<td><strong>type</strong></td>
+<td>联接类型。下面给出各种联接类型,按照从最佳类型到最坏类型进行排序:<br><strong>system</strong>:表仅有一行(=系统表)。这是const联接类型的一个特例。 <br><strong>const</strong>:表最多有一个匹配行,它将在查询开始时被读取。因为仅有一行,在这行的列值可被优化器剩余部分认为是常数。const表很快,因为它们只读取一次! <br><strong>eq_ref</strong>:对于每个来自于前面的表的行组合,从该表中读取一行。这可能是最好的联接类型,除了const类型。 <br><strong>ref</strong>:对于每个来自于前面的表的行组合,所有有匹配索引值的行将从这张表中读取。 <br><strong>ref_or_null</strong>:该联接类型如同ref,但是添加了MySQL可以专门搜索包含NULL值的行。 <br><strong>index_merge</strong>:该联接类型表示使用了索引合并优化方法。<br><strong>unique_subquery</strong>:该类型替换了下面形式的IN子查询的ref: value IN (SELECT primary_key FROM single_table WHERE some_expr) unique_subquery是一个索引查找函数,可以完全替换子查询,效率更高。<br> <strong>index_subquery</strong>:该联接类型类似于unique_subquery。可以替换IN子查询,但只适合下列形式的子查询中的非唯一索引: value IN (SELECT key_column FROM single_table WHERE some_expr) <br><strong>range</strong>:只检索给定范围的行,使用一个索引来选择行。 <br><strong>index</strong>:该联接类型与ALL相同,除了只有索引树被扫描。这通常比ALL快,因为索引文件通常比数据文件小。 <br><strong>ALL</strong>:对于每个来自于先前的表的行组合,进行完整的表扫描。</td>
+</tr>
+<tr>
+<td><strong>possible_keys</strong></td>
+<td>指出MySQL能使用哪个索引在该表中找到行</td>
+</tr>
+<tr>
+<td><strong>key</strong></td>
+<td>显示MySQL实际决定使用的键(索引)。如果没有选择索引,键是NULL。</td>
+</tr>
+<tr>
+<td><strong>key_len</strong></td>
+<td>显示MySQL决定使用的键长度。如果键是NULL,则长度为NULL。</td>
+</tr>
+<tr>
+<td><strong>ref</strong></td>
+<td>显示使用哪个列或常数与key一起从表中选择行。</td>
+</tr>
+<tr>
+<td><strong>rows</strong></td>
+<td>显示MySQL认为它执行查询时必须检查的行数。多行之间的数据相乘可以估算要处理的行数。</td>
+</tr>
+<tr>
+<td><strong>filtered</strong></td>
+<td>显示了通过条件过滤出的行数的百分比估计值。</td>
+</tr>
+<tr>
+<td><strong>Extra</strong></td>
+<td>该列包含MySQL解决查询的详细信息</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>Distinct</strong>:MySQL发现第1个匹配行后,停止为当前的行组合搜索更多的行。<br> <strong>Not exists</strong>:MySQL能够对查询进行LEFT JOIN优化,发现1个匹配LEFT JOIN标准的行后,不再为前面的的行组合在该表内检查更多的行。 <br><strong>range checked for each record (index map: #)</strong>:MySQL没有发现好的可以使用的索引,但发现如果来自前面的表的列值已知,可能部分索引可以使用。 <br><strong>Using filesort</strong>:MySQL需要额外的一次传递,以找出如何按排序顺序检索行。 <br><strong>Using index</strong>:从只使用索引树中的信息而不需要进一步搜索读取实际的行来检索表中的列信息。 <br><strong>Using temporary</strong>:为了解决查询,MySQL需要创建一个临时表来容纳结果。 <br><strong>Using where</strong>:WHERE 子句用于限制哪一个行匹配下一个表或发送到客户。 <br><strong>Using sort_union(…), Using union(…), Using intersect(…)</strong>:这些函数说明如何为index_merge联接类型合并索引扫描。 <br><strong>Using index for group-by</strong>:类似于访问表的Using index方式,Using index for group-by表示MySQL发现了一个索引,可以用来查 询GROUP BY或DISTINCT查询的所有列,而不要额外搜索硬盘访问实际的表。</td>
+</tr>
+</tbody>
+</table>
+<p><strong>注意</strong>：在其它场景，语句会修改数据(<code>INSERT</code>、<code>UPDATE</code>、<code>DELETE</code>、<code>EXECUTE</code>)，可以用事务。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">BEGIN</span>;</div><div class="line"><span class="keyword">EXPLAIN</span> <span class="keyword">ANALYZE</span> ...;</div><div class="line"><span class="keyword">ROLLBACK</span>;</div></pre></td></tr></table></figure>
+<ul>
+<li>性能优化器 profile</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">--查询是否开启</span></div><div class="line"><span class="keyword">SELECT</span> @@profiling;</div><div class="line"><span class="comment">--设置开启</span></div><div class="line"><span class="keyword">SET</span> profiling = <span class="number">1</span>;</div><div class="line"><span class="comment">--执行一次查询</span></div><div class="line"><span class="keyword">select</span> a,b,c <span class="keyword">from</span> tableName;</div><div class="line"><span class="comment">--查看结果</span></div><div class="line"><span class="keyword">show</span> <span class="keyword">profiles</span>;</div><div class="line"><span class="comment">--查看当前查询的信息, 2为执行语句所对应的Query ID</span></div><div class="line"><span class="keyword">show</span> profile <span class="keyword">for</span> <span class="keyword">query</span> <span class="number">2</span>;</div></pre></td></tr></table></figure>
+<h3 id="其它阅读"><a href="#其它阅读" class="headerlink" title="其它阅读"></a>其它阅读</h3><p><a href="https://use-the-index-luke.com/3-minute-test/mysql" target="_blank" rel="external">三分钟测试SQL水平</a></p>
+<h3 id="参考文档："><a href="#参考文档：" class="headerlink" title="参考文档："></a>参考文档：</h3><p><a href="https://www.vertabelo.com/blog/technical-articles/5-tips-to-optimize-your-sql-queries" target="_blank" rel="external">5 tips to optimize your SQL Queries</a></p>
+<p><a href="https://www.cnblogs.com/yycc/p/7338894.html" target="_blank" rel="external">mysql explain用法和结果的含义</a></p>
+
+      
+    
+    </div>
+    
+      
+  <div class="post-reward">
+    <span class="reward-btn" id="reward-btn">点这里</span>
+    <div class="reward-wrapper syuanpi" id="reward-wrapper" style="display:none;">
+      
+      <div class="reward-item reward-alipay">
+        <img src="https://wx3.sinaimg.cn/mw690/8c564d2aly1ftkt83thjlj20o60skjzn.jpg">
+      </div>
+      
+    </div>
+  </div>
+
+
+      
+    
+  </article>
+  
+    
+  <nav class="article-page">
+    
+      <a href="/MySQL/reason.html" id="art-left" class="art-left">
+        <span class="next-title">
+          <i class="iconfont icon-left"></i>SQL语句优化-原因
+        </span>
+      </a>
+    
+    
+      <a href="/code/rule.html" id="art-right" class="art-right">
+        <span class="prev-title"> 
+          Good Code<i class="iconfont icon-right"></i>  
+        </span>
+      </a>
+    
+  </nav>
+
+    
+  <i id="com-switch" class="iconfont icon-more jumping-in long infinite" style="font-size:24px;display:block;text-align:center;transform:rotate(180deg);"></i>
+  <div class="post-comments" id="post-comments" style="display: block;margin: auto 16px;">
+    
+<!-- Gitment Comments -->
+<div id="gitment"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  owner: "super2bai",
+  repo: 'comment',
+  oauth: {
+    client_id: '37f2293730b41dcb5276',
+    client_secret: 'dbab4955840d4cbc88f1563be04ab676662194e5',
+  },
+})
+gitment.render('gitment')
+</script>
+
+    
+    
+
+  </div>
+
+
+  
+  
+    
+  
+  <aside class="post-toc">
+    <span class="title" id="toc-switch"><span>文章导航</span></span>
+    <div class="toc-inner syuanpi back-1" style="display:none;">
+      <li class="title-link"><a href="javascript:;" class="toTop">SQL语句优化</a></li>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#索引"><span class="toc-text">索引</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建"><span class="toc-text">创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用"><span class="toc-text">使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其它阅读"><span class="toc-text">其它阅读</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考文档："><span class="toc-text">参考文档：</span></a></li></ol></li></ol>
+    </div>
+  </aside>
+
+
+
+  
+
+
+        </div>
+      </main>
+
+      <footer class="footer syuanpi fadeIn" id="footer">
+  <hr>
+  <div class="footer-wrapper">
+    <div class="left">
+      <div class="contact-icon">
+    
+    
+    
+    
+    
+    
+    
+    
+        
+            <a href="https://github.com/super2bai" class="iconfont icon-github" title="github"></a>
+        
+        
+        
+        
+        
+        
+        
+    
+</div>
+    </div>
+    <div class="right">
+      <div class="copyright">
+    <div class="info">
+        <span>&copy;</span>
+        <span>2017 ~ 2019</span>
+        <span>❤</span>
+        <span>super2bai</span>
+    </div>
+    <div class="theme">
+        <span>
+            动力来源于
+            <a href="http://hexo.io/" target="_blank">Hexo </a>
+        </span>
+        <span>
+            主题
+            <a href="https://github.com/ColMugX/hexo-theme-Nlvi"> Nlvi </a>
+        </span>
+    </div>
+    
+    <div class="visit_count">
+        <i class="iconfont icon-visit"></i>
+        <span id="busuanzi_value_site_uv"></span>
+        <i class="iconfont icon-people"></i>
+        <span id="busuanzi_value_site_pv"></span>
+    </div>
+    
+</div>
+
+    </div>
+  </div>
+</footer>
+    </div>
+  </div>
+  <script src="/script/lib/jquery/jquery-3.2.1.min.js"></script>
+
+
+  <script src="/script/lib/lightbox/js/lightbox.min.js"></script>
+
+
+
+
+
+
+
+
+<script src="/script/src/nlvi.js"></script>
+
+  <script src="/script/scheme/banderole.js"></script>
+
+<script src="/script/bootstarp.js"></script>
+
+
+<div class="backtop syuanpi melt toTop" id="backtop">
+    <i class="iconfont icon-up"></i>
+    <span style="text-align:center;font-family:Georgia;"><span style="font-family:Georgia;" id="scrollpercent">1</span>%</span>
+</div>
+
+
+
+</body>
+</html>

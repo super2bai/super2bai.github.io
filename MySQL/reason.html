@@ -76,11 +76,9 @@
 
 
 
-  <title>
-  
-    归档 · 贰白
-  
-</title>
+  <meta name="keywords" content="MySQL, Nlvi" />
+
+  <title> SQL语句优化-原因 · 贰白 </title>
 </head>
 <body>
   <div class="progress">
@@ -243,153 +241,150 @@
         <div class="main-wrapper">
           
     
-    <div class="archive syuanpi fadeInUp" id="archive">
-        
-            <h1 class="archive-title">Total</h1>
-            <span class="archive-num">一共有 90 篇文章</span>
-        
-        <div class="archive-list">
-            <ul>
-        
+  
+  <article class="
+  post
+   is_post 
+  ">
+    <header class="post-header">
+      <div class="post-time syuanpi fadeInUpShort back-1">
+        <div class="post-time-wrapper">
+          <span>2019-02-24</span>
+          
             
-                
-                
-                
-                    
-                     
-                        <h2 class="archive-year"> 2018 </h2>
-                    
-                
+              <span class="post-category"><a href="/categories/MySQL/">MySQL</a></span>
             
+          
+          
             
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    03-15
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/walkup/Africa.html">WalkUp攻略-非洲</a>
-                </span>
-            </li>
-
-        
+              <aside class="post-tags syuanpi fadeInUpShort back-3">
+              
+                <a href="/tags/MySQL/">MySQL</a>
+              
+              </aside>
             
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    01-31
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/JVM/create.html">JVM中对象的创建</a>
-                </span>
-            </li>
-
-        
-            
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    01-30
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/walkup/Antarctica.html">WalkUp攻略-南极洲</a>
-                </span>
-            </li>
-
-        
-            
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    01-30
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/walkup/Europe.html">WalkUp攻略-欧洲</a>
-                </span>
-            </li>
-
-        
-            
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    01-30
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/walkup/Asia.html">WalkUp攻略-亚洲</a>
-                </span>
-            </li>
-
-        
-            
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    01-30
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/JVM/memory.html">Java内存区域</a>
-                </span>
-            </li>
-
-        
-            
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    01-22
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/JVM/build.html">Mac 编译openJDK9</a>
-                </span>
-            </li>
-
-        
-            </ul>
+          
         </div>
+      </div>
+      <h1 class="post-title syuanpi fadeInUpShort back-2">
+        
+          SQL语句优化-原因
+        
+      </h1>
+    </header>
+    <div class="post-content syuanpi fadeInUpShort back-3">
+      
+        <p>知其然更知其所以然</p>
+<a id="more"></a>
+<p>A：为什么不能在频繁新增修改的列建立索引?</p>
+<p>Q：更新表时，MySQL不仅要保存数据，还要保存一下索引文件。大部分场景下，低技术列上建立索引的精确查找，相对于布简历索引的全表扫描没有任何优势，而且增大了IO负担</p>
+<p>A：使用索引顺序为什么要和建立索引顺序保持一致？</p>
+<p>Q：索引使用原则是最左前缀</p>
+<p>A：为什么不建议使用<code>like %xxx%</code></p>
+<p>Q：不会使用索引，而<code>like xxx%</code>则会使用索引</p>
+<p>A：为什么不要包含多个列的排序</p>
+<p>Q：where子句中已经使用了索引的话，那么order by中的列是不会使用索引</p>
+<p>A：为什么不能在索引列上进行运算</p>
+<p>Q：将在每个行上进行运算，这将导致索引失效而进行全表扫描。MySQL只对一下操作符才使用索引：&lt;,&lt;=,=,&gt;,&gt;=,between,in,以及某些时候的like(不以通配符%或_开头的情形)。</p>
+<p>A：为什么数据类型会影响性能</p>
+<p>Q：</p>
+<p>(1)越小的数据类型通常更好：越小的数据类型通常在磁盘、内存和CPU缓存中都需要更少的空间，处理起来更快。<br>(2)简单的数据类型更好：整型数据比起字符，处理开销更小，因为字符串的比较更复杂。在MySQL中，应该用内置的日期和时间数据类型，而不是用字符串来存储时间；以及用整型数据类型存储IP地址。<br>(3)尽量避免NULL：应该指定列为NOT NULL，除非你想存储NULL。在MySQL中，含有空值的列很难进行查询优化，因为它们使得索引、索引的统计信息以及比较运算更加复杂。你应该用0、一个特殊的值或者一个空串代替空值。</p>
+<p>A：为什么要用列名替代*</p>
+<p>Q：</p>
+<p>1.减少网络带宽消耗</p>
+<p>2.能有效利用覆盖索引</p>
+<p>3.表结构变更对程序基本无影响</p>
+<p>A：在需要小部分数据时，为什么要使用limit限定返回数量</p>
+<p>Q：避免全表扫描，数据库只查询指定条数的数据</p>
+<p>A：为什么要减少不必要的子查询</p>
+<p>Q：子查询对主查询的每一行运行一次，从而导致可能的低效率</p>
+<p>A：为什么要用in替代or</p>
+<p>Q：MySQL内部会对in的列值进行排序后查找，效率更高</p>
+<p>A：为什么用union all替代union</p>
+<p>Q：不需要对结果集进行排序</p>
+<p>A：为什么批量插入要将多条语句改为一条语句多value的格式</p>
+<p>Q：减少和db的交互次数</p>
+<p>A：为什么多次alter操作要合并为一次操作</p>
+<p>Q：mysql对表的修改巨大部分操作都需要锁表并重建表，而锁表将对线上业务造成影响。</p>
+<p>A：为什么SQL语句中不能包含业务逻辑</p>
+<p>Q：数据库时有状态的服务，比昂更复杂而且速度慢。</p>
+<p>A：为什么名称不能使用MySQL保留子</p>
+<p>Q：SQL语句必须用反引号引用，增加书写难度</p>
+
+      
+    
     </div>
     
-  <nav class="pagination">
-      <a class="extend prev" rel="prev" href="/archives/2018/page/5/">< 上一页</a><a class="page-number" href="/archives/2018/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2018/page/4/">4</a><a class="page-number" href="/archives/2018/page/5/">5</a><span class="page-number current">6</span>
+      
+  <div class="post-reward">
+    <span class="reward-btn" id="reward-btn">点这里</span>
+    <div class="reward-wrapper syuanpi" id="reward-wrapper" style="display:none;">
+      
+      <div class="reward-item reward-alipay">
+        <img src="https://wx3.sinaimg.cn/mw690/8c564d2aly1ftkt83thjlj20o60skjzn.jpg">
+      </div>
+      
+    </div>
+  </div>
+
+
+      
+    
+  </article>
+  
+    
+  <nav class="article-page">
+    
+    
+      <a href="/MySQL/optimization.html" id="art-right" class="art-right">
+        <span class="prev-title"> 
+          SQL语句优化<i class="iconfont icon-right"></i>  
+        </span>
+      </a>
+    
   </nav>
 
+    
+  <i id="com-switch" class="iconfont icon-more jumping-in long infinite" style="font-size:24px;display:block;text-align:center;transform:rotate(180deg);"></i>
+  <div class="post-comments" id="post-comments" style="display: block;margin: auto 16px;">
+    
+<!-- Gitment Comments -->
+<div id="gitment"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  owner: "super2bai",
+  repo: 'comment',
+  oauth: {
+    client_id: '37f2293730b41dcb5276',
+    client_secret: 'dbab4955840d4cbc88f1563be04ab676662194e5',
+  },
+})
+gitment.render('gitment')
+</script>
+
+    
+    
+
+  </div>
+
+
+  
+  
+    
+  
+  <aside class="post-toc">
+    <span class="title" id="toc-switch"><span>文章导航</span></span>
+    <div class="toc-inner syuanpi back-1" style="display:none;">
+      <li class="title-link"><a href="javascript:;" class="toTop">SQL语句优化-原因</a></li>
+      
+    </div>
+  </aside>
+
+
+
+  
 
 
         </div>
