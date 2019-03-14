@@ -277,7 +277,7 @@
         <p>Alibaba开源的Java诊断工具</p>
 <a id="more"></a>
 <p><strong>1.支持管道操作;2.<code>-h</code>查看帮助;3.<code>tab</code>自动补全;4.keymap查看快捷键;5.方向键上和下查看历史命令，或通过history命令</strong></p>
-<p>1.启动程序</p>
+<p>1.启动需要监测的应用程序</p>
 <p>2.启动arthas，attach到自己的程序上</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">wget https://alibaba.github.io/arthas/arthas-boot.jar</div><div class="line"><span class="meta">#</span>阿里云镜像地址</div><div class="line">java -jar arthas-boot.jar --repo-mirror aliyun --use-http</div></pre></td></tr></table></figure>
 <p>3.输入序号,回车。attach成功后，会打印Logo</p>
@@ -324,12 +324,11 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">jad --source-only com.example.demo.arthas.user.UserController</div></pre></td></tr></table></figure>
 <h3 id="Ognl"><a href="#Ognl" class="headerlink" title="Ognl"></a>Ognl</h3><p>在Arthas里，有一个单独的<code>ognl</code>命令，可以动态执行代码。</p>
 <h4 id="调用static函数"><a href="#调用static函数" class="headerlink" title="调用static函数"></a>调用static函数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ognl &apos;@java.lang.System@out.println(&quot;hello ognl&quot;)&apos;</div></pre></td></tr></table></figure>
-<p>可以检查<code>Terminal 1</code>里的进程输出，可以发现打印出了<code>hello ognl</code>。</p>
 <h4 id="获取静态类的静态字段"><a href="#获取静态类的静态字段" class="headerlink" title="获取静态类的静态字段"></a>获取静态类的静态字段</h4><p>获取<code>UserController</code>类里的<code>logger</code>字段：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ognl -c 1be6f5c3 @com.example.demo.arthas.user.UserController@logger</div></pre></td></tr></table></figure>
 <p>还可以通过<code>-x</code>参数控制返回值的展开层数。比如：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ognl -c 1be6f5c3 -x 2 @com.example.demo.arthas.user.UserController@logger</div></pre></td></tr></table></figure>
-<h4 id="执行多行表达式，赋值给临时变量，返回一个List"><a href="#执行多行表达式，赋值给临时变量，返回一个List" class="headerlink" title="执行多行表达式，赋值给临时变量，返回一个List"></a>执行多行表达式，赋值给临时变量，返回一个List</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">ognl &apos;#value1=@System@getProperty(&quot;java.home&quot;), #value2=@System@getProperty(&quot;java.runtime.name&quot;), &#123;#value1, #value2&#125;&apos;</div><div class="line">$ ognl &apos;#value1=@System@getProperty(&quot;java.home&quot;), #value2=@System@getProperty(&quot;java.runtime.name&quot;), &#123;#value1, #value2&#125;&apos;</div><div class="line">@ArrayList[</div><div class="line">    @String[/Library/Java/JavaVirtualMachines/jdk1.8.0_162.jdk/Contents/Home/jre],</div><div class="line">    @String[Java(TM) SE Runtime Environment],</div><div class="line">]</div></pre></td></tr></table></figure>
+<h4 id="执行多行表达式，赋值给临时变量，返回一个List"><a href="#执行多行表达式，赋值给临时变量，返回一个List" class="headerlink" title="执行多行表达式，赋值给临时变量，返回一个List"></a>执行多行表达式，赋值给临时变量，返回一个List</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$ ognl &apos;#value1=@System@getProperty(&quot;java.home&quot;), #value2=@System@getProperty(&quot;java.runtime.name&quot;), &#123;#value1, #value2&#125;&apos;</div><div class="line">$ ognl &apos;#value1=@System@getProperty(&quot;java.home&quot;), #value2=@System@getProperty(&quot;java.runtime.name&quot;), &#123;#value1, #value2&#125;&apos;</div><div class="line">@ArrayList[</div><div class="line">    @String[/Library/Java/JavaVirtualMachines/jdk1.8.0_162.jdk/Contents/Home/jre],</div><div class="line">    @String[Java(TM) SE Runtime Environment],</div><div class="line">]</div></pre></td></tr></table></figure>
 <h4 id="更多"><a href="#更多" class="headerlink" title="更多"></a>更多</h4><p>在Arthas里<code>ognl</code>表达式是很重要的功能，在很多命令里都可以使用<code>ognl</code>表达式。</p>
 <p>一些更复杂的用法，可以参考：</p>
 <ul>
