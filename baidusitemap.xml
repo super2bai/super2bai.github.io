@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>https://super2bai.github.io/MySQL/reason.html</loc>
+    <lastmod>2019-03-14T09:57:33.822Z</lastmod>
+    <data>
+        <display>
+        <title>SQL语句优化-原因</title>
+        <pubTime>2019-02-23T19:14:14.000Z</pubTime>
+        
+        <tag>MySQL</tag>
+         
+         
+           
+             
+              <breadCrumb title="MySQL" url="https://super2bai.github.io/categories/MySQL/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://super2bai.github.io/JDK/Traversal.html</loc>
     <lastmod>2019-03-14T09:41:28.772Z</lastmod>
     <data>
@@ -50,26 +70,6 @@
         <display>
         <title>SQL语句优化</title>
         <pubTime>2019-02-13T19:11:30.000Z</pubTime>
-        
-        <tag>MySQL</tag>
-         
-         
-           
-             
-              <breadCrumb title="MySQL" url="https://super2bai.github.io/categories/MySQL/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://super2bai.github.io/MySQL/reason.html</loc>
-    <lastmod>2019-02-23T19:15:25.942Z</lastmod>
-    <data>
-        <display>
-        <title>SQL语句优化-原因</title>
-        <pubTime>2019-02-23T19:14:14.000Z</pubTime>
         
         <tag>MySQL</tag>
          
