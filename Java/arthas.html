@@ -398,7 +398,7 @@
 <h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><h4 id="SC"><a href="#SC" class="headerlink" title="SC"></a>SC</h4><p>主要信息，通过Class获取：<code>Test.class.isInterface()</code></p>
 <p>加载信息，通过CodeSource获取：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">CodeSource codeSource = Test.class.getProtectionDomain().getCodeSource();</div><div class="line">codeSource.getLocation().getFile();</div></pre></td></tr></table></figure>
-<h4 id="jad"><a href="#jad" class="headerlink" title="jad"></a>jad</h4><p>使用的是cfr提供的jar包来进行反编译</p>
+<h4 id="jad"><a href="#jad" class="headerlink" title="jad"></a>jad</h4><p>使用的是<a href="http://www.benf.org/other/cfr/" target="_blank" rel="external">cfr</a>提供的jar包来进行反编译</p>
 <h4 id="修改日志级别"><a href="#修改日志级别" class="headerlink" title="修改日志级别"></a>修改日志级别</h4><p>具体原理是首先获取AppClassLoader(默认)或者指定的ClassLoader，然后再调用Ognl的包，自动执行解析这个表达式，而这个执行的类都会从前面的ClassLoader中获取中去获取。</p>
 <h4 id="watch"><a href="#watch" class="headerlink" title="watch"></a>watch</h4><p>利用jdk1.6的instrument + ASM 记录方法的入参出参，以及方法消耗时间。</p>
 <h4 id="trace-1"><a href="#trace-1" class="headerlink" title="trace"></a>trace</h4><p>利用jdk1.6的instrument + ASM。在访问方法之前和之后会进行记录</p>
