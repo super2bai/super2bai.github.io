@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <link rel="stylesheet" href="/style/style.css">
+<script>
+  var nlviconfig = {
+    title: "贰白",
+    author: "super2bai",
+    baseUrl: "/",
+    theme: {
+      scheme: "banderole",
+      lightbox: true,
+      animate: true,
+      search: false,
+      friends: false,
+      reward: true,
+      lazy: false
+    }
+  }
+</script>
+
+
+
+
+    <link rel="stylesheet" href="/script/lib/lightbox/css/lightbox.min.css">
+
+
+
+
+    <link rel="stylesheet" href="/syuanpi/syuanpi.min.css">
+
+
+
+
+    <link rel="icon" href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-98059014-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-116557847-1');
+</script>
+
+
+
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="browsermode" content="application">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="贰白">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="msapplication-navbutton-color" content="#666666">
+<meta name= "format-detection" content="telephone=no" />
+<meta name="keywords" content="nlvi, Nlvi" />
+
+  <link rel="apple-touch-icon"  sizes="72x72"  href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+  <link rel="apple-touch-icon-precomposed"  sizes="72x72"  href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+
+
+  <meta name="subtitle" content="苦于探索，全是未知">
+
+
+  <meta name="description" content="苦于探索，全是未知">
+
+
+
+  <meta name="keywords" content="monitor, Nlvi" />
+
+  <title> Arthas入门 · 贰白 </title>
+</head>
+<body>
+  <div class="progress">
+  <div class="progress-inner"></div>
+</div>
+  
+  
+    <div class="tagcloud-mask"></div>  
+<div class="tagcloud" id="tagcloud">
+  <div class="tagcloud-inner">
+    <a href="/tags/Data-Structures/" style="font-size: 14px;">Data Structures</a> <a href="/tags/Docker/" style="font-size: 14px;">Docker</a> <a href="/tags/Dubbo/" style="font-size: 14px;">Dubbo</a> <a href="/tags/GHPages/" style="font-size: 14px;">GHPages</a> <a href="/tags/IO/" style="font-size: 14px;">IO</a> <a href="/tags/JDK/" style="font-size: 14px;">JDK</a> <a href="/tags/JVM/" style="font-size: 14px;">JVM</a> <a href="/tags/Linux/" style="font-size: 14px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 14px;">MySQL</a> <a href="/tags/Python/" style="font-size: 14px;">Python</a> <a href="/tags/Spring/" style="font-size: 14px;">Spring</a> <a href="/tags/Zookeeper/" style="font-size: 14px;">Zookeeper</a> <a href="/tags/code/" style="font-size: 14px;">code</a> <a href="/tags/git/" style="font-size: 14px;">git</a> <a href="/tags/jmeter/" style="font-size: 14px;">jmeter</a> <a href="/tags/mac/" style="font-size: 14px;">mac</a> <a href="/tags/monitor/" style="font-size: 14px;">monitor</a> <a href="/tags/walkup/" style="font-size: 14px;">walkup</a> <a href="/tags/分布式/" style="font-size: 14px;">分布式</a> <a href="/tags/工具/" style="font-size: 14px;">工具</a> <a href="/tags/并发/" style="font-size: 14px;">并发</a> <a href="/tags/旅游/" style="font-size: 14px;">旅游</a> <a href="/tags/汇编/" style="font-size: 14px;">汇编</a> <a href="/tags/编码/" style="font-size: 14px;">编码</a>
+  </div>
+</div>  
+  
+
+  <div class="container">
+
+    <header class="header" id="header">
+  <div class="header-wrapper">
+    <div class="logo">
+  <div class="logo-inner syuanpi tvIn">
+    <span><a href="/">贰白</a></span>
+    
+      <span id="subtitle">苦于探索，全是未知</span>
+    
+  </div>
+</div>
+    <nav class="main-nav">
+  
+  <ul class="main-nav-list syuanpi tvIn">
+  
+  
+    
+      
+    
+    <li class="menu-item">
+      <a href="/" id="article">
+        <span class="base-name">文章</span>
+        
+          <span class="menu-item-label">article</span>
+        
+      </a>
+    </li>
+  
+    
+      
+    
+    <li class="menu-item">
+      <a href="/archives" id="archives">
+        <span class="base-name">归档</span>
+        
+          <span class="menu-item-label">archives</span>
+        
+      </a>
+    </li>
+  
+    
+      
+    
+    <li class="menu-item">
+      <a href="javascript:;" id="tags">
+        <span class="base-name">标签</span>
+        
+          <span class="menu-item-label">tags</span>
+        
+      </a>
+    </li>
+  
+    
+      
+    
+    <li class="menu-item">
+      <a href="/about" id="about">
+        <span class="base-name">关于</span>
+        
+          <span class="menu-item-label">about</span>
+        
+      </a>
+    </li>
+  
+  </ul>
+  
+</nav>
+
+    
+    
+  </div>
+</header>
+<div class="mobile-header">
+  <div class="mobile-header-body">
+    <div class="mobile-header-list">
+      
+        
+            <div class="mobile-nav-item">
+                <a href="/">
+                    <span>文章</span>
+                    
+                        <span class="menu-item-label">article</span>
+                    
+                </a>
+            </div>
+        
+      
+        
+            <div class="mobile-nav-item">
+                <a href="/archives">
+                    <span>归档</span>
+                    
+                        <span class="menu-item-label">archives</span>
+                    
+                </a>
+            </div>
+        
+      
+        
+          <div class="mobile-nav-item inner-cloud">
+            <div class="mobile-nav-tag">
+              <a href="javascript:;" id="mobile-tags">
+                <span>标签</span>
+                
+                    <span class="menu-item-label">tags</span>
+                
+              </a>
+            </div>
+            <div class="mobile-nav-tagcloud">
+              <div class="mobile-tagcloud-inner">
+                <a href="/tags/Data-Structures/" style="font-size: 14px;">Data Structures</a> <a href="/tags/Docker/" style="font-size: 14px;">Docker</a> <a href="/tags/Dubbo/" style="font-size: 14px;">Dubbo</a> <a href="/tags/GHPages/" style="font-size: 14px;">GHPages</a> <a href="/tags/IO/" style="font-size: 14px;">IO</a> <a href="/tags/JDK/" style="font-size: 14px;">JDK</a> <a href="/tags/JVM/" style="font-size: 14px;">JVM</a> <a href="/tags/Linux/" style="font-size: 14px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 14px;">MySQL</a> <a href="/tags/Python/" style="font-size: 14px;">Python</a> <a href="/tags/Spring/" style="font-size: 14px;">Spring</a> <a href="/tags/Zookeeper/" style="font-size: 14px;">Zookeeper</a> <a href="/tags/code/" style="font-size: 14px;">code</a> <a href="/tags/git/" style="font-size: 14px;">git</a> <a href="/tags/jmeter/" style="font-size: 14px;">jmeter</a> <a href="/tags/mac/" style="font-size: 14px;">mac</a> <a href="/tags/monitor/" style="font-size: 14px;">monitor</a> <a href="/tags/walkup/" style="font-size: 14px;">walkup</a> <a href="/tags/分布式/" style="font-size: 14px;">分布式</a> <a href="/tags/工具/" style="font-size: 14px;">工具</a> <a href="/tags/并发/" style="font-size: 14px;">并发</a> <a href="/tags/旅游/" style="font-size: 14px;">旅游</a> <a href="/tags/汇编/" style="font-size: 14px;">汇编</a> <a href="/tags/编码/" style="font-size: 14px;">编码</a>
+              </div>
+            </div>
+          </div>
+        
+      
+        
+            <div class="mobile-nav-item">
+                <a href="/about">
+                    <span>关于</span>
+                    
+                        <span class="menu-item-label">about</span>
+                    
+                </a>
+            </div>
+        
+      
+    </div>
+  </div>
+  <div class="mobile-header-nav">
+    <div class="mobile-header-item" id="mobile-left">
+      <div class="header-menu-item">
+        <span class="header-menu-line"></span>
+      </div>
+    </div>
+    <h1 class="mobile-header-title">
+      <a href="/">贰白</a>
+    </h1>
+    <div class="mobile-header-item"></div>
+  </div>
+</div>
+    <div class="container-inner">
+      <main class="main" id="main">
+        <div class="main-wrapper">
+          
+    
+  
+  <article class="
+  post
+   is_post 
+  ">
+    <header class="post-header">
+      <div class="post-time syuanpi fadeInUpShort back-1">
+        <div class="post-time-wrapper">
+          <span>2019-03-13</span>
+          
+            
+              <span class="post-category"><a href="/categories/Java/">Java</a></span>
+            
+          
+          
+            
+              <aside class="post-tags syuanpi fadeInUpShort back-3">
+              
+                <a href="/tags/monitor/">monitor</a>
+              
+              </aside>
+            
+          
+        </div>
+      </div>
+      <h1 class="post-title syuanpi fadeInUpShort back-2">
+        
+          Arthas入门
+        
+      </h1>
+    </header>
+    <div class="post-content syuanpi fadeInUpShort back-3">
+      
+        <p>Alibaba开源的Java诊断工具</p>
+<a id="more"></a>
+<p><strong>1.支持管道操作;2.<code>-h</code>查看帮助;3.<code>tab</code>自动补全;4.keymap查看快捷键;5.方向键上和下查看历史命令，或通过history命令</strong></p>
+<p>1.启动程序</p>
+<p>2.启动arthas，attach到自己的程序上</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">wget https://alibaba.github.io/arthas/arthas-boot.jar</div><div class="line"><span class="meta">#</span>阿里云镜像地址</div><div class="line">java -jar arthas-boot.jar --repo-mirror aliyun --use-http</div></pre></td></tr></table></figure>
+<p>3.输入序号,回车。attach成功后，会打印Logo</p>
+<hr>
+<h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><p><code>dashboard</code>：查看当前系统的实时数据面板</p>
+<p><code>thread</code>：打印线程栈信息<code>thread [id]</code></p>
+<p><code>jad</code>：反编译代码<code>jad demo.MathGame</code></p>
+<p><code>watch</code>：查看函数的参数/返回值/异常信息<code>watch demo.MathGame primeFactors returnObj</code></p>
+<p><code>sc</code>：查找JVM里已加载的类<code>sc -d *MathGame</code></p>
+<p><code>exit</code>或<code>quit</code>：退出当前session</p>
+<p><code>shutdown</code>：停止程序</p>
+<p><code>resert</code>：清除增强代码(Arthas在 watch/trace 等命令时，实际上是修改了应用的字节码，插入增强的代码。)</p>
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p><code>--target-ip</code>：允许外部访问</p>
+<p><code>--versions</code>：列出所有版本</p>
+<p><code>--use-version  3.1.0</code>：使用指定版本</p>
+<p><code>telnet-port 9999 --http-port -1</code>：只监听Telnet端口，不监听HTTP端口</p>
+<p><code>-v</code>：打印运行详情</p>
+<h3 id="查看JVM信息"><a href="#查看JVM信息" class="headerlink" title="查看JVM信息"></a>查看JVM信息</h3><h4 id="sysprop"><a href="#sysprop" class="headerlink" title="sysprop"></a>sysprop</h4><blockquote>
+<p>打印所有的System Properties信息</p>
+</blockquote>
+<p>也可以指定单个key： <code>sysprop java.version</code></p>
+<p>也可以通过<code>grep</code>来过滤： <code>sysprop | grep user</code></p>
+<p>可以设置新的value： <code>sysprop testKey testValue</code></p>
+<h4 id="sysenv"><a href="#sysenv" class="headerlink" title="sysenv"></a>sysenv</h4><p><code>sysenv</code> 命令可以获取到环境变量。和<code>sysprop</code>命令类似。</p>
+<h4 id="jvm"><a href="#jvm" class="headerlink" title="jvm"></a>jvm</h4><p><code>jvm</code> 命令会打印出<code>JVM</code>的各种详细信息。</p>
+<h4 id="dashboard"><a href="#dashboard" class="headerlink" title="dashboard"></a>dashboard</h4><p><code>dashboard</code> 命令可以查看当前系统的实时数据面板。</p>
+<p>输入 <code>Q</code> 或者 <code>Ctrl+C</code> 可以退出dashboard命令。</p>
+<h3 id="sc-sm-查看已加载的类"><a href="#sc-sm-查看已加载的类" class="headerlink" title="sc/sm 查看已加载的类"></a>sc/sm 查看已加载的类</h3><h4 id="sc"><a href="#sc" class="headerlink" title="sc"></a>sc</h4><p><code>sc</code> 命令可以查找到所有JVM已经加载到的类。</p>
+<p>如果搜索的是接口，还会搜索所有的实现类。比如查看所有的<code>Filter</code>实现类：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sc javax.servlet.Filter</div></pre></td></tr></table></figure>
+<p>通过<code>-d</code>参数，可以打印出类加载的具体信息，很方便查找类加载问题。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sc -d javax.servlet.Filter</div></pre></td></tr></table></figure>
+<p><code>sc</code>支持通配，比如搜索所有的<code>StringUtils</code>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sc *StringUtils</div></pre></td></tr></table></figure>
+<h4 id="sm"><a href="#sm" class="headerlink" title="sm"></a>sm</h4><p><code>sm</code>命令则是查找类的具体函数。比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sm java.math.RoundingMode</div></pre></td></tr></table></figure>
+<p>通过<code>-d</code>参数可以打印函数的具体属性：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sm -d java.math.RoundingMode</div></pre></td></tr></table></figure>
+<p>也可以查找特定的函数，比如查找构造函数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sm java.math.RoundingMode &lt;init&gt;</div></pre></td></tr></table></figure>
+<h3 id="Jad"><a href="#Jad" class="headerlink" title="Jad"></a>Jad</h3><p>可以通过 <code>jad</code> 命令来反编译代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">jad com.example.demo.arthas.user.UserController</div></pre></td></tr></table></figure>
+<p>通过<code>--source-only</code>参数可以只打印出在反编译的源代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">jad --source-only com.example.demo.arthas.user.UserController</div></pre></td></tr></table></figure>
+<h3 id="Ognl"><a href="#Ognl" class="headerlink" title="Ognl"></a>Ognl</h3><p>在Arthas里，有一个单独的<code>ognl</code>命令，可以动态执行代码。</p>
+<h4 id="调用static函数"><a href="#调用static函数" class="headerlink" title="调用static函数"></a>调用static函数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ognl &apos;@java.lang.System@out.println(&quot;hello ognl&quot;)&apos;</div></pre></td></tr></table></figure>
+<p>可以检查<code>Terminal 1</code>里的进程输出，可以发现打印出了<code>hello ognl</code>。</p>
+<h4 id="获取静态类的静态字段"><a href="#获取静态类的静态字段" class="headerlink" title="获取静态类的静态字段"></a>获取静态类的静态字段</h4><p>获取<code>UserController</code>类里的<code>logger</code>字段：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ognl -c 1be6f5c3 @com.example.demo.arthas.user.UserController@logger</div></pre></td></tr></table></figure>
+<p>还可以通过<code>-x</code>参数控制返回值的展开层数。比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ognl -c 1be6f5c3 -x 2 @com.example.demo.arthas.user.UserController@logger</div></pre></td></tr></table></figure>
+<h4 id="执行多行表达式，赋值给临时变量，返回一个List"><a href="#执行多行表达式，赋值给临时变量，返回一个List" class="headerlink" title="执行多行表达式，赋值给临时变量，返回一个List"></a>执行多行表达式，赋值给临时变量，返回一个List</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">ognl &apos;#value1=@System@getProperty(&quot;java.home&quot;), #value2=@System@getProperty(&quot;java.runtime.name&quot;), &#123;#value1, #value2&#125;&apos;</div><div class="line">$ ognl &apos;#value1=@System@getProperty(&quot;java.home&quot;), #value2=@System@getProperty(&quot;java.runtime.name&quot;), &#123;#value1, #value2&#125;&apos;</div><div class="line">@ArrayList[</div><div class="line">    @String[/Library/Java/JavaVirtualMachines/jdk1.8.0_162.jdk/Contents/Home/jre],</div><div class="line">    @String[Java(TM) SE Runtime Environment],</div><div class="line">]</div></pre></td></tr></table></figure>
+<h4 id="更多"><a href="#更多" class="headerlink" title="更多"></a>更多</h4><p>在Arthas里<code>ognl</code>表达式是很重要的功能，在很多命令里都可以使用<code>ognl</code>表达式。</p>
+<p>一些更复杂的用法，可以参考：</p>
+<ul>
+<li>OGNL特殊用法请参考：<a href="https://github.com/alibaba/arthas/issues/71" target="_blank" rel="external">https://github.com/alibaba/arthas/issues/71</a></li>
+<li>OGNL表达式官方指南：<a href="https://commons.apache.org/proper/commons-ognl/language-guide.html" target="_blank" rel="external">https://commons.apache.org/proper/commons-ognl/language-guide.html</a></li>
+</ul>
+<h3 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h3><h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h4><p><code>watch com.xxx.UserController * &#39;{params,throwExp} -x 2</code></p>
+<p>结构：watch 类名 函数名 返回值表达式  展开结果</p>
+<p><a href="https://alibaba.github.io/arthas/advice-class.html" target="_blank" rel="external">返回值表达式</a>可选值如下：</p>
+<ul>
+<li>loader</li>
+<li>clazz</li>
+<li>method</li>
+<li>target</li>
+<li>params</li>
+<li>returnObj</li>
+<li>throwExp</li>
+<li>isBefore</li>
+<li>isThrow</li>
+<li>isReturn</li>
+</ul>
+<h4 id="条件表达式"><a href="#条件表达式" class="headerlink" title="条件表达式"></a>条件表达式</h4><p>当第一个参数大于100时才打印结果</p>
+<p><code>watch com.example.demo.arthas.user.UserController * returnObj &#39;params[0] &gt; 100</code></p>
+<h4 id="捕获异常"><a href="#捕获异常" class="headerlink" title="捕获异常"></a>捕获异常</h4><p><code>watch</code>命令支持<code>-e</code>选项，表示只捕获抛出异常时的请求：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">watch com.example.demo.arthas.user.UserController * &quot;&#123;params[0],throwExp&#125;&quot; -e</div></pre></td></tr></table></figure>
+<h4 id="按照耗时进行过滤"><a href="#按照耗时进行过滤" class="headerlink" title="按照耗时进行过滤"></a>按照耗时进行过滤</h4><p><code>watch</code>命令支持按请求耗时进行过滤，比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">watch com.example.demo.arthas.user.UserController * &apos;&#123;params, returnObj&#125;&apos; &apos;#cost&gt;200&apos;</div></pre></td></tr></table></figure>
+<h3 id="热更新代码"><a href="#热更新代码" class="headerlink" title="热更新代码"></a>热更新代码</h3><p>保存反编译文件</p>
+<p><code>jad --source-only com.example.demo.arthas.user.UserController &gt; /tmp/UserController.java</code></p>
+<p>查找ClassLoader</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sc -d *UserController | grep classLoaderHash</div><div class="line">classLoaderHash   1be6f5c3</div></pre></td></tr></table></figure>
+<p>修改反编译文件后，重新编译</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> mc -c 1be6f5c3 /tmp/UserController.java -d /tmp</div><div class="line">Memory compiler output:</div><div class="line">/tmp/com/example/demo/arthas/user/UserController.class</div><div class="line">Affect(row-cnt:1) cost in 346 ms</div></pre></td></tr></table></figure>
+<p>重新加载新编译后的文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">redefine /tmp/com/example/demo/arthas/user/UserController.class</div><div class="line">redefine success, size: 1</div></pre></td></tr></table></figure>
+<h3 id="动态更新日志级别"><a href="#动态更新日志级别" class="headerlink" title="动态更新日志级别"></a>动态更新日志级别</h3><p>查找ClassLoader</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sc -d com.example.demo.arthas.user.UserController | grep classLoaderHash</div><div class="line">classLoaderHash   1be6f5c3</div></pre></td></tr></table></figure>
+<p>用ognl获取logger</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> ognl -c 1be6f5c3 '@com.example.demo.arthas.user.UserController@logger'</div><div class="line">@Logger[</div><div class="line">    serialVersionUID=@Long[5454405123156820674],</div><div class="line">    FQCN=@String[ch.qos.logback.classic.Logger],</div><div class="line">    name=@String[com.example.demo.arthas.user.UserController],</div><div class="line">    level=null,</div><div class="line">    effectiveLevelInt=@Integer[20000],</div><div class="line">    parent=@Logger[Logger[com.example.demo.arthas.user]],</div><div class="line">    childrenList=null,</div><div class="line">    aai=null,</div><div class="line">    additive=@Boolean[true],</div><div class="line">    loggerContext=@LoggerContext[ch.qos.logback.classic.LoggerContext[default]],</div><div class="line">]</div></pre></td></tr></table></figure>
+<p>可以通过loggerContext看出来使用的是logback，并且通过level看出来没有设置级别</p>
+<p>单独设置某类的级别</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ognl -c 1be6f5c3 '@com.example.demo.arthas.user.UserController@logger.setLevel(@ch.qos.logback.classic.Level@DEBUG)'</div></pre></td></tr></table></figure>
+<p>修改全局日志级别</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ognl -c 1be6f5c3 '@org.slf4j.LoggerFactory@getLogger("root").setLevel(@ch.qos.logback.classic.Level@DEBUG)'</div></pre></td></tr></table></figure>
+<h3 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h3><h4 id="查看所有线程信息"><a href="#查看所有线程信息" class="headerlink" title="查看所有线程信息"></a>查看所有线程信息</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">thread</div></pre></td></tr></table></figure>
+<h4 id="查看具体线程的栈"><a href="#查看具体线程的栈" class="headerlink" title="查看具体线程的栈"></a>查看具体线程的栈</h4><p>查看线程ID 16的栈：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">thread 16</div></pre></td></tr></table></figure>
+<h4 id="查看CPU使用率top-n线程的栈"><a href="#查看CPU使用率top-n线程的栈" class="headerlink" title="查看CPU使用率top n线程的栈"></a>查看CPU使用率top n线程的栈</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">thread -n 3</div></pre></td></tr></table></figure>
+<p>查看5秒内的CPU使用率top n线程栈</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">thread -n 3 -i 5000</div></pre></td></tr></table></figure>
+<h4 id="查找线程是否有阻塞"><a href="#查找线程是否有阻塞" class="headerlink" title="查找线程是否有阻塞"></a>查找线程是否有阻塞</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">thread -b</div></pre></td></tr></table></figure>
+<h3 id="Web-Console"><a href="#Web-Console" class="headerlink" title="Web Console"></a>Web Console</h3><p>通过Web Socket访问Arthas：<code>http://localhost:8563</code></p>
+<h3 id="参考文件"><a href="#参考文件" class="headerlink" title="参考文件"></a>参考文件</h3><p><a href="https://alibaba.github.io/arthas/arthas-tutorials?language=cn&amp;id=arthas-basics" target="_blank" rel="external">Arthas Tutorials</a></p>
+<p><a href="https://alibaba.github.io/arthas/commands.html" target="_blank" rel="external">Arthas命令</a></p>
+<p><a href="https://alibaba.github.io/arthas/arthas-tutorials?language=cn&amp;id=arthas-advanced" target="_blank" rel="external">Katacoda在线学习</a></p>
+
+      
+    
+    </div>
+    
+      
+  <div class="post-reward">
+    <span class="reward-btn" id="reward-btn">点这里</span>
+    <div class="reward-wrapper syuanpi" id="reward-wrapper" style="display:none;">
+      
+      <div class="reward-item reward-alipay">
+        <img src="https://wx3.sinaimg.cn/mw690/8c564d2aly1ftkt83thjlj20o60skjzn.jpg">
+      </div>
+      
+    </div>
+  </div>
+
+
+      
+    
+  </article>
+  
+    
+  <nav class="article-page">
+    
+    
+      <a href="/JDK/Traversal.html" id="art-right" class="art-right">
+        <span class="prev-title"> 
+          集合遍历<i class="iconfont icon-right"></i>  
+        </span>
+      </a>
+    
+  </nav>
+
+    
+  <i id="com-switch" class="iconfont icon-more jumping-in long infinite" style="font-size:24px;display:block;text-align:center;transform:rotate(180deg);"></i>
+  <div class="post-comments" id="post-comments" style="display: block;margin: auto 16px;">
+    
+<!-- Gitment Comments -->
+<div id="gitment"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  owner: "super2bai",
+  repo: 'comment',
+  oauth: {
+    client_id: '37f2293730b41dcb5276',
+    client_secret: 'dbab4955840d4cbc88f1563be04ab676662194e5',
+  },
+})
+gitment.render('gitment')
+</script>
+
+    
+    
+
+  </div>
+
+
+  
+  
+    
+  
+  <aside class="post-toc">
+    <span class="title" id="toc-switch"><span>文章导航</span></span>
+    <div class="toc-inner syuanpi back-1" style="display:none;">
+      <li class="title-link"><a href="javascript:;" class="toTop">Arthas入门</a></li>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#常用命令"><span class="toc-text">常用命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参数"><span class="toc-text">参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查看JVM信息"><span class="toc-text">查看JVM信息</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#sysprop"><span class="toc-text">sysprop</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#sysenv"><span class="toc-text">sysenv</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#jvm"><span class="toc-text">jvm</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#dashboard"><span class="toc-text">dashboard</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sc-sm-查看已加载的类"><span class="toc-text">sc/sm 查看已加载的类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#sc"><span class="toc-text">sc</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#sm"><span class="toc-text">sm</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Jad"><span class="toc-text">Jad</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Ognl"><span class="toc-text">Ognl</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#调用static函数"><span class="toc-text">调用static函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#获取静态类的静态字段"><span class="toc-text">获取静态类的静态字段</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#执行多行表达式，赋值给临时变量，返回一个List"><span class="toc-text">执行多行表达式，赋值给临时变量，返回一个List</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#更多"><span class="toc-text">更多</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实践"><span class="toc-text">实践</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#概述"><span class="toc-text">概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#条件表达式"><span class="toc-text">条件表达式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#捕获异常"><span class="toc-text">捕获异常</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#按照耗时进行过滤"><span class="toc-text">按照耗时进行过滤</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#热更新代码"><span class="toc-text">热更新代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#动态更新日志级别"><span class="toc-text">动态更新日志级别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#线程"><span class="toc-text">线程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#查看所有线程信息"><span class="toc-text">查看所有线程信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查看具体线程的栈"><span class="toc-text">查看具体线程的栈</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查看CPU使用率top-n线程的栈"><span class="toc-text">查看CPU使用率top n线程的栈</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查找线程是否有阻塞"><span class="toc-text">查找线程是否有阻塞</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Web-Console"><span class="toc-text">Web Console</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考文件"><span class="toc-text">参考文件</span></a></li></ol>
+    </div>
+  </aside>
+
+
+
+  
+
+
+        </div>
+      </main>
+
+      <footer class="footer syuanpi fadeIn" id="footer">
+  <hr>
+  <div class="footer-wrapper">
+    <div class="left">
+      <div class="contact-icon">
+    
+    
+    
+    
+    
+    
+    
+    
+        
+            <a href="https://github.com/super2bai" class="iconfont icon-github" title="github"></a>
+        
+        
+        
+        
+        
+        
+        
+    
+</div>
+    </div>
+    <div class="right">
+      <div class="copyright">
+    <div class="info">
+        <span>&copy;</span>
+        <span>2017 ~ 2019</span>
+        <span>❤</span>
+        <span>super2bai</span>
+    </div>
+    <div class="theme">
+        <span>
+            动力来源于
+            <a href="http://hexo.io/" target="_blank">Hexo </a>
+        </span>
+        <span>
+            主题
+            <a href="https://github.com/ColMugX/hexo-theme-Nlvi"> Nlvi </a>
+        </span>
+    </div>
+    
+    <div class="visit_count">
+        <i class="iconfont icon-visit"></i>
+        <span id="busuanzi_value_site_uv"></span>
+        <i class="iconfont icon-people"></i>
+        <span id="busuanzi_value_site_pv"></span>
+    </div>
+    
+</div>
+
+    </div>
+  </div>
+</footer>
+    </div>
+  </div>
+  <script src="/script/lib/jquery/jquery-3.2.1.min.js"></script>
+
+
+  <script src="/script/lib/lightbox/js/lightbox.min.js"></script>
+
+
+
+
+
+
+
+
+<script src="/script/src/nlvi.js"></script>
+
+  <script src="/script/scheme/banderole.js"></script>
+
+<script src="/script/bootstarp.js"></script>
+
+
+<div class="backtop syuanpi melt toTop" id="backtop">
+    <i class="iconfont icon-up"></i>
+    <span style="text-align:center;font-family:Georgia;"><span style="font-family:Georgia;" id="scrollpercent">1</span>%</span>
+</div>
+
+
+
+</body>
+</html>
