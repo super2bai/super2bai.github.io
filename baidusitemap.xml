@@ -4,8 +4,28 @@
 
     
   <url>
+    <loc>https://super2bai.github.io/JDK/equals.html</loc>
+    <lastmod>2019-03-21T10:24:39.501Z</lastmod>
+    <data>
+        <display>
+        <title>如何覆盖equals方法</title>
+        <pubTime>2019-03-18T10:23:19.000Z</pubTime>
+        
+        <tag>JDK</tag>
+         
+         
+           
+             
+              <breadCrumb title="JDK" url="https://super2bai.github.io/categories/JDK/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://super2bai.github.io/MySQL/reason.html</loc>
-    <lastmod>2019-03-14T09:57:33.822Z</lastmod>
+    <lastmod>2019-03-14T09:59:04.182Z</lastmod>
     <data>
         <display>
         <title>SQL语句优化-原因</title>
