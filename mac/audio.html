@@ -76,11 +76,9 @@
 
 
 
-  <title>
-  
-    归档 · 贰白
-  
-</title>
+  <meta name="keywords" content="mac, Nlvi" />
+
+  <title> mac没有声音 · 贰白 </title>
 </head>
 <body>
   <div class="progress">
@@ -243,99 +241,140 @@
         <div class="main-wrapper">
           
     
-    <div class="archive syuanpi fadeInUp" id="archive">
-        
-            <h1 class="archive-title">Total</h1>
-            <span class="archive-num">一共有 94 篇文章</span>
-        
-        <div class="archive-list">
-            <ul>
-        
+  
+  <article class="
+  post
+   is_post 
+  ">
+    <header class="post-header">
+      <div class="post-time syuanpi fadeInUpShort back-1">
+        <div class="post-time-wrapper">
+          <span>2019-04-23</span>
+          
             
-                
-                
-                
-                    
-                     
-                        <h2 class="archive-year"> 2018 </h2>
-                    
-                
+              <span class="post-category"><a href="/categories/mac/">mac</a></span>
             
+          
+          
             
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    10-28
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/MySQL/fieldType.html">MySQL中Text与Varchar</a>
-                </span>
-            </li>
-
-        
+              <aside class="post-tags syuanpi fadeInUpShort back-3">
+              
+                <a href="/tags/mac/">mac</a>
+              
+              </aside>
             
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    10-27
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/JDK/stream.html">Java8-Stream</a>
-                </span>
-            </li>
-
-        
-            
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    10-25
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/JVM/callMethod.html">方法调用</a>
-                </span>
-            </li>
-
-        
-            
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    10-10
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/JVM/stackFrame.html">运行时栈帧结构</a>
-                </span>
-            </li>
-
-        
-            </ul>
+          
         </div>
+      </div>
+      <h1 class="post-title syuanpi fadeInUpShort back-2">
+        
+          mac没有声音
+        
+      </h1>
+    </header>
+    <div class="post-content syuanpi fadeInUpShort back-3">
+      
+        <p>想听歌，插上耳机，还是一片安静</p>
+<a id="more"></a>
+<ul>
+<li>检查音乐软件是否为静音，调整声音</li>
+<li><p>检查电脑音量</p>
+</li>
+<li><p>检查输出设备是否为耳机</p>
+<ul>
+<li>点击屏幕上方小喇叭图标，查看Output device，显示Headphones</li>
+<li>如果输出设备是显示器，修改为耳机</li>
+</ul>
+</li>
+<li>一切皆正常</li>
+</ul>
+<p>解决办法一：</p>
+<ul>
+<li>电源线插拔一下</li>
+</ul>
+<p>解决办法二：</p>
+<ul>
+<li>控制台执行命令：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">killall coreaudiod</div></pre></td></tr></table></figure>
+<blockquote>
+<p>有时候 Mac 从睡眠状态恢复之后没有声音，这是 Mac OS X 系统的一个 Bug。这是因为 Mac OS X 的核心音频守护进程「coreaudiod」出了问题，虽然简单的重启电脑就能解决，但是如果此时开启了很多程序后者有其他情况不想重启电脑的话，可以按照下面的方法解决此问题。</p>
+</blockquote>
+
+      
+    
     </div>
     
-  <nav class="pagination">
-      <span class="page-number current">1</span>
+      
+  <div class="post-reward">
+    <span class="reward-btn" id="reward-btn">点这里</span>
+    <div class="reward-wrapper syuanpi" id="reward-wrapper" style="display:none;">
+      
+      <div class="reward-item reward-alipay">
+        <img src="https://wx3.sinaimg.cn/mw690/8c564d2aly1ftkt83thjlj20o60skjzn.jpg">
+      </div>
+      
+    </div>
+  </div>
+
+
+      
+    
+  </article>
+  
+    
+  <nav class="article-page">
+    
+    
+      <a href="/JDK/equals.html" id="art-right" class="art-right">
+        <span class="prev-title"> 
+          如何覆盖equals方法<i class="iconfont icon-right"></i>  
+        </span>
+      </a>
+    
   </nav>
 
+    
+  <i id="com-switch" class="iconfont icon-more jumping-in long infinite" style="font-size:24px;display:block;text-align:center;transform:rotate(180deg);"></i>
+  <div class="post-comments" id="post-comments" style="display: block;margin: auto 16px;">
+    
+<!-- Gitment Comments -->
+<div id="gitment"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  owner: "super2bai",
+  repo: 'comment',
+  oauth: {
+    client_id: '37f2293730b41dcb5276',
+    client_secret: 'dbab4955840d4cbc88f1563be04ab676662194e5',
+  },
+})
+gitment.render('gitment')
+</script>
+
+    
+    
+
+  </div>
+
+
+  
+  
+    
+  
+  <aside class="post-toc">
+    <span class="title" id="toc-switch"><span>文章导航</span></span>
+    <div class="toc-inner syuanpi back-1" style="display:none;">
+      <li class="title-link"><a href="javascript:;" class="toTop">mac没有声音</a></li>
+      
+    </div>
+  </aside>
+
+
+
+  
 
 
         </div>
