@@ -76,11 +76,9 @@
 
 
 
-  <title>
-  
-    MySQL · 贰白
-  
-</title>
+  <meta name="keywords" content="MySQL, Nlvi" />
+
+  <title> mysql修改用户名和密码 · 贰白 </title>
 </head>
 <body>
   <div class="progress">
@@ -243,106 +241,122 @@
         <div class="main-wrapper">
           
     
-    <div class="archive syuanpi fadeInUp" id="archive">
-        
-            <h2 class="archive-title"> 正在查看 </h2>
-            <span class="archive-name"> — MySQL</span>
-        
-        <div class="archive-list">
-            <ul>
-        
+  
+  <article class="
+  post
+   is_post 
+  ">
+    <header class="post-header">
+      <div class="post-time syuanpi fadeInUpShort back-1">
+        <div class="post-time-wrapper">
+          <span>2019-05-20</span>
+          
             
+              <span class="post-category"><a href="/categories/MySQL/">MySQL</a></span>
             
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    2019-05-20
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/MySQL/update.html">mysql修改用户名和密码</a>
-                </span>
-            </li>
-
-        
+          
+          
             
+              <aside class="post-tags syuanpi fadeInUpShort back-3">
+              
+                <a href="/tags/MySQL/">MySQL</a>
+              
+              </aside>
             
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    2019-02-24
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/MySQL/reason.html">SQL语句优化-原因</a>
-                </span>
-            </li>
-
-        
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    2019-02-14
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/MySQL/optimization.html">SQL语句优化</a>
-                </span>
-            </li>
-
-        
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    2018-11-30
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/MySQL/frm.html">Mac访问MySQL的Data文件夹</a>
-                </span>
-            </li>
-
-        
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    2018-11-01
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/MySQL/sort.html">MySQL编码及排序规则</a>
-                </span>
-            </li>
-
-        
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    2018-10-28
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/MySQL/fieldType.html">MySQL中Text与Varchar</a>
-                </span>
-            </li>
-
-        
-            </ul>
+          
         </div>
+      </div>
+      <h1 class="post-title syuanpi fadeInUpShort back-2">
+        
+          mysql修改用户名和密码
+        
+      </h1>
+    </header>
+    <div class="post-content syuanpi fadeInUpShort back-3">
+      
+        <p>首先，登录，MySQL。</p>
+<p><strong>修改用户名：</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">use</span> mysql;</div><div class="line"><span class="keyword">update</span> <span class="keyword">user</span> <span class="keyword">set</span> <span class="keyword">user</span>=<span class="string">"newUserName"</span> <span class="keyword">where</span> <span class="keyword">user</span>=<span class="string">"oldUserName"</span>;</div></pre></td></tr></table></figure>
+<p><strong>修改密码：</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">set</span> <span class="keyword">password</span> <span class="keyword">for</span> 用户名@localhost = <span class="keyword">password</span>(<span class="string">'新密码'</span>);</div></pre></td></tr></table></figure>
+<p><strong>修改端口：</strong></p>
+<p>在MySQL安装目录找到<code>my.ini</code>配置文件</p>
+<p>找到<code>port=3306</code>，修改为想要改成的端口号，重启MySQL服务即可生效。</p>
+
+      
+    
     </div>
     
-  <nav class="pagination">
-      <span class="page-number current">1</span>
+      
+  <div class="post-reward">
+    <span class="reward-btn" id="reward-btn">点这里</span>
+    <div class="reward-wrapper syuanpi" id="reward-wrapper" style="display:none;">
+      
+      <div class="reward-item reward-alipay">
+        <img src="https://wx3.sinaimg.cn/mw690/8c564d2aly1ftkt83thjlj20o60skjzn.jpg">
+      </div>
+      
+    </div>
+  </div>
+
+
+      
+    
+  </article>
+  
+    
+  <nav class="article-page">
+    
+    
+      <a href="/git/rename.html" id="art-right" class="art-right">
+        <span class="prev-title"> 
+          git rename branch<i class="iconfont icon-right"></i>  
+        </span>
+      </a>
+    
   </nav>
 
+    
+  <i id="com-switch" class="iconfont icon-more jumping-in long infinite" style="font-size:24px;display:block;text-align:center;transform:rotate(180deg);"></i>
+  <div class="post-comments" id="post-comments" style="display: block;margin: auto 16px;">
+    
+<!-- Gitment Comments -->
+<div id="gitment"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  owner: "super2bai",
+  repo: 'comment',
+  oauth: {
+    client_id: '37f2293730b41dcb5276',
+    client_secret: 'dbab4955840d4cbc88f1563be04ab676662194e5',
+  },
+})
+gitment.render('gitment')
+</script>
+
+    
+    
+
+  </div>
+
+
+  
+  
+    
+  
+  <aside class="post-toc">
+    <span class="title" id="toc-switch"><span>文章导航</span></span>
+    <div class="toc-inner syuanpi back-1" style="display:none;">
+      <li class="title-link"><a href="javascript:;" class="toTop">mysql修改用户名和密码</a></li>
+      
+    </div>
+  </aside>
+
+
+
+  
 
 
         </div>
