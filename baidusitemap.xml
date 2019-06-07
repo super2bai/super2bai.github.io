@@ -4,8 +4,28 @@
 
     
   <url>
+    <loc>https://super2bai.github.io/book/csj.html</loc>
+    <lastmod>2019-06-07T14:37:41.012Z</lastmod>
+    <data>
+        <display>
+        <title>《褚时健传》读书笔记</title>
+        <pubTime>2019-06-07T14:31:31.000Z</pubTime>
+        
+        <tag>book</tag>
+         
+         
+           
+             
+              <breadCrumb title="book" url="https://super2bai.github.io/categories/book/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://super2bai.github.io/MySQL/update.html</loc>
-    <lastmod>2019-05-20T09:51:28.640Z</lastmod>
+    <lastmod>2019-06-04T09:57:25.146Z</lastmod>
     <data>
         <display>
         <title>mysql修改用户名和密码</title>
