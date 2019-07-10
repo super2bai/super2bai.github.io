@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>https://super2bai.github.io/git/branch.html</loc>
+    <lastmod>2019-07-10T09:35:54.131Z</lastmod>
+    <data>
+        <display>
+        <title>Git分支操作</title>
+        <pubTime>2019-04-28T06:41:19.000Z</pubTime>
+        
+        <tag>git</tag>
+         
+         
+           
+             
+              <breadCrumb title="git" url="https://super2bai.github.io/categories/git/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://super2bai.github.io/idea/eliminateYellowLine.html</loc>
     <lastmod>2019-07-10T03:07:02.378Z</lastmod>
     <data>
@@ -117,26 +137,6 @@
            
              
               <breadCrumb title="MySQL" url="https://super2bai.github.io/categories/MySQL/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://super2bai.github.io/git/rename.html</loc>
-    <lastmod>2019-04-28T06:42:42.936Z</lastmod>
-    <data>
-        <display>
-        <title>git rename branch</title>
-        <pubTime>2019-04-28T06:41:19.000Z</pubTime>
-        
-        <tag>git</tag>
-         
-         
-           
-             
-              <breadCrumb title="git" url="https://super2bai.github.io/categories/git/"/>
           
         </display>
     </data>
