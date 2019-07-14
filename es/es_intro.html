@@ -76,9 +76,9 @@
 
 
 
-  <meta name="keywords" content="idea, Nlvi" />
+  <meta name="keywords" content="es, Nlvi" />
 
-  <title> 消除mapper中的黄线 · 贰白 </title>
+  <title> Elasticsearch介绍 · 贰白 </title>
 </head>
 <body>
   <div class="progress">
@@ -249,17 +249,17 @@
     <header class="post-header">
       <div class="post-time syuanpi fadeInUpShort back-1">
         <div class="post-time-wrapper">
-          <span>2019-06-17</span>
+          <span>2019-07-03</span>
           
             
-              <span class="post-category"><a href="/categories/idea/">idea</a></span>
+              <span class="post-category"><a href="/categories/es/">es</a></span>
             
           
           
             
               <aside class="post-tags syuanpi fadeInUpShort back-3">
               
-                <a href="/tags/idea/">idea</a>
+                <a href="/tags/es/">es</a>
               
               </aside>
             
@@ -268,25 +268,95 @@
       </div>
       <h1 class="post-title syuanpi fadeInUpShort back-2">
         
-          消除mapper中的黄线
+          Elasticsearch介绍
         
       </h1>
     </header>
     <div class="post-content syuanpi fadeInUpShort back-3">
       
-        <p>写个Mapper文件也要像输入验证码一样一堆干扰线嘛</p>
+        <p>先跑起来再说</p>
 <a id="more"></a>
-<p>IntelliJ IDEA 打开 MyBatis的mapper文件时，总有黄色的警告。警告有<code>No data sources configure</code>和<code>SQL dialect is not configured</code>，按照下列步骤操作即可消除。</p>
+<h3 id="What"><a href="#What" class="headerlink" title="What"></a>What</h3><p>Elasticsearch是一个基于<a href="https://lucene.apache.org/core/" target="_blank" rel="external">Apache Lucene(TM)</a>的开源搜索引擎。</p>
+<h3 id="Why"><a href="#Why" class="headerlink" title="Why"></a>Why</h3><p>Elasticsearch使用Java开发并使用Lucene作为其核心来实现所有索引和搜索的功能，但是它的目的是通过简单的<code>RESTful API</code>来隐藏Lucene的复杂性，从而让全文搜索变得简单。</p>
+<p>Elasticsearch不仅仅是Lucene和全文搜索，还支持：</p>
 <ul>
-<li>Settings</li>
-<li>Editor</li>
-<li>Inspections</li>
-<li>右侧搜索SQL</li>
-<li>取消No data sources configured勾选</li>
-<li>取消SQL Dialect detection勾选</li>
-<li>Apply</li>
-<li>OK</li>
+<li>分布式的实时文件存储，每个字段都被索引并可被搜索</li>
+<li>分布式的实时分析搜索引擎</li>
+<li>可以扩展到上百台服务器，处理PB级结构化或非结构化数据</li>
 </ul>
+<p>Elasticsearch在<a href="http://www.apache.org/licenses/LICENSE-2.0.html" target="_blank" rel="external">Apache 2 license</a>下许可使用，可以免费下载、使用和修改。</p>
+<p>定制高级特性，都一切都是可以灵活配置的。</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><h4 id="安装包"><a href="#安装包" class="headerlink" title="安装包"></a>安装包</h4><p><a href="https://www.elastic.co/downloads/elasticsearch" target="_blank" rel="external">Mac安装Elasticsearch</a></p>
+<h4 id="homebrew-方式安装："><a href="#homebrew-方式安装：" class="headerlink" title="homebrew 方式安装："></a><code>homebrew</code> 方式安装：</h4><ul>
+<li>To install with Homebrew, you first need to tap the Elastic Homebrew repository:</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew tap elastic/tap</div></pre></td></tr></table></figure>
+<ul>
+<li>Once you’ve tapped the Elastic Homebrew repo, you can use <code>brew install</code> to install the default distribution of Elasticsearch:</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install elastic/tap/elasticsearch-full</div></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>有可能会报错：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt; Install the Command Line Tools:</div><div class="line">&gt; xcode-select --install</div><div class="line">&gt;</div></pre></td></tr></table></figure>
+</blockquote>
+<p>&gt;</p>
+<blockquote>
+<p>那就执行对应命令就可以啦：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; xcode-select --installs</div><div class="line">&gt;</div></pre></td></tr></table></figure>
+</blockquote>
+<p>&gt;</p>
+<blockquote>
+<ul>
+<li>还有可能会报错</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt; future versions of Elasticsearch will require Java 11; your Java version from [/Library/Java/JavaVirtualMachines/jdk-9.0.1.jdk/Contents/Home] does not meet this requirement</div><div class="line">&gt; Exception in thread &quot;main&quot; java.lang.RuntimeException: starting java failed with [1]</div><div class="line">&gt;</div></pre></td></tr></table></figure>
+</blockquote>
+<p>&gt;</p>
+<blockquote>
+<p>那就安装高版本的JDK咯：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; brew cask install java</div><div class="line">&gt;</div></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="路径说明"><a href="#路径说明" class="headerlink" title="路径说明"></a>路径说明</h3><p><strong>以下为brew安装的对应路径，如果直接下载的安装包，则进入根路径下查看所有目录</strong></p>
+<p><strong>home</strong>：Elasticsearch 根目录 -&gt; <code>$ES_HOME</code></p>
+<p><code>/usr/local/var/homebrew/linked/elasticsearch-full</code></p>
+<p><strong>bin</strong>：启动一个节点或安装插件的二进制脚本</p>
+<p><code>/usr/local/var/homebrew/linked/elasticsearch-full/bin</code></p>
+<p><strong>config</strong>：配置文件(<code>elasticsearch.yml</code>)</p>
+<p><code>/usr/local/etc/elasticsearch</code></p>
+<p><strong>data</strong>：每一个索引的数据文件/在节点上分配的分片。可以容纳多个位置</p>
+<p><code>/usr/local/var/lib/elasticsearch</code></p>
+<p><strong>logs</strong>：日志文件</p>
+<p><code>/usr/local/var/log/elasticsearch</code></p>
+<p><strong>plugin</strong>：插件目录。每一个插件都有一个子目录。</p>
+<p><code>/usr/local/var/homebrew/linked/elasticsearch/plugins</code></p>
+<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><ul>
+<li>如果用<code>homebrew</code>方式安装，直接输入<code>elasticsearch</code>即可启动。</li>
+<li>安装包方式： <code>bin/elasticsearch</code></li>
+</ul>
+<p>启动成功后，访问<code>http://localhost:9200</code>，会输出：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">"name"</span>: <span class="string">"username"</span>,</div><div class="line">    <span class="attr">"cluster_name"</span>: <span class="string">"elasticsearch_username"</span>,</div><div class="line">    <span class="attr">"cluster_uuid"</span>: <span class="string">"dca-l0K_QF2xP_JHi5iqtA"</span>,</div><div class="line">    <span class="attr">"version"</span>: &#123;</div><div class="line">        <span class="attr">"number"</span>: <span class="string">"7.2.0"</span>,</div><div class="line">        <span class="attr">"build_flavor"</span>: <span class="string">"default"</span>,</div><div class="line">        <span class="attr">"build_type"</span>: <span class="string">"tar"</span>,</div><div class="line">        <span class="attr">"build_hash"</span>: <span class="string">"508c38a"</span>,</div><div class="line">        <span class="attr">"build_date"</span>: <span class="string">"2019-06-20T15:54:18.811730Z"</span>,</div><div class="line">        <span class="attr">"build_snapshot"</span>: <span class="literal">false</span>,</div><div class="line">        <span class="attr">"lucene_version"</span>: <span class="string">"8.0.0"</span>,</div><div class="line">        <span class="attr">"minimum_wire_compatibility_version"</span>: <span class="string">"6.8.0"</span>,</div><div class="line">        <span class="attr">"minimum_index_compatibility_version"</span>: <span class="string">"6.0.0-beta1"</span></div><div class="line">    &#125;,</div><div class="line">    <span class="attr">"tagline"</span>: <span class="string">"You Know, for Search"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>说明Elasticsearch集群已经启动并且正常运行，接下来就可以进行各种试验了。</p>
+<h3 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h3><h4 id="查看插件列表"><a href="#查看插件列表" class="headerlink" title="查看插件列表"></a>查看插件列表</h4><p><code>elasticsearch-plugin list</code></p>
+<h4 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h4><p><code>elasticsearch-plugin install pluginName</code></p>
+<h4 id="移除插件"><a href="#移除插件" class="headerlink" title="移除插件"></a>移除插件</h4><p><code>elasticsearch-plugin remove pluginName</code></p>
+<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><ul>
+<li>安装分词插件：<code>bin/elasticsearch-plugin install analysis-icu</code></li>
+<li>运行：<code>bin/elasticsearch</code></li>
+<li>查看：<code>http://localhost:9200/_cat/plugins</code></li>
+<li>输出：<code>username analysis-icu 7.2.0</code></li>
+</ul>
+<h4 id="集群运行"><a href="#集群运行" class="headerlink" title="集群运行"></a>集群运行</h4><ul>
+<li>执行命令</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bin/elasticsearch -E node.name=节点名称 -E cluster.name=集群名称 -E path.data=节点对应数据 -d</div></pre></td></tr></table></figure>
+<ul>
+<li>查看节点</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://localhost:9200/_cat/nodes?v</div></pre></td></tr></table></figure>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p><a href="https://www.elastic.co/support/matrix#matrix_jvm" target="_blank" rel="external">Elasticsearch and JVM</a></p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/7.2/brew.html" target="_blank" rel="external">Directory layout for Homebrew installs</a></p>
 
       
     
@@ -312,16 +382,16 @@
     
   <nav class="article-page">
     
-      <a href="/es/es_intro.html" id="art-left" class="art-left">
+      <a href="/es/kibana_intro.html" id="art-left" class="art-left">
         <span class="next-title">
-          <i class="iconfont icon-left"></i>Elasticsearch介绍
+          <i class="iconfont icon-left"></i>Kibana介绍
         </span>
       </a>
     
     
-      <a href="/book/wydt.html" id="art-right" class="art-right">
+      <a href="/idea/eliminateYellowLine.html" id="art-right" class="art-right">
         <span class="prev-title"> 
-          《我与地坛》读书笔记<i class="iconfont icon-right"></i>  
+          消除mapper中的黄线<i class="iconfont icon-right"></i>  
         </span>
       </a>
     
@@ -360,8 +430,8 @@ gitment.render('gitment')
   <aside class="post-toc">
     <span class="title" id="toc-switch"><span>文章导航</span></span>
     <div class="toc-inner syuanpi back-1" style="display:none;">
-      <li class="title-link"><a href="javascript:;" class="toTop">消除mapper中的黄线</a></li>
-      
+      <li class="title-link"><a href="javascript:;" class="toTop">Elasticsearch介绍</a></li>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#What"><span class="toc-text">What</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Why"><span class="toc-text">Why</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装"><span class="toc-text">安装</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#安装包"><span class="toc-text">安装包</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#homebrew-方式安装："><span class="toc-text">homebrew 方式安装：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#路径说明"><span class="toc-text">路径说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#运行"><span class="toc-text">运行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#插件"><span class="toc-text">插件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#查看插件列表"><span class="toc-text">查看插件列表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#安装插件"><span class="toc-text">安装插件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#移除插件"><span class="toc-text">移除插件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#示例"><span class="toc-text">示例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#集群运行"><span class="toc-text">集群运行</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考资料"><span class="toc-text">参考资料</span></a></li></ol>
     </div>
   </aside>
 

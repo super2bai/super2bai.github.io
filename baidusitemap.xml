@@ -4,8 +4,28 @@
 
     
   <url>
-    <loc>https://super2bai.github.io/es/introduction.html</loc>
-    <lastmod>2019-07-14T09:45:52.351Z</lastmod>
+    <loc>https://super2bai.github.io/es/kibana_intro.html</loc>
+    <lastmod>2019-07-14T10:29:14.811Z</lastmod>
+    <data>
+        <display>
+        <title>Kibana介绍</title>
+        <pubTime>2019-07-14T10:26:49.000Z</pubTime>
+        
+        <tag>es</tag>
+         
+         
+           
+             
+              <breadCrumb title="es" url="https://super2bai.github.io/categories/es/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://super2bai.github.io/es/es_intro.html</loc>
+    <lastmod>2019-07-14T10:28:50.781Z</lastmod>
     <data>
         <display>
         <title>Elasticsearch介绍</title>
