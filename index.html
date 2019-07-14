@@ -256,7 +256,7 @@
     <header class="post-header">
       <div class="post-time syuanpi fadeInUpShort back-1">
         <div class="post-time-wrapper">
-          <span>2019-07-14</span>
+          <span>2019-07-13</span>
           
             
               <span class="post-category"><a href="/categories/es/">es</a></span>
@@ -274,291 +274,15 @@
     <div class="post-content syuanpi fadeInUpShort back-3">
       
         
-          <h3 id="文档Document"><a href="#文档Document" class="headerlink" title="文档Document"></a>文档Document</h3><ul>
-<li>Elaticsearch是面向文档的，文档时所有可搜索数据的最小单元<ul>
-<li>日志文件中的日志项</li>
-<li>一个电影的具体信息/一张唱片的详细信息</li>
-</ul>
-</li>
-<li>文档会被序列化成JSON格式，保存在Elasticsearch中<ul>
-<li>JSON对象由字段组成</li>
-<li>每个字段都有对应的字段类型<ul>
-<li>字符串、数值、布尔、日期、二进制、范围</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>每个文档都有一个Unique ID<ul>
-<li>可以指定</li>
-<li>Elasticsearch自动生成</li>
-</ul>
-</li>
-</ul>
-<h3 id="JSON文档"><a href="#JSON文档" class="headerlink" title="JSON文档"></a>JSON文档</h3><ul>
-<li>一篇文章包含了一系列的字段。类似数据库表中一条记录</li>
-<li>JSON文档，格式灵活，不需要预先定义格式<ul>
-<li>字段的类型可以指定或者通过Elasticsearch自动推算</li>
-<li>支持数组/支持潜逃</li>
-</ul>
-</li>
-</ul>
-<h3 id="文档的元数据"><a href="#文档的元数据" class="headerlink" title="文档的元数据"></a>文档的元数据</h3><ul>
-<li>元数据，用于标注文档的相关信息<ul>
-<li><code>_index</code>：文档所属的索引名</li>
-<li><code>_type</code>：文档所属的类型名</li>
-<li><code>_id</code>：文档的唯一ID</li>
-<li><code>_source</code>：文档的原始Json数据</li>
-<li><del><code>_all</code>：整合所有文档内容到该字段，已废除</del></li>
-<li><code>_version</code>：文档的版本信息</li>
-<li><code>_score</code>：相关性打分</li>
-</ul>
-</li>
-</ul>
-<h3 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h3><ul>
-<li>Index - 索引时文档的容器，是一类文档的结合<ul>
-<li>Index体现了逻辑空间的概念：每个索引都有自己的Mapping定义，用于定义包含的文档的字段名和字段类型</li>
-<li>Shard体现了物理空间的概念：索引中的数据分散在Shard上</li>
-</ul>
-</li>
-<li>索引的Mapping与Settings<ul>
-<li>Mapping定义文档字段的类型</li>
-<li>Setting定义不同的数据分布</li>
-</ul>
-</li>
-</ul>
-<h3 id="索引的不同语意"><a href="#索引的不同语意" class="headerlink" title="索引的不同语意"></a>索引的不同语意</h3><ul>
-<li>名词<ul>
-<li>一个Elasticsearch集群汇总，可以创建很多个不同的索引</li>
-<li>一个B输索引，一个倒排索引</li>
-</ul>
-</li>
-<li>动词：保存一个文档到Elasticsearch的过程也叫索引(Indexing)<ul>
-<li>ES中，创建一个倒排索引的过程</li>
-</ul>
-</li>
-</ul>
-<h3 id="Type"><a href="#Type" class="headerlink" title="Type"></a>Type</h3><ul>
-<li>在7.0之前，一个Index可以设置多个Types</li>
-<li>6.0开始，Type已经被Deprecated。7.0开始，一个索引只能创建一个Type - “_doc”<ul>
-<li><a href="https://www.elastic.co/cn/blog/moving-from-types-to-typeless-apis-in-elasticsearch-7-0" target="_blank" rel="external">为什么不再支持单个Index下，多个Types</a></li>
-</ul>
-</li>
-</ul>
-<h3 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h3><ul>
-<li>传统关系型数据库和Elasticsearch的区别<ul>
-<li>Elasticsearch - Schemaless/相关性/高性能全文检索</li>
-<li>RDMS - 事务性 / Join</li>
-</ul>
-</li>
-</ul>
-<h3 id="简单的API"><a href="#简单的API" class="headerlink" title="简单的API"></a>简单的API</h3><p>可以在kibana的Dev Tools中执行以下请求</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">#查看索引相关信息</div><div class="line">GET kibana_sample_data_ecommerce</div><div class="line"></div><div class="line">#查看索引的文档总数</div><div class="line">GET kibana_sample_data_ecommerce/_count</div><div class="line"></div><div class="line">#查看前10条文档，了解文档格式</div><div class="line">POST kibana_sample_data_ecommerce/_search</div><div class="line">&#123;</div><div class="line">&#125;</div><div class="line"></div><div class="line">#_cat indices API</div><div class="line">#查看indices</div><div class="line">GET /_cat/indices/kibana*?v&amp;s=index</div><div class="line"></div><div class="line">#查看状态为绿的索引</div><div class="line">GET /_cat/indices?v&amp;health=green</div><div class="line"></div><div class="line">#按照文档个数排序</div><div class="line">GET /_cat/indices?v&amp;s=docs.count:desc</div><div class="line"></div><div class="line">#查看具体的字段</div><div class="line">GET /_cat/indices/kibana*?pri&amp;v&amp;h=health,index,pri,rep,docs.count,mt</div><div class="line"></div><div class="line">#How much memory is used per index?</div><div class="line">GET /_cat/indices?v&amp;h=i,tm&amp;s=tm:desc</div></pre></td></tr></table></figure>
-<h3 id="可用性与扩展性"><a href="#可用性与扩展性" class="headerlink" title="可用性与扩展性"></a>可用性与扩展性</h3><ul>
-<li>高可用<ul>
-<li>服务可用性 - 允许有节点停止服务</li>
-<li>数据可用性 - 部分节点丢失，不会丢失数据</li>
-</ul>
-</li>
-<li>可扩展<ul>
-<li>请求量提升/ 数据的不断增长(将数据分布到所有节点上)</li>
-</ul>
-</li>
-</ul>
-<h3 id="分布式特性"><a href="#分布式特性" class="headerlink" title="分布式特性"></a>分布式特性</h3><ul>
-<li>Elasticsearch的分布式架构的好处<ul>
-<li>存储的水平扩容</li>
-<li>提高系统的可用性，部分节点停止服务，整个集群的服务不受影响</li>
-</ul>
-</li>
-<li>Elasticsearch的分布式架构<ul>
-<li>不同的集群通过不同的名字来区分<ul>
-<li>默认：<code>elasticsearch</code></li>
-</ul>
-</li>
-<li>通过修改配置文件，或者在命令行中执行<code>-E cluster.name=修改后的名字</code></li>
-<li>一个集群可以有一个或者多个节点</li>
-</ul>
-</li>
-</ul>
-<h3 id="节点"><a href="#节点" class="headerlink" title="节点"></a>节点</h3><ul>
-<li>节点是一个Elasticsearch的实例<ul>
-<li>本质上就是一个Java进程</li>
-<li>一台机器上可以运行多个Elasticsearch进程，但是生产环境一般建议一台机器上只运行一个实例</li>
-</ul>
-</li>
-<li>每一个节点都有名字，通过配置文件修改，或者启动时通过命令指定<code>-E node.name=修改后的名称</code></li>
-<li>每一个节点在启动之后，会分配一个UID，保存在data目录下</li>
-</ul>
-<h3 id="Master"><a href="#Master" class="headerlink" title="Master"></a>Master</h3><ul>
-<li>每个节点启动后，默认就是一个Master eligible节点<ul>
-<li>可以设置<code>node.master:false</code>禁止</li>
-</ul>
-</li>
-<li>Master-eligible节点可以参加选主流程，成为Master节点</li>
-<li>当第一个节点启动时，它会将自己选举成Master节点</li>
-<li>每个节点上都保存了集群的状态，只有Master节点才能修改集群的状态信息<ul>
-<li>集群状态Cluster State，维护了一个集群中，必要的信息<ul>
-<li>所有的节点信息</li>
-<li>所有的索引和其相关的Mapping与Setting信息</li>
-<li>分片的路由信息</li>
-</ul>
-</li>
-<li>任意节点都能修改信息会导致数据的不一致性</li>
-</ul>
-</li>
-</ul>
-<h3 id="Data-Node"><a href="#Data-Node" class="headerlink" title="Data Node"></a>Data Node</h3><ul>
-<li>可以保存数据的节点</li>
-<li>负责保存分片数据</li>
-<li>在数据扩展上起到了至关重要的作用</li>
-</ul>
-<h3 id="Coordinating-Node"><a href="#Coordinating-Node" class="headerlink" title="Coordinating Node"></a>Coordinating Node</h3><ul>
-<li>负责接收Client的请求，将请求分发到合适的节点，最终把节点汇集到一起</li>
-<li>每个节点默认都起到了Coordinating Node的职责</li>
-</ul>
-<h3 id="其他节点类型"><a href="#其他节点类型" class="headerlink" title="其他节点类型"></a>其他节点类型</h3><ul>
-<li>Hot &amp; Warm Node<ul>
-<li>不同硬件配置的Data Node</li>
-<li>用来实现Hot &amp; Warm架构，降低集群部署的成本</li>
-<li>分别存储热数据和冷数据的节点</li>
-</ul>
-</li>
-<li>Machine Learning Node<ul>
-<li>负责跑机器学习的Job</li>
-<li>发现数据的异常，用来做异常检测</li>
-</ul>
-</li>
-<li>Tribe Node<ul>
-<li>未来版本将会淘汰，替代为5.3开始使用Cross Cluster Search</li>
-<li>Tribe Node连接到不同的Elasticsearch集群</li>
-<li>并且支持将这些集群当成一个单独的集群处理</li>
-</ul>
-</li>
-</ul>
-<h3 id="配置节点类型"><a href="#配置节点类型" class="headerlink" title="配置节点类型"></a>配置节点类型</h3><ul>
-<li>开发环境中一个节点可以承担多种角色</li>
-<li>生产环境中，应该设置单一的角色的节点(dedicated node)</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>节点类型</th>
-<th>配置参数</th>
-<th>默认值</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>master eligible</td>
-<td>node.master</td>
-<td>true</td>
-</tr>
-<tr>
-<td>data</td>
-<td>node.data</td>
-<td>true</td>
-</tr>
-<tr>
-<td>ingest</td>
-<td>node.ingest</td>
-<td>true</td>
-</tr>
-<tr>
-<td>coordinating only</td>
-<td>无</td>
-<td>每个节点默认都是coordinating节点。设置其他类型全部为false</td>
-</tr>
-<tr>
-<td>machine learning</td>
-<td>node.ml</td>
-<td>true(需要enable x-pack)</td>
-</tr>
-</tbody>
-</table>
-<h3 id="分片"><a href="#分片" class="headerlink" title="分片"></a>分片</h3><h4 id="Primary-Shard"><a href="#Primary-Shard" class="headerlink" title="Primary Shard"></a>Primary Shard</h4><ul>
-<li>主分片</li>
-<li>用以解决数据水平扩展的问题。</li>
-<li>通过主分片，可以将数据分布到集群内的所有节点之上<ul>
-<li>一个分片时一个运行的Lucene的实例</li>
-<li>主分片数载索引创建时指定，后续不允许修改，除非Reindex<ul>
-<li>和倒排索引有关</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="Replica-Shard"><a href="#Replica-Shard" class="headerlink" title="Replica Shard"></a>Replica Shard</h4><ul>
-<li>副本</li>
-<li>用以解决数据高可用的问题</li>
-<li>副本是主分片的拷贝<ul>
-<li>副本分片数，可以动态调整</li>
-<li>增加副本数，还可以在一定程度上提高服务的可用性(读取的吞吐)</li>
-</ul>
-</li>
-</ul>
-<h3 id="分片的设置"><a href="#分片的设置" class="headerlink" title="分片的设置"></a>分片的设置</h3><ul>
-<li>对于生产环境中分片的设置，需要提前做好容量规划<ul>
-<li>分片数设置过小<ul>
-<li>导致后续无法增加节点实现水平扩展</li>
-<li>单个分片的数据量太大，导致数据重新重新分配耗时</li>
-</ul>
-</li>
-<li>分片数设置过大<ul>
-<li>影响搜索结果的相关性打分，影响统计结果的准确性</li>
-<li>单个节点上过多的分片，会导致资源浪费，同时也会影响性能</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p>7.0开始，默认主分片设置成1，解决了<code>over-sharding</code>的问题</p>
-</blockquote>
-<h3 id="集群健康"><a href="#集群健康" class="headerlink" title="集群健康"></a>集群健康</h3><p><code>http://localhost:9200/_cluster/health</code></p>
-<ul>
-<li>Green：主分片与副本都正常分配</li>
-<li>Yellow：主分片全部正常分配，有副本分片未能正常分配</li>
-<li>Red：有主分片未能分配<ul>
-<li>例如：当服务器的磁盘容量超过85%时，去创建一个新的索引</li>
-</ul>
-</li>
-</ul>
-<h4 id="Kibana"><a href="#Kibana" class="headerlink" title="Kibana"></a>Kibana</h4><p>在Dev Tools中执行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">#查看集群状态</div><div class="line">GET _cluster/health</div><div class="line">#查看节点</div><div class="line">GET _cat/nodes?v</div><div class="line">#查看分片</div><div class="line">GET _cat/shards</div><div class="line"></div><div class="line">GET /_nodes/es7_01,es7_02</div><div class="line">GET /_cat/nodes?v&amp;h=id,ip,port,v,m</div><div class="line"></div><div class="line"></div><div class="line">GET _cluster/health</div><div class="line">GET _cluster/health?level=shards</div><div class="line">GET /_cluster/health/kibana_sample_data_ecommerce,kibana_sample_data_flights</div><div class="line">GET /_cluster/health/kibana_sample_data_flights?level=shards</div><div class="line"></div><div class="line">#### cluster state</div><div class="line">The cluster state API allows access to metadata representing the state of the whole cluster. This includes information such as</div><div class="line">GET /_cluster/state</div><div class="line"></div><div class="line">#cluster get settings</div><div class="line">GET /_cluster/settings</div><div class="line">GET /_cluster/settings?include_defaults=true</div><div class="line"></div><div class="line">GET _cat/shards</div><div class="line">GET _cat/shards?h=index,shard,prirep,state,unassigned.reason</div></pre></td></tr></table></figure>
-<h4 id="cerebro"><a href="#cerebro" class="headerlink" title="cerebro"></a>cerebro</h4><blockquote>
-<p>Cerebro 是使用 Scala，Play Framework，AngularJS 和 Bootstrap 构建的开源（MIT 许可证）的基于 Elasticsearch Web管理工具。</p>
-</blockquote>
-<p><strong>Java 1.8以上运行</strong></p>
-<ul>
-<li><a href="https://cerebrohq.com/en/download/" target="_blank" rel="external">下载地址</a></li>
-<li>运行：<code>bin/cerebro</code></li>
-<li>访问：<code>http://localhost:9000</code></li>
-<li><p>输入：<code>http://localhost:9200</code></p>
-</li>
-<li><p>其他</p>
-<ul>
-<li>配置文件：<code>conf/application.conf</code></li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<ul>
-<li><p>行为不同的节点，列为索引，实线的代表为主分片，虚线为副本分片</p>
-</li>
-<li><p>节点名称前的星号代表该节点是master eligible节点，可以被选为master节点</p>
-</li>
-<li>上方的长条代表集群的状态<ul>
-<li>如果停止一个主节点运行，颜色将会变成黄色</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/7.1/cat-shards.html" target="_blank" rel="external">cat Shards</a></p>
-<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/7.1/cluster.html" target="_blank" rel="external">Cluster APIs</a></p>
-<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/7.1/cat-nodes.html" target="_blank" rel="external">cat nodes</a></p>
-
+          <p>认识认识七大姑八大姨</p>
         
       
+    
+      <p class="content-link">
+        <a href="/es/basis.html#more">
+          <span>继续阅读</span>
+        </a>
+      </p>
     
     </div>
     
@@ -578,7 +302,7 @@
     <header class="post-header">
       <div class="post-time syuanpi fadeInUpShort back-1">
         <div class="post-time-wrapper">
-          <span>2019-07-14</span>
+          <span>2019-07-11</span>
           
             
               <span class="post-category"><a href="/categories/es/">es</a></span>
