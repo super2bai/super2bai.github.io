@@ -4,15 +4,20 @@
 
     
   <url>
-    <loc>https://super2bai.github.io/uncategorized/null.html</loc>
-    <lastmod>2019-07-14T13:22:15.482Z</lastmod>
+    <loc>https://super2bai.github.io/es/logstash_intro.html</loc>
+    <lastmod>2019-07-14T13:24:52.610Z</lastmod>
     <data>
         <display>
         <title>Logstash介绍</title>
         <pubTime>2019-07-14T13:20:01.000Z</pubTime>
         
+        <tag>es</tag>
+         
          
            
+             
+              <breadCrumb title="es" url="https://super2bai.github.io/categories/es/"/>
+          
         </display>
     </data>
     </url>
