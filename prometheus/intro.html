@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <link rel="stylesheet" href="/style/style.css">
+<script>
+  var nlviconfig = {
+    title: "贰白",
+    author: "super2bai",
+    baseUrl: "/",
+    theme: {
+      scheme: "banderole",
+      lightbox: true,
+      animate: true,
+      search: false,
+      friends: false,
+      reward: true,
+      lazy: false
+    }
+  }
+</script>
+
+
+
+
+    <link rel="stylesheet" href="/script/lib/lightbox/css/lightbox.min.css">
+
+
+
+
+    <link rel="stylesheet" href="/syuanpi/syuanpi.min.css">
+
+
+
+
+    <link rel="icon" href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-98059014-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-116557847-1');
+</script>
+
+
+
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="browsermode" content="application">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="贰白">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="msapplication-navbutton-color" content="#666666">
+<meta name= "format-detection" content="telephone=no" />
+<meta name="keywords" content="nlvi, Nlvi" />
+
+  <link rel="apple-touch-icon"  sizes="72x72"  href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+  <link rel="apple-touch-icon-precomposed"  sizes="72x72"  href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+
+
+  <meta name="subtitle" content="苦于探索，全是未知">
+
+
+  <meta name="description" content="苦于探索，全是未知">
+
+
+
+  <meta name="keywords" content="监控, Nlvi" />
+
+  <title> Prometheus介绍 · 贰白 </title>
+</head>
+<body>
+  <div class="progress">
+  <div class="progress-inner"></div>
+</div>
+  
+  
+    <div class="tagcloud-mask"></div>  
+<div class="tagcloud" id="tagcloud">
+  <div class="tagcloud-inner">
+    <a href="/tags/Data-Structures/" style="font-size: 14px;">Data Structures</a> <a href="/tags/Docker/" style="font-size: 14px;">Docker</a> <a href="/tags/Dubbo/" style="font-size: 14px;">Dubbo</a> <a href="/tags/GHPages/" style="font-size: 14px;">GHPages</a> <a href="/tags/IO/" style="font-size: 14px;">IO</a> <a href="/tags/JDK/" style="font-size: 14px;">JDK</a> <a href="/tags/JVM/" style="font-size: 14px;">JVM</a> <a href="/tags/Linux/" style="font-size: 14px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 14px;">MySQL</a> <a href="/tags/Python/" style="font-size: 14px;">Python</a> <a href="/tags/Spring/" style="font-size: 14px;">Spring</a> <a href="/tags/Zookeeper/" style="font-size: 14px;">Zookeeper</a> <a href="/tags/book/" style="font-size: 14px;">book</a> <a href="/tags/code/" style="font-size: 14px;">code</a> <a href="/tags/es/" style="font-size: 14px;">es</a> <a href="/tags/git/" style="font-size: 14px;">git</a> <a href="/tags/idea/" style="font-size: 14px;">idea</a> <a href="/tags/jmeter/" style="font-size: 14px;">jmeter</a> <a href="/tags/mac/" style="font-size: 14px;">mac</a> <a href="/tags/monitor/" style="font-size: 14px;">monitor</a> <a href="/tags/walkup/" style="font-size: 14px;">walkup</a> <a href="/tags/分布式/" style="font-size: 14px;">分布式</a> <a href="/tags/工具/" style="font-size: 14px;">工具</a> <a href="/tags/并发/" style="font-size: 14px;">并发</a> <a href="/tags/旅游/" style="font-size: 14px;">旅游</a> <a href="/tags/汇编/" style="font-size: 14px;">汇编</a> <a href="/tags/监控/" style="font-size: 14px;">监控</a> <a href="/tags/编码/" style="font-size: 14px;">编码</a>
+  </div>
+</div>  
+  
+
+  <div class="container">
+
+    <header class="header" id="header">
+  <div class="header-wrapper">
+    <div class="logo">
+  <div class="logo-inner syuanpi tvIn">
+    <span><a href="/">贰白</a></span>
+    
+      <span id="subtitle">苦于探索，全是未知</span>
+    
+  </div>
+</div>
+    <nav class="main-nav">
+  
+  <ul class="main-nav-list syuanpi tvIn">
+  
+  
+    
+      
+    
+    <li class="menu-item">
+      <a href="/" id="article">
+        <span class="base-name">文章</span>
+        
+          <span class="menu-item-label">article</span>
+        
+      </a>
+    </li>
+  
+    
+      
+    
+    <li class="menu-item">
+      <a href="/archives" id="archives">
+        <span class="base-name">归档</span>
+        
+          <span class="menu-item-label">archives</span>
+        
+      </a>
+    </li>
+  
+    
+      
+    
+    <li class="menu-item">
+      <a href="javascript:;" id="tags">
+        <span class="base-name">标签</span>
+        
+          <span class="menu-item-label">tags</span>
+        
+      </a>
+    </li>
+  
+    
+      
+    
+    <li class="menu-item">
+      <a href="/about" id="about">
+        <span class="base-name">关于</span>
+        
+          <span class="menu-item-label">about</span>
+        
+      </a>
+    </li>
+  
+  </ul>
+  
+</nav>
+
+    
+    
+  </div>
+</header>
+<div class="mobile-header">
+  <div class="mobile-header-body">
+    <div class="mobile-header-list">
+      
+        
+            <div class="mobile-nav-item">
+                <a href="/">
+                    <span>文章</span>
+                    
+                        <span class="menu-item-label">article</span>
+                    
+                </a>
+            </div>
+        
+      
+        
+            <div class="mobile-nav-item">
+                <a href="/archives">
+                    <span>归档</span>
+                    
+                        <span class="menu-item-label">archives</span>
+                    
+                </a>
+            </div>
+        
+      
+        
+          <div class="mobile-nav-item inner-cloud">
+            <div class="mobile-nav-tag">
+              <a href="javascript:;" id="mobile-tags">
+                <span>标签</span>
+                
+                    <span class="menu-item-label">tags</span>
+                
+              </a>
+            </div>
+            <div class="mobile-nav-tagcloud">
+              <div class="mobile-tagcloud-inner">
+                <a href="/tags/Data-Structures/" style="font-size: 14px;">Data Structures</a> <a href="/tags/Docker/" style="font-size: 14px;">Docker</a> <a href="/tags/Dubbo/" style="font-size: 14px;">Dubbo</a> <a href="/tags/GHPages/" style="font-size: 14px;">GHPages</a> <a href="/tags/IO/" style="font-size: 14px;">IO</a> <a href="/tags/JDK/" style="font-size: 14px;">JDK</a> <a href="/tags/JVM/" style="font-size: 14px;">JVM</a> <a href="/tags/Linux/" style="font-size: 14px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 14px;">MySQL</a> <a href="/tags/Python/" style="font-size: 14px;">Python</a> <a href="/tags/Spring/" style="font-size: 14px;">Spring</a> <a href="/tags/Zookeeper/" style="font-size: 14px;">Zookeeper</a> <a href="/tags/book/" style="font-size: 14px;">book</a> <a href="/tags/code/" style="font-size: 14px;">code</a> <a href="/tags/es/" style="font-size: 14px;">es</a> <a href="/tags/git/" style="font-size: 14px;">git</a> <a href="/tags/idea/" style="font-size: 14px;">idea</a> <a href="/tags/jmeter/" style="font-size: 14px;">jmeter</a> <a href="/tags/mac/" style="font-size: 14px;">mac</a> <a href="/tags/monitor/" style="font-size: 14px;">monitor</a> <a href="/tags/walkup/" style="font-size: 14px;">walkup</a> <a href="/tags/分布式/" style="font-size: 14px;">分布式</a> <a href="/tags/工具/" style="font-size: 14px;">工具</a> <a href="/tags/并发/" style="font-size: 14px;">并发</a> <a href="/tags/旅游/" style="font-size: 14px;">旅游</a> <a href="/tags/汇编/" style="font-size: 14px;">汇编</a> <a href="/tags/监控/" style="font-size: 14px;">监控</a> <a href="/tags/编码/" style="font-size: 14px;">编码</a>
+              </div>
+            </div>
+          </div>
+        
+      
+        
+            <div class="mobile-nav-item">
+                <a href="/about">
+                    <span>关于</span>
+                    
+                        <span class="menu-item-label">about</span>
+                    
+                </a>
+            </div>
+        
+      
+    </div>
+  </div>
+  <div class="mobile-header-nav">
+    <div class="mobile-header-item" id="mobile-left">
+      <div class="header-menu-item">
+        <span class="header-menu-line"></span>
+      </div>
+    </div>
+    <h1 class="mobile-header-title">
+      <a href="/">贰白</a>
+    </h1>
+    <div class="mobile-header-item"></div>
+  </div>
+</div>
+    <div class="container-inner">
+      <main class="main" id="main">
+        <div class="main-wrapper">
+          
+    
+  
+  <article class="
+  post
+   is_post 
+  ">
+    <header class="post-header">
+      <div class="post-time syuanpi fadeInUpShort back-1">
+        <div class="post-time-wrapper">
+          <span>2019-07-23</span>
+          
+            
+              <span class="post-category"><a href="/categories/prometheus/">prometheus</a></span>
+            
+          
+          
+            
+              <aside class="post-tags syuanpi fadeInUpShort back-3">
+              
+                <a href="/tags/监控/">监控</a>
+              
+              </aside>
+            
+          
+        </div>
+      </div>
+      <h1 class="post-title syuanpi fadeInUpShort back-2">
+        
+          Prometheus介绍
+        
+      </h1>
+    </header>
+    <div class="post-content syuanpi fadeInUpShort back-3">
+      
+        <p>请假不用害怕，有东西看着线上。</p>
+<a id="more"></a> 
+<h3 id="监控现状"><a href="#监控现状" class="headerlink" title="监控现状"></a>监控现状</h3><p>​        随着服务器以及服务规模的扩大，监控体系也面临同样的问题，如何更好的在监控层面为日常运营而服务，如何预防并快速定位问题从而解决问题就显得尤为重要。</p>
+<p>​        目前普遍采用的监控方式有：主动监控、被动监控、旁路监控。比如Nagios、Cacti、Zabbix等监控工具以及第三方监控平台。</p>
+<p>​        监控要从公司的业务角度考虑，而不是某种手段，某个服务。对于辅助解决问题，又要细化到服务器、服务、容器甚至是进城，站在服务提供的角度发现、定位、解决问题。</p>
+<p>​        使用者的痛点：配置复杂，可定制化低，组件间耦合度高，数据生涩，展示化程度低，通知信息不完善等。</p>
+<p>​        监控体系的建立离不开功能模块的加入，不能增加监控模块、类别、参数，进行过滤，整合达到合理的产出。</p>
+<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><blockquote>
+<p>Prometheus是开源的系统监控和警报工具包。</p>
+<p>已于2016加入云计算本地计算基金会，作为Kubernetes之后的第二个托管项目。</p>
+<p>Prometheus是时间序列化数据库，可以简单理解为将数据打上标签，以时间维度存储。</p>
+</blockquote>
+<p><a href="https://github.com/prometheus/prometheus" target="_blank" rel="external">GitHub - 地址</a></p>
+<p><a href="https://prometheus.io/" target="_blank" rel="external">官网</a></p>
+<p>根据操作系统下载对应的版本，直接运行即可：<code>./prometheus</code>，访问<code>localhost:9090</code>可以查看。</p>
+<h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><ul>
+<li>多维数据模型（时序列数据由metric名和一组key/value组成）</li>
+<li>在多维度上灵活的查询语言(PromQL)</li>
+<li>不依赖分布式存储，单主节点工作</li>
+<li>通过基于HTTP的Pull方式采集时序数据</li>
+<li>可以通过中间网关进行时序列数据推送(pushing)</li>
+<li>目标服务器可以通过发现服务或者静态配置实现</li>
+<li>多种可视化和仪表盘支持</li>
+</ul>
+<h3 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h3><ul>
+<li>每经过一个时间间隔，数据都会从运行的服务中流出，存储到一个时间序列数据库中，这个数据库之后可以通过PromQL语言查询。</li>
+<li>因为数据是以时间序列存储的，当出现问题时，可以根据这些时间间隔进行诊断，另外还可以预测基础设施的长期监控趋势。</li>
+</ul>
+<h3 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h3><ul>
+<li>Prometheus主服务<ul>
+<li>用来抓取和存储时序数据</li>
+</ul>
+</li>
+<li>client library<ul>
+<li>用来构造应用或 exporter 代码 (go,java,python,ruby)</li>
+</ul>
+</li>
+<li>pus<ul>
+<li>网关可用来支持短连接任务</li>
+</ul>
+</li>
+<li>可视化的dashboard<ul>
+<li>(两种选择,promdash 和 grafana.目前主流选择是 grafana.)</li>
+</ul>
+</li>
+<li>实验性的报警管理端<ul>
+<li>(alertmanager,单独进行报警汇总,分发,屏蔽等 )</li>
+</ul>
+</li>
+</ul>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p><a href="https://prometheus.io/docs/prometheus/latest/configuration/configuration/" target="_blank" rel="external">官方文档</a></p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 常规的全局配置</span></div><div class="line"><span class="attr">global:</span></div><div class="line"><span class="attr">  scrape_interval:</span>     <span class="number">15</span><span class="string">s</span> <span class="comment"># 每15秒采集一次数据.</span></div><div class="line"><span class="attr">  evaluation_interval:</span> <span class="number">15</span><span class="string">s</span> <span class="comment"># 每15秒做一次告警检测.</span></div><div class="line"></div><div class="line"><span class="comment"># 配置alertmanagers</span></div><div class="line"><span class="attr">alerting:</span></div><div class="line"><span class="attr">  alertmanagers:</span></div><div class="line"><span class="attr">  - static_configs:</span></div><div class="line"><span class="attr">    - targets:</span></div><div class="line">      <span class="comment"># - alertmanager:9093</span></div><div class="line"></div><div class="line"><span class="comment"># 指定加载的告警规则文件，根据evaluation_interval设置的告警频率。</span></div><div class="line"><span class="attr">rule_files:</span></div><div class="line">  <span class="comment"># - "first_rules.yml"</span></div><div class="line">  <span class="comment"># - "second_rules.yml"</span></div><div class="line"></div><div class="line"><span class="comment"># 指定Prometheus要监控的目标</span></div><div class="line"><span class="comment"># 每个监控目标是一个job，job的类型有很多种。可以是最简单的static_config，即静态地指定每一个目标</span></div><div class="line"><span class="attr">scrape_configs:</span></div><div class="line">  <span class="comment"># 监控的对象名称，不可重复	</span></div><div class="line"><span class="attr">  - job_name:</span> <span class="string">'prometheus'</span></div><div class="line"></div><div class="line">    <span class="comment"># 监听的服务地址</span></div><div class="line"><span class="attr">    static_configs:</span></div><div class="line"><span class="attr">    - targets:</span> <span class="string">['localhost:9090']</span></div></pre></td></tr></table></figure>
+<h3 id="告警"><a href="#告警" class="headerlink" title="告警"></a>告警</h3><blockquote>
+<p>在处理时间序列数据库时，希望对数据进行处理，并对结果给出反馈，这部分工作时用告警来实现。</p>
+</blockquote>
+<p>告警在Grafana中非常常见，Prometheus也通过Alertmanager实现完成的告警系统。Alertmanager是一个独立的工具，可以绑定到Prometheus并运行自定义Alertmanager。告警通过配置文件定义，定义有一组指标定义规则组成，如果数据命中这些规则，则会触发告警并将其发送到预定义的目标。与Grafana类似，Prometheus的告警，可以通过email，Slack webhooks，PagerDuty和自定义HTTP目标等。</p>
+<p>告警规则是单独文件定义，在<code>prometheus.yml</code>中引用，格式如下</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="string">$</span> <span class="string">cat</span> <span class="string">first_rules.yml</span></div><div class="line"><span class="attr">groups:</span></div><div class="line"><span class="attr">- name:</span> <span class="string">rule1-http_requst_total</span></div><div class="line"><span class="attr">  rules:</span></div><div class="line"><span class="attr">  - alert:</span>  <span class="string">HTTP_REQUEST_TOTAL</span></div><div class="line"><span class="attr">    expr:</span> <span class="string">http_requests_total</span> <span class="string">&gt; 100</span></div><div class="line"><span class="string"></span><span class="attr">    for:</span> <span class="number">1</span><span class="string">m</span></div><div class="line"><span class="attr">    labels:</span></div><div class="line"><span class="attr">      severity:</span> <span class="string">page</span></div><div class="line"><span class="attr">    annotations:</span></div><div class="line"><span class="attr">      summary:</span> <span class="string">Http</span> <span class="string">request</span> <span class="string">total</span> <span class="string">reach</span> <span class="string">limit</span></div></pre></td></tr></table></figure>
+<p>需要注意的是，还要在<code>prometheus.yml</code>中配置<code>alertmanager</code>的地址</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="attr">alerting:</span></div><div class="line"><span class="attr">  alertmanagers:</span></div><div class="line"><span class="attr">  - static_configs:</span></div><div class="line"><span class="attr">    - targets:</span></div><div class="line">      <span class="comment"># - alertmanager:9093</span></div></pre></td></tr></table></figure>
+<h3 id="Exporters"><a href="#Exporters" class="headerlink" title="Exporters"></a>Exporters</h3><blockquote>
+<p>Exportr负责数据指标的采集。对于自定义应用程序，仪表化非常方便，允许自定义公开的指标以及其随时间的变化方式。</p>
+</blockquote>
+<h4 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h4><ul>
+<li>node_exporter<ul>
+<li>主要用来采集机器的性能指标数据，包括cpu，内存，磁盘，io等基本信息。</li>
+</ul>
+</li>
+<li>mysqld_exporter<ul>
+<li>主要用于监控采集mysql数据库服务器相关指标。</li>
+</ul>
+</li>
+<li>redis_exporter<ul>
+<li>主要用于监控采集redis数据库服务器相关指标。</li>
+</ul>
+</li>
+<li>black_exporter<ul>
+<li>prometheus社区提供的官方黑盒监控解决方案，其允许用户通过：http、https、dns、tcp以及icmp的方式对网络进行探测。</li>
+</ul>
+</li>
+<li>cadvisor<ul>
+<li>google开源的用于监控容器运行的工具。</li>
+</ul>
+</li>
+</ul>
+<p>常见的模版：</p>
+<ul>
+<li>数据库模版<ul>
+<li>用于MongoDB数据，SQL服务器和MySQL服务器的配置</li>
+</ul>
+</li>
+<li>HTTP模版<ul>
+<li>用于HAProxy，Apache或Nginx等Web服务器和代理的配置</li>
+</ul>
+</li>
+<li>Unix模版<ul>
+<li>用来使用构建的节点导出程序监控，可以实现完整的系统指标的监控</li>
+</ul>
+</li>
+</ul>
+<h3 id="数据模型"><a href="#数据模型" class="headerlink" title="数据模型"></a>数据模型</h3><blockquote>
+<p>Prometheus靠进程主动去抓取。</p>
+<p>Prometheus 从根本上所有的存储都是按时间序列去实现的，相同的 metrics(指标名称) 和 label(一个或多个标签) 组成一条时间序列，不同的label表示不同的时间序列。为了支持一些查询，有时还会临时产生一些时间序列存储。</p>
+</blockquote>
+<p>每条时间序列是由唯一的 指标名称 和 一组 标签 （key=value）的形式组成。<br>指标名称 一般是给监测对像起一名字，例如 http_requests<em>total 这样，它有一些命名规则，可以包字母数字</em>之类的的。</p>
+<p>标签 就是对一条时间序列不同维度的识别了，例如 一个http请求用的是POST还是GET，它的endpoint是什么，这时候就要用标签去标记了， 最终形成的标识便是这样了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http_requests_total&#123;method=&quot;POST&quot;,endpoint=&quot;/api/tracks&quot;&#125;</div></pre></td></tr></table></figure>
+<p>记住，针对http_requests_total这个metrics name 无论是增加标签还是删除标签都会形成一条新的时间序列。<br>查询语句就可以跟据上面标签的组合来查询聚合结果了。</p>
+<p>如果以传统数据库的理解来看这条语句，则可以考虑 http_requests_total是表名，标签是字段，而timestamp是主键，还有一个float64字段是值了。（Prometheus里面所有值都是按float64存储）。</p>
+<p><a href="https://prometheus.io/docs/practices/naming/" target="_blank" rel="external">命名最佳实践</a></p>
+<h3 id="类型-1"><a href="#类型-1" class="headerlink" title="类型"></a>类型</h3><h4 id="计数器Counter"><a href="#计数器Counter" class="headerlink" title="计数器Counter"></a>计数器Counter</h4><blockquote>
+<p>只增不减的计数器。比如记录应用请求的总量(http_requests_total)，cpu使用时间(process_cpu_seconds_total)等。</p>
+<p>对于Counter类型的指标，只包含一个inc()方法，用于计数器+1</p>
+<p>一般而言，Counter类型的metrics指标在命名中我们使用_total结束</p>
+</blockquote>
+<p>使用Counter.build()创建Counter metrics，name()方法，用于指定该指标的名称 labelNames()方法，用于声明该metrics拥有的维度label。在preHandle方法中，我们获取当前请求的，RequesPath，Method以及状态码。并且调用inc()方法，在每次请求发生时计数+1。</p>
+<p>Counter.build()…register(),会像Collector中注册该指标，并且当访问/metrics地址时，返回该指标的状态。</p>
+<p>通过指标io_namespace_http_requests_total我们可以：</p>
+<ul>
+<li>查询应用的请求总量<ul>
+<li><code>sum(io_namespace_http_requests_total)</code></li>
+</ul>
+</li>
+<li>查询每秒Http请求量<ul>
+<li><code>sum(rate(io_wise2c_gateway_requests_total[5m]))</code></li>
+</ul>
+</li>
+<li>查询当前应用请求量Top N的URI<ul>
+<li><code>topk(10, sum(io_namespace_http_requests_total) by (path))</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="计量表Gauges"><a href="#计量表Gauges" class="headerlink" title="计量表Gauges"></a>计量表Gauges</h4><blockquote>
+<p>可增可减的仪表盘，可以用于反应应用的<strong>当前状态</strong>,例如在监控主机时，主机当前空闲的内容大小(node_memory_MemFree)，可用内存大小(node_memory_MemAvailable)。或者容器当前的cpu使用率,内存使用率。</p>
+<p>对于Gauge指标的对象则包含两个主要的方法inc()以及dec(),用户添加或者减少计数。在这里我们使用Gauge记录当前正在处理的Http请求数量。</p>
+</blockquote>
+<ul>
+<li>查询应用当前正在处理中的Http请求数量:<ul>
+<li><code>io_namespace_http_inprogress_requests{}</code></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">static</span> <span class="keyword">final</span> Gauge inprogressRequests = Gauge.build()</div><div class="line">            .name(<span class="string">"io_namespace_http_inprogress_requests"</span>).labelNames(<span class="string">"path"</span>, <span class="string">"method"</span>, <span class="string">"code"</span>)</div><div class="line">            .help(<span class="string">"Inprogress requests."</span>).register();</div></pre></td></tr></table></figure>
+<h4 id="直方图Histogram"><a href="#直方图Histogram" class="headerlink" title="直方图Histogram"></a>直方图Histogram</h4><blockquote>
+<p>自带buckets区间用于统计分布统计图</p>
+</blockquote>
+<p>主要用于在指定分布范围内(Buckets)记录大小(如http request bytes)或者事件发生的次数。</p>
+<p>以请求响应时间requests_latency_seconds为例，假如我们需要记录http请求响应时间符合在分布范围{.005, .01, .025, .05, .075, .1, .25, .5, .75, 1, 2.5, 5, 7.5, 10}中的次数时。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PrometheusMetricsInterceptor</span> <span class="keyword">extends</span> <span class="title">HandlerInterceptorAdapter</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">static</span> <span class="keyword">final</span> Histogram requestLatencyHistogram = Histogram.build().labelNames(<span class="string">"path"</span>, <span class="string">"method"</span>, <span class="string">"code"</span>)</div><div class="line">            .name(<span class="string">"io_namespace_http_requests_latency_seconds_histogram"</span>).help(<span class="string">"Request latency in seconds."</span>)</div><div class="line">            .register();</div><div class="line"></div><div class="line">    <span class="keyword">private</span> Histogram.Timer histogramRequestTimer;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">preHandle</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        <span class="comment">//...省略的代码</span></div><div class="line">        histogramRequestTimer = requestLatencyHistogram.labels(requestURI, method, String.valueOf(status)).startTimer();</div><div class="line">        <span class="comment">//...省略的代码</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">afterCompletion</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        <span class="comment">//...省略的代码</span></div><div class="line">        histogramRequestTimer.observeDuration();</div><div class="line">        <span class="comment">//...省略的代码</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>使用Histogram构造器可以创建Histogram监控指标。默认的buckets范围为{.005, .01, .025, .05, .075, .1, .25, .5, .75, 1, 2.5, 5, 7.5, 10}。如何需要覆盖默认的buckets，可以使用.buckets(double… buckets)覆盖。</p>
+<p>Histogram会自动创建3个指标，分别为：</p>
+<ul>
+<li>事件发生总次数： basename_count</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># 实际含义： 当前一共发生了2次http请求</div><div class="line">io_namespace_http_requests_latency_seconds_histogram_count&#123;path=&quot;/&quot;,method=&quot;GET&quot;,code=&quot;200&quot;,&#125; 2.0</div></pre></td></tr></table></figure>
+<ul>
+<li>所有事件产生值的大小的总和: basename_sum</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># 实际含义： 发生的2次http请求总的响应时间为13.107670803000001 秒</div><div class="line">io_namespace_http_requests_latency_seconds_histogram_sum&#123;path=&quot;/&quot;,method=&quot;GET&quot;,code=&quot;200&quot;,&#125; 13.107670803000001</div></pre></td></tr></table></figure>
+<ul>
+<li>事件产生的值分布在bucket中的次数： basename_bucket{le=”上包含”}</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"># 在总共2次请求当中。http请求响应时间 &lt;=0.005 秒 的请求次数为0</div><div class="line">io_namespace_http_requests_latency_seconds_histogram_bucket&#123;path=&quot;/&quot;,method=&quot;GET&quot;,code=&quot;200&quot;,le=&quot;0.005&quot;,&#125; 0.0</div><div class="line"># 在总共2次请求当中。http请求响应时间 &lt;=0.01 秒 的请求次数为0</div><div class="line">io_namespace_http_requests_latency_seconds_histogram_bucket&#123;path=&quot;/&quot;,method=&quot;GET&quot;,code=&quot;200&quot;,le=&quot;0.01&quot;,&#125; 0.0</div><div class="line"># 在总共2次请求当中。http请求响应时间 &lt;=0.025 秒 的请求次数为0</div><div class="line">io_namespace_http_requests_latency_seconds_histogram_bucket&#123;path=&quot;/&quot;,method=&quot;GET&quot;,code=&quot;200&quot;,le=&quot;0.025&quot;,&#125; 0.0</div><div class="line">io_namespace_http_requests_latency_seconds_histogram_bucket&#123;path=&quot;/&quot;,method=&quot;GET&quot;,code=&quot;200&quot;,le=&quot;0.05&quot;,&#125; 0.0</div><div class="line">io_namespace_http_requests_latency_seconds_histogram_bucket&#123;path=&quot;/&quot;,method=&quot;GET&quot;,code=&quot;200&quot;,le=&quot;0.075&quot;,&#125; 0.0</div><div class="line">io_namespace_http_requests_latency_seconds_histogram_bucket&#123;path=&quot;/&quot;,method=&quot;GET&quot;,code=&quot;200&quot;,le=&quot;0.1&quot;,&#125; 0.0</div><div class="line">io_namespace_http_requests_latency_seconds_histogram_bucket&#123;path=&quot;/&quot;,method=&quot;GET&quot;,code=&quot;200&quot;,le=&quot;0.25&quot;,&#125; 0.0</div><div class="line">io_namespace_http_requests_latency_seconds_histogram_bucket&#123;path=&quot;/&quot;,method=&quot;GET&quot;,code=&quot;200&quot;,le=&quot;0.5&quot;,&#125; 0.0</div><div class="line">io_namespace_http_requests_latency_seconds_histogram_bucket&#123;path=&quot;/&quot;,method=&quot;GET&quot;,code=&quot;200&quot;,le=&quot;0.75&quot;,&#125; 0.0</div><div class="line">io_namespace_http_requests_latency_seconds_histogram_bucket&#123;path=&quot;/&quot;,method=&quot;GET&quot;,code=&quot;200&quot;,le=&quot;1.0&quot;,&#125; 0.0</div><div class="line">io_namespace_http_requests_latency_seconds_histogram_bucket&#123;path=&quot;/&quot;,method=&quot;GET&quot;,code=&quot;200&quot;,le=&quot;2.5&quot;,&#125; 0.0</div><div class="line">io_namespace_http_requests_latency_seconds_histogram_bucket&#123;path=&quot;/&quot;,method=&quot;GET&quot;,code=&quot;200&quot;,le=&quot;5.0&quot;,&#125; 0.0</div><div class="line">io_namespace_http_requests_latency_seconds_histogram_bucket&#123;path=&quot;/&quot;,method=&quot;GET&quot;,code=&quot;200&quot;,le=&quot;7.5&quot;,&#125; 2.0</div><div class="line"># 在总共2次请求当中。http请求响应时间 &lt;=10 秒 的请求次数为0</div><div class="line">io_namespace_http_requests_latency_seconds_histogram_bucket&#123;path=&quot;/&quot;,method=&quot;GET&quot;,code=&quot;200&quot;,le=&quot;10.0&quot;,&#125; 2.0</div><div class="line"># 在总共2次请求当中。http请求响应时间 10 秒 的请求次数为0</div><div class="line">io_namespace_http_requests_latency_seconds_histogram_bucket&#123;path=&quot;/&quot;,method=&quot;GET&quot;,code=&quot;200&quot;,le=&quot;+Inf&quot;,&#125; 2.0</div></pre></td></tr></table></figure>
+<h4 id="摘要Summary"><a href="#摘要Summary" class="headerlink" title="摘要Summary"></a>摘要Summary</h4><p>Summary和Histogram非常类型相似，都可以统计事件发生的次数或者发小，以及其分布情况。</p>
+<p>Summary和Histogram都提供了对于事件的计数_count以及值的汇总_sum。 因此使用_count,和_sum时间序列可以计算出相同的内容，例如http每秒的平均响应时间：rate(basename_sum[5m]) / rate(basename_count[5m])。</p>
+<p>同时Summary和Histogram都可以计算和统计样本的分布情况，比如中位数，9分位数等等。其中 0.0&lt;= 分位数Quantiles &lt;= 1.0。</p>
+<p>不同在于Histogram可以通过histogram_quantile函数在服务器端计算分位数。 而Sumamry的分位数则是直接在客户端进行定义。因此对于分位数的计算。 Summary在通过PromQL进行查询时有更好的性能表现，而Histogram则会消耗更多的资源。相对的对于客户端而言Histogram消耗的资源更少。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PrometheusMetricsInterceptor</span> <span class="keyword">extends</span> <span class="title">HandlerInterceptorAdapter</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">static</span> <span class="keyword">final</span> Summary requestLatency = Summary.build()</div><div class="line">            .name(<span class="string">"io_namespace_http_requests_latency_seconds_summary"</span>)</div><div class="line">            .quantile(<span class="number">0.5</span>, <span class="number">0.05</span>)</div><div class="line">            .quantile(<span class="number">0.9</span>, <span class="number">0.01</span>)</div><div class="line">            .labelNames(<span class="string">"path"</span>, <span class="string">"method"</span>, <span class="string">"code"</span>)</div><div class="line">            .help(<span class="string">"Request latency in seconds."</span>).register();</div><div class="line"></div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">preHandle</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        <span class="comment">//...省略的代码</span></div><div class="line">        requestTimer = requestLatency.labels(requestURI, method, String.valueOf(status)).startTimer();</div><div class="line">        <span class="comment">//...省略的代码</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">afterCompletion</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        <span class="comment">//...省略的代码</span></div><div class="line">        requestTimer.observeDuration();</div><div class="line">        <span class="comment">//...省略的代码</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>使用Summary指标，会自动创建多个时间序列：</p>
+<ul>
+<li>事件发生总的次数</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># 含义：当前http请求发生总次数为12次</div><div class="line">io_namespace_http_requests_latency_seconds_summary_count&#123;path=&quot;/&quot;,method=&quot;GET&quot;,code=&quot;200&quot;,&#125; 12.0</div></pre></td></tr></table></figure>
+<ul>
+<li>事件产生的值的总和</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># 含义：这12次http请求的总响应时间为 51.029495508s</div><div class="line">io_namespace_http_requests_latency_seconds_summary_sum&#123;path=&quot;/&quot;,method=&quot;GET&quot;,code=&quot;200&quot;,&#125; 51.029495508</div></pre></td></tr></table></figure>
+<ul>
+<li>事件产生的值的分布情况</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"># 含义：这12次http请求响应时间的中位数是3.052404983s</div><div class="line">io_namespace_http_requests_latency_seconds_summary&#123;path=&quot;/&quot;,method=&quot;GET&quot;,code=&quot;200&quot;,quantile=&quot;0.5&quot;,&#125; 3.052404983</div><div class="line"># 含义：这12次http请求响应时间的9分位数是8.003261666s</div><div class="line">io_namespace_http_requests_latency_seconds_summary&#123;path=&quot;/&quot;,method=&quot;GET&quot;,code=&quot;200&quot;,quantile=&quot;0.9&quot;,&#125; 8.003261666</div></pre></td></tr></table></figure>
+<h3 id="PromQL"><a href="#PromQL" class="headerlink" title="PromQL"></a>PromQL</h3><blockquote>
+<p>内置SQL查询，用于便捷和熟悉的方式从Prometheus查询和检索数据。</p>
+</blockquote>
+<p>除了用来查询数据，告警规则也要用查询语句描述。查询语句直接就是指标的名称：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">go_memstats_other_sys_bytes</div></pre></td></tr></table></figure>
+<p>可以通过label筛选</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">go_memstats_other_sys_bytes&#123;instance=&quot;192.168.88.10&quot;&#125;</div></pre></td></tr></table></figure>
+<p>label可以使用4个操作符</p>
+<ul>
+<li><code>=:</code>：精准等于的label</li>
+<li><code>!=</code>：不等于的label</li>
+<li><code>=~</code>：符合正则表达式的label</li>
+<li><code>!~</code>：不符合正则表达式的label</li>
+</ul>
+<p>并且可以使用多个标签属性，用<code>,</code>间隔，彼此是与的关系</p>
+<p><code>http_requests_total{environment=~&quot;staging|testing|development&quot;,method!=&quot;GET&quot;}</code></p>
+<p>或者只有标签</p>
+<p><code>{instance=&quot;192.168.88.10&quot;}</code></p>
+<p>对查询出来的结果进行运算也是可以的</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 时间范围截取，Range Vector Selectors</span></div><div class="line"><span class="string">http_requests_total&#123;job="prometheus"&#125;[5m]</span></div><div class="line"> </div><div class="line"><span class="comment"># 时间偏移</span></div><div class="line"><span class="string">http_requests_total</span> <span class="string">offset</span> <span class="number">5</span><span class="string">m</span></div><div class="line"> </div><div class="line"><span class="comment"># 时间段内数值累加</span></div><div class="line"><span class="string">sum(http_requests_total&#123;method="GET"&#125;</span> <span class="string">offset</span> <span class="number">5</span><span class="string">m)</span></div></pre></td></tr></table></figure>
+<p>还可以进行<a href="https://prometheus.io/docs/prometheus/latest/querying/operators/" target="_blank" rel="external">多元运算</a>，以及<a href="https://prometheus.io/docs/prometheus/latest/querying/functions/" target="_blank" rel="external">使用函数</a>。</p>
+<ul>
+<li>sum(求和)</li>
+<li>min(取最小)</li>
+<li>max(取最大)</li>
+<li>avg(取平均)</li>
+<li>count (计数器)</li>
+<li>stddev (计算偏差)</li>
+<li>stdvar (计算方差)</li>
+<li>count_values(每个元素独立值数量)</li>
+<li>bottomk (取倒数几个),topk(取前几位)</li>
+</ul>
+<h3 id="页面"><a href="#页面" class="headerlink" title="页面"></a>页面</h3><p>可以在<code>Status-&gt;rule</code>页面看到告警规则，在alert页面看到触发的告警。</p>
+<blockquote>
+<p>alertmanager需要单独部署。用来接受prometheus发出的告警，然后按照配置文件的要求，将告警用用对应的方式发送出去。</p>
+</blockquote>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>创建一个Demo来展示Prometheus的功能。Spring Boot + Pushgateway + Prometheus。</p>
+<h3 id="Spring-Boot"><a href="#Spring-Boot" class="headerlink" title="Spring Boot"></a>Spring Boot</h3><p><a href="https://start.spring.io/" target="_blank" rel="external">创建Spring Boot项目</a></p>
+<ul>
+<li><code>pom.xml</code></li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.prometheus<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>simpleclient<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>0.3.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.prometheus<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>simpleclient_pushgateway<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>0.0.10<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li><code>Controller</code></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@RestController</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestPrometheus</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Counter REQUEST_COUNTER = Counter.build()</div><div class="line">            .name(<span class="string">"test_counter_name"</span>).help(<span class="string">"test_counter_help."</span>).register();</div><div class="line"></div><div class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/push"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">push</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        CollectorRegistry registry = <span class="keyword">new</span> CollectorRegistry();</div><div class="line">        REQUEST_COUNTER.inc();</div><div class="line">				<span class="comment">//pushgateway地址</span></div><div class="line">        PushGateway pg = <span class="keyword">new</span> PushGateway(<span class="string">"127.0.0.1:9091"</span>);</div><div class="line">        <span class="comment">//collector,jobName</span></div><div class="line">        pg.push(REQUEST_COUNTER, <span class="string">"test_push"</span>);</div><div class="line">        <span class="keyword">return</span> String.valueOf(REQUEST_COUNTER.get());</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="Pushgateway"><a href="#Pushgateway" class="headerlink" title="Pushgateway"></a>Pushgateway</h3><ul>
+<li><p><a href="https://github.com/prometheus/pushgateway/releases" target="_blank" rel="external">下载对应系统版本</a></p>
+</li>
+<li><p>解压运行：<code>./pushgateway</code></p>
+<ul>
+<li>默认端口：<code>9091</code></li>
+</ul>
+</li>
+<li>修改<code>prometheus</code>配置文件</li>
+</ul>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">###以下内容为SpringBoot应用配置</span></div><div class="line"><span class="attr">  - job_name:</span> <span class="string">'springboot_prometheus'</span></div><div class="line"><span class="attr">    metrics_path:</span> <span class="string">'/actuator/prometheus'</span></div><div class="line"><span class="attr">    static_configs:</span></div><div class="line"><span class="attr">      - targets:</span> <span class="string">['127.0.0.1:8080']</span></div><div class="line"><span class="comment">### 以下内容为配置pushgateway</span></div><div class="line"><span class="attr">  - job_name:</span> <span class="string">'push-metrics'</span></div><div class="line"><span class="attr">    static_configs:</span></div><div class="line"><span class="attr">      - targets:</span> <span class="string">['localhost:9091']</span></div></pre></td></tr></table></figure>
+<ul>
+<li>启动<code>prometheus</code></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./prometheus</div></pre></td></tr></table></figure>
+<ul>
+<li>访问页面：<code>http://localhost:8080/push</code><ul>
+<li>因为每访问一次<code>push</code>接口，Counter计数器<code>REQUEST_COUNTER</code>就会自增1，并将结果显示在页面中，所以页面会显示此次应用启动后，此接口的访问次数</li>
+</ul>
+</li>
+<li>访问页面：<code>http://localhost:9090/graph</code>，输入Counter的<code>name</code>值<code>test_counter_name</code>，点击<code>Execute</code>，将会看到下方输出：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th><strong>Element</strong></th>
+<th><strong>Value</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>test_counter_name{exported_job=”test_push”,instance=”localhost:9091”,job=”push-metrics”}</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>其中：</p>
+<ul>
+<li><code>exported_job</code>：代码中定义的<code>PushGateWay</code>的<code>job</code>名称</li>
+<li><code>instance</code>：实例</li>
+<li><code>job</code>：在<code>prometheus</code>中配置的job名称</li>
+<li><code>Value</code>：Counter计数器的数值</li>
+</ul>
+<h3 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h3><blockquote>
+<p>influxdb、openTSDB等，是专门时间序列数据库，不是一套完整的监控告警系统，缺少告警功能。</p>
+</blockquote>
+<h3 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h3><ul>
+<li>如果应用程序运行在容器上并由Kubernetes负责调度，在此环境中它们是高度自动化并且动态的。传统的监控工具一般是基于服务器，只监控静态的服务，所以当要在这种动态环境监控应用程序时，传统的监控工具往往很难满足这一需求，这时就需要Prometheus出马了。</li>
+</ul>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://blog.csdn.net/lijiaocn/article/details/81865120" target="_blank" rel="external">李佶澳博客</a></p>
+<p><a href="https://blog.csdn.net/mingongge/article/details/89507202" target="_blank" rel="external">Prometheus 使用总结：我踩过得那些坑</a></p>
+<p><a href="https://blog.csdn.net/mingongge/article/details/89507202" target="_blank" rel="external">Prometheus时间序列监控方案</a></p>
+
+      
+    
+    </div>
+    
+      
+  <div class="post-reward">
+    <span class="reward-btn" id="reward-btn">点这里</span>
+    <div class="reward-wrapper syuanpi" id="reward-wrapper" style="display:none;">
+      
+      <div class="reward-item reward-alipay">
+        <img src="https://wx3.sinaimg.cn/mw690/8c564d2aly1ftkt83thjlj20o60skjzn.jpg">
+      </div>
+      
+    </div>
+  </div>
+
+
+      
+    
+  </article>
+  
+    
+  <nav class="article-page">
+    
+    
+      <a href="/es/basis.html" id="art-right" class="art-right">
+        <span class="prev-title"> 
+          ES的基本概念<i class="iconfont icon-right"></i>  
+        </span>
+      </a>
+    
+  </nav>
+
+    
+  <i id="com-switch" class="iconfont icon-more jumping-in long infinite" style="font-size:24px;display:block;text-align:center;transform:rotate(180deg);"></i>
+  <div class="post-comments" id="post-comments" style="display: block;margin: auto 16px;">
+    
+<!-- Gitment Comments -->
+<div id="gitment"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  owner: "super2bai",
+  repo: 'comment',
+  oauth: {
+    client_id: '37f2293730b41dcb5276',
+    client_secret: 'dbab4955840d4cbc88f1563be04ab676662194e5',
+  },
+})
+gitment.render('gitment')
+</script>
+
+    
+    
+
+  </div>
+
+
+  
+  
+    
+  
+  <aside class="post-toc">
+    <span class="title" id="toc-switch"><span>文章导航</span></span>
+    <div class="toc-inner syuanpi back-1" style="display:none;">
+      <li class="title-link"><a href="javascript:;" class="toTop">Prometheus介绍</a></li>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#监控现状"><span class="toc-text">监控现状</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#简介"><span class="toc-text">简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#特点"><span class="toc-text">特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#功能"><span class="toc-text">功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#组件"><span class="toc-text">组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置"><span class="toc-text">配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#告警"><span class="toc-text">告警</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Exporters"><span class="toc-text">Exporters</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#类型"><span class="toc-text">类型</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据模型"><span class="toc-text">数据模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#类型-1"><span class="toc-text">类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#计数器Counter"><span class="toc-text">计数器Counter</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#计量表Gauges"><span class="toc-text">计量表Gauges</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#直方图Histogram"><span class="toc-text">直方图Histogram</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#摘要Summary"><span class="toc-text">摘要Summary</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PromQL"><span class="toc-text">PromQL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#页面"><span class="toc-text">页面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实例"><span class="toc-text">实例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spring-Boot"><span class="toc-text">Spring Boot</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pushgateway"><span class="toc-text">Pushgateway</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对比"><span class="toc-text">对比</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#应用场景"><span class="toc-text">应用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考"><span class="toc-text">参考</span></a></li></ol>
+    </div>
+  </aside>
+
+
+
+  
+
+
+        </div>
+      </main>
+
+      <footer class="footer syuanpi fadeIn" id="footer">
+  <hr>
+  <div class="footer-wrapper">
+    <div class="left">
+      <div class="contact-icon">
+    
+    
+    
+    
+    
+    
+    
+    
+        
+            <a href="https://github.com/super2bai" class="iconfont icon-github" title="github"></a>
+        
+        
+        
+        
+        
+        
+        
+    
+</div>
+    </div>
+    <div class="right">
+      <div class="copyright">
+    <div class="info">
+        <span>&copy;</span>
+        <span>2017 ~ 2019</span>
+        <span>❤</span>
+        <span>super2bai</span>
+    </div>
+    <div class="theme">
+        <span>
+            动力来源于
+            <a href="http://hexo.io/" target="_blank">Hexo </a>
+        </span>
+        <span>
+            主题
+            <a href="https://github.com/ColMugX/hexo-theme-Nlvi"> Nlvi </a>
+        </span>
+    </div>
+    
+    <div class="visit_count">
+        <i class="iconfont icon-visit"></i>
+        <span id="busuanzi_value_site_uv"></span>
+        <i class="iconfont icon-people"></i>
+        <span id="busuanzi_value_site_pv"></span>
+    </div>
+    
+</div>
+
+    </div>
+  </div>
+</footer>
+    </div>
+  </div>
+  <script src="/script/lib/jquery/jquery-3.2.1.min.js"></script>
+
+
+  <script src="/script/lib/lightbox/js/lightbox.min.js"></script>
+
+
+
+
+
+
+
+
+<script src="/script/src/nlvi.js"></script>
+
+  <script src="/script/scheme/banderole.js"></script>
+
+<script src="/script/bootstarp.js"></script>
+
+
+<div class="backtop syuanpi melt toTop" id="backtop">
+    <i class="iconfont icon-up"></i>
+    <span style="text-align:center;font-family:Georgia;"><span style="font-family:Georgia;" id="scrollpercent">1</span>%</span>
+</div>
+
+
+
+</body>
+</html>
