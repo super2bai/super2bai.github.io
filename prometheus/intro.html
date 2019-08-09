@@ -327,7 +327,7 @@
 <h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p><a href="https://prometheus.io/docs/prometheus/latest/configuration/configuration/" target="_blank" rel="external">官方文档</a></p>
 <figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 常规的全局配置</span></div><div class="line"><span class="attr">global:</span></div><div class="line"><span class="attr">  scrape_interval:</span>     <span class="number">15</span><span class="string">s</span> <span class="comment"># 每15秒采集一次数据.</span></div><div class="line"><span class="attr">  evaluation_interval:</span> <span class="number">15</span><span class="string">s</span> <span class="comment"># 每15秒做一次告警检测.</span></div><div class="line"></div><div class="line"><span class="comment"># 配置alertmanagers</span></div><div class="line"><span class="attr">alerting:</span></div><div class="line"><span class="attr">  alertmanagers:</span></div><div class="line"><span class="attr">  - static_configs:</span></div><div class="line"><span class="attr">    - targets:</span></div><div class="line">      <span class="comment"># - alertmanager:9093</span></div><div class="line"></div><div class="line"><span class="comment"># 指定加载的告警规则文件，根据evaluation_interval设置的告警频率。</span></div><div class="line"><span class="attr">rule_files:</span></div><div class="line">  <span class="comment"># - "first_rules.yml"</span></div><div class="line">  <span class="comment"># - "second_rules.yml"</span></div><div class="line"></div><div class="line"><span class="comment"># 指定Prometheus要监控的目标</span></div><div class="line"><span class="comment"># 每个监控目标是一个job，job的类型有很多种。可以是最简单的static_config，即静态地指定每一个目标</span></div><div class="line"><span class="attr">scrape_configs:</span></div><div class="line">  <span class="comment"># 监控的对象名称，不可重复	</span></div><div class="line"><span class="attr">  - job_name:</span> <span class="string">'prometheus'</span></div><div class="line"></div><div class="line">    <span class="comment"># 监听的服务地址</span></div><div class="line"><span class="attr">    static_configs:</span></div><div class="line"><span class="attr">    - targets:</span> <span class="string">['localhost:9090']</span></div></pre></td></tr></table></figure>
 <h3 id="告警"><a href="#告警" class="headerlink" title="告警"></a>告警</h3><blockquote>
-<p>在处理时间序列数据库时，希望对数据进行处理，并对结果给出反馈，这部分工作时用告警来实现。</p>
+<p>在处理时间序列数据库时，希望对数据进行处理，并对结果给出反馈，这部分工作是用告警来实现。</p>
 </blockquote>
 <p>告警在Grafana中非常常见，Prometheus也通过Alertmanager实现完成的告警系统。Alertmanager是一个独立的工具，可以绑定到Prometheus并运行自定义Alertmanager。告警通过配置文件定义，定义有一组指标定义规则组成，如果数据命中这些规则，则会触发告警并将其发送到预定义的目标。与Grafana类似，Prometheus的告警，可以通过email，Slack webhooks，PagerDuty和自定义HTTP目标等。</p>
 <p>告警规则是单独文件定义，在<code>prometheus.yml</code>中引用，格式如下</p>
@@ -375,7 +375,6 @@
 </li>
 </ul>
 <h3 id="数据模型"><a href="#数据模型" class="headerlink" title="数据模型"></a>数据模型</h3><blockquote>
-<p>Prometheus靠进程主动去抓取。</p>
 <p>Prometheus 从根本上所有的存储都是按时间序列去实现的，相同的 metrics(指标名称) 和 label(一个或多个标签) 组成一条时间序列，不同的label表示不同的时间序列。为了支持一些查询，有时还会临时产生一些时间序列存储。</p>
 </blockquote>
 <p>每条时间序列是由唯一的 指标名称 和 一组 标签 （key=value）的形式组成。<br>指标名称 一般是给监测对像起一名字，例如 http_requests<em>total 这样，它有一些命名规则，可以包字母数字</em>之类的的。</p>
@@ -577,6 +576,12 @@
   
     
   <nav class="article-page">
+    
+      <a href="/es/es_query.html" id="art-left" class="art-left">
+        <span class="next-title">
+          <i class="iconfont icon-left"></i>Elasticsearch查询概述
+        </span>
+      </a>
     
     
       <a href="/es/basis.html" id="art-right" class="art-right">
