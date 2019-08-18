@@ -4,8 +4,48 @@
 
     
   <url>
+    <loc>https://super2bai.github.io/MySQL/index.html</loc>
+    <lastmod>2019-08-18T17:07:50.914Z</lastmod>
+    <data>
+        <display>
+        <title>MySQL索引原理</title>
+        <pubTime>2019-08-18T17:06:03.000Z</pubTime>
+        
+        <tag>MySQL</tag>
+         
+         
+           
+             
+              <breadCrumb title="MySQL" url="https://super2bai.github.io/categories/MySQL/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://super2bai.github.io/MySQL/intro.html</loc>
+    <lastmod>2019-08-18T17:07:47.563Z</lastmod>
+    <data>
+        <display>
+        <title>MySQL概述</title>
+        <pubTime>2019-08-09T16:56:06.000Z</pubTime>
+        
+        <tag>MySQL</tag>
+         
+         
+           
+             
+              <breadCrumb title="MySQL" url="https://super2bai.github.io/categories/MySQL/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://super2bai.github.io/es/es_query.html</loc>
-    <lastmod>2019-08-09T09:01:40.298Z</lastmod>
+    <lastmod>2019-08-09T09:17:15.636Z</lastmod>
     <data>
         <display>
         <title>Elasticsearch查询概述</title>

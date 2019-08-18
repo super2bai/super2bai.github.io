@@ -357,7 +357,7 @@
 <p>es 的搜索引擎严重依赖于底层的 <code>filesystem cache</code>，你如果给 <code>filesystem cache</code> 更多的内存，尽量让内存可以容纳所有的 <code>idx segment file</code> 索引数据文件，那么你搜索的时候就基本都是走内存的，性能会非常高。</p>
 </blockquote>
 <ul>
-<li>数据预热</li>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/7.3/_pre_loading_data_into_the_file_system_cache.html" target="_blank" rel="external">数据预热</a></li>
 </ul>
 <blockquote>
 <p>把一些热点数据，提前访问刷到<code>filesystem cache</code>，再次搜索时，直接走内存。 </p>
@@ -398,6 +398,12 @@
   
     
   <nav class="article-page">
+    
+      <a href="/MySQL/intro.html" id="art-left" class="art-left">
+        <span class="next-title">
+          <i class="iconfont icon-left"></i>MySQL概述
+        </span>
+      </a>
     
     
       <a href="/prometheus/intro.html" id="art-right" class="art-right">
