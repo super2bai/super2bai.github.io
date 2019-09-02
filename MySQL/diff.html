@@ -76,11 +76,9 @@
 
 
 
-  <title>
-  
-    归档 · 贰白
-  
-</title>
+  <meta name="keywords" content="MySQL, Nlvi" />
+
+  <title> MySQL对比表结构 · 贰白 </title>
 </head>
 <body>
   <div class="progress">
@@ -252,135 +250,163 @@
         <div class="main-wrapper">
           
     
-    <div class="archive syuanpi fadeInUp" id="archive">
-        
-            <h1 class="archive-title">Total</h1>
-            <span class="archive-num">一共有 110 篇文章</span>
-        
-        <div class="archive-list">
-            <ul>
-        
+  
+  <article class="
+  post
+   is_post 
+  ">
+    <header class="post-header">
+      <div class="post-time syuanpi fadeInUpShort back-1">
+        <div class="post-time-wrapper">
+          <span>2019-08-25</span>
+          
             
-                
-                
-                
-                    
-                     
-                        <h2 class="archive-year"> 2018 </h2>
-                    
-                
+              <span class="post-category"><a href="/categories/MySQL/">MySQL</a></span>
             
+          
+          
             
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    03-29
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/JVM/metaspace.html">JVM元数据区溢出</a>
-                </span>
-            </li>
-
-        
+              <aside class="post-tags syuanpi fadeInUpShort back-3">
+              
+                <a href="/tags/MySQL/">MySQL</a>
+              
+              </aside>
             
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    03-21
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/JVM/stack.html">JVM虚拟机栈和本地方法栈溢出</a>
-                </span>
-            </li>
-
-        
-            
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    03-21
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/JVM/heap.html">JVM堆溢出</a>
-                </span>
-            </li>
-
-        
-            
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    03-20
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/JVM/position.html">JVM对象的访问定位</a>
-                </span>
-            </li>
-
-        
-            
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    03-20
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/JVM/layout.html">JVM中对象的内存布局</a>
-                </span>
-            </li>
-
-        
-            
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    03-15
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/walkup/Africa.html">WalkUp攻略-非洲</a>
-                </span>
-            </li>
-
-        
-            </ul>
+          
         </div>
+      </div>
+      <h1 class="post-title syuanpi fadeInUpShort back-2">
+        
+          MySQL对比表结构
+        
+      </h1>
+    </header>
+    <div class="post-content syuanpi fadeInUpShort back-3">
+      
+        <p>对比MySQL不同环境下的表结构。</p>
+<a id="more"></a>
+<ul>
+<li>安装<code>mysql-connector-python</code></li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew cask install mysql-connector-python</div></pre></td></tr></table></figure>
+<ul>
+<li>安装<code>mysql-utilities</code></li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew cask install mysql-utilities</div></pre></td></tr></table></figure>
+<ul>
+<li>安装<code>mysql_config_editor</code></li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew cask install mysql_config_editor</div></pre></td></tr></table></figure>
+<ul>
+<li>配置信息</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql_config_editor set --login-path=name --host=host --port=port --user=user --password</div></pre></td></tr></table></figure>
+<p>要对比至少需要源信息和目标信息</p>
+<ul>
+<li>移除信息</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql_config_editor remove --login-path=name --host=host --port=port --user=user --password</div></pre></td></tr></table></figure>
+<ul>
+<li>查看所有</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql_config_editor print --all</div></pre></td></tr></table></figure>
+<ul>
+<li>Usage</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Usage: mysqldiff --server1=user:pass@host:port:socket --server2=user:pass@host:port:socket db1.object1:db2.object1 db3:db4</div></pre></td></tr></table></figure>
+<ul>
+<li>相同</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ mysqldiff --server1=dev5 --server2=uat --difftype=sql profile.profile_note:profile.profile_note</div><div class="line"># server1 on l-ars5.dev.ep.cn0.sgrl.io: ... connected.</div><div class="line"># server2 on l-arsdb1.uat.op.tx3.sgrl.io: ... connected.</div><div class="line"># Comparing profile.profile_note to profile.profile_note           [PASS]</div><div class="line"># Success. All objects are the same.</div></pre></td></tr></table></figure>
+<ul>
+<li>不同</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$ mysqldiff --server1=dev5 --server2=uat --difftype=sql profile.profile_note:profile.profile_note</div><div class="line"># server1 on l-ars5.dev.ep.cn0.sgrl.io: ... connected.</div><div class="line"># server2 on l-arsdb1.uat.op.tx3.sgrl.io: ... connected.</div><div class="line"># Comparing profile.profile_note to profile.profile_note           [FAIL]</div><div class="line"># Transformation for --changes-for=server1:</div><div class="line">#</div></pre></td></tr></table></figure>
+<blockquote>
+<p>注意: <code>--port</code> and <code>--socket</code> options are supported for the <code>set/remove</code> commands as of <strong>MySQL 5.6.11</strong></p>
+</blockquote>
+<p>参考：</p>
+<ul>
+<li><p><a href="https://dev.mysql.com/doc/refman/8.0/en/mysql-config-editor.html" target="_blank" rel="external">mysql config editor</a></p>
+</li>
+<li><p><a href="https://docs.oracle.com/cd/E17952_01/mysql-utilities-1.5-en/mysqldiff.html" target="_blank" rel="external">mysqldiff</a></p>
+</li>
+</ul>
+
+      
+    
     </div>
     
-  <nav class="pagination">
-      <span class="page-number current">1</span>
+      
+  <div class="post-reward">
+    <span class="reward-btn" id="reward-btn">点这里</span>
+    <div class="reward-wrapper syuanpi" id="reward-wrapper" style="display:none;">
+      
+      <div class="reward-item reward-alipay">
+        <img src="https://wx3.sinaimg.cn/mw690/8c564d2aly1ftkt83thjlj20o60skjzn.jpg">
+      </div>
+      
+    </div>
+  </div>
+
+
+      
+    
+  </article>
+  
+    
+  <nav class="article-page">
+    
+    
+      <a href="/github/acronym.html" id="art-right" class="art-right">
+        <span class="prev-title"> 
+          GitHub Message缩写<i class="iconfont icon-right"></i>  
+        </span>
+      </a>
+    
   </nav>
 
+    
+  <i id="com-switch" class="iconfont icon-more jumping-in long infinite" style="font-size:24px;display:block;text-align:center;transform:rotate(180deg);"></i>
+  <div class="post-comments" id="post-comments" style="display: block;margin: auto 16px;">
+    
+<!-- Gitment Comments -->
+<div id="gitment"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  owner: "super2bai",
+  repo: 'comment',
+  oauth: {
+    client_id: '37f2293730b41dcb5276',
+    client_secret: 'dbab4955840d4cbc88f1563be04ab676662194e5',
+  },
+})
+gitment.render('gitment')
+</script>
+
+    
+    
+
+  </div>
+
+
+  
+  
+    
+  
+  <aside class="post-toc">
+    <span class="title" id="toc-switch"><span>文章导航</span></span>
+    <div class="toc-inner syuanpi back-1" style="display:none;">
+      <li class="title-link"><a href="javascript:;" class="toTop">MySQL对比表结构</a></li>
+      
+    </div>
+  </aside>
+
+
+
+  
 
 
         </div>
