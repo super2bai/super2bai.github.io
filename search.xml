@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Emacs快捷键</title>
+      <link href="/emacs/shortcut.html"/>
+      <url>/emacs/shortcut.html</url>
+      
+        <content type="html"><![CDATA[<p>macOS大部分的文本编辑功能都绑定了Emacs快捷键，所以在邮件，chrome等地方这些都是通用的。</p><a id="more"></a><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">Ctrl + h        向前删除一个字符</div><div class="line">Ctrl + d        向后删除一个字符</div><div class="line">Ctrl + u        删除光标到行首的所有字符</div><div class="line">Ctrl + k        删除光标到行尾的所有字符</div><div class="line"></div><div class="line">Ctrl + a        光标移到行首 Ahead</div><div class="line">Ctrl + e        光标移到行尾 End</div><div class="line">Ctrl + f        光标向前移一个字符 Forward</div><div class="line">Ctrl + b        光标向后移一个字符 Backward</div><div class="line">Ctrl + left     光标向前移一个单词</div><div class="line">Ctrl + right    光标向后移一个单词</div><div class="line">Ctrl + p        调出前一条命令/向上一行 Previous </div><div class="line">Ctrl + n        调出后一条命令/向下一行 Next</div><div class="line"></div><div class="line">Ctrl + c        取消当前行命令 Ctrl + <span class="keyword">Break</span></div><div class="line">Ctrl + l        清屏 clear命令</div><div class="line">Ctrl + r        出现bck-i-search: 输入查找相关历史命令</div></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> emacs </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> emacs </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>设置线程池大小</title>
       <link href="/server/threadpool.html"/>
       <url>/server/threadpool.html</url>
