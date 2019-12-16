@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Mac下Brew安装Tomcat并配置到IntelliJ IDEA</title>
+      <link href="/mac/tomcat.html"/>
+      <url>/mac/tomcat.html</url>
+      
+        <content type="html"><![CDATA[<p>更新了一波，配置忘记恢复了，从来！</p><a id="more"></a><ul><li><p>安装Tomcat：<code>brew install tomcat</code></p></li><li><p>根目录：<code>/usr/local/Cellar/tomcat/x.x.x/libexec/</code></p></li><li><p>配置到IntelliJ IDEA时选择上述路径即可</p></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> mac </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> mac </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>启用root账号设置密码</title>
       <link href="/Mac/root.html"/>
       <url>/Mac/root.html</url>
