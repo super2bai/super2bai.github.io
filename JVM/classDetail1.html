@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
   <link rel="stylesheet" href="/style/style.css">
 <script>
   var nlviconfig = {
@@ -54,19 +54,19 @@
     <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
-<meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="browsermode" content="application">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="贰白">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="msapplication-navbutton-color" content="#666666">
-<meta name= "format-detection" content="telephone=no" />
-<meta name="keywords" content="nlvi, Nlvi" />
+<meta name="format-detection" content="telephone=no">
+<meta name="keywords" content="nlvi, Nlvi">
 
-  <link rel="apple-touch-icon"  sizes="72x72"  href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
-  <link rel="apple-touch-icon-precomposed"  sizes="72x72"  href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+  <link rel="apple-touch-icon" sizes="72x72" href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
 
 
   <meta name="subtitle" content="苦于探索，全是未知">
@@ -76,7 +76,7 @@
 
 
 
-  <meta name="keywords" content="JVM, Nlvi" />
+  <meta name="keywords" content="JVM, Nlvi">
 
   <title> Class文件详述(1) · 贰白 </title>
 </head>
@@ -561,7 +561,7 @@
 <p><code>0x0009</code>：UTF-8的字符串长度是9字节</p>
 <p><code>0x74</code>：十进制为116，查询ASC码表可知，为字母<code>t</code>。</p>
 <p>将<code>74 65 73 74 2F 54 65 73 74</code>逐个翻译后为：<code>test/Test</code>，也就是文章开头源码的全限定名。</p>
-<p><img src="https://wx1.sinaimg.cn/mw690/8c564d2agy1fv07a7wxmij20w30mngvj.jpg" alt=""></p>
+<p><img src="https://wx1.sinaimg.cn/mw690/8c564d2agy1fv07a7wxmij20w30mngvj.jpg" alt></p>
 <hr>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">07 00 04 01 00 10 6A 61 76 61 2F 6C 61 6E 67 2F 4F 62 6A 65 63 74</div></pre></td></tr></table></figure>
 <p><code>0x07</code>：<code>CONSTANT_Class_info</code>，类或接口的引用</p>
@@ -573,7 +573,7 @@
 <p>由于Class文件中方法、字段等都需要引用<code>CONSTANT_Utf8_info</code>型常量来描述名称，所以<code>CONSTANT_Utf8_info</code>型常量的最大长度也就是Java中方法、字段名的最大长度，也就是<code>length</code>的最大值，即<code>65535</code>。所以Java程序中如果定义了超过64KB英文字符的变量或方法名，将无法编译。</p>
 </blockquote>
 <h4 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h4><p>可以用JDK自带工具<code>javap -v ClassName</code>来检查手动翻译内容是否正确，如下图所示</p>
-<p><img src="https://wx4.sinaimg.cn/mw690/8c564d2agy1fv07ankao0j211y140tgl.jpg" alt=""></p>
+<p><img src="https://wx4.sinaimg.cn/mw690/8c564d2agy1fv07ankao0j211y140tgl.jpg" alt></p>
 <h3 id="访问标志"><a href="#访问标志" class="headerlink" title="访问标志"></a>访问标志</h3><h4 id="作用-3"><a href="#作用-3" class="headerlink" title="作用"></a>作用</h4><ul>
 <li>识别一些类或者接口层次的访问信息<ul>
 <li>这个Class是类还是接口<ul>
@@ -820,7 +820,7 @@ gitment.render('gitment')
     <div class="search-wrapper syuanpi">
       <h2 id="search-header" class="syuanpi">找啥？</h2>
       <div class="input">
-        <input type="text" id="local-search-input" results="0" name="">
+        <input type="text" id="local-search-input" results="0" name>
       </div>
       <div id="local-search-result"></div>
     </div>

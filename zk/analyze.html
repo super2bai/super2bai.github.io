@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
   <link rel="stylesheet" href="/style/style.css">
 <script>
   var nlviconfig = {
@@ -54,19 +54,19 @@
     <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
-<meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="browsermode" content="application">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="贰白">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="msapplication-navbutton-color" content="#666666">
-<meta name= "format-detection" content="telephone=no" />
-<meta name="keywords" content="nlvi, Nlvi" />
+<meta name="format-detection" content="telephone=no">
+<meta name="keywords" content="nlvi, Nlvi">
 
-  <link rel="apple-touch-icon"  sizes="72x72"  href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
-  <link rel="apple-touch-icon-precomposed"  sizes="72x72"  href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+  <link rel="apple-touch-icon" sizes="72x72" href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
 
 
   <meta name="subtitle" content="苦于探索，全是未知">
@@ -76,7 +76,7 @@
 
 
 
-  <meta name="keywords" content="Zookeeper, Nlvi" />
+  <meta name="keywords" content="Zookeeper, Nlvi">
 
   <title> Zookeeper的几个原理分析 · 贰白 </title>
 </head>
@@ -442,8 +442,8 @@ gitment.render('gitment')
     <span class="title" id="toc-switch"><span>文章导航</span></span>
     <div class="toc-inner syuanpi back-1" style="display:none;">
       <li class="title-link"><a href="javascript:;" class="toTop">Zookeeper的几个原理分析</a></li>
-      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Zookeeper的集群角色"><span class="toc-text">Zookeeper的集群角色</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Zookeeper的集群组成"><span class="toc-text">Zookeeper的集群组成</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#服务器集群数量"><span class="toc-text">服务器集群数量</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#leader选举"><span class="toc-text">leader选举</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#选举算法"><span class="toc-text">选举算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#源码"><span class="toc-text">源码</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#名词"><span class="toc-text">名词</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#serverid"><span class="toc-text">serverid</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#zxid"><span class="toc-text">zxid</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Epoch"><span class="toc-text">Epoch</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#server的状态"><span class="toc-text">server的状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#选举流程"><span class="toc-text">选举流程</span></a>
-    </div>
+      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Zookeeper的集群角色"><span class="toc-text">Zookeeper的集群角色</span></a></li></ol><li class="toc-item toc-level-3"><a class="toc-link" href="#Zookeeper的集群组成"><span class="toc-text">Zookeeper的集群组成</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#服务器集群数量"><span class="toc-text">服务器集群数量</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#leader选举"><span class="toc-text">leader选举</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#选举算法"><span class="toc-text">选举算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#源码"><span class="toc-text">源码</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#名词"><span class="toc-text">名词</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#serverid"><span class="toc-text">serverid</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#zxid"><span class="toc-text">zxid</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Epoch"><span class="toc-text">Epoch</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#server的状态"><span class="toc-text">server的状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#选举流程"><span class="toc-text">选举流程</span></a>
+    </li></div>
   </aside>
 
 
@@ -542,7 +542,7 @@ gitment.render('gitment')
     <div class="search-wrapper syuanpi">
       <h2 id="search-header" class="syuanpi">找啥？</h2>
       <div class="input">
-        <input type="text" id="local-search-input" results="0" name="">
+        <input type="text" id="local-search-input" results="0" name>
       </div>
       <div id="local-search-result"></div>
     </div>

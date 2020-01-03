@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
   <link rel="stylesheet" href="/style/style.css">
 <script>
   var nlviconfig = {
@@ -54,19 +54,19 @@
     <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
-<meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="browsermode" content="application">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="贰白">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="msapplication-navbutton-color" content="#666666">
-<meta name= "format-detection" content="telephone=no" />
-<meta name="keywords" content="nlvi, Nlvi" />
+<meta name="format-detection" content="telephone=no">
+<meta name="keywords" content="nlvi, Nlvi">
 
-  <link rel="apple-touch-icon"  sizes="72x72"  href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
-  <link rel="apple-touch-icon-precomposed"  sizes="72x72"  href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+  <link rel="apple-touch-icon" sizes="72x72" href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
 
 
   <meta name="subtitle" content="苦于探索，全是未知">
@@ -76,7 +76,7 @@
 
 
 
-  <meta name="keywords" content="MySQL, Nlvi" />
+  <meta name="keywords" content="MySQL, Nlvi">
 
   <title> MySQL索引原理 · 贰白 </title>
 </head>
@@ -377,7 +377,7 @@
 <p>二叉查找树的时间复杂度为O(longN)，从算法逻辑上讲查找速度和比较速度都是最小的。但是要考虑<strong>磁盘I/O</strong>，节约在磁盘上花的时间，对搜索树的性能提高是最有效的，所以文件系统及数据库系统普遍采用B树或B+树作为索引结构。</p>
 <h2 id="索引的本质"><a href="#索引的本质" class="headerlink" title="索引的本质"></a>索引的本质</h2><p>在使用数据库时，查询是最主要的功能之一。所以需要查询数据的速度尽可能的快，所以数据库的设计者会从查询算法的角度进行优化。</p>
 <p>最基本的查询算法当前是顺序查找，但复杂度为O(n)会使得在数据量很大时效率很差。一些其他查找算法，诸如二分查找或二叉树查找效率更高，但每种算法都只能应用于特定的数据结构之上。例如，二分查找要求被检索的数据有序，而二叉树查找只能应用于二叉查找树。所以，在数据之外，数据库还维护着满足特定查找算法的数据结构，这些数据结构以某种个方式指向数据，这样就可以实现高级查找算法。这种数据结构，就是索引。</p>
-<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p><img src="https://wx1.sinaimg.cn/mw690/8c564d2aly1g36ymajdtlj20gc08974w.jpg" alt=""></p>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p><img src="https://wx1.sinaimg.cn/mw690/8c564d2aly1g36ymajdtlj20gc08974w.jpg" alt></p>
 <p>上图展示了一种可能的索引方式。左边是数据表，一共有两列七条数据，最左边是数据的物理地址（逻辑相邻的记录在磁盘上的物理存储地址并不一定是相邻的）。为了加快Col2的查找，可以维护一个右边所示的二叉查找树，每个节点分别包含索引键值和一个指向对应数据记录的物理地址指针，这样就可以运用二叉查找在O(logN)的复杂度内获取到相应数据。虽然这是一个货真价实的索引，但是实际的数据库系统几乎没有使用二叉查找树或红黑树实现的，为什么呢？</p>
 <h2 id="磁盘存取原理"><a href="#磁盘存取原理" class="headerlink" title="磁盘存取原理"></a>磁盘存取原理</h2><p>磁盘是块设备。也就是说磁盘的读写单位是以块为单位，一般块大小从0.5K到4K。</p>
 <blockquote>
@@ -399,10 +399,10 @@
 <p>为了减少磁盘的I/O次数，就需要把原来”瘦高”的树结构变得”矮胖”，而这正满足B树的特质之一，内节点出度d越大，索引的性能越好，而出度的上限取决于节点内key和data的大小：$$d_{max}=floor(pagesize/(keysize+datasize+pointsize))$$</p>
 <h2 id="MySQL索引实现"><a href="#MySQL索引实现" class="headerlink" title="MySQL索引实现"></a>MySQL索引实现</h2><p>在MySQL中，索引属于存储引擎级别的概念，不同存储引擎对索引的实现方式是不同的，在MySQL中主要为MyISAM和InnoDB两个存储引擎的索引实现。</p>
 <h3 id="MyISAM索引实现"><a href="#MyISAM索引实现" class="headerlink" title="MyISAM索引实现"></a>MyISAM索引实现</h3><p>MyISAM引擎使用B+树作为索引结构，叶节点的data域存放的是数据记录的<strong>地址</strong>。索引文件和数据文件分离，索引文件仅保存数据记录的地址。</p>
-<p><img src="https://wx3.sinaimg.cn/mw690/8c564d2aly1g3eq7vgfgpj20ig0eujs1.jpg" alt=""></p>
+<p><img src="https://wx3.sinaimg.cn/mw690/8c564d2aly1g3eq7vgfgpj20ig0eujs1.jpg" alt></p>
 <p>假设以Col1为主键，则上图是MyISAM表的主索引示意。MyISAM的索引文件仅仅保存数据记录的地址。</p>
 <p>在MyISAM中，主索引和辅助索引（Secondary key）在结构上没有任何区别，只是主索引要求key是唯一的，而辅助索引的key可以重复。</p>
-<p><img src="https://wx4.sinaimg.cn/mw690/8c564d2aly1g3eq7vj9q3j20ig0eu3z6.jpg" alt=""></p>
+<p><img src="https://wx4.sinaimg.cn/mw690/8c564d2aly1g3eq7vj9q3j20ig0eu3z6.jpg" alt></p>
 <p>同样也是B+树，data域保存数据记录的地址。</p>
 <p>因此，MyISAM中索引检索的算法为：</p>
 <ul>
@@ -412,7 +412,7 @@
 <p>MyISAM的索引方式也叫做”非聚集”的，之所以这么称呼是为了与InnoDB的聚集索引区分。</p>
 <h3 id="InnoDB索引实现"><a href="#InnoDB索引实现" class="headerlink" title="InnoDB索引实现"></a>InnoDB索引实现</h3><p>InnoDB也是用B+树作为索引结构，但实现方式与MyISAM不同。</p>
 <p><strong>InnoDB的数据文件本身就是索引文件。</strong>表数据文件本身就是按B+树组织的一个索引结构，叶节点的data域保存了完整的数据记录。这个索引的key是数据表的主键，因此InnoDB表数据文件本身就是主索引。</p>
-<p><img src="https://wx2.sinaimg.cn/mw690/8c564d2aly1g3eq7vg0baj20f306pjrj.jpg" alt=""></p>
+<p><img src="https://wx2.sinaimg.cn/mw690/8c564d2aly1g3eq7vg0baj20f306pjrj.jpg" alt></p>
 <p>可以看到叶节点包含了完整的数据记录。这种索引叫做聚集索引。</p>
 <ul>
 <li>因为InnoDB的数据文件本身要按主键聚集，所以InnoDB要求表必须有主键(MyISAM可以没有)。</li>
@@ -536,8 +536,8 @@ gitment.render('gitment')
     <span class="title" id="toc-switch"><span>文章导航</span></span>
     <div class="toc-inner syuanpi back-1" style="display:none;">
       <li class="title-link"><a href="javascript:;" class="toTop">MySQL索引原理</a></li>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#概述"><span class="toc-text">概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#历史"><span class="toc-text">历史</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#B树查找过程"><span class="toc-text">B树查找过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#B树与B-树"><span class="toc-text">B树与B+树</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#B树特点"><span class="toc-text">B树特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#B-树"><span class="toc-text">B+树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么选择B-树"><span class="toc-text">为什么选择B+树</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么不用二叉查找树实现"><span class="toc-text">为什么不用二叉查找树实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#索引的本质"><span class="toc-text">索引的本质</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#例子"><span class="toc-text">例子</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#磁盘存取原理"><span class="toc-text">磁盘存取原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#磁盘如何读取"><span class="toc-text">磁盘如何读取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#局部性原理"><span class="toc-text">局部性原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#预读"><span class="toc-text">预读</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MySQL索引实现"><span class="toc-text">MySQL索引实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MyISAM索引实现"><span class="toc-text">MyISAM索引实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#InnoDB索引实现"><span class="toc-text">InnoDB索引实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#索引使用及优化"><span class="toc-text">索引使用及优化</span></a>
-    </div>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#概述"><span class="toc-text">概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#历史"><span class="toc-text">历史</span></a></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#B树查找过程"><span class="toc-text">B树查找过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#B树与B-树"><span class="toc-text">B树与B+树</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#B树特点"><span class="toc-text">B树特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#B-树"><span class="toc-text">B+树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么选择B-树"><span class="toc-text">为什么选择B+树</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么不用二叉查找树实现"><span class="toc-text">为什么不用二叉查找树实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#索引的本质"><span class="toc-text">索引的本质</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#例子"><span class="toc-text">例子</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#磁盘存取原理"><span class="toc-text">磁盘存取原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#磁盘如何读取"><span class="toc-text">磁盘如何读取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#局部性原理"><span class="toc-text">局部性原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#预读"><span class="toc-text">预读</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MySQL索引实现"><span class="toc-text">MySQL索引实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MyISAM索引实现"><span class="toc-text">MyISAM索引实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#InnoDB索引实现"><span class="toc-text">InnoDB索引实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#索引使用及优化"><span class="toc-text">索引使用及优化</span></a>
+    </li></div>
   </aside>
 
 
@@ -636,7 +636,7 @@ gitment.render('gitment')
     <div class="search-wrapper syuanpi">
       <h2 id="search-header" class="syuanpi">找啥？</h2>
       <div class="input">
-        <input type="text" id="local-search-input" results="0" name="">
+        <input type="text" id="local-search-input" results="0" name>
       </div>
       <div id="local-search-result"></div>
     </div>

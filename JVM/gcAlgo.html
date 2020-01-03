@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
   <link rel="stylesheet" href="/style/style.css">
 <script>
   var nlviconfig = {
@@ -54,19 +54,19 @@
     <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
-<meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="browsermode" content="application">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="贰白">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="msapplication-navbutton-color" content="#666666">
-<meta name= "format-detection" content="telephone=no" />
-<meta name="keywords" content="nlvi, Nlvi" />
+<meta name="format-detection" content="telephone=no">
+<meta name="keywords" content="nlvi, Nlvi">
 
-  <link rel="apple-touch-icon"  sizes="72x72"  href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
-  <link rel="apple-touch-icon-precomposed"  sizes="72x72"  href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+  <link rel="apple-touch-icon" sizes="72x72" href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
 
 
   <meta name="subtitle" content="苦于探索，全是未知">
@@ -76,7 +76,7 @@
 
 
 
-  <meta name="keywords" content="JVM, Nlvi" />
+  <meta name="keywords" content="JVM, Nlvi">
 
   <title> 垃圾收集算法 · 贰白 </title>
 </head>
@@ -312,14 +312,14 @@
 </li>
 </ul>
 <p>标记阶段结束后，GC执行下一步并移除所有不可达对象。</p>
-<p><img src="https://wx3.sinaimg.cn/mw690/8c564d2aly1frb8v15jixj20g405smy1.jpg" alt=""></p>
+<p><img src="https://wx3.sinaimg.cn/mw690/8c564d2aly1frb8v15jixj20g405smy1.jpg" alt></p>
 <h4 id="移除"><a href="#移除" class="headerlink" title="移除"></a>移除</h4><p>移除不可达对象在不同的GC算法中是不一样的，但概括来看，可分为三类：清除、压缩和复制。</p>
 <hr>
 <h3 id="标记-清除算法"><a href="#标记-清除算法" class="headerlink" title="标记-清除算法"></a>标记-清除算法</h3><h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><blockquote>
 <p>Mark-Sweep，首先标记出所有需要回收的对象，在标记完成后统一回收所有被标记的对象。</p>
 </blockquote>
 <p><code>free-list</code>记录所有可用空间和大小，释放所有被不可达对象占用的内存</p>
-<h4 id="执行过程"><a href="#执行过程" class="headerlink" title="执行过程"></a>执行过程</h4><p><img src="https://wx4.sinaimg.cn/mw690/8c564d2aly1frb9kjgprwj20g90cjglp.jpg" alt=""></p>
+<h4 id="执行过程"><a href="#执行过程" class="headerlink" title="执行过程"></a>执行过程</h4><p><img src="https://wx4.sinaimg.cn/mw690/8c564d2aly1frb9kjgprwj20g90cjglp.jpg" alt></p>
 <h4 id="不足"><a href="#不足" class="headerlink" title="不足"></a>不足</h4><ul>
 <li>效率<ul>
 <li>标记和清除两个过程的效率都不高</li>
@@ -333,7 +333,7 @@
 <h3 id="复制算法"><a href="#复制算法" class="headerlink" title="复制算法"></a>复制算法</h3><h4 id="原理-1"><a href="#原理-1" class="headerlink" title="原理"></a>原理</h4><blockquote>
 <p>Copying，解决效率问题，将可用内存按容量划分为大小相等的两块，每次只使用其中一块。当这一块的内存用完了，就将还存活的对象复制到另外一块上面，再把已使用过的内存空间一次清理掉。这样使得每次都是对整个半区进行回收，内存分配时也无需考虑内存碎片等问题，只需要移动堆顶指针，按顺序分配内存即可。</p>
 </blockquote>
-<h4 id="执行过程-1"><a href="#执行过程-1" class="headerlink" title="执行过程"></a>执行过程</h4><p><img src="https://wx1.sinaimg.cn/mw690/8c564d2aly1frb9kjf96nj20gd0ddt8u.jpg" alt=""></p>
+<h4 id="执行过程-1"><a href="#执行过程-1" class="headerlink" title="执行过程"></a>执行过程</h4><p><img src="https://wx1.sinaimg.cn/mw690/8c564d2aly1frb9kjf96nj20gd0ddt8u.jpg" alt></p>
 <h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><ul>
 <li>实现简单</li>
 <li>运行高效</li>
@@ -350,7 +350,7 @@
 <h3 id="标记-整理算法"><a href="#标记-整理算法" class="headerlink" title="标记-整理算法"></a>标记-整理算法</h3><h4 id="原理-2"><a href="#原理-2" class="headerlink" title="原理"></a>原理</h4><blockquote>
 <p>Mark-Compact，标记后，让所有存活的对象都向一端移动，然后直接清理掉端边界以外的内存。</p>
 </blockquote>
-<h4 id="执行过程-2"><a href="#执行过程-2" class="headerlink" title="执行过程"></a>执行过程</h4><p><img src="https://wx3.sinaimg.cn/mw690/8c564d2aly1frb9kjf1r1j20gg0crglp.jpg" alt=""></p>
+<h4 id="执行过程-2"><a href="#执行过程-2" class="headerlink" title="执行过程"></a>执行过程</h4><p><img src="https://wx3.sinaimg.cn/mw690/8c564d2aly1frb9kjf1r1j20gg0crglp.jpg" alt></p>
 <h3 id="分代收集算法"><a href="#分代收集算法" class="headerlink" title="分代收集算法"></a>分代收集算法</h3><blockquote>
 <p>根据对象存活周期的不同将内存划分为几块。</p>
 <p>一般是把Java堆分为新生代和老年代，根据不同年代特点采用不同算法。</p>
@@ -616,7 +616,7 @@ gitment.render('gitment')
     <div class="search-wrapper syuanpi">
       <h2 id="search-header" class="syuanpi">找啥？</h2>
       <div class="input">
-        <input type="text" id="local-search-input" results="0" name="">
+        <input type="text" id="local-search-input" results="0" name>
       </div>
       <div id="local-search-result"></div>
     </div>

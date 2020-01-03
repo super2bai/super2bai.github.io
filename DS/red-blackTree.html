@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
   <link rel="stylesheet" href="/style/style.css">
 <script>
   var nlviconfig = {
@@ -54,19 +54,19 @@
     <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
-<meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="browsermode" content="application">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="贰白">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="msapplication-navbutton-color" content="#666666">
-<meta name= "format-detection" content="telephone=no" />
-<meta name="keywords" content="nlvi, Nlvi" />
+<meta name="format-detection" content="telephone=no">
+<meta name="keywords" content="nlvi, Nlvi">
 
-  <link rel="apple-touch-icon"  sizes="72x72"  href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
-  <link rel="apple-touch-icon-precomposed"  sizes="72x72"  href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+  <link rel="apple-touch-icon" sizes="72x72" href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
 
 
   <meta name="subtitle" content="苦于探索，全是未知">
@@ -76,7 +76,7 @@
 
 
 
-  <meta name="keywords" content="Data Structures, Nlvi" />
+  <meta name="keywords" content="Data Structures, Nlvi">
 
   <title> Red-Black Tree · 贰白 </title>
 </head>
@@ -308,7 +308,7 @@
 <li>右子树所有节点的值均大于或等于根节点的值</li>
 <li>左、右子树本身又各都是二叉查找树</li>
 </ul>
-<h3 id="二叉树如何找数据10"><a href="#二叉树如何找数据10" class="headerlink" title="二叉树如何找数据10"></a>二叉树如何找数据10</h3><p><img src="https://wx1.sinaimg.cn/mw690/8c564d2agy1fyqd4opchqj21400u03zu.jpg" alt=""></p>
+<h3 id="二叉树如何找数据10"><a href="#二叉树如何找数据10" class="headerlink" title="二叉树如何找数据10"></a>二叉树如何找数据10</h3><p><img src="https://wx1.sinaimg.cn/mw690/8c564d2agy1fyqd4opchqj21400u03zu.jpg" alt></p>
 <ul>
 <li>首先从根节点开始，比较10与9，由于10&gt;9，则在右子树查找</li>
 <li>比较10与13，由于10&lt;13，则在左子树查找</li>
@@ -316,19 +316,19 @@
 <li>查找到10</li>
 </ul>
 <p>利用二分查找思想，经过三次，效率高。如果是列表的话，查找次数不止三次，正是因为这个特性，二叉查找树得到广泛应用。</p>
-<h3 id="二叉树如何找数据"><a href="#二叉树如何找数据" class="headerlink" title="二叉树如何找数据"></a>二叉树如何找数据</h3><p><img src="https://wx2.sinaimg.cn/mw690/8c564d2agy1fyqd4oj864j20u0140q4w.jpg" alt=""></p>
+<h3 id="二叉树如何找数据"><a href="#二叉树如何找数据" class="headerlink" title="二叉树如何找数据"></a>二叉树如何找数据</h3><p><img src="https://wx2.sinaimg.cn/mw690/8c564d2agy1fyqd4oj864j20u0140q4w.jpg" alt></p>
 <p>前序遍历：根左右</p>
 <p>中序遍历：左根右</p>
 <p>后序遍历：左右根</p>
 <p>二叉查找树的中序遍历就是有序序列，落到数轴上，即124789。</p>
-<h3 id="长歪的二叉查找树"><a href="#长歪的二叉查找树" class="headerlink" title="长歪的二叉查找树"></a>长歪的二叉查找树</h3><p><img src="https://wx2.sinaimg.cn/mw690/8c564d2agy1fyqd4o8pizj20u01400u3.jpg" alt=""></p>
+<h3 id="长歪的二叉查找树"><a href="#长歪的二叉查找树" class="headerlink" title="长歪的二叉查找树"></a>长歪的二叉查找树</h3><p><img src="https://wx2.sinaimg.cn/mw690/8c564d2agy1fyqd4o8pizj20u01400u3.jpg" alt></p>
 <p>都是大于上一个节点，都挂在右节点，说是树，其实是列表，几乎变成了线性，构建、查找树均效率低。那就需要把树变得扁一些，重新构建树，解决多次插入新节点导致的不平衡问题，也就是平衡二叉树。</p>
 <h2 id="平衡二叉树"><a href="#平衡二叉树" class="headerlink" title="平衡二叉树"></a>平衡二叉树</h2><h3 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h3><ul>
 <li>树的左右<strong>高度差</strong>的绝对值不能超过1</li>
 <li>任何往下<strong>递归</strong>的左、右子树，必须符合第一条性质</li>
 <li>没有任何节点的<strong>空树</strong>或只有根节点的树也是平衡二叉树</li>
 </ul>
-<p><img src="http://wx3.sinaimg.cn/mw690/8c564d2agy1fyqd4oe410j21400u0409.jpg" alt=""></p>
+<p><img src="http://wx3.sinaimg.cn/mw690/8c564d2agy1fyqd4oe410j21400u0409.jpg" alt></p>
 <h3 id="红黑树与AVL树"><a href="#红黑树与AVL树" class="headerlink" title="红黑树与AVL树"></a>红黑树与AVL树</h3><p><strong>AVL树</strong>：是以苏联数学家Adelson-Velsky和Landis名字命名的平衡二叉树算法</p>
 <p>插入和修改都不频繁，查询频繁。</p>
 <p><strong>红黑树</strong>：是于1972年发明的，当时称为对称二叉B树，1978年得到优化，正式命名为红黑树。它的特征是在每个节点上增加一个属性来表示节点的颜色，可以是红色和黑色。频繁插入和删除效率高。</p>
@@ -389,7 +389,7 @@
 <p>TreeMap底层的红黑树实现，新节点默认为红色，判断当树不平衡时，进行变色及旋转操作。</p>
 <p><img src="https://wx4.sinaimg.cn/mw690/8c564d2agy1fyrlsf9gzyj20u00wugt5.jpg" alt="TreeMap"></p>
 <h2 id="集合框架图"><a href="#集合框架图" class="headerlink" title="集合框架图"></a>集合框架图</h2><p>集合是数据结构的载体</p>
-<p><img src="http://wx1.sinaimg.cn/large/8c564d2agy1fyspaak2trj21xy0u0adi.jpg" alt=""></p>
+<p><img src="http://wx1.sinaimg.cn/large/8c564d2agy1fyspaak2trj21xy0u0adi.jpg" alt></p>
 <h3 id="常用集合"><a href="#常用集合" class="headerlink" title="常用集合"></a>常用集合</h3><ul>
 <li>HashSet、HashMap</li>
 <li>TreeSet、TreeMap<ul>
@@ -594,7 +594,7 @@ gitment.render('gitment')
     <div class="search-wrapper syuanpi">
       <h2 id="search-header" class="syuanpi">找啥？</h2>
       <div class="input">
-        <input type="text" id="local-search-input" results="0" name="">
+        <input type="text" id="local-search-input" results="0" name>
       </div>
       <div id="local-search-result"></div>
     </div>

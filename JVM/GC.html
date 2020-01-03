@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
   <link rel="stylesheet" href="/style/style.css">
 <script>
   var nlviconfig = {
@@ -54,19 +54,19 @@
     <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
-<meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="browsermode" content="application">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="贰白">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="msapplication-navbutton-color" content="#666666">
-<meta name= "format-detection" content="telephone=no" />
-<meta name="keywords" content="nlvi, Nlvi" />
+<meta name="format-detection" content="telephone=no">
+<meta name="keywords" content="nlvi, Nlvi">
 
-  <link rel="apple-touch-icon"  sizes="72x72"  href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
-  <link rel="apple-touch-icon-precomposed"  sizes="72x72"  href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+  <link rel="apple-touch-icon" sizes="72x72" href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://wx4.sinaimg.cn/mw690/8c564d2agy1fq4rsiycy4j202c01wa9v.jpg">
 
 
   <meta name="subtitle" content="苦于探索，全是未知">
@@ -76,7 +76,7 @@
 
 
 
-  <meta name="keywords" content="JVM, Nlvi" />
+  <meta name="keywords" content="JVM, Nlvi">
 
   <title> 垃圾收集器 · 贰白 </title>
 </head>
@@ -292,7 +292,7 @@
 <li>如何回收</li>
 </ul>
 <h3 id="为什么要懂"><a href="#为什么要懂" class="headerlink" title="为什么要懂"></a>为什么要懂</h3><p>当需要排查各种内存溢出、内存泄漏问题时，当垃圾收集称为系统达到更高并发量的瓶颈时，就需要对这些“自动化”的技术实施必要的监控和调节。</p>
-<p><img src="https://wx2.sinaimg.cn/mw690/8c564d2agy1fqxaynyb86j20f70ae400.jpg" alt=""></p>
+<p><img src="https://wx2.sinaimg.cn/mw690/8c564d2agy1fqxaynyb86j20f70ae400.jpg" alt></p>
 <h3 id="Serial"><a href="#Serial" class="headerlink" title="Serial"></a>Serial</h3><h4 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h4><ul>
 <li>最基本、发展历史最悠久的收集器</li>
 <li>JDK1.3.1之前，虚拟机新生代收集的唯一选择</li>
@@ -318,7 +318,7 @@
 </ul>
 </li>
 </ul>
-<h4 id="运行示意图"><a href="#运行示意图" class="headerlink" title="运行示意图"></a>运行示意图</h4><p><img src="https://wx1.sinaimg.cn/mw690/8c564d2aly1fqy1c6aamzj20oc0bjgmd.jpg" alt=""></p>
+<h4 id="运行示意图"><a href="#运行示意图" class="headerlink" title="运行示意图"></a>运行示意图</h4><p><img src="https://wx1.sinaimg.cn/mw690/8c564d2aly1fqy1c6aamzj20oc0bjgmd.jpg" alt></p>
 <h3 id="ParNew"><a href="#ParNew" class="headerlink" title="ParNew"></a>ParNew</h3><h4 id="特点-1"><a href="#特点-1" class="headerlink" title="特点"></a>特点</h4><ul>
 <li>Serial GC的多线程版本</li>
 <li>与Serial GC一致<ul>
@@ -334,7 +334,7 @@
 </ul>
 </li>
 </ul>
-<h4 id="运行示意图-1"><a href="#运行示意图-1" class="headerlink" title="运行示意图"></a>运行示意图</h4><p><img src="https://wx2.sinaimg.cn/mw690/8c564d2aly1fqy1c0cxccj20oc0bj75b.jpg" alt=""></p>
+<h4 id="运行示意图-1"><a href="#运行示意图-1" class="headerlink" title="运行示意图"></a>运行示意图</h4><p><img src="https://wx2.sinaimg.cn/mw690/8c564d2aly1fqy1c0cxccj20oc0bj75b.jpg" alt></p>
 <h4 id="兼容性"><a href="#兼容性" class="headerlink" title="兼容性"></a>兼容性</h4><p>CMS作为老年代的收集器，却无法与JDK 1.4.0中已经存在的新生代收集器Paralled Scavenge配合工作。所以在JDK1.5中使用CMS时，新生代只能选择Paralled Scavenge或者Serial。<strong>Parallel Scavenge没有使用原本HotSpot其它GC通用的那个GC框架，所以不能跟使用了那个框架的CMS搭配使用。就这么简单，不是什么算法/技术上的不兼容，纯粹是人为造成的。Parallel Scavenge和ParNew抽象来说是同一思路的GC，而后者可以跟CMS搭配使用。这样就够了。</strong></p>
 <h4 id="与Serial对比"><a href="#与Serial对比" class="headerlink" title="与Serial对比"></a>与Serial对比</h4><p>ParNew收集器在单CPU的环境中绝对不会有比Serial收集器更好的效果，甚至由于线程交互的开销，该收集器在通过超线程技术实现的两个CPU的环境中都不能百分之百的保证可以超越Serial收集器。当然，随着可以使用的CPU的数量的增加，它对于GC使系统资源的有效利用还是很有好处的。</p>
 <blockquote>
@@ -352,7 +352,7 @@
 <blockquote>
 <p>并发：两件以上的事件在同一时间间隔发生。同一实体</p>
 <p>并行：两件以上的事件在同一时刻发生。不同实体</p>
-<p><img src="https://wx3.sinaimg.cn/mw690/8c564d2aly1fqx1ilmc0kj20go0cj0t7.jpg" alt=""></p>
+<p><img src="https://wx3.sinaimg.cn/mw690/8c564d2aly1fqx1ilmc0kj20go0cj0t7.jpg" alt></p>
 </blockquote>
 <h3 id="Parallel-Scavenge"><a href="#Parallel-Scavenge" class="headerlink" title="Parallel Scavenge"></a>Parallel Scavenge</h3><h4 id="特点-2"><a href="#特点-2" class="headerlink" title="特点"></a>特点</h4><ul>
 <li>新生代收集器</li>
@@ -363,7 +363,7 @@
 </ul>
 </li>
 </ul>
-<h4 id="运行示意图-2"><a href="#运行示意图-2" class="headerlink" title="运行示意图"></a>运行示意图</h4><p><img src="https://wx2.sinaimg.cn/mw690/8c564d2aly1fqy1c2a1hkj20oc0bjdgo.jpg" alt=""></p>
+<h4 id="运行示意图-2"><a href="#运行示意图-2" class="headerlink" title="运行示意图"></a>运行示意图</h4><p><img src="https://wx2.sinaimg.cn/mw690/8c564d2aly1fqy1c2a1hkj20oc0bjdgo.jpg" alt></p>
 <h4 id="吞吐量"><a href="#吞吐量" class="headerlink" title="吞吐量"></a>吞吐量</h4><ul>
 <li>CPU用于运行用户代码的时间与CPU总消耗的时间的比值</li>
 <li>吞吐量<code>=</code>运行用户代码时间<code>/(</code>运行用户代码时间<code>+</code>垃圾收集时间<code>)</code></li>
@@ -415,7 +415,7 @@
 <blockquote>
 <p>需要说明一下，Parallel Scavenge收集器架构中本身有PS MarkSweep收集器来进行老年代收集，并非直接使用了Serial Old收集器，但是这个PS MarkSweep收集器与Serial Old的实现非常接近，所以在官方的许多资料中都是直接以Serial Old代替PS MarkSweep进行讲解，这里笔者也采用这种方式。</p>
 </blockquote>
-<h4 id="运行示意图-3"><a href="#运行示意图-3" class="headerlink" title="运行示意图"></a>运行示意图</h4><p><img src="https://wx1.sinaimg.cn/mw690/8c564d2aly1fqy1c6aamzj20oc0bjgmd.jpg" alt=""></p>
+<h4 id="运行示意图-3"><a href="#运行示意图-3" class="headerlink" title="运行示意图"></a>运行示意图</h4><p><img src="https://wx1.sinaimg.cn/mw690/8c564d2aly1fqy1c6aamzj20oc0bjgmd.jpg" alt></p>
 <h3 id="Parallel-Old"><a href="#Parallel-Old" class="headerlink" title="Parallel Old"></a>Parallel Old</h3><h4 id="特点-4"><a href="#特点-4" class="headerlink" title="特点"></a>特点</h4><ul>
 <li>Parallel Scavenge老年代版本</li>
 <li>多线程</li>
@@ -453,7 +453,7 @@
 <li>重置线程</li>
 </ul>
 <p>由于整个过程中耗时最长的并发标记和并发清除过程收集器线程都可以与用户线程一起工作，所以，从总体上来说，CMS收集器的内存回收过程是与用户线程一起并发执行的。</p>
-<h4 id="运行示意图-4"><a href="#运行示意图-4" class="headerlink" title="运行示意图"></a>运行示意图</h4><p><img src="https://wx2.sinaimg.cn/mw690/8c564d2aly1fqy1c4jvwoj20pw0bjt9j.jpg" alt=""></p>
+<h4 id="运行示意图-4"><a href="#运行示意图-4" class="headerlink" title="运行示意图"></a>运行示意图</h4><p><img src="https://wx2.sinaimg.cn/mw690/8c564d2aly1fqy1c4jvwoj20pw0bjt9j.jpg" alt></p>
 <h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><ul>
 <li>并发收集</li>
 <li>低停顿<ul>
@@ -535,7 +535,7 @@
 <li>筛选回收(Live Data Counting and Evacuation)</li>
 </ul>
 <p>首先对各个Region的回收价值和成本进行排序，根据用户所期望的GC停顿时间来制定回收计划，可与用户程序并发执行，但是因为只回收一部分Region，时间是用户可控制的，而且停顿用户线程将大幅提高收集效率。</p>
-<h4 id="运行示意图-5"><a href="#运行示意图-5" class="headerlink" title="运行示意图"></a>运行示意图</h4><p><img src="https://wx2.sinaimg.cn/mw690/8c564d2aly1fqy1byiglfj20pb0cj75m.jpg" alt=""></p>
+<h4 id="运行示意图-5"><a href="#运行示意图-5" class="headerlink" title="运行示意图"></a>运行示意图</h4><p><img src="https://wx2.sinaimg.cn/mw690/8c564d2aly1fqy1byiglfj20pb0cj75m.jpg" alt></p>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><h4 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h4><table>
 <thead>
 <tr>
@@ -785,7 +785,7 @@ gitment.render('gitment')
     <div class="search-wrapper syuanpi">
       <h2 id="search-header" class="syuanpi">找啥？</h2>
       <div class="input">
-        <input type="text" id="local-search-input" results="0" name="">
+        <input type="text" id="local-search-input" results="0" name>
       </div>
       <div id="local-search-result"></div>
     </div>
