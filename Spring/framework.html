@@ -353,7 +353,7 @@
 <ul>
 <li>XmlBeanFactory</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//根据Xml配置文件创建Resource资源对象，该对象中包含了BeanDefinition的信息</span></div><div class="line">ClassPathResource resource =<span class="keyword">new</span> ClassPathResource(<span class="string">"application-context.xml"</span>);</div><div class="line"></div><div class="line"><span class="comment">//创建DefaultListableBeanFactory</span></div><div class="line">DefaultListableBeanFactory factory =<span class="keyword">new</span> DefaultListableBeanFactory();</div><div class="line"></div><div class="line"><span class="comment">//创建XmlBeanDefinitionReader读取器，用于载入BeanDefinition。</span></div><div class="line"><span class="comment">//之所以需要BeanFactory作为参数，是因为会将读取的信息回调配置给factory</span></div><div class="line"></div><div class="line">XmlBeanDefinitionReader reader =<span class="keyword">new</span> XmlBeanDefinitionReader(factory);</div><div class="line"></div><div class="line"><span class="comment">//XmlBeanDefinitionReader执行载入BeanDefinition的方法，最后会完成Bean的载入和注册。</span></div><div class="line"><span class="comment">//完成后Bean就成功的放置到IOC容器当中，以后我们就可以从中取得 Bean来使用</span></div><div class="line">reader.loadBeanDefinitions(resource);</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//根据Xml配置文件创建Resource资源对象，该对象中包含了BeanDefinition的信息</span></span><br><span class="line">ClassPathResource resource =<span class="keyword">new</span> ClassPathResource(<span class="string">"application-context.xml"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建DefaultListableBeanFactory</span></span><br><span class="line">DefaultListableBeanFactory factory =<span class="keyword">new</span> DefaultListableBeanFactory();</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建XmlBeanDefinitionReader读取器，用于载入BeanDefinition。</span></span><br><span class="line"><span class="comment">//之所以需要BeanFactory作为参数，是因为会将读取的信息回调配置给factory</span></span><br><span class="line"></span><br><span class="line">XmlBeanDefinitionReader reader =<span class="keyword">new</span> XmlBeanDefinitionReader(factory);</span><br><span class="line"></span><br><span class="line"><span class="comment">//XmlBeanDefinitionReader执行载入BeanDefinition的方法，最后会完成Bean的载入和注册。</span></span><br><span class="line"><span class="comment">//完成后Bean就成功的放置到IOC容器当中，以后我们就可以从中取得 Bean来使用</span></span><br><span class="line">reader.loadBeanDefinitions(resource);</span><br></pre></td></tr></table></figure>
 <ul>
 <li>FileSystemXmlApplicationContext    <ul>
 <li>通过调用父类AbstractApplicationContext的refresh()启动整个IoC容器对Bean定义的载入过程</li>
@@ -444,7 +444,11 @@
 </ul>
 <blockquote>
 <p>经过对Spring Bean定义资源文件转换的Document对象中的元素层层解析，Spring IoC现在已经将XML性质定义的Bean定义资源文件转换为Spring IoC所识别的数据结构—BeanDefinition，它是Bean定义资源文件中配置POJO对象在Spring IoC容器中的映射，可以通过AbstractBeanDefinition为入口，看到了IoC容器进行索引、查询和操作.</p>
+</blockquote>
+<blockquote>
 <p>通过Spring IoC容器对Bean定义资源的解析后，IoC容器大致完成了管理Bean对象的准备工作，即初始化过程，但是最为重要的依赖注入还没有发生，现在在IoC容器中BeanDefinition存储的只是一些静态信息，接下来需要向同期注册Bean定义信息才能全部完成IoC容器的初始化过程。</p>
+</blockquote>
+<blockquote>
 <p>继续跟踪程序的执行顺序，接下来会到分析DefaultBeanDefinitionDocumentReader对Bean定义转换的Document对象解析的流程中，在其parseDefaultElement方法中完成对Document对象的解析后得到BeanDefinition的BeanDefinitionHolder对象，然后在processBeanDefinition方法里调用BeanDefinitionReaderUtils的registerBeanDefinition向IoC容器注册解析的Bean。</p>
 </blockquote>
 <p><strong>解析过后的BeanDefinition在IoC容器中的注册</strong></p>
@@ -695,6 +699,8 @@
 <p><strong>BeanPostProcessor后置处理器的实现</strong></p>
 <blockquote>
 <p>BeanPostProcessor后置处理器是Spring IoC容器经常使用到的一个特性，这个Bean后置处理器是一个监听器，可以监听容器触发的Bean生命周期事件。后置处理器向容器注册以后，容器中管理的Bean就具备了接收IoC容器事件回调的能力。</p>
+</blockquote>
+<blockquote>
 <p>BeanPostProcessor的使用非常简单，只需要提供一个实现接口BeanPostProcessor的实现类，然后在Bean的配置文件中设置即可。</p>
 </blockquote>
 <ul>
@@ -780,7 +786,7 @@
 <ul>
 <li>Aspect切面<ul>
 <li>官方的抽象定义为“一个关注点的模块化，这个关注点可能会横切多个对象”</li>
-<li>“切面“在ApplicationContext中<aop:aspect>来配置</aop:aspect></li>
+<li>“切面“在ApplicationContext中<a href="aop:aspect" target="_blank" rel="noopener">aop:aspect</a>来配置</li>
 </ul>
 </li>
 <li>Joinpoint连接点<ul>
@@ -814,7 +820,7 @@
 </ul>
 </li>
 <li>默认情况下，TargetObject实现了接口时，则采用JDK动态代理，反之，采用CGLIB代理</li>
-<li>强制使用CGLIB大力需要将<aop:config>的proxy-target-class属性设置为true</aop:config></li>
+<li>强制使用CGLIB大力需要将<a href="aop:config" target="_blank" rel="noopener">aop:config</a>的proxy-target-class属性设置为true</li>
 </ul>
 </li>
 </ul>
@@ -823,29 +829,29 @@
 <ul>
 <li>Before advice 前置通知<ul>
 <li>在某连接点JointPoint之前执行的通知，但这个通知不能阻止连接点前的执行</li>
-<li>ApplicationContext中在<aop:aspect>里面使用<aop:before></aop:before></aop:aspect></li>
+<li>ApplicationContext中在<a href="aop:aspect" target="_blank" rel="noopener">aop:aspect</a>里面使用<a href="aop:before" target="_blank" rel="noopener">aop:before</a></li>
 </ul>
 </li>
 <li>After advice 后置通知<ul>
 <li>在某连接点退出的时候执行的通知(不论是正常返回还是异常退出)</li>
-<li>ApplicationContext中在<aop:aspect>里面使用<aop:after></aop:after></aop:aspect></li>
+<li>ApplicationContext中在<a href="aop:aspect" target="_blank" rel="noopener">aop:aspect</a>里面使用<a href="aop:after" target="_blank" rel="noopener">aop:after</a></li>
 </ul>
 </li>
 <li>After return advice 返回后通知<ul>
 <li>在某连接点正常完成后执行的通知，不包括抛出异常的情况</li>
-<li>ApplicationContext中在<aop:aspect>里面使用<after-returning></after-returning></aop:aspect></li>
+<li>ApplicationContext中在<a href="aop:aspect" target="_blank" rel="noopener">aop:aspect</a>里面使用<after-returning></after-returning></li>
 </ul>
 </li>
 <li>Around advice环绕通知<ul>
 <li>包围一个连接点的通知</li>
 <li>类似Web中Servlet规范中的Filter的doFilter方法</li>
 <li>可以在方法的调用前后完成自定义的行为，也可以选择不执行</li>
-<li>ApplicationContext中在<aop:aspect>里面使用<aop:around></aop:around></aop:aspect></li>
+<li>ApplicationContext中在<a href="aop:aspect" target="_blank" rel="noopener">aop:aspect</a>里面使用<a href="aop:around" target="_blank" rel="noopener">aop:around</a></li>
 </ul>
 </li>
 <li>After throwing advice 抛出异常后通知<ul>
 <li>在方法抛出异常退出时执行的通知</li>
-<li>ApplicationContext中在<aop:aspect>里面使用<aop:after-throwing><br>注：可以将多个通知应用到一个目标对象上，即可以将多个切面织入到同一目标对象</aop:after-throwing></aop:aspect></li>
+<li>ApplicationContext中在<a href="aop:aspect" target="_blank" rel="noopener">aop:aspect</a>里面使用<a href="aop:after-throwing" target="_blank" rel="noopener">aop:after-throwing</a><br>注：可以将多个通知应用到一个目标对象上，即可以将多个切面织入到同一目标对象</li>
 </ul>
 </li>
 </ul>
@@ -1229,14 +1235,14 @@
 <li>它们尝试当前请求与相应的controller以及其中的方法相匹配</li>
 <li><p>最基本的org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping类</p>
 <ul>
-<li>将URL与相应的bean进行匹配<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;bean name=&quot;/friends&quot; class&quot;com.2bai.controller.FriendsController&quot; /&gt;</div></pre></td></tr></table></figure>
+<li>将URL与相应的bean进行匹配<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;bean name=&quot;/friends&quot; class&quot;com.2bai.controller.FriendsController&quot; /&gt;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
 <li><p>更灵活的处理映射器org.springframework.web.servlet.handler.SimpleUrlHandleMapping</p>
 <ul>
 <li><p>可以创建一个映射文件，其中包含URl作为键和controller作为值</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;bean id=&quot;simpleUrlMapping&quot; class=&quot;org.springframework.web.servlet.handler.SimpleUrlHandleMapping&quot;&gt;</div><div class="line">	&lt;property name=&quot;mappings&quot;&gt;</div><div class="line">		&lt;props&gt;</div><div class="line">			&lt;prop key=&quot;/friends.html&quot;&gt;FriendsControler&lt;/props&gt;</div><div class="line">		&lt;/props&gt;</div><div class="line">	&lt;/property&gt;</div><div class="line">&lt;/bean&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;bean id=&quot;simpleUrlMapping&quot; class=&quot;org.springframework.web.servlet.handler.SimpleUrlHandleMapping&quot;&gt;</span><br><span class="line">	&lt;property name=&quot;mappings&quot;&gt;</span><br><span class="line">		&lt;props&gt;</span><br><span class="line">			&lt;prop key=&quot;/friends.html&quot;&gt;FriendsControler&lt;/props&gt;</span><br><span class="line">		&lt;/props&gt;</span><br><span class="line">	&lt;/property&gt;</span><br><span class="line">&lt;/bean&gt;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>处理稍微复杂URL也是一个头疼的问题</p>
 </li>
@@ -1248,10 +1254,10 @@
 <li>@RequestMapping</li>
 </ul>
 </li>
-<li>配置文件中定义<mvc:annotation-driven>，此处理程序将被激活</mvc:annotation-driven></li>
+<li>配置文件中定义<a href="mvc:annotation-driven/" target="_blank" rel="noopener">mvc:annotation-driven/</a>，此处理程序将被激活</li>
 <li>更细粒度的处理cotroller注解<ul>
-<li><context:annotation-config></context:annotation-config></li>
-<li><context:component-scan base-package="path.with.my.services.and.controllers"></context:component-scan></li>
+<li><a href="context:annotation-config/" target="_blank" rel="noopener">context:annotation-config/</a></li>
+<li>&lt;context:component-scan base-package=”path.with.my.services.and.controllers”/&gt;</li>
 </ul>
 </li>
 </ul>
@@ -1367,7 +1373,7 @@
 </tbody>
 </table>
 <p><strong>工作机制</strong></p>
-<p>在容器初始化时会创建所有url和controller的对应关系，保存到Map<url,controller>中<br>tomcat启动时会通知Spring初始化容器(加载bean的定义信息和初始化所有单例bean)<br>然后SpringMVC会遍历容器中的bean，获取每一个controller中的所有方法访问的url<br>然后将url和controller保存到一个map中。</url,controller></p>
+<p>在容器初始化时会创建所有url和controller的对应关系，保存到Map&lt;url,controller&gt;中<br>tomcat启动时会通知Spring初始化容器(加载bean的定义信息和初始化所有单例bean)<br>然后SpringMVC会遍历容器中的bean，获取每一个controller中的所有方法访问的url<br>然后将url和controller保存到一个map中。</p>
 <p>这样就可以根据request快速定位到controller,因为最终处理request的是controller中的方法,Map中只保留了url和controller中的对应关系,所以要根据request的 url进一步确认controller中的method, 这一步工作的原理就是拼接controller的url(controller 上@RequestMapping的值)和方法的url(method 上 @RequestMapping 的值),与request的url进行匹配,找到匹配的那个方法;</p>
 <p>确定处理请求的method后,接下来的任务就是参数绑定,把request中参数绑定到方法的形式参数上, 这一步是整个请求处理过程中最复杂的一个步骤。springmvc 提供了两种 request参数与方法形参的绑定方法:1.通过注解进行绑定,@RequestParam；2.通过参数名称进行绑定.</p>
 <p>使用注解进行绑定,我们只要在方法参数前面声明@RequestParam(“a”),就可以将request中参数a的值绑定到方法的该参数上.使用参数名称进行绑定的前提是必须要获取方法中参数的名称,Java反射只提供了获取方法的参数的类型,并没有提供获取参数名称的方法.springmvc解决这个问题的方法是用asm框架读取字节码文件,来获取方法的参数名称.asm框架是一个字节码操作框架,关于 asm 更多介绍可以参考它的官网.个人建议,使用注解来完成参数绑定,这样就可以省去asm框架的读取字节码的操作.</p>
@@ -1380,7 +1386,7 @@
 <li>request参数绑定到方法的形参，执行方法处理请求，并返回结果视图</li>
 </ul>
 </li>
-<li><p>建立Map<urls,controller>的关系</urls,controller></p>
+<li><p>建立Map&lt;urls,controller&gt;的关系</p>
 <ul>
 <li>ApplicationObjectSupport—setApplicationContext<ul>
 <li>核心为初始化容器initApplicationContext(context)<ul>
@@ -1446,7 +1452,7 @@
 <ul>
 <li>Spring 事务的本质其实就是数据库对事务的支持，没有数据库的事务支持，spring 是无法提供事务功能的。</li>
 <li><p>纯JDBC操作数据库</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//1.获取连接</span></div><div class="line">Connection con = DriverManager.getConnection()</div><div class="line"><span class="comment">//2. 开启事务</span></div><div class="line">con.setAutoCommit(<span class="keyword">true</span>/<span class="keyword">false</span>);</div><div class="line"><span class="comment">//3. 执行 CRUD</span></div><div class="line"><span class="comment">//4. 提交事务/回滚事务 </span></div><div class="line">con.commit() / con.rollback();</div><div class="line"><span class="comment">//5. 关闭连接 </span></div><div class="line">conn.close();</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.获取连接</span></span><br><span class="line">Connection con = DriverManager.getConnection()</span><br><span class="line"><span class="comment">//2. 开启事务</span></span><br><span class="line">con.setAutoCommit(<span class="keyword">true</span>/<span class="keyword">false</span>);</span><br><span class="line"><span class="comment">//3. 执行 CRUD</span></span><br><span class="line"><span class="comment">//4. 提交事务/回滚事务 </span></span><br><span class="line">con.commit() / con.rollback();</span><br><span class="line"><span class="comment">//5. 关闭连接 </span></span><br><span class="line">conn.close();</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>使用Spring的事务管理功能后，我们可以不再写步骤2和4的代码，而是由Spirng自动完成。那么 Spring 是如何在我们书写的 CRUD 之前和之后开启事务和关闭事务的呢?解决这个问题，也就可以从整体上理解 Spring 的事务管理实现原理了。下面简单地介绍下，注解方式为例子:</p>
 <ul>
@@ -1454,11 +1460,11 @@
 <li>配置文件开启注解驱动，在相关的类和方法上通过注解@Transactional 标识。</li>
 </ol>
 </li>
-<li><ol>
+<li><ol start="2">
 <li>spring 在启动的时候会去解析生成相关的 bean，这时候会查看拥有相关注解的类和方法，并且 为这些类和方法生成代理，并根据@Transaction 的相关参数进行相关配置注入，这样就在代理中为我们把相关的事务处理掉了(开启正常提交事务，异常回滚事务)。</li>
 </ol>
 </li>
-<li><ol>
+<li><ol start="3">
 <li>真正的数据库层的事务提交和回滚是通过 binlog 或者 redo log 实现的。</li>
 </ol>
 </li>

@@ -320,7 +320,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="jps"><a href="#jps" class="headerlink" title="jps"></a><a href="https://docs.oracle.com/javase/9/tools/jps.htm#GUID-6EB65B96-F9DD-4356-B825-6146E9EEC81E" target="_blank" rel="external">jps</a></h3><h4 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h4><ul>
+<h3 id="jps"><a href="#jps" class="headerlink" title="jps"></a><a href="https://docs.oracle.com/javase/9/tools/jps.htm#GUID-6EB65B96-F9DD-4356-B825-6146E9EEC81E" target="_blank" rel="noopener">jps</a></h3><h4 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h4><ul>
 <li>列出正在运行的虚拟机进程</li>
 <li>显示虚拟机执行主类(Main Class , main()函数所在的类)名称</li>
 <li>进程的本地虚拟机唯一ID(Local Virtual Machine Identifier,LVMID)</li>
@@ -402,7 +402,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="jstat"><a href="#jstat" class="headerlink" title="jstat"></a><a href="https://docs.oracle.com/javase/9/tools/jstat.htm#GUID-5F72A7F9-5D5A-4486-8201-E1D1BA8ACCB5" target="_blank" rel="external">jstat</a></h3><h4 id="功能-1"><a href="#功能-1" class="headerlink" title="功能"></a>功能</h4><ul>
+<h3 id="jstat"><a href="#jstat" class="headerlink" title="jstat"></a><a href="https://docs.oracle.com/javase/9/tools/jstat.htm#GUID-5F72A7F9-5D5A-4486-8201-E1D1BA8ACCB5" target="_blank" rel="noopener">jstat</a></h3><h4 id="功能-1"><a href="#功能-1" class="headerlink" title="功能"></a>功能</h4><ul>
 <li>监视虚拟机各种运行状态信息<ul>
 <li>类装载</li>
 <li>内存</li>
@@ -584,7 +584,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="jinfo"><a href="#jinfo" class="headerlink" title="jinfo"></a><a href="https://docs.oracle.com/javase/9/tools/jinfo.htm#JSWOR744" target="_blank" rel="external">jinfo</a></h3><h4 id="功能-2"><a href="#功能-2" class="headerlink" title="功能"></a>功能</h4><ul>
+<h3 id="jinfo"><a href="#jinfo" class="headerlink" title="jinfo"></a><a href="https://docs.oracle.com/javase/9/tools/jinfo.htm#JSWOR744" target="_blank" rel="noopener">jinfo</a></h3><h4 id="功能-2"><a href="#功能-2" class="headerlink" title="功能"></a>功能</h4><ul>
 <li>实时查看和调整虚拟机的各项参数</li>
 </ul>
 <h4 id="用法-2"><a href="#用法-2" class="headerlink" title="用法"></a>用法</h4><p>查看：</p>
@@ -601,7 +601,7 @@
 </ul>
 <h4 id="示例-1"><a href="#示例-1" class="headerlink" title="示例"></a>示例</h4><p><code>java -XX:+PrintFlagsFinal -version|grep manageable</code></p>
 <p>查看JVM中哪些flag可以被jinfo动态修改</p>
-<h3 id="jmap"><a href="#jmap" class="headerlink" title="jmap"></a><a href="https://docs.oracle.com/javase/9/tools/jmap.htm#JSWOR746" target="_blank" rel="external">jmap</a></h3><h4 id="功能-3"><a href="#功能-3" class="headerlink" title="功能"></a>功能</h4><ul>
+<h3 id="jmap"><a href="#jmap" class="headerlink" title="jmap"></a><a href="https://docs.oracle.com/javase/9/tools/jmap.htm#JSWOR746" target="_blank" rel="noopener">jmap</a></h3><h4 id="功能-3"><a href="#功能-3" class="headerlink" title="功能"></a>功能</h4><ul>
 <li>生成堆转储快照(heapdump)，就是打印内存内的所有“对象”的情况</li>
 <li>查询finalize执行队列</li>
 <li>Java堆和永久代的详细信息<ul>
@@ -667,13 +667,13 @@
 </tbody>
 </table>
 <h4 id="示例-2"><a href="#示例-2" class="headerlink" title="示例"></a>示例</h4><p><code>jmap -dump:live,format=b,file=heap.hprof pid</code></p>
-<h3 id="jhat"><a href="#jhat" class="headerlink" title="jhat"></a>jhat</h3><p>JDK9中被<a href="https://www.infoq.com/news/2015/12/OpenJDK-9-removal-of-HPROF-jhat" target="_blank" rel="external">移除</a>，使用jvisualvm、Eclipse Memory Analyzer、IBM HeapAnalyzer等工具来分析dump文件。</p>
+<h3 id="jhat"><a href="#jhat" class="headerlink" title="jhat"></a>jhat</h3><p>JDK9中被<a href="https://www.infoq.com/news/2015/12/OpenJDK-9-removal-of-HPROF-jhat" target="_blank" rel="noopener">移除</a>，使用jvisualvm、Eclipse Memory Analyzer、IBM HeapAnalyzer等工具来分析dump文件。</p>
 <p>另：IBM HeapAnalyzer用于分析IBM J9虚拟机生成的映像文件，各个虚拟机产生的文件格式不一致，所以分析工具也不能通用。</p>
-<p><a href="https://blogs.oracle.com/nbprofiler/visualvm-139-released" target="_blank" rel="external">visualvm介绍</a></p>
-<p><a href="https://visualvm.github.io/download.html" target="_blank" rel="external">下载visualvm</a></p>
-<p><a href="http://www.eclipse.org/mat/downloads.php" target="_blank" rel="external">下载Eclipse Memory Analyzer</a></p>
-<p><a href="https://www.ibm.com/developerworks/community/groups/service/html/communityview?communityUuid=4544bafe-c7a2-455f-9d43-eb866ea60091" target="_blank" rel="external">下载IBM HeapAnalyzer</a></p>
-<h3 id="jstack"><a href="#jstack" class="headerlink" title="jstack"></a><a href="https://docs.oracle.com/javase/9/tools/jstack.htm#JSWOR748" target="_blank" rel="external">jstack</a></h3><h4 id="功能-4"><a href="#功能-4" class="headerlink" title="功能"></a>功能</h4><ul>
+<p><a href="https://blogs.oracle.com/nbprofiler/visualvm-139-released" target="_blank" rel="noopener">visualvm介绍</a></p>
+<p><a href="https://visualvm.github.io/download.html" target="_blank" rel="noopener">下载visualvm</a></p>
+<p><a href="http://www.eclipse.org/mat/downloads.php" target="_blank" rel="noopener">下载Eclipse Memory Analyzer</a></p>
+<p><a href="https://www.ibm.com/developerworks/community/groups/service/html/communityview?communityUuid=4544bafe-c7a2-455f-9d43-eb866ea60091" target="_blank" rel="noopener">下载IBM HeapAnalyzer</a></p>
+<h3 id="jstack"><a href="#jstack" class="headerlink" title="jstack"></a><a href="https://docs.oracle.com/javase/9/tools/jstack.htm#JSWOR748" target="_blank" rel="noopener">jstack</a></h3><h4 id="功能-4"><a href="#功能-4" class="headerlink" title="功能"></a>功能</h4><ul>
 <li>用于生成虚拟机当前时刻的线程快照<ul>
 <li>一般称为threaddump或者javacore文件</li>
 </ul>
@@ -702,7 +702,7 @@
 </tbody>
 </table>
 <h4 id="示例-3"><a href="#示例-3" class="headerlink" title="示例"></a>示例</h4><p><code>jstack -l pid</code></p>
-<h3 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h3><p>其它工具请参阅文档，<a href="https://docs.oracle.com/javase/9/tools/tools-and-command-reference.htm#JSWOR596" target="_blank" rel="external">Java Platform, Standard Edition Tools Reference</a></p>
+<h3 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h3><p>其它工具请参阅文档，<a href="https://docs.oracle.com/javase/9/tools/tools-and-command-reference.htm#JSWOR596" target="_blank" rel="noopener">Java Platform, Standard Edition Tools Reference</a></p>
 
       
     

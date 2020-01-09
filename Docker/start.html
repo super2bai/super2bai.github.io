@@ -290,7 +290,7 @@
 </blockquote>
 <ul>
 <li>Docker 项目的目标是实现轻量级的操作系统虚拟化解决方案</li>
-<li>早期版本的Docker是基于已经成熟的Linux Container（LXC）技术实现的。自Docker 0.9版本起，Docker逐渐从LXC转移到新的<a href="https://github.com/docker/libcontainer" target="_blank" rel="external">libcontainer</a>上，并且积极推动开放容器规范runc，试图打造更通用的底层容器虚拟化库。</li>
+<li>早期版本的Docker是基于已经成熟的Linux Container（LXC）技术实现的。自Docker 0.9版本起，Docker逐渐从LXC转移到新的<a href="https://github.com/docker/libcontainer" target="_blank" rel="noopener">libcontainer</a>上，并且积极推动开放容器规范runc，试图打造更通用的底层容器虚拟化库。</li>
 </ul>
 <h3 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h3><p><img src="https://wx4.sinaimg.cn/mw690/8c564d2aly1ftbrd670cfj20rc0lejta.jpg" alt></p>
 <p><img src="https://wx2.sinaimg.cn/mw690/8c564d2aly1ftbrd5u96xj22dq3agayu.jpg" alt></p>
@@ -306,7 +306,7 @@
 <li>Docker Container State</li>
 </ul>
 <p><img src="https://wx2.sinaimg.cn/mw690/8c564d2aly1ft7fsb4y6xj20sb09ydh8.jpg" alt></p>
-<p>另，如果只想安装client不想安装整套Docker，可以下载<a href="https://howtowhale.github.io/dvm/" target="_blank" rel="external">Docker Version Manager</a></p>
+<p>另，如果只想安装client不想安装整套Docker，可以下载<a href="https://howtowhale.github.io/dvm/" target="_blank" rel="noopener">Docker Version Manager</a></p>
 <h4 id="image镜像"><a href="#image镜像" class="headerlink" title="image镜像"></a>image镜像</h4><blockquote>
 <ul>
 <li>一个镜像是轻量的、独立的、一个包含所有需要运行它(软件、运行时、系统工具、系统库、设置)的可执行包的软件。</li>
@@ -354,10 +354,10 @@
 </ul>
 </blockquote>
 <ul>
-<li><a href="https://hub.docker.com/" target="_blank" rel="external">Docker Hub</a></li>
-<li><a href="https://quay.io/" target="_blank" rel="external">Quay</a></li>
-<li><a href="https://cloud.google.com/container-registry/" target="_blank" rel="external">Google Container Registry</a></li>
-<li><a href="https://aws.amazon.com/ecr/" target="_blank" rel="external">AWS Container Registry</a></li>
+<li><a href="https://hub.docker.com/" target="_blank" rel="noopener">Docker Hub</a></li>
+<li><a href="https://quay.io/" target="_blank" rel="noopener">Quay</a></li>
+<li><a href="https://cloud.google.com/container-registry/" target="_blank" rel="noopener">Google Container Registry</a></li>
+<li><a href="https://aws.amazon.com/ecr/" target="_blank" rel="noopener">AWS Container Registry</a></li>
 </ul>
 <h4 id="repository仓库"><a href="#repository仓库" class="headerlink" title="repository仓库"></a>repository仓库</h4><blockquote>
 <ul>
@@ -431,7 +431,7 @@
 <p>相关搜索关键字：<code>docker privileged=true</code></p>
 <h4 id="Union-File-System联合文件系统"><a href="#Union-File-System联合文件系统" class="headerlink" title="Union File System联合文件系统"></a>Union File System联合文件系统</h4><blockquote>
 <p>联合文件系统（UnionFS）是一种轻量级的高性能分层文件系统，它支持将文件系统中的修改信息作为一次提交，并层层叠加，同时可以将不同目录挂载到同一个虚拟文件系统下，应用看到的是挂载的最终结果。</p>
-<p>在Docker中，只读层及在顶部的读写层的组合被称为<a href="https://docs.docker.com/terms/layer/#union-file-system" target="_blank" rel="external">Union File System</a>（联合文件系统）。</p>
+<p>在Docker中，只读层及在顶部的读写层的组合被称为<a href="https://docs.docker.com/terms/layer/#union-file-system" target="_blank" rel="noopener">Union File System</a>（联合文件系统）。</p>
 </blockquote>
 <ul>
 <li>Docker存储</li>
@@ -482,7 +482,7 @@
 <li><code>docker ps</code>列出所有运行中的容器</li>
 <li><code>docker ps -a</code> 列出所有容器</li>
 <li><code>docker stop &lt;container-id&gt;</code>向运行中的容器发送一个SIGTERM的系统信号，然后等待容器中的应用程序终止执行，如果等待时间达到设定的超时时间(默认10秒)，会继续发送SIGKILL的系统信号强行KILL掉进程。<ul>
-<li>设置超时时间：<code>docker stop --``time``=20 container_name</code></li>
+<li>设置超时时间：<code>docker stop --`</code>time<code></code>=20 container_name`</li>
 </ul>
 </li>
 <li><code>docker kill</code>：直接发出SIGKILL的系统信号，强行终止容器中程序的运行。</li>
@@ -493,13 +493,13 @@
 <li><code>docker export &lt;container-id&gt;</code>创建一个tar文件，并且移除了元数据和不必要的层，将多个层整合成了一个层，只保存了当前统一视角看到的内容</li>
 </ul>
 <h4 id="both"><a href="#both" class="headerlink" title="both"></a>both</h4><p><code>docker inspect &lt;container-id&gt; or &lt;image-id&gt;</code>提取出容器或者镜像最顶层的元数据</p>
-<h3 id="镜像加速器"><a href="#镜像加速器" class="headerlink" title="镜像加速器"></a>镜像加速器</h3><h4 id="阿里云加速器"><a href="#阿里云加速器" class="headerlink" title="阿里云加速器"></a><a href="https://cr.console.aliyun.com/#/accelerator" target="_blank" rel="external">阿里云加速器</a></h4><blockquote>
+<h3 id="镜像加速器"><a href="#镜像加速器" class="headerlink" title="镜像加速器"></a>镜像加速器</h3><h4 id="阿里云加速器"><a href="#阿里云加速器" class="headerlink" title="阿里云加速器"></a><a href="https://cr.console.aliyun.com/#/accelerator" target="_blank" rel="noopener">阿里云加速器</a></h4><blockquote>
 <p>针对安装了Docker for Mac的用户</p>
 <p>右键点击桌面顶栏的 docker 图标，选择 Preferences ，在 Daemon 标签（Docker 17.03 之前版本为 Advanced 标签）下的 Registry mirrors 列表中将</p>
 <p>加速器地址加到”registry-mirrors”的数组里，点击 Apply &amp; Restart按钮，等待Docker重启并应用配置的镜像加速器。</p>
 </blockquote>
 <p><img src="https://wx4.sinaimg.cn/mw690/8c564d2aly1ftbtkllnq0j215s0jq41t.jpg" alt></p>
-<h4 id="Docker-中国官方镜像加速"><a href="#Docker-中国官方镜像加速" class="headerlink" title="Docker 中国官方镜像加速"></a><a href="https://www.docker-cn.com/registry-mirror" target="_blank" rel="external">Docker 中国官方镜像加速</a></h4><blockquote>
+<h4 id="Docker-中国官方镜像加速"><a href="#Docker-中国官方镜像加速" class="headerlink" title="Docker 中国官方镜像加速"></a><a href="https://www.docker-cn.com/registry-mirror" target="_blank" rel="noopener">Docker 中国官方镜像加速</a></h4><blockquote>
 <p>配置Docker守护进程默认使用Docker官方镜像加速，可以默认通过官方镜像加速拉取，而无需在每次拉取时指定registry.docker-cn.com</p>
 </blockquote>
 <ul>
@@ -509,19 +509,19 @@
 <ul>
 <li>永久性保留更改，可以通过修改<code>/etc/docker/daemon.json</code>文件兵添加上registry-mirrors键值</li>
 </ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  "registry-mirrors": ["https://registry.docker-cn.com"]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "registry-mirrors": ["https://registry.docker-cn.com"]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>修改保存后，重启Docker以使配置生效。</li>
 </ul>
-<h4 id="新手建议"><a href="#新手建议" class="headerlink" title="新手建议"></a>新手建议</h4><p><a href="https://docs.docker.com/" target="_blank" rel="external">新手入门-官方Guide</a></p>
-<p><a href="https://docs.docker.com/reference/" target="_blank" rel="external">查字典-官方Reference</a></p>
-<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="https://www.cnblogs.com/bethal/p/5942369.html" target="_blank" rel="external">docker容器和镜像区别</a></p>
-<p><a href="https://stackoverflow.com/questions/34004076/difference-between-docker-registry-and-repository" target="_blank" rel="external">Difference between Docker registry and repository</a></p>
-<p><a href="http://www.infoq.com/cn/articles/docker-kernel-knowledge-cgroups-resource-isolation" target="_blank" rel="external">Docker背后的内核知识</a></p>
-<p><a href="https://www.cnblogs.com/wade-luffy/p/6589254.html" target="_blank" rel="external">Docker核心实现技术</a></p>
-<p><a href="https://www.docker.com/docker-news-and-press/docker-brings-docker-public-registry-china-expand-developer-adoption-and-fuel" target="_blank" rel="external">说明文档-Docker和阿里云合作的公共加速器</a></p>
-<p><a href="https://www.cnblogs.com/sammyliu/p/5878973.html" target="_blank" rel="external">理解Docker（3）：Docker 使用 Linux namespace 隔离容器的运行环境</a></p>
-<p><a href="https://www.cnblogs.com/sammyliu/p/5878973.html" target="_blank" rel="external">Understanding how uid and gid work in Docker containers</a></p>
+<h4 id="新手建议"><a href="#新手建议" class="headerlink" title="新手建议"></a>新手建议</h4><p><a href="https://docs.docker.com/" target="_blank" rel="noopener">新手入门-官方Guide</a></p>
+<p><a href="https://docs.docker.com/reference/" target="_blank" rel="noopener">查字典-官方Reference</a></p>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="https://www.cnblogs.com/bethal/p/5942369.html" target="_blank" rel="noopener">docker容器和镜像区别</a></p>
+<p><a href="https://stackoverflow.com/questions/34004076/difference-between-docker-registry-and-repository" target="_blank" rel="noopener">Difference between Docker registry and repository</a></p>
+<p><a href="http://www.infoq.com/cn/articles/docker-kernel-knowledge-cgroups-resource-isolation" target="_blank" rel="noopener">Docker背后的内核知识</a></p>
+<p><a href="https://www.cnblogs.com/wade-luffy/p/6589254.html" target="_blank" rel="noopener">Docker核心实现技术</a></p>
+<p><a href="https://www.docker.com/docker-news-and-press/docker-brings-docker-public-registry-china-expand-developer-adoption-and-fuel" target="_blank" rel="noopener">说明文档-Docker和阿里云合作的公共加速器</a></p>
+<p><a href="https://www.cnblogs.com/sammyliu/p/5878973.html" target="_blank" rel="noopener">理解Docker（3）：Docker 使用 Linux namespace 隔离容器的运行环境</a></p>
+<p><a href="https://www.cnblogs.com/sammyliu/p/5878973.html" target="_blank" rel="noopener">Understanding how uid and gid work in Docker containers</a></p>
 
       
     

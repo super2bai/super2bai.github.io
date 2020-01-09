@@ -477,7 +477,7 @@
 </blockquote>
 <hr>
 <p>在进行数据传送或运算时，要注意指令的两个操作对象的位数应当是一致的。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">;以下为正确指令</div><div class="line">mov ax,bx</div><div class="line">mov bx,cx</div><div class="line">mov ax,18H</div><div class="line">mov al,18H</div><div class="line">add ax,bx</div><div class="line">add ax,20000</div><div class="line">;以下为错误指令，指令的两个操作对象的位数不一致</div><div class="line">mov ax,bl(在8位寄存器和16位寄存器之间传送数据)</div><div class="line">mov bh,ax(在16位寄存器和8位寄存器之间传送数据)</div><div class="line">mov al,20000(8位寄存器最大可存放值为255的数据)</div><div class="line">add al,100H(将一个高于8位的数据驾到一个8位寄存器中)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">;以下为正确指令</span><br><span class="line">mov ax,bx</span><br><span class="line">mov bx,cx</span><br><span class="line">mov ax,18H</span><br><span class="line">mov al,18H</span><br><span class="line">add ax,bx</span><br><span class="line">add ax,20000</span><br><span class="line">;以下为错误指令，指令的两个操作对象的位数不一致</span><br><span class="line">mov ax,bl(在8位寄存器和16位寄存器之间传送数据)</span><br><span class="line">mov bh,ax(在16位寄存器和8位寄存器之间传送数据)</span><br><span class="line">mov al,20000(8位寄存器最大可存放值为255的数据)</span><br><span class="line">add al,100H(将一个高于8位的数据驾到一个8位寄存器中)</span><br></pre></td></tr></table></figure>
 <h3 id="物理地址"><a href="#物理地址" class="headerlink" title="物理地址"></a>物理地址</h3><blockquote>
 <p>CPU访问内存单元时，要给出内存单元的地址。所有的内存单元构成的存储空间时一个一维的线性空间，每一个内存单元在这个空间中都有唯一的地址，将这个唯一的地址称为物理空间</p>
 </blockquote>
@@ -500,6 +500,8 @@
 <li>通过内部总线送入地址总线</li>
 <li>传入内存</li>
 </ul>
+</blockquote>
+<blockquote>
 <p>关于进制：</p>
 <p>一个数据的二进制形式左移1位，相当于该数乘以2</p>
 <p>一个数据的二进制形式左移N位，相当于该数乘以2的N次方</p>
@@ -551,14 +553,14 @@
 </ul>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">jmp 2AE3:3</div><div class="line">;执行后：CS=2AE3H，IP=0003H，CPU将从2AE33H处读取指令</div><div class="line">jmp 3:0B16</div><div class="line">;执行后：CS=0003H，IP=0B16H，CPU将从00B46H处读取指令</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">jmp 2AE3:3</span><br><span class="line">;执行后：CS=2AE3H，IP=0003H，CPU将从2AE33H处读取指令</span><br><span class="line">jmp 3:0B16</span><br><span class="line">;执行后：CS=0003H，IP=0B16H，CPU将从00B46H处读取指令</span><br></pre></td></tr></table></figure>
 <ul>
 <li>仅修改IP的内容，可用<code>jmp 某一合法寄存器</code>指令完成<ul>
 <li>用寄存器中的值修改IP</li>
 </ul>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">;指令执行前：ax=1000H，CS=2000H，IP=0003H</div><div class="line">jmp ax</div><div class="line">;指令执行后：ax=1000H，CS=2000H，IP=1000H</div><div class="line"></div><div class="line">;指令执行前：bx=0B16H，CS=2000H，IP=0003H</div><div class="line">jmp bx</div><div class="line">;指令执行后：bx=0B16H，CS=2000H，IP=0B16H</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">;指令执行前：ax=1000H，CS=2000H，IP=0003H</span><br><span class="line">jmp ax</span><br><span class="line">;指令执行后：ax=1000H，CS=2000H，IP=1000H</span><br><span class="line"></span><br><span class="line">;指令执行前：bx=0B16H，CS=2000H，IP=0003H</span><br><span class="line">jmp bx</span><br><span class="line">;指令执行后：bx=0B16H，CS=2000H，IP=0B16H</span><br></pre></td></tr></table></figure>
 <h3 id="代码段"><a href="#代码段" class="headerlink" title="代码段"></a>代码段</h3><ul>
 <li><p>对于8086PC机，在编程时，可以根据需要，将一组内存单元定义为一个段。</p>
 </li>

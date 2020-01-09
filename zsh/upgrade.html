@@ -286,11 +286,11 @@
         <p>oh my zsh… oh! my!</p>
 <a id="more"></a>
 <p>提示更新oh my zsh，当然更新！提示：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Updating Oh My Zsh</div><div class="line">error: cannot pull with rebase: You have unstaged changes.</div><div class="line">error: please commit or stash them.</div><div class="line">There was an error updating. Try again later?</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Updating Oh My Zsh</span><br><span class="line">error: cannot pull with rebase: You have unstaged changes.</span><br><span class="line">error: please commit or stash them.</span><br><span class="line">There was an error updating. Try again later?</span><br></pre></td></tr></table></figure>
 <p>尝试手动更新：<code>upgrade_oh_my_zsh</code>，依旧报错。</p>
 <p>原因在报错中已经提示了：<code>You have unstaged changes.</code>，因为修改了git文件。</p>
 <p>如果想保留修改，可以采用如下方式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">cd ~/.oh-my-zsh</div><div class="line">git status</div><div class="line">git stash</div><div class="line">upgrade_oh_my_zsh</div><div class="line">git stash pop</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd ~/.oh-my-zsh</span><br><span class="line">git status</span><br><span class="line">git stash</span><br><span class="line">upgrade_oh_my_zsh</span><br><span class="line">git stash pop</span><br></pre></td></tr></table></figure>
 <p>不想保留就按照git提交丢弃本地修改的方式即可。</p>
 
       

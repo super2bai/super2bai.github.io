@@ -290,7 +290,7 @@
 </ul>
 </li>
 <li>api里面放去spring的引用配置。也可以放在模块的包目录下<ul>
-<li>com.bai.order/<em>*</em>-reference.xml</li>
+<li>com.bai.order/***-reference.xml</li>
 </ul>
 </li>
 </ul>
@@ -325,7 +325,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="配置dubbo缓存文件"><a href="#配置dubbo缓存文件" class="headerlink" title="配置dubbo缓存文件"></a>配置dubbo缓存文件</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dubbo:registry</span> <span class="attr">file</span>=<span class="string">".."</span> /&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="配置dubbo缓存文件"><a href="#配置dubbo缓存文件" class="headerlink" title="配置dubbo缓存文件"></a>配置dubbo缓存文件</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dubbo:registry</span> <span class="attr">file</span>=<span class="string">".."</span> /&gt;</span></span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>如果注册中心挂掉了(临时不可用)，可以从缓存文件中找。进一步保证可用性。</p>
 <ul>

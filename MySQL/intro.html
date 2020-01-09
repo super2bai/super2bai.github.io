@@ -286,16 +286,16 @@
         <p>宏观来看</p>
 <a id="more"></a>
 <ul>
-<li><a href="https://dev.mysql.com/downloads/mysql/8.0.html" target="_blank" rel="external">MySQL 8.0</a>采用GPL协议</li>
+<li><a href="https://dev.mysql.com/downloads/mysql/8.0.html" target="_blank" rel="noopener">MySQL 8.0</a>采用GPL协议</li>
 <li>单进程多线程</li>
 <li>查看MySQL查找文件的顺序：<code>mysql --help | grep my.cnf</code></li>
 </ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> mysql --help | grep my.cnf</div><div class="line">                      order of preference, my.cnf, $MYSQL_TCP_PORT,</div><div class="line">/etc/my.cnf /etc/mysql/my.cnf /usr/etc/my.cnf ~/.my.cnf</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> mysql --help | grep my.cnf</span><br><span class="line">                      order of preference, my.cnf, $MYSQL_TCP_PORT,</span><br><span class="line">/etc/my.cnf /etc/mysql/my.cnf /usr/etc/my.cnf ~/.my.cnf</span><br></pre></td></tr></table></figure>
 <p>多个配置文件，以最后为准；缺失配置文件，按照编译时的默认参数设置。</p>
 <ul>
 <li>启动方式：<code>mysqld</code>、<code>mysqld_safe</code>、<code>mysqld_multi</code>(主要用于多实例启动)</li>
 </ul>
-<p>首先当使用<code>service mysqld start</code>或者<code>/etc/init.d/mysqld start</code>这样的方式启动的时候，其实是使用了<code>mysql.server</code>这个脚本，这个脚本默认会调用<code>mysqld_safe</code>来启动<code>mysqld</code>，所以通常我们启动mysql之后查看进程的时候会发现有<code>mysqld</code>和<code>mysqld_safe</code>这两个进程存在。这两种通常都是<strong>单实例</strong>的启动方式，当然也可以使用mysqld来启动多实例的。而<code>mysqld_multi</code>用来启动多实例，也是通过先调用<code>mysqld_safe</code>和<code>mysqld</code>来启动mysql的。参考：<a href="https://dev.mysql.com/doc/refman/8.0/en/mysql-server.html" target="_blank" rel="external">MySQL Server</a></p>
+<p>首先当使用<code>service mysqld start</code>或者<code>/etc/init.d/mysqld start</code>这样的方式启动的时候，其实是使用了<code>mysql.server</code>这个脚本，这个脚本默认会调用<code>mysqld_safe</code>来启动<code>mysqld</code>，所以通常我们启动mysql之后查看进程的时候会发现有<code>mysqld</code>和<code>mysqld_safe</code>这两个进程存在。这两种通常都是<strong>单实例</strong>的启动方式，当然也可以使用mysqld来启动多实例的。而<code>mysqld_multi</code>用来启动多实例，也是通过先调用<code>mysqld_safe</code>和<code>mysqld</code>来启动mysql的。参考：<a href="https://dev.mysql.com/doc/refman/8.0/en/mysql-server.html" target="_blank" rel="noopener">MySQL Server</a></p>
 <ul>
 <li>启动原理：启动程序为<code>mysql.server</code>，用到的程序my_print_defaults、myslqd_safe和函数parse_server_arguments<ul>
 <li>my_print_defaults:读取my.cnf配置文件，输出参数传递给parse_server_arguments，该程序只读my.cnf中[mysqld]中的参数。</li>
@@ -306,7 +306,7 @@
 </ul>
 </li>
 </ul>
-<p><a href="https://dev.mysql.com/doc/refman/8.0/en/programs-overview.html" target="_blank" rel="external">My SQL Programs Overview</a></p>
+<p><a href="https://dev.mysql.com/doc/refman/8.0/en/programs-overview.html" target="_blank" rel="noopener">My SQL Programs Overview</a></p>
 <ul>
 <li>查看数据库存放路径：<code>show variables like &#39;%datadir%&#39;\G</code></li>
 <li>数据库是由 一个个文件组成 （一般来说都是二进制的文件） 的，如果要对这些文件执行诸如 SELECT 、 INSERT 、UPDATE和DETELE 之类的操作 ，不能通过简单的操作文件来更改数据库的内容 ， 需要通过数据库实例来完成对数据库的操作 。</li>
@@ -326,10 +326,10 @@
 </ul>
 <p><img src="https://3.bp.blogspot.com/-WllJC9xfxqg/VxTbuAoMm4I/AAAAAAAAHzA/1tF7Sxx8Y34levMmR9fYPZfDQDHVdWzKwCLcB/s1600/MySQL%2BArchitecture.png" alt></p>
 <p>MySQL最重要的特点就是其插件式的表存储引擎，这是与其他数据库最重要的区别，它提供了一些列标准的管理和服务支持，这些标准与存储引擎无关，例如SQL分析器和优化器等。存储引擎是基于表的。MySQL的核心是存储引擎。</p>
-<h3 id="InnoDB存储引擎"><a href="#InnoDB存储引擎" class="headerlink" title="InnoDB存储引擎"></a><a href="https://dev.mysql.com/doc/refman/8.0/en/innodb-introduction.html" target="_blank" rel="external">InnoDB存储引擎</a></h3><blockquote>
+<h3 id="InnoDB存储引擎"><a href="#InnoDB存储引擎" class="headerlink" title="InnoDB存储引擎"></a><a href="https://dev.mysql.com/doc/refman/8.0/en/innodb-introduction.html" target="_blank" rel="noopener">InnoDB存储引擎</a></h3><blockquote>
 <p>完整支持ACID事务，主要面向在线事务处理(OLTP)方面的应用</p>
 </blockquote>
-<h4 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h4><p><a href="https://dev.mysql.com/doc/refman/5.6/en/innodb-architecture.html" target="_blank" rel="external">InnoDB Architecture</a></p>
+<h4 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h4><p><a href="https://dev.mysql.com/doc/refman/5.6/en/innodb-architecture.html" target="_blank" rel="noopener">InnoDB Architecture</a></p>
 <p><img src="https://dev.mysql.com/doc/refman/5.6/en/images/innodb-architecture.png" alt></p>
 <h4 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h4><ul>
 <li>行锁设计</li>
@@ -344,7 +344,7 @@
 <li>表中数据的存储，采用聚集(clustered)的方式。每张表的存储都按主键的顺序存放，如果没有显式地在表定义时指定主键，InnoDB存储引擎会为每一行生成一个6字节的ROWID，并以此为主键。</li>
 <li>最有效的利用内存和CPU</li>
 </ul>
-<h4 id="最佳实践"><a href="#最佳实践" class="headerlink" title="最佳实践"></a><a href="https://dev.mysql.com/doc/refman/8.0/en/innodb-best-practices.html" target="_blank" rel="external">最佳实践</a></h4><ul>
+<h4 id="最佳实践"><a href="#最佳实践" class="headerlink" title="最佳实践"></a><a href="https://dev.mysql.com/doc/refman/8.0/en/innodb-best-practices.html" target="_blank" rel="noopener">最佳实践</a></h4><ul>
 <li>指定主键或自增的值</li>
 <li>关闭自动提交</li>
 <li>将一组相关的DML操作分组到事务中</li>
@@ -366,7 +366,7 @@
 </li>
 </ul>
 <p>后台线程的主要作用是负责刷新内存池中的数据，保证缓冲池中的内存缓存的是最近的数据。此外，将已修改的数据文件刷新到磁盘文件，同时保存在数据库发生异常情况下InnoDB能恢复到正常状态。</p>
-<h3 id="后台线程"><a href="#后台线程" class="headerlink" title="后台线程"></a><a href="https://dev.mysql.com/doc/refman/8.0/en/mysql-threads.html" target="_blank" rel="external">后台线程</a></h3><p>InnoDB存储引擎是在master thread的线程上几乎实现了所有功能。默认情况下，InnoDB存储引擎的后台线程有7个：</p>
+<h3 id="后台线程"><a href="#后台线程" class="headerlink" title="后台线程"></a><a href="https://dev.mysql.com/doc/refman/8.0/en/mysql-threads.html" target="_blank" rel="noopener">后台线程</a></h3><p>InnoDB存储引擎是在master thread的线程上几乎实现了所有功能。默认情况下，InnoDB存储引擎的后台线程有7个：</p>
 <ul>
 <li>IO Thread：4<ul>
 <li>Windows平台可以修改：配置文件中的innodb_file_io_threads，默认为4</li>
@@ -383,16 +383,16 @@
 <ul>
 <li>查询InnoDB引擎状态：show engine innodb status\G;`</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">--------</div><div class="line">FILE I/O</div><div class="line">--------</div><div class="line">I/O thread 0 state: waiting for i/o request (insert buffer thread)</div><div class="line">I/O thread 1 state: waiting for i/o request (log thread)</div><div class="line">I/O thread 2 state: waiting for i/o request (read thread)</div><div class="line">I/O thread 3 state: waiting for i/o request (read thread)</div><div class="line">I/O thread 4 state: waiting for i/o request (read thread)</div><div class="line">I/O thread 5 state: waiting for i/o request (read thread)</div><div class="line">I/O thread 6 state: waiting for i/o request (write thread)</div><div class="line">I/O thread 7 state: waiting for i/o request (write thread)</div><div class="line">I/O thread 8 state: waiting for i/o request (write thread)</div><div class="line">I/O thread 9 state: waiting for i/o request (write thread)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">--------</span><br><span class="line">FILE I/O</span><br><span class="line">--------</span><br><span class="line">I/O thread 0 state: waiting for i/o request (insert buffer thread)</span><br><span class="line">I/O thread 1 state: waiting for i/o request (log thread)</span><br><span class="line">I/O thread 2 state: waiting for i/o request (read thread)</span><br><span class="line">I/O thread 3 state: waiting for i/o request (read thread)</span><br><span class="line">I/O thread 4 state: waiting for i/o request (read thread)</span><br><span class="line">I/O thread 5 state: waiting for i/o request (read thread)</span><br><span class="line">I/O thread 6 state: waiting for i/o request (write thread)</span><br><span class="line">I/O thread 7 state: waiting for i/o request (write thread)</span><br><span class="line">I/O thread 8 state: waiting for i/o request (write thread)</span><br><span class="line">I/O thread 9 state: waiting for i/o request (write thread)</span><br></pre></td></tr></table></figure>
 <ul>
 <li>查询引擎版本：<code>show variables like &#39;innodb_version&#39;\G</code></li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Variable_name | innodb_version</div><div class="line">Value         | 5.7.22</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Variable_name | innodb_version</span><br><span class="line">Value         | 5.7.22</span><br></pre></td></tr></table></figure>
 <ul>
 <li>查询IO线程数量：<code>show variables like &#39;innodb_%io_threads&#39;\G</code></li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">***************************[ 1. row ]***************************</div><div class="line">Variable_name | innodb_read_io_threads</div><div class="line">Value         | 4</div><div class="line">***************************[ 2. row ]***************************</div><div class="line">Variable_name | innodb_write_io_threads</div><div class="line">Value         | 4</div></pre></td></tr></table></figure>
-<h3 id="线程调优"><a href="#线程调优" class="headerlink" title="线程调优"></a><a href="https://dev.mysql.com/doc/refman/8.0/en/thread-pool-tuning.html" target="_blank" rel="external">线程调优</a></h3><h4 id="thread-pool-size"><a href="#thread-pool-size" class="headerlink" title="thread_pool_size"></a><code>thread_pool_size</code></h4><blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">***************************[ 1. row ]***************************</span><br><span class="line">Variable_name | innodb_read_io_threads</span><br><span class="line">Value         | 4</span><br><span class="line">***************************[ 2. row ]***************************</span><br><span class="line">Variable_name | innodb_write_io_threads</span><br><span class="line">Value         | 4</span><br></pre></td></tr></table></figure>
+<h3 id="线程调优"><a href="#线程调优" class="headerlink" title="线程调优"></a><a href="https://dev.mysql.com/doc/refman/8.0/en/thread-pool-tuning.html" target="_blank" rel="noopener">线程调优</a></h3><h4 id="thread-pool-size"><a href="#thread-pool-size" class="headerlink" title="thread_pool_size"></a><code>thread_pool_size</code></h4><blockquote>
 <ul>
 <li>线程池数量决定最佳性能</li>
 <li>在启动时设置</li>
@@ -432,8 +432,8 @@ FROM performance_schema.tp_thread_group_stats;</code>这个数字应该尽可能
 <p>thread_pool_prio_kickup_timer设置为10000（10秒）。</p>
 <p>thread_pool_stall_limit设置为100（1秒）。</p>
 <p>在最坏的情况下，10个高优先级语句代表10个持续执行很长时间的事务。因此，在最坏的情况下，没有语句将被移动到高优先级队列，因为它总是已经包含等待执行的语句。 10秒后，新语句有资格移动到高优先级队列。但是，在可以移动它之前，它之前的所有语句也必须移动。这可能需要另外2秒，因为每秒最多100个语句被移动到高优先级队列。现在，当语句到达高优先级队列时，可能会有许多长时间运行的语句。在最坏的情况下，每一个都会陷入停滞状态。</p>
-<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p><a href="http://funwithmysql.blogspot.com/2012/08/mysql-scalability-architecture.html" target="_blank" rel="external">MySQL Scalability Architecture</a></p>
-<p><a href="https://www.oreilly.com/library/view/high-performance-mysql/9780596101718/ch01.html" target="_blank" rel="external">High Performance MySQL</a></p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p><a href="http://funwithmysql.blogspot.com/2012/08/mysql-scalability-architecture.html" target="_blank" rel="noopener">MySQL Scalability Architecture</a></p>
+<p><a href="https://www.oreilly.com/library/view/high-performance-mysql/9780596101718/ch01.html" target="_blank" rel="noopener">High Performance MySQL</a></p>
 
       
     

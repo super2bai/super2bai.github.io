@@ -285,9 +285,9 @@
       
         <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>每一种收集器的日志形式都是由它们自身的实现所决定的，格式不一致。</p>
 <a id="more"></a>
-<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">33.125：[GC[DefNew：3324K-＞152K（3712K），0.0025925secs]3324K-＞152K（11904K），0.0031680 secs]</div></pre></td></tr></table></figure>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">33.125：[GC[DefNew：3324K-＞152K（3712K），0.0025925secs]3324K-＞152K（11904K），0.0031680 secs]</span><br></pre></td></tr></table></figure>
 <p>GC发生的时间(虚拟机启动以来经过的秒数)：<code>[</code>停顿类型<code>[</code>发生区域<code>：</code>GC前该内存区域已使用容量<code>-&gt;</code> GC后该内存区域已使用容量(内存区域总容量)<code>,该区域GC所占用的时间(秒)</code> <code>]</code>GC前Java堆已使用容量<code>-&gt;</code>GC后Java堆已使用容量(Java堆总容量)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">100.667：FullGC[Tenured：0K-＞210K（10240K），0.0149142secs]4603K-＞210K（19456K），[Perm：2999K-＞2999K（21248K）]，0.0150007 secs</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">100.667：FullGC[Tenured：0K-＞210K（10240K），0.0149142secs]4603K-＞210K（19456K），[Perm：2999K-＞2999K（21248K）]，0.0150007 secs</span><br></pre></td></tr></table></figure>
 <ul>
 <li>类型：<ul>
 <li>FullGC：Stop-The-World</li>
@@ -306,10 +306,10 @@
 </ul>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[Full GC 283.736：[ParNew：261599K-＞261599K（261952K），0.0000288 secs]</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[Full GC 283.736：[ParNew：261599K-＞261599K（261952K），0.0000288 secs]</span><br></pre></td></tr></table></figure>
 <p>ParNew出现Full GC：一般是因为出现了分配担保失败之类的问题，所以才导致STW。</p>
 <h3 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h3><p>有的收集器会给出更具体的时间数据</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[Times : user=0.01 sys=0.00, real=0.02 secs]</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[Times : user=0.01 sys=0.00, real=0.02 secs]</span><br></pre></td></tr></table></figure>
 <p><code>user</code>：用户态消耗的CPU时间</p>
 <p><code>sys</code>：内核态消耗的CPU时间</p>
 <p><code>real</code>：操作从开始到结束所经过的墙钟时间(Wall Clock Time)</p>

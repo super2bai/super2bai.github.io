@@ -4,8 +4,28 @@
 
     
   <url>
+    <loc>https://super2bai.github.io/Linux/vi.html</loc>
+    <lastmod>2020-01-09T16:37:28.742Z</lastmod>
+    <data>
+        <display>
+        <title>vim中文乱码</title>
+        <pubTime>2020-01-09T16:35:12.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+         
+           
+             
+              <breadCrumb title="Linux" url="https://super2bai.github.io/categories/Linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://super2bai.github.io/mac/tomcat.html</loc>
-    <lastmod>2019-12-16T04:25:48.652Z</lastmod>
+    <lastmod>2019-12-16T04:59:33.818Z</lastmod>
     <data>
         <display>
         <title>Mac下Brew安装Tomcat并配置到IntelliJ IDEA</title>

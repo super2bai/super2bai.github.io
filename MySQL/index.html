@@ -307,7 +307,7 @@
 </blockquote>
 <ul>
 <li>二叉树缺点：只规定了简单结构，存在多种深度可能，导致二叉树的效率低，所以引入了平衡二叉树。</li>
-<li>红黑树与AVL树类似，都是在进行插入和删除时通过特定的操作保持二叉树的平衡，从而获得较高的查找性能。在Java中<a href="https://hg.openjdk.java.net/jdk/jdk/file/34bbd91b1522/src/java.base/share/classes/java/util/TreeSet.java" target="_blank" rel="external">TreeSet</a>、<a href="https://hg.openjdk.java.net/jdk/jdk/file/34bbd91b1522/src/java.base/share/classes/java/util/TreeMap.java" target="_blank" rel="external">TreeMap</a>的底层就是用的这个方法。<ul>
+<li>红黑树与AVL树类似，都是在进行插入和删除时通过特定的操作保持二叉树的平衡，从而获得较高的查找性能。在Java中<a href="https://hg.openjdk.java.net/jdk/jdk/file/34bbd91b1522/src/java.base/share/classes/java/util/TreeSet.java" target="_blank" rel="noopener">TreeSet</a>、<a href="https://hg.openjdk.java.net/jdk/jdk/file/34bbd91b1522/src/java.base/share/classes/java/util/TreeMap.java" target="_blank" rel="noopener">TreeMap</a>的底层就是用的这个方法。<ul>
 <li>节点是红色或黑色</li>
 <li>根节点是黑色</li>
 <li>叶子节点（nil,空节点）是黑色</li>
@@ -392,7 +392,9 @@
 <p>预读的长度一般为页(Page)的整倍数。</p>
 <blockquote>
 <p>页是计算机管理存储器的逻辑块，硬件及操作系统往往将主存和磁盘存储区分割为连续的大小相扽的块，每格存储块称为一页。</p>
-<p>MySQL(默认使用InnoDB引擎)，将记录按页的方式进行管理。<a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-physical-structure.html" target="_blank" rel="external">每页大小默认为16K</a>。Linux默认页大小为4K。</p>
+</blockquote>
+<blockquote>
+<p>MySQL(默认使用InnoDB引擎)，将记录按页的方式进行管理。<a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-physical-structure.html" target="_blank" rel="noopener">每页大小默认为16K</a>。Linux默认页大小为4K。</p>
 </blockquote>
 <p>要减少磁盘上花的时间，就可以从减少读盘次数以及减少寻道时间着手。<strong>B树采取的方法就是，充分的利用盘块的空间，在一个盘块种尽可能多得存储信息，或者在连续的盘块地址上存储尽可能多的信息。</strong>在数据结构上的变化就是每个节点存储多个key信息以及包含多个子节点。</p>
 <p><strong>磁盘的I/O次数由树的高度决定的。</strong>在最坏的情况下磁盘的I/O数等于索引树的高度。而B树是一颗平衡的m-路查找树，假设高度为h，每一个节点最多容纳m-1个关键字，所以一颗m-路查找树总共可容纳$$m^k-1$$个关键字。与二叉查找树比较，当高度为h，能容$$2^h-1$$个关键字，若高度为3，则二叉查找树只能容纳7个关键字，而对于200-路查找树可容纳$$200^3-1$$个关键字。</p>
@@ -458,10 +460,10 @@
 </li>
 </ul>
 <hr>
-<p>MySQL官方提供了<a href="https://dev.mysql.com/doc/employee/en/" target="_blank" rel="external">示例数据库</a></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> git clone git@github.com:datacharmer/test_db.git</div><div class="line"><span class="meta">$</span> cd test_db</div><div class="line"><span class="meta">$</span> mycli &lt; employees.sql</div></pre></td></tr></table></figure>
+<p>MySQL官方提供了<a href="https://dev.mysql.com/doc/employee/en/" target="_blank" rel="noopener">示例数据库</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> git clone git@github.com:datacharmer/test_db.git</span><br><span class="line"><span class="meta">$</span> cd test_db</span><br><span class="line"><span class="meta">$</span> mycli &lt; employees.sql</span><br></pre></td></tr></table></figure>
 <p>因为是在本地测试，所以用户名和host都可以省略，直接敲密码即可。执行后会有下面的输出：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">INFO</div><div class="line">CREATING DATABASE STRUCTURE</div><div class="line">INFO</div><div class="line">storage engine: InnoDB</div><div class="line">INFO</div><div class="line">LOADING departments</div><div class="line">INFO</div><div class="line">LOADING employees</div><div class="line">INFO</div><div class="line">LOADING dept_emp</div><div class="line">INFO</div><div class="line">LOADING dept_manager</div><div class="line">INFO</div><div class="line">LOADING titles</div><div class="line">INFO</div><div class="line">LOADING salaries</div><div class="line">data_load_time_diff</div><div class="line">NULL</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">INFO</span><br><span class="line">CREATING DATABASE STRUCTURE</span><br><span class="line">INFO</span><br><span class="line">storage engine: InnoDB</span><br><span class="line">INFO</span><br><span class="line">LOADING departments</span><br><span class="line">INFO</span><br><span class="line">LOADING employees</span><br><span class="line">INFO</span><br><span class="line">LOADING dept_emp</span><br><span class="line">INFO</span><br><span class="line">LOADING dept_manager</span><br><span class="line">INFO</span><br><span class="line">LOADING titles</span><br><span class="line">INFO</span><br><span class="line">LOADING salaries</span><br><span class="line">data_load_time_diff</span><br><span class="line">NULL</span><br></pre></td></tr></table></figure>
 
       
     

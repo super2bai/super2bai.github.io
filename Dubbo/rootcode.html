@@ -480,7 +480,7 @@
 <li>都没有，则随机生成</li>
 </ul>
 </li>
-<li>用Map<string, string>来存储配置信息<ul>
+<li>用Map&lt;String, String&gt;来存储配置信息<ul>
 <li>dubboVersion</li>
 <li>timestamp</li>
 <li>pid</li>
@@ -489,7 +489,7 @@
 <li>provider</li>
 <li>…</li>
 </ul>
-</string,></li>
+</li>
 <li>根据<code>name</code>、<code>host</code>、<code>port</code>、<code>path</code>、<code>map</code>生成发布服务的URL</li>
 <li>如果register不为空，则将服务注册</li>
 <li>通过<code>protocol.export</code>发布服务<ul>
@@ -581,7 +581,7 @@
 <li>逐行读取com.alibaba.dubbo.rpc.Protocol里的内容，<ul>
 <li>有<code>@Adaptive</code>，则将此类作为Protocol协议的适配，加载到缓存(cahedNames)里,然后根据name找到class，再去通过ClassLoader实例化(new Instance())</li>
 <li>没有<code>@Adaptive</code>，适配类通过javassist修改字节码生成。<ul>
-<li>判断实现类是否存在入参为接口的构造器（就是DubbboProtocol类是否还有入参为Protocol的构造器），有的话作为包装类缓存到此ExtensionLoader的Set<class<?>&gt;集合中，这个其实是个装饰模式</class<?></li>
+<li>判断实现类是否存在入参为接口的构造器（就是DubbboProtocol类是否还有入参为Protocol的构造器），有的话作为包装类缓存到此ExtensionLoader的Set&lt;Class&lt;?&gt;&gt;集合中，这个其实是个装饰模式</li>
 </ul>
 </li>
 <li>既不是适配对象也不是wrapped对象，那就是扩展点的具体实现对象，查找<code>@Activate</code><ul>

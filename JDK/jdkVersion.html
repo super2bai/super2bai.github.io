@@ -283,7 +283,7 @@
     </header>
     <div class="post-content syuanpi fadeInUpShort back-3">
       
-        <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>在看<a href="https://book.douban.com/subject/24722612/" target="_blank" rel="external">深入理解Java虚拟机（第2版）</a>第二章的内容时，内存溢出在不同JDK版本下会有不同的表现，想测试不同<code>JDK</code>版本下，内存溢出的效果。</p>
+        <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>在看<a href="https://book.douban.com/subject/24722612/" target="_blank" rel="noopener">深入理解Java虚拟机（第2版）</a>第二章的内容时，内存溢出在不同JDK版本下会有不同的表现，想测试不同<code>JDK</code>版本下，内存溢出的效果。</p>
 <a id="more"></a>
 <h3 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h3><p>在IDE中写对应内存溢出的代码，添加JVM参数，运行成功。</p>
 <p>使用不同JDK版本时，如果每次都需要修改IDE环境较为繁琐，所以想通过命令行的方式来指定JDK版本。</p>
@@ -302,13 +302,13 @@
 <li>环境变量错误</li>
 </ul>
 <h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><p><strong>安装包(注意都是下载mac下的dmg安装包)：</strong></p>
-<p><a href="http://support.apple.com/kb/DL1572" target="_blank" rel="external">JDK 1.6</a></p>
-<p><a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html" target="_blank" rel="external">JDK 1.7&amp;1.8&amp;1.9（早期版本在页面下方）</a></p>
+<p><a href="http://support.apple.com/kb/DL1572" target="_blank" rel="noopener">JDK 1.6</a></p>
+<p><a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html" target="_blank" rel="noopener">JDK 1.7&amp;1.8&amp;1.9（早期版本在页面下方）</a></p>
 <h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>关于Mac系统的环境变量文件入门介绍，可参考<a href="https://super2bai.github.io/2018/04/04/varFile/">Linux环境变量文件</a>。</p>
 <h4 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h4><ul>
 <li><code>vi ~/.bash_profile</code></li>
 </ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span>配置版本</div><div class="line">export JAVA_6_HOME=`/usr/libexec/java_home -v 1.6`  </div><div class="line">export JAVA_7_HOME=`/usr/libexec/java_home -v 1.7`  </div><div class="line">export JAVA_8_HOME=`/usr/libexec/java_home -v 1.8` </div><div class="line"><span class="meta">#</span>配置JAVA_HOME</div><div class="line">export JAVA_HOME=`/usr/libexec/java_home`</div><div class="line"><span class="meta">#</span>配置PATH</div><div class="line">export PATH="$JAVA_HOME:$PATH"</div><div class="line"><span class="meta">#</span>alias命令动态切换JDK版本</div><div class="line">alias jdk6="export JAVA_HOME=$JAVA_6_HOME"</div><div class="line">alias jdk7="export JAVA_HOME=$JAVA_7_HOME"</div><div class="line">alias jdk8="export JAVA_HOME=$JAVA_8_HOME"</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>配置版本</span><br><span class="line">export JAVA_6_HOME=`/usr/libexec/java_home -v 1.6`  </span><br><span class="line">export JAVA_7_HOME=`/usr/libexec/java_home -v 1.7`  </span><br><span class="line">export JAVA_8_HOME=`/usr/libexec/java_home -v 1.8` </span><br><span class="line"><span class="meta">#</span>配置JAVA_HOME</span><br><span class="line">export JAVA_HOME=`/usr/libexec/java_home`</span><br><span class="line"><span class="meta">#</span>配置PATH</span><br><span class="line">export PATH="$JAVA_HOME:$PATH"</span><br><span class="line"><span class="meta">#</span>alias命令动态切换JDK版本</span><br><span class="line">alias jdk6="export JAVA_HOME=$JAVA_6_HOME"</span><br><span class="line">alias jdk7="export JAVA_HOME=$JAVA_7_HOME"</span><br><span class="line">alias jdk8="export JAVA_HOME=$JAVA_8_HOME"</span><br></pre></td></tr></table></figure>
 <ul>
 <li><code>source ~/.bash_profile</code></li>
 <li>通过命令行输入<code>jdk6</code>、<code>jdk7</code>、<code>jdk8</code>、<code>jdk9</code>可以快速切换版本</li>
@@ -316,7 +316,7 @@
 <p><img src="https://wx3.sinaimg.cn/mw690/8c564d2agy1fq4q31yyrdj20se0kek7x.jpg" alt="Mac切换JDK版本"></p>
 <h3 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h3><h4 id="不建议"><a href="#不建议" class="headerlink" title="不建议"></a>不建议</h4><blockquote>
 <ul>
-<li>根据<a href="https://developer.apple.com/library/content/qa/qa1170/_index.html" target="_blank" rel="external">苹果的官方说明</a>，Mac OS X 10.5 及以后的版本应该使用 /usr/libexec/java_home 命令来确定 JAVA_HOME。</li>
+<li>根据<a href="https://developer.apple.com/library/content/qa/qa1170/_index.html" target="_blank" rel="noopener">苹果的官方说明</a>，Mac OS X 10.5 及以后的版本应该使用 /usr/libexec/java_home 命令来确定 JAVA_HOME。</li>
 <li>版本发生变化需要修改配置</li>
 <li>无法适应不同的Java实现(Apple、Oracle、OpenJDk)</li>
 </ul>
@@ -345,16 +345,16 @@
 <li>通过<code>dd</code>当前行，在合适的地方<code>p</code>。</li>
 <li><code>:5 move 2</code></li>
 <li>map快捷键</li>
-<li><a href="https://github.com/tpope/vim-unimpaired" target="_blank" rel="external">安装插件vim-unimpaired</a><ul>
+<li><a href="https://github.com/tpope/vim-unimpaired" target="_blank" rel="noopener">安装插件vim-unimpaired</a><ul>
 <li>装好后按[e或者]e这两个快捷键移动当前行到上面或者下面</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-<h3 id="阅读资料"><a href="#阅读资料" class="headerlink" title="阅读资料"></a>阅读资料</h3><p><a href="https://docs.oracle.com/javase/tutorial/essential/environment/paths.html" target="_blank" rel="external">PATH and CLASSPATH</a></p>
-<p><a href="https://www.zhihu.com/question/21265424" target="_blank" rel="external">Linux文件系统中/bin、/sbin、/usr/bin、/usr/sbin、/usr/local/bin、/usr/local/sbin文件夹的区别是什么？</a></p>
-<p><a href="https://blog.csdn.net/davidhsing/article/details/8297105" target="_blank" rel="external">Mac 上 java 究竟在哪里，本文彻底让你搞清楚！</a></p>
+<h3 id="阅读资料"><a href="#阅读资料" class="headerlink" title="阅读资料"></a>阅读资料</h3><p><a href="https://docs.oracle.com/javase/tutorial/essential/environment/paths.html" target="_blank" rel="noopener">PATH and CLASSPATH</a></p>
+<p><a href="https://www.zhihu.com/question/21265424" target="_blank" rel="noopener">Linux文件系统中/bin、/sbin、/usr/bin、/usr/sbin、/usr/local/bin、/usr/local/sbin文件夹的区别是什么？</a></p>
+<p><a href="https://blog.csdn.net/davidhsing/article/details/8297105" target="_blank" rel="noopener">Mac 上 java 究竟在哪里，本文彻底让你搞清楚！</a></p>
 
       
     

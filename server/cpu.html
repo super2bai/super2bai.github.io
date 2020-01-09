@@ -288,19 +288,19 @@
 <ul>
 <li>找出CPU比较高的进程PID</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">top</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">top</span><br></pre></td></tr></table></figure>
 <ul>
 <li>打印该进程下线程的CPU占用比较高的tid</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">top -Hp &#123;PID&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">top -Hp &#123;PID&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>将该tid进行16进制转换id</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">printf &quot;%x\n&quot; &#123;tid&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">printf &quot;%x\n&quot; &#123;tid&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>打印线程的堆栈信息</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">jstack &#123;PID&#125; |grep &#123;id&#125; -A 100</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jstack &#123;PID&#125; |grep &#123;id&#125; -A 100</span><br></pre></td></tr></table></figure>
 <p>那么既然找到了问题，剩下就只能通过，数据库索引、SQL优化、算法优化、快速返回等方法来最这段代码优化。</p>
 
       

@@ -447,7 +447,7 @@
 </li>
 <li>唤醒暂停的线程</li>
 </ul>
-<h5 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">-XX:-UseBiastedLocking:启用/禁用(禁用后，默认进入轻量级锁状态)</div><div class="line">-XX:BiasedLockingStartupDelay=0:关闭启动延迟</div></pre></td></tr></table></figure>
+<h5 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-XX:-UseBiastedLocking:启用/禁用(禁用后，默认进入轻量级锁状态)</span><br><span class="line">-XX:BiasedLockingStartupDelay=0:关闭启动延迟</span><br></pre></td></tr></table></figure>
 <h4 id="轻量级锁"><a href="#轻量级锁" class="headerlink" title="轻量级锁"></a>轻量级锁</h4><h5 id="加锁-1"><a href="#加锁-1" class="headerlink" title="加锁"></a>加锁</h5><ul>
 <li>线程执行同步块之前，JVM会在当前线程的栈帧中创建存储锁记录的空间，并将对象头重的Mark Word复制到锁记录中，也就是<code>Displaced Mark Word</code></li>
 <li>线程尝试使用CAS将对象头中的Mark Word替换为指向锁记录的指针<ul>
@@ -583,8 +583,8 @@
 </ul>
 </li>
 </ul>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://www.quora.com/What-is-the-difference-between-a-word-and-a-byte" target="_blank" rel="external">Quora-What is the difference between a word and a byte?</a></p>
-<p><a href="https://www.oracle.com/technetwork/java/biasedlocking-oopsla2006-wp-149958.pdf" target="_blank" rel="external">Oracle-Biased Locking</a></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://www.quora.com/What-is-the-difference-between-a-word-and-a-byte" target="_blank" rel="noopener">Quora-What is the difference between a word and a byte?</a></p>
+<p><a href="https://www.oracle.com/technetwork/java/biasedlocking-oopsla2006-wp-149958.pdf" target="_blank" rel="noopener">Oracle-Biased Locking</a></p>
 <h3 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h3><ul>
 <li>Markdown的表格真得很一言难尽</li>
 </ul>
