@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Mac解压rar</title>
+      <link href="/mac/rar.html"/>
+      <url>/mac/rar.html</url>
+      
+        <content type="html"><![CDATA[<p>rar和mac不得不说的二三事</p><a id="more"></a><ul><li>安装<code>unrar</code>命令，例：<code>brew install unrar</code></li><li><code>cd 待解压文件目录下</code></li><li><code>unrar x 文件名称</code></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> mac </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> mac </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>vim中文乱码</title>
       <link href="/Linux/vi.html"/>
       <url>/Linux/vi.html</url>
