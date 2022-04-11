@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://super2bai.github.io/idea/allowMavenHttp.html</loc>
+    
+    <lastmod>2022-04-11T07:22:45.198Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://super2bai.github.io/git/branch.html</loc>
+    
+    <lastmod>2020-04-13T08:34:29.402Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://super2bai.github.io/MySQL/column.html</loc>
     
     <lastmod>2020-03-19T14:22:24.384Z</lastmod>
@@ -145,13 +159,6 @@
     <loc>https://super2bai.github.io/idea/eliminateYellowLine.html</loc>
     
     <lastmod>2019-07-11T05:29:01.717Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://super2bai.github.io/git/branch.html</loc>
-    
-    <lastmod>2019-07-10T09:35:54.131Z</lastmod>
     
   </url>
   
@@ -436,13 +443,6 @@
   </url>
   
   <url>
-    <loc>https://super2bai.github.io/walkup/SA.html</loc>
-    
-    <lastmod>2018-09-09T16:33:26.681Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://super2bai.github.io/JVM/classSummary.html</loc>
     
     <lastmod>2018-09-06T15:26:06.583Z</lastmod>
@@ -495,13 +495,6 @@
     <loc>https://super2bai.github.io/JVM/decompile.html</loc>
     
     <lastmod>2018-06-25T13:34:59.602Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://super2bai.github.io/walkup/NA.html</loc>
-    
-    <lastmod>2018-06-04T06:14:10.439Z</lastmod>
     
   </url>
   
@@ -709,13 +702,6 @@
   </url>
   
   <url>
-    <loc>https://super2bai.github.io/walkup/Africa.html</loc>
-    
-    <lastmod>2018-05-23T03:35:22.415Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://super2bai.github.io/JVM/memory.html</loc>
     
     <lastmod>2018-05-23T03:35:12.707Z</lastmod>
@@ -726,27 +712,6 @@
     <loc>https://super2bai.github.io/JVM/create.html</loc>
     
     <lastmod>2018-05-23T03:35:07.116Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://super2bai.github.io/walkup/Asia.html</loc>
-    
-    <lastmod>2018-05-23T03:34:55.449Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://super2bai.github.io/walkup/Antarctica.html</loc>
-    
-    <lastmod>2018-05-23T03:34:52.011Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://super2bai.github.io/walkup/Europe.html</loc>
-    
-    <lastmod>2018-05-23T03:34:47.896Z</lastmod>
     
   </url>
   

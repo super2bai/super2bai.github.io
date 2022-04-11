@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>取消Maven屏蔽HTTP</title>
+      <link href="/idea/allowMavenHttp.html"/>
+      <url>/idea/allowMavenHttp.html</url>
+      
+        <content type="html"><![CDATA[<p>公司的仓它就是http的，亲测好使</p><a id="more"></a><p>当idea加载外部配置文件时会优先加载安装目录下\plugins\maven\lib\maven3\conf文件夹内的settings.xml，注释该文件中maven-default-http-blocker配置</p><p>记得需要重启IDEA！！！不然修改不会生效</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> idea </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> idea </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>mysql查询列名</title>
       <link href="/MySQL/column.html"/>
       <url>/MySQL/column.html</url>
@@ -633,7 +658,7 @@
       <link href="/git/branch.html"/>
       <url>/git/branch.html</url>
       
-        <content type="html"><![CDATA[<p>一个需求一个分支，需求无穷尽，分支无穷尽。</p><a id="more"></a><ul><li><p>重命名分支</p><ul><li>重命名本地分支：<code>git branch -m oldBranchName newBranchName</code></li><li>删除远程分支：<code>git push origin :oldBranchName</code></li><li>将重命名过的分支提交：<code>git push origin newBranchName</code></li></ul></li><li><p>查看本地分支及追踪的分支：<code>git branch -vv</code></p></li><li>查看远程分支：<code>git branch -a</code></li><li>设置远程跟踪分支：<code>git branch --set-upstream-to=origin/newBranchName</code></li></ul>]]></content>
+        <content type="html"><![CDATA[<p>一个需求一个分支，需求无穷尽，分支无穷尽。</p><a id="more"></a><ul><li>重命名分支<ul><li>重命名本地分支：<code>git branch -m oldBranchName newBranchName</code></li><li>删除远程分支：<code>git push origin :oldBranchName</code></li><li>将重命名过的分支提交：<code>git push origin newBranchName</code></li></ul></li><li>查看本地分支及追踪的分支：<code>git branch -vv</code></li><li>查看远程分支：<code>git branch -a</code></li><li>设置远程跟踪分支：<code>git branch --set-upstream-to=origin/newBranchName</code></li></ul>]]></content>
       
       
       <categories>
@@ -1517,31 +1542,6 @@
     
     
     <entry>
-      <title>WalkUp签证-南美洲</title>
-      <link href="/walkup/SA.html"/>
-      <url>/walkup/SA.html</url>
-      
-        <content type="html"><![CDATA[<blockquote><p>以下为<strong>南美洲篇</strong>签证攻略。</p></blockquote><a id="more"></a><h4 id="智利"><a href="#智利" class="headerlink" title="智利"></a>智利</h4><p>智利是不是第一个成为南美洲的OECD成员国—<strong>是</strong></p><p>智利什么资源是世界上最丰富的—<strong>铜矿</strong></p><p>智利曾是哪个国家的殖民地—<strong>西班牙</strong></p><p>智利的官方语言是什么—<strong>西班牙语</strong></p><p>哪一年智利发生大地震—<strong>1960年</strong></p><h4 id="乌拉圭"><a href="#乌拉圭" class="headerlink" title="乌拉圭"></a>乌拉圭</h4><p>乌拉圭是高收入的国家么—<strong>是</strong></p><p>大部分居民信奉什么教—<strong>天主教</strong></p><p>大麻的销售和生产在乌拉圭是合法的么—<strong>是</strong></p><p>乌拉圭总统的任期是几年—<strong>5</strong></p><p>最热爱的运动是—<strong>足球</strong></p><h4 id="巴西"><a href="#巴西" class="headerlink" title="巴西"></a>巴西</h4><p>巴西的官方语言是什么—<strong>葡萄牙语</strong></p><p>巴西的主要宗教是什么—<strong>天主教</strong></p><p>巴西在哪一年举办世界杯—<strong>2014年</strong></p><p>巴西是不是南美洲国家联盟的成员国—<strong>是</strong></p><p>巴西一共分为多少个州—<strong>26</strong></p><h4 id="巴拉圭"><a href="#巴拉圭" class="headerlink" title="巴拉圭"></a>巴拉圭</h4><p>巴拉圭共和国是哪一年独立—<strong>1811</strong></p><p>巴拉圭原为哪个族的印第安人居住地—<strong>瓜拉尼族印度安人</strong></p><p>全国90%的人居住在巴拉圭河以东还是以西—<strong>住在河东</strong></p><p>巴拉圭的首都是哪个城市—<strong>亚松森</strong></p><p>哪个党是巴拉圭的传统政党—<strong>亲爱祖国党</strong></p><p>巴拉圭境内主要河流是—<strong>巴拉圭河河巴拉那河</strong></p><p>巴拉圭经济主要支柱是—<strong>农业</strong></p><h4 id="玻利维亚"><a href="#玻利维亚" class="headerlink" title="玻利维亚"></a>玻利维亚</h4><p>独立后，玻利维亚曾实行过哪种政治制度—<strong>寡头制</strong></p><p>玻利维亚境内有亚马逊森林吗—<strong>有</strong></p><p>哪次战争后玻利维亚横位了内陆国家—<strong>硝石战争</strong></p><p>玻利维亚原名为—<strong>玻利维亚共和国</strong></p><p>玻利维亚是一个政教分离的国家么—<strong>是</strong></p><p>玻利维亚的民族英雄玻利瓦尔来自哪个国家—<strong>委内瑞拉</strong></p><p>大部分土著人崇拜谁—<strong>地球母亲</strong></p><blockquote><p>截止到2018-09-09，玻利维亚-苏克雷城市官方还没有做好，只能暂停。</p><p>另：大洋洲也没有做好，目前没的可走了</p></blockquote>]]></content>
-      
-      
-      <categories>
-          
-          <category> walkup </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> walkup </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>文本文件从Windows拷贝到Mac乱码</title>
       <link href="/codec/w2m.html"/>
       <url>/codec/w2m.html</url>
@@ -1671,7 +1671,7 @@
       <link href="/GHPages/sitemap.html"/>
       <url>/GHPages/sitemap.html</url>
       
-        <content type="html"><![CDATA[<p>目的：搜索引擎收录网站</p><a id="more"></a><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><blockquote><p><strong>站点地图</strong>：描述了一个网站的架构。</p><p>它可以是一个任意形式的文档，也可以是列出网站中所有页面的一个网页。</p><p>通常采用分级形式。</p><p>有助于访问者以及搜索引擎的机器人找到网站中的页面</p></blockquote><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-generator-sitemap --save #sitemap.xml适合提交给谷歌搜素引擎</span><br><span class="line">npm install hexo-generator-baidu-sitemap --save #baidusitemap.xml适合提交百度搜索引擎</span><br></pre></td></tr></table></figure><h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><h4 id="config-yml"><a href="#config-yml" class="headerlink" title="_config.yml"></a>_config.yml</h4><ul><li>在站点配置文件<code>_config.yml</code>中<strong>添加</strong>以下代码</li></ul><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 自动生成sitemap</span></span><br><span class="line">sitemap:</span><br><span class="line">    path: sitemap.xml</span><br><span class="line">baidusitemap:</span><br><span class="line">    path: baidusitemap.xml</span><br></pre></td></tr></table></figure><ul><li>在站点配置文件<code>_config.yml</code>中<strong>修改</strong>以下代码</li></ul><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> URL</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 比如网站地址是https://a.com，那么下面就写url: https://a.com</span></span></span><br><span class="line">url: http://yoursite</span><br></pre></td></tr></table></figure><h3 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g -d</span><br></pre></td></tr></table></figure><p>会在<code>/public</code>下生成<code>sitemap.xml</code>和<code>baidusitemap.xml</code></p><h3 id="收录"><a href="#收录" class="headerlink" title="收录"></a>收录</h3><h4 id="google"><a href="#google" class="headerlink" title="google"></a>google</h4><p><a href="https://www.google.com/webmasters/tools/home?hl=zh-CN" target="_blank" rel="noopener">Search Console</a></p><ul><li>添加网站地址</li><li>提交<code>sitemap.xml</code></li></ul><h4 id="baidu"><a href="#baidu" class="headerlink" title="baidu"></a>baidu</h4><p><a href="https://ziyuan.baidu.com/https/index" target="_blank" rel="noopener">百度资源</a></p><ul><li>添加网站地址</li><li>提交<ul><li>站点信息-&gt;网页抓取-&gt;详情</li></ul></li></ul>]]></content>
+        <content type="html"><![CDATA[<p>目的：搜索引擎收录网站</p><a id="more"></a><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><blockquote><p><strong>站点地图</strong>：描述了一个网站的架构。</p><p>它可以是一个任意形式的文档，也可以是列出网站中所有页面的一个网页。</p><p>通常采用分级形式。</p><p>有助于访问者以及搜索引擎的机器人找到网站中的页面</p></blockquote><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-generator-sitemap --save #sitemap.xml适合提交给谷歌搜素引擎</span><br><span class="line">npm install hexo-generator-baidu-sitemap --save #baidusitemap.xml适合提交百度搜索引擎</span><br></pre></td></tr></table></figure><h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><h4 id="config-yml"><a href="#config-yml" class="headerlink" title="_config.yml"></a>_config.yml</h4><ul><li>在站点配置文件<code>_config.yml</code>中<strong>添加</strong>以下代码</li></ul><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 自动生成sitemap</span><br><span class="line">sitemap:</span><br><span class="line">    path: sitemap.xml</span><br><span class="line">baidusitemap:</span><br><span class="line">    path: baidusitemap.xml</span><br></pre></td></tr></table></figure><ul><li>在站点配置文件<code>_config.yml</code>中<strong>修改</strong>以下代码</li></ul><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> URL</span><br><span class="line"><span class="meta">#</span># If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'</span><br><span class="line"><span class="meta">#</span># 比如网站地址是https://a.com，那么下面就写url: https://a.com</span><br><span class="line">url: http://yoursite</span><br></pre></td></tr></table></figure><h3 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g -d</span><br></pre></td></tr></table></figure><p>会在<code>/public</code>下生成<code>sitemap.xml</code>和<code>baidusitemap.xml</code></p><h3 id="收录"><a href="#收录" class="headerlink" title="收录"></a>收录</h3><h4 id="google"><a href="#google" class="headerlink" title="google"></a>google</h4><p><a href="https://www.google.com/webmasters/tools/home?hl=zh-CN" target="_blank" rel="noopener">Search Console</a></p><ul><li>添加网站地址</li><li>提交<code>sitemap.xml</code></li></ul><h4 id="baidu"><a href="#baidu" class="headerlink" title="baidu"></a>baidu</h4><p><a href="https://ziyuan.baidu.com/https/index" target="_blank" rel="noopener">百度资源</a></p><ul><li>添加网站地址</li><li>提交<ul><li>站点信息-&gt;网页抓取-&gt;详情</li></ul></li></ul>]]></content>
       
       
       <categories>
@@ -1917,31 +1917,6 @@
     
     
     <entry>
-      <title>WalkUp攻略-北美洲</title>
-      <link href="/walkup/NA.html"/>
-      <url>/walkup/NA.html</url>
-      
-        <content type="html"><![CDATA[<blockquote><p>以下为<strong>北美洲篇</strong>签证攻略。</p></blockquote><a id="more"></a><h4 id="哥斯达黎加"><a href="#哥斯达黎加" class="headerlink" title="哥斯达黎加"></a>哥斯达黎加</h4><p>哥斯达黎加是哥伦布第几次航行时发现—<strong>第四次</strong></p><p>圣何塞是中美洲最高的首都吗—<strong>是</strong></p><p>哥斯达黎加境内有军队吗—<strong>没有</strong></p><p>哥斯达黎加是永久中立国吗—<strong>是</strong></p><p>哥斯达黎加喜欢用什么称呼他人—<strong>学衔</strong></p><h4 id="尼加拉瓜"><a href="#尼加拉瓜" class="headerlink" title="尼加拉瓜"></a>尼加拉瓜</h4><p>尼加拉瓜境内有长城吗—<strong>有</strong></p><p>尼加拉瓜最早的土著民以什么为主—<strong>印第安人</strong></p><p>马那瓜的玉米节在什么时候举行—<strong>9月26日</strong></p><p>尼加拉瓜在什么时间宣布独立—<strong>1821年</strong></p><p>尼加拉瓜湖是中美洲最大的湖泊吗—<strong>是</strong></p><h4 id="危地马拉"><a href="#危地马拉" class="headerlink" title="危地马拉"></a>危地马拉</h4><p>危地马拉城是危地马拉最大的城市吗—<strong>是</strong></p><p>捕捉格查尔鸟违反危地马拉法律吗—<strong>违反</strong></p><p>危地马拉是玛雅文化中心之一吗—<strong>是</strong></p><p>危地马拉境内主要以什么地形为主—<strong>山地</strong></p><p>阿蒂特兰湖盛产什么鱼—<strong>黑鲈鱼</strong></p><h4 id="牙买加"><a href="#牙买加" class="headerlink" title="牙买加"></a>牙买加</h4><p>牙买加是英联邦国家吗—<strong>是</strong></p><p>NBA传奇巨星尤因是牙买加人吗—<strong>是</strong></p><p>牙买加在印第安语中意为什么—<strong>林水之乡</strong></p><p>哥伦布最初登陆牙买加的地点被称为—<strong>发现湾</strong></p><p>牙买加是蓝山咖啡的产地吗—<strong>是</strong></p><h4 id="古巴"><a href="#古巴" class="headerlink" title="古巴"></a>古巴</h4><p>古巴在泰诺语中意为什么—<strong>肥沃之地</strong></p><p>古巴导弹危机也被称为什么—<strong>加勒比海导弹危机</strong></p><p>古巴岛是大安的列斯群岛中最大的岛屿吗—<strong>是</strong></p><p>古巴境内最长的河流名为什么—<strong>考托河</strong></p><p>古巴是美洲唯一的社会主义国家吗—<strong>是</strong></p><h4 id="墨西哥"><a href="#墨西哥" class="headerlink" title="墨西哥"></a>墨西哥</h4><p>墨西哥是世界第一大西班牙语国家吗—<strong>是</strong></p><p>墨西哥的国酒是什么—<strong>龙舌兰酒</strong></p><p>已知最古老的美洲文明是什么—<strong>奥尔梅克文明</strong></p><p>墨西哥保持着食虫的传统吗—<strong>有</strong></p><p>玉米是墨西哥古印第安人培育的吗—<strong>是</strong></p><h4 id="美国"><a href="#美国" class="headerlink" title="美国"></a>美国</h4><p>美国的最高山峰是哪座山—<strong>迪纳利山</strong></p><p>哪个形象是美国的国家象征—<strong>山姆大叔</strong></p><p>美国是美洲第一大面积国家吗—<strong>不是</strong></p><p>总统山在哪个国家公园—<strong>拉什莫尔山国家纪念公园</strong></p><p>白宫曾经被焚毁过吗—<strong>有</strong></p><h4 id="加拿大"><a href="#加拿大" class="headerlink" title="加拿大"></a>加拿大</h4><p>加拿大的政治体制是—<strong>君主立宪制</strong></p><p>加拿大国旗两边的红色代表了—<strong>大西洋和太平洋</strong></p><p>加拿大的首都是—<strong>渥太华</strong></p><p>下面哪一项是加拿大的国花—<strong>枫叶</strong></p><p>加拿大的国球是哪一个—<strong>旱冰球</strong></p>]]></content>
-      
-      
-      <categories>
-          
-          <category> walkup </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> walkup </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>Mac切换JDK版本</title>
       <link href="/JDK/jdkVersion.html"/>
       <url>/JDK/jdkVersion.html</url>
@@ -2117,31 +2092,6 @@
     
     
     <entry>
-      <title>WalkUp攻略-非洲</title>
-      <link href="/walkup/Africa.html"/>
-      <url>/walkup/Africa.html</url>
-      
-        <content type="html"><![CDATA[<blockquote><p>以下为<strong>非洲篇</strong>签证攻略。</p></blockquote><a id="more"></a><h4 id="阿尔及利亚"><a href="#阿尔及利亚" class="headerlink" title="阿尔及利亚"></a>阿尔及利亚</h4><p>阿尔及利亚的舞蹈按什么划分—<strong>地区</strong><br>阿尔及利亚是葡萄酒主要生产国吗—<strong>不是</strong><br>阿尔及利亚什么时候开始伊斯兰化—<strong>8世纪</strong><br>阿尔及利亚国名来自于—<strong>首都名</strong><br>柏柏人曾经建立起王国吗—<strong>有</strong></p><h4 id="突尼斯"><a href="#突尼斯" class="headerlink" title="突尼斯"></a>突尼斯</h4><p>突尼斯人姓名一般有几部分组成—<strong>四部分</strong><br>茉莉花革命在什么时候爆发—<strong>2011年</strong><br>突尼斯得国旗历史可追溯到什么时期—<strong>奥斯曼帝国</strong><br>突尼斯南部主要以什么地形为主—<strong>沙漠</strong><br>突尼斯拥有世界上最大的油橄榄吗—<strong>有</strong></p><h4 id="利比亚"><a href="#利比亚" class="headerlink" title="利比亚"></a>利比亚</h4><p>卡扎菲政权在哪场战争被推翻—<strong>利比亚内战</strong><br>利比亚蹭属于迦太基吗—<strong>属于</strong><br>利比亚茶内含有什么—<strong>薄荷叶</strong><br>利比亚国旗中红色代表什么地区—<strong>费赞地区</strong><br>井泉是利比亚的主要水源吗—<strong>是</strong></p><h4 id="埃及"><a href="#埃及" class="headerlink" title="埃及"></a>埃及</h4><p>拿破仑曾经占领过埃及吗—<strong>有</strong><br>如今的阿拉伯人是古埃及人吗—<strong>不是</strong><br>埃及的”国菜”是什么—<strong>蚕豆</strong><br>非洲最大的人工湖名叫—<strong>纳赛尔水库</strong><br>大金字塔归属于哪位国王—<strong>胡夫</strong></p><h4 id="埃塞尔比亚"><a href="#埃塞尔比亚" class="headerlink" title="埃塞尔比亚"></a>埃塞尔比亚</h4><p>绿黄红三色也被称为—<strong>泛非洲色彩</strong></p><p>埃塞尔比亚境内以什么地形为主—<strong>高原</strong></p><p>青尼罗河发源于埃塞尔比亚吗—<strong>是</strong></p><p>东非大裂谷有跨越埃塞尔比亚吗—<strong>有</strong></p><p>埃塞尔比亚有受到殖民主义影响吗—<strong>没有</strong></p><h4 id="刚果共和国"><a href="#刚果共和国" class="headerlink" title="刚果共和国"></a>刚果共和国</h4><p>布拉柴维尔被称作什么—<strong>花园城</strong></p><p>刚果人经常使用什么酱料—<strong>蚁酱</strong></p><p>北方原始森林有俾格米人生活吗—<strong>有</strong></p><p>大洋铁路是非洲第一条铁路吗—<strong>是</strong></p><p>布拉柴维尔曾是哪个国家的“象征首都”—<strong>自由法国</strong></p><h4 id="肯尼亚"><a href="#肯尼亚" class="headerlink" title="肯尼亚"></a>肯尼亚</h4><p>肯尼亚的“国花”是什么—<strong>肯山兰</strong></p><p>肯尼亚的国家代码是—<strong>肯</strong></p><p>肯尼亚是人类发源地之一吗—<strong>是</strong></p><p>肯尼亚地跨赤道吗—<strong>有</strong></p><p>肯尼亚咖啡豆更适合做哪种咖啡—<strong>冰咖啡</strong></p><h4 id="坦桑尼亚"><a href="#坦桑尼亚" class="headerlink" title="坦桑尼亚"></a>坦桑尼亚</h4><p>坦桑尼亚国旗由几种颜色构成—<strong>4种</strong></p><p>坦桑尼亚的首都是—<strong>多多马</strong></p><p>乞力马扎罗山是世界最高独体山吗—<strong>是</strong></p><p>坦桑尼亚是英联邦国家吗—<strong>是</strong></p><p>坦桑尼亚的马赛人用设么方式迎宾—<strong>踩高跷</strong></p><h4 id="津巴布韦"><a href="#津巴布韦" class="headerlink" title="津巴布韦"></a>津巴布韦</h4><p>津巴布韦有怎样的称号—<strong>鳄鱼之乡</strong></p><p>绍纳人曾在津巴布韦建立过文明吗—<strong>有</strong></p><p>津巴布韦原本称作什么—<strong>南罗得西亚</strong></p><p>津巴布韦是内陆国家吗—<strong>是</strong></p><p>津巴布韦部族依然保留图腾吗—<strong>保留</strong></p><h4 id="纳米比亚"><a href="#纳米比亚" class="headerlink" title="纳米比亚"></a>纳米比亚</h4><p>鲸鱼港曾是哪个国家的飞地—<strong>南非</strong></p><p>奥万博族是纳米比亚最大的民族吗—<strong>是</strong></p><p>纳米比亚曾经被称为什么—<strong>西南非洲</strong></p><p>纳米比亚的国徽有几种动物—<strong>2种</strong></p><p>纳米比亚的第一大城市是什么—<strong>温得和克</strong></p><h4 id="南非"><a href="#南非" class="headerlink" title="南非"></a>南非</h4><p>什么肉是南非的特色风味—<strong>鸵鸟肉</strong></p><p>好望角位于南非的哪个方位—<strong>西南端</strong></p><p>南非的国石是什么—<strong>钻石</strong></p><p>南非有几个首都—<strong>3个</strong></p><p>地下水是南非供水的主要资源吗—<strong>是</strong></p><h4 id="马达加斯加"><a href="#马达加斯加" class="headerlink" title="马达加斯加"></a>马达加斯加</h4><p>马达加斯加是世界第几大岛屿—<strong>第四</strong></p><p>马达加斯加的别称是什么—<strong>牛的王国</strong></p><p>马达加斯加有行割礼的传统吗—<strong>有</strong></p><p>香草是马达加斯加主要出口物吗—<strong>是</strong></p><p>马达加斯加什么时候出现国家组织—<strong>14世纪</strong></p>]]></content>
-      
-      
-      <categories>
-          
-          <category> walkup </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> walkup </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>JVM中对象的创建</title>
       <link href="/JVM/create.html"/>
       <url>/JVM/create.html</url>
@@ -2159,81 +2109,6 @@
         <tags>
             
             <tag> JVM </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>WalkUp攻略-南极洲</title>
-      <link href="/walkup/Antarctica.html"/>
-      <url>/walkup/Antarctica.html</url>
-      
-        <content type="html"><![CDATA[<blockquote><p>以下为<strong>南极洲篇</strong>签证攻略。</p></blockquote><a id="more"></a><h4 id="南极洲"><a href="#南极洲" class="headerlink" title="南极洲"></a>南极洲</h4><p>第一个到达南极点的是哪国人—挪威人</p><p>南极有北极熊吗 — 没有</p><p>南极大陆是世界上唯一没有狗的地区吗 — 是</p><p>南极的总面积位居世界大洲第几位 — 第五位</p><p>南极是地球上最后一个被发现的大陆吗 — 是</p><blockquote><p>嗯，是的，南极洲就这么一个。。。over</p></blockquote>]]></content>
-      
-      
-      <categories>
-          
-          <category> walkup </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> walkup </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>WalkUp攻略-欧洲</title>
-      <link href="/walkup/Europe.html"/>
-      <url>/walkup/Europe.html</url>
-      
-        <content type="html"><![CDATA[<blockquote><p>以下为<strong>欧洲篇</strong>签证攻略。</p></blockquote><a id="more"></a><h4 id="希腊"><a href="#希腊" class="headerlink" title="希腊"></a>希腊</h4><p>传说普罗米修斯属于哪个神族后裔—泰坦神族后裔</p><p>希腊诸神中宙斯是怎么当上诸神之王的—抓阄抓的</p><p>希腊除了古文明，还有哪件事是欧洲文明的始祖—葡萄酒酿制</p><p>传说中火神用粘土制造了第一个女人手里拿的是什么—潘多拉魔盒</p><p>古希腊文化中著名的数学家、物理学家是哪一位—阿基米德</p><h4 id="阿尔巴尼亚"><a href="#阿尔巴尼亚" class="headerlink" title="阿尔巴尼亚"></a>阿尔巴尼亚</h4><p>阿尔巴尼亚是信仰什么宗教的国家—伊斯兰教</p><p>在阿尔巴尼亚表示肯定、赞同用什么肢体语言—摇头</p><p>阿尔巴尼亚是发达国家还是不发达国家—不发达</p><p>阿尔巴尼亚的首都是地拉那吗—是</p><p>阿尔巴尼亚的解放日是哪一天—11月29日</p><h4 id="波黑"><a href="#波黑" class="headerlink" title="波黑"></a>波黑</h4><p>萨拉热窝暗杀的是哪国王储—奥匈帝国王储</p><p>全世界第一个全天运行路面电车的国家是—旧金山</p><p>萨拉热窝地区人们常年饮食是凉的，是真是假—真的</p><p>第一次世界大战的导火索是什么事件—萨拉热窝事件</p><p>萨拉热窝被誉为欧洲的—耶路撒冷</p><h4 id="塞尔维亚"><a href="#塞尔维亚" class="headerlink" title="塞尔维亚"></a>塞尔维亚</h4><p>塞尔维亚曾是哪个解体国家的主体—南斯拉夫</p><p>贝尔格莱德建成史上多少次被军队占领—40次</p><p>萨尔维亚最热衷的体育运动是什么—足球</p><p>萨尔维亚信仰哪个宗教—东正教</p><p>萨尔维亚北部是什么地形—平原</p><h4 id="保加利亚"><a href="#保加利亚" class="headerlink" title="保加利亚"></a>保加利亚</h4><p>保加利亚的建筑风格属于—拜占庭式建筑</p><p>保加利亚国徽上的饰带上的文字是—团结就是力量</p><p>保加利亚属于欧盟吗—属于</p><p>索菲亚这座城市因什么而命名—教堂</p><p>当选过保加利亚总理的末代国王是—西蒙二世</p><h4 id="罗马尼亚"><a href="#罗马尼亚" class="headerlink" title="罗马尼亚"></a>罗马尼亚</h4><p>罗马尼亚的和乍得的国旗完全相同吗—-相同</p><p>罗马尼亚是否加入了北约军事组织—-是</p><p>罗马尼亚的独裁者齐奥塞斯库哪年被推翻—-1989</p><p>哪位天王巨星曾在罗马尼亚举办轰动一时的演唱会—-迈克尔杰克逊</p><p>罗马尼亚的祖先—-达契亚人</p><h4 id="摩尔多瓦"><a href="#摩尔多瓦" class="headerlink" title="摩尔多瓦"></a>摩尔多瓦</h4><p>摩尔多瓦最常见的自然灾害是—涝灾</p><p>最后一个占领基希纳乌的政体是—苏联</p><p>没独立前的基希纳乌叫什么—基什尼奥夫</p><p>摩尔多瓦人常用什么酒招待客人—葡萄酒</p><p>摩尔多瓦人认为数字几代表成功幸福—7</p><h4 id="乌克兰"><a href="#乌克兰" class="headerlink" title="乌克兰"></a>乌克兰</h4><p>乌克兰的额定电压是多少伏—230V</p><p>欧洲粮仓乌克兰是世界第几大粮食出口国—第三</p><p>乌克兰与俄罗斯接壤吗—接壤</p><p>乌克兰的主要宗教除了东正教还有—天主教</p><p>乌克兰的独立日是哪一天—8月24日</p><h4 id="波兰"><a href="#波兰" class="headerlink" title="波兰"></a>波兰</h4><p>波兰火车中慢车使用什么颜色表示的—黑色</p><p>波兰人爱喝烈酒对吗—对的</p><p>国徽上的白鹰象征着什么—爱国精神</p><p>波兰初建于几世纪中叶—十三世纪</p><p>1025年谁加冕为波兰国王—博莱斯瓦夫一世</p><h4 id="立陶宛"><a href="#立陶宛" class="headerlink" title="立陶宛"></a>立陶宛</h4><p>立陶宛加入欧元区恰逢欧元诞生多少周年—15周年</p><p>立陶宛的“国树”是什么—桦树</p><p>被称作“立陶宛黄金”的稀有物产是—琥珀</p><p>立陶宛属于欧元区吗—属于</p><p>立陶宛于哪一年宣布独立—1918</p><h4 id="白俄罗斯"><a href="#白俄罗斯" class="headerlink" title="白俄罗斯"></a>白俄罗斯</h4><p>苏联什么时候解体的—1991.12.25</p><p>苏联解体是在哪里宣布的—白俄罗斯</p><p>明斯克在白俄语言里的意思是—交易之城</p><p>白俄罗斯的“国家战略资源”是什么—白俄罗斯美女</p><p>明斯克人称马铃薯为—第二面包</p><h4 id="俄罗斯"><a href="#俄罗斯" class="headerlink" title="俄罗斯"></a>俄罗斯</h4><p>俄罗斯饮品“格瓦斯”的主要原料是—面包</p><p>俄罗斯国土面积是世界第几—第一</p><p>在俄罗斯，表达尊敬要送什么花—菊花</p><p>克里姆林宫坐落在俄罗斯哪做城市—莫斯科</p><p>俄罗斯总统普京是柔道八段运动员吗—是</p><h4 id="拉脱维亚"><a href="#拉脱维亚" class="headerlink" title="拉脱维亚"></a>拉脱维亚</h4><p>拉脱维亚语属于哪个语系—印欧语系</p><p>拉脱维亚属于欧元区吗—属于</p><p>“北方的巴黎”是拉脱维亚哪个城市的别名—里加</p><p>拉脱维亚是申根公约成员国吗—是</p><p>拉脱维亚男性与女性比例大约是—46比54</p><h4 id="芬兰"><a href="#芬兰" class="headerlink" title="芬兰"></a>芬兰</h4><p>下面哪个风靡世界卡通人物原产于芬兰—姆米</p><p>芬兰的国土面积排欧洲第几—第七</p><p>芬兰的国粹是什么呢—桑拿</p><p>赫尔辛基市除了哪里之外，世界上纬度最高的首都—雷克雅未克</p><p>由于芬兰的自然特色，芬兰被冠以什么之名—千湖之国</p><h4 id="瑞典"><a href="#瑞典" class="headerlink" title="瑞典"></a>瑞典</h4><p>瑞典的“国石“是什么—水晶</p><p>瑞典参加第二次世界大战了吗—没有参加</p><p>“瑞典“一次在瑞典语中什么意思—安宁的王国</p><p>瑞典可以将酒作为礼物吗—不可以</p><p>每年8月，瑞典有什么特殊的节日—吃虾节</p><h4 id="挪威"><a href="#挪威" class="headerlink" title="挪威"></a>挪威</h4><p>在挪威，最受欢迎的酒是什么—啤酒</p><p>挪威和瑞典曾经是一个国家吗—是</p><p>第一个到达南极的是挪威人吗—是</p><p>挪威的通行婚姻合法吗—合法</p><p>奥斯陆这座城市有多少年历史—近1000年</p><h4 id="丹麦"><a href="#丹麦" class="headerlink" title="丹麦"></a>丹麦</h4><p>丹麦出租车可以使用信用卡吗—可以</p><p>小美人鱼像有进行搬迁过吗—有</p><p>菲登斯堡宫被成为什么宫—和平宫</p><p>格陵兰岛属于丹麦吗—属于</p><p>丹麦国旗中的白条是等比例的吗—不是</p><h4 id="德国"><a href="#德国" class="headerlink" title="德国"></a>德国</h4><p>德国举办国几次奥运会—2次</p><p>两德什么时候统一—1990</p><p>老鹰是德国的国鸟吗—不是</p><p>哪条河发源于德国境内—多瑙河</p><p>慕尼黑啤酒节又称什么节—十月节</p><h4 id="捷克"><a href="#捷克" class="headerlink" title="捷克"></a>捷克</h4><p>哪位作家不是捷克人—卡夫卡</p><p>捷克的母亲河是什么—伏尔塔瓦河</p><p>布拉格在德语中是什么意思—门槛</p><p>捷克是哪个时区—东一区</p><p>捷克有几个国徽—2个</p><h4 id="奥地利"><a href="#奥地利" class="headerlink" title="奥地利"></a>奥地利</h4><p>以下哪位音乐家是奥地利人—海顿</p><p>奥地利的官方语言是什么—德语</p><p>维也纳是联合国官方驻地吗—是</p><p>“间谍之都“指的是—维也纳</p><p>“奥地利“这个国家名称出现在什么时候—996</p><h4 id="匈牙利"><a href="#匈牙利" class="headerlink" title="匈牙利"></a>匈牙利</h4><p>布达佩斯曾经是两座城市吗—是</p><p>在布达佩斯哪种出行方式更流行—有轨电车</p><p>匈牙利国旗中的绿色代表什么—繁荣昌盛</p><p>“匈牙利“一词含义是什么—十个部落</p><p>匈牙利王国什么时候建立—公元1000年</p><h4 id="意大利"><a href="#意大利" class="headerlink" title="意大利"></a>意大利</h4><p>意大利是“文艺复兴”的发源地吗—是</p><p>意大利第一次夺得世界杯是什么时候—1934年</p><p>米兰大教堂完工了吗—完工</p><p>在意大利家庭中谁最受尊重—外祖母</p><p>意大利国旗是由谁设计的—拿破仑</p><h4 id="瑞士"><a href="#瑞士" class="headerlink" title="瑞士"></a>瑞士</h4><p>瑞士是唯一一个正方形国旗的国家吗—不是</p><p>瑞士最大的城市是什么—苏黎世</p><p>陀飞轮技术是哪位瑞士钟表大师发明的—宝玑先生</p><p>瑞士是否参加过一战—否</p><p>瑞士的雇佣兵出口业务是什么时候开始—15世纪</p><h4 id="比利时"><a href="#比利时" class="headerlink" title="比利时"></a>比利时</h4><p>比利时政府最多有多少天未能组阁—500天</p><p>比利时法律意义上的首都是哪个—布鲁塞尔市</p><p>奥黛丽.赫本是比利时人吗—是</p><p>比利时是第几个通行婚姻合法化国家—第2个</p><p>比利时曾属于罗马共和国吗—属于</p><h4 id="荷兰"><a href="#荷兰" class="headerlink" title="荷兰"></a>荷兰</h4><p>荷兰的领土分为几个区—2个区</p><p>荷兰是世界最早拥有议会选举的国家吗—不是</p><p>荷兰确立海上霸主地位是什么时候—17世纪</p><p>荷兰的字母表有几个字母—27个</p><p>荷兰“女王日”是哪一天—4月的最后一天</p><h4 id="英国"><a href="#英国" class="headerlink" title="英国"></a>英国</h4><p>英国是欧元区国家吗—不是</p><p>英国由几个构成国组成—4个</p><p>塞文河是英国境内最长的河吗—是</p><p>英国举办国几届夏季运动会—3届</p><p>曼彻斯特是英国第一大城市吗—不是</p><h4 id="冰岛"><a href="#冰岛" class="headerlink" title="冰岛"></a>冰岛</h4><p>最早定居冰岛的是什么人—维京人</p><p>冰岛是欧洲人口密度最小的国家吗—是</p><p>冰岛有铁路设施吗—没有</p><p>冰岛是世界上温泉最多的国家吗—是</p><p>冰岛有几大守护神—4</p><h4 id="爱尔兰"><a href="#爱尔兰" class="headerlink" title="爱尔兰"></a>爱尔兰</h4><p>爱尔兰的国庆节也称为—圣帕特里克节</p><p>爱尔兰的国徽是哪种乐器—竖琴</p><p>爱尔兰是永久中立国吗—是</p><p>爱尔兰的有什么别名—翡翠绿岛</p><p>爱尔兰男人的传统服饰是—裙子</p><h4 id="法国"><a href="#法国" class="headerlink" title="法国"></a>法国</h4><p>《马赛曲》创作于什么时候—1792年</p><p>法国是西欧面积最大的国家吗—是</p><p>戛纳国际电影节最高奖称为—金棕榈奖</p><p>法国最大的岛屿叫什么—科西嘉岛</p><p>法国的国鸟是什么—云雀</p><h4 id="摩纳哥"><a href="#摩纳哥" class="headerlink" title="摩纳哥"></a>摩纳哥</h4><p>摩纳哥公民能免费进入赌场吗—不能</p><p>摩纳哥国内水域率是多少—0%</p><p>摩纳哥官方语言是—法语</p><p>摩纳哥的地名起源于哪个地发—希腊</p><p>摩纳哥的主要经济来源—博彩业</p><h4 id="西班牙"><a href="#西班牙" class="headerlink" title="西班牙"></a>西班牙</h4><p>西班牙斗牛士为什么使用红布斗牛—吸引观众注意</p><p>西班牙国家足球队问鼎过几次欧洲杯冠军—3次</p><p>西班牙国土面积占伊比利亚半岛多少—五分之四</p><p>西班牙在非洲有领土吗—有</p><p>西班牙语也称为什么语—卡斯蒂利亚语</p><h4 id="葡萄牙"><a href="#葡萄牙" class="headerlink" title="葡萄牙"></a>葡萄牙</h4><p>葡萄牙的国花是什么—薰衣草</p><p>麦哲伦是葡萄牙人吗—是</p><p>葡萄牙是世界上第几大橄榄油生产国—第四</p><p>葡萄牙国徽图案是什么—浑天仪</p><p>葡萄牙的传统民谣被称为什么—法朵</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> walkup </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> walkup </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>WalkUp攻略-亚洲</title>
-      <link href="/walkup/Asia.html"/>
-      <url>/walkup/Asia.html</url>
-      
-        <content type="html"><![CDATA[<blockquote><p>以下为<strong>亚洲篇</strong>签证攻略。<br>越南前面的国家没有记录，抱歉。</p></blockquote><a id="more"></a><h3 id="越南"><a href="#越南" class="headerlink" title="越南"></a>越南</h3><p>越南的古时称谓—安南</p><p>越南曾是哪个国家的殖民地—法国</p><p>越南人喜欢戴绿色帽子吗—是</p><p>越南是多民族国家吗—是</p><p>越南三宝之一—香水</p><h3 id="柬埔寨"><a href="#柬埔寨" class="headerlink" title="柬埔寨"></a>柬埔寨</h3><p>柬埔寨的名胜景点中最著名的是哪个—吴哥窟</p><p>哪位担任过柬埔寨国王—西哈莫尼</p><p>柬埔寨有王室吗—有</p><p>柬埔寨是多民族国家,主要民族是哪个民族—高棉族</p><p>柬埔寨在公元几世纪建立了统一的王国—公元1世纪</p><h3 id="泰国"><a href="#泰国" class="headerlink" title="泰国"></a>泰国</h3><p>大多数泰国人信封什么佛—四面佛</p><p>泰国民间会不会重男轻女—不会</p><p>泰国古时叫什么—暹罗国</p><p>人妖平均寿命不超过多少岁—40岁</p><p>泰国常年温度不低于多少度—18</p><h3 id="缅甸"><a href="#缅甸" class="headerlink" title="缅甸"></a>缅甸</h3><p>缅甸最大的城市在哪里—仰光</p><p>缅甸曾是哪个国家的殖民地—英国</p><p>缅甸人机会不能在几月份结婚—12月</p><p>在缅甸会机会抚摸孩子的头吗—会</p><p>缅甸男士常穿的民族服饰是什么—笼基</p><h3 id="尼泊尔"><a href="#尼泊尔" class="headerlink" title="尼泊尔"></a>尼泊尔</h3><p>在尼泊尔购买满百年的股东是否能带回国—不能</p><p>尼泊尔是三大宗教中哪个宗教的发源地—佛教</p><p>尼泊尔是什么类型的国家—农业国</p><p>尼瓦尔族的女人在7至9岁时要与一种见过结婚,这种婚姻叫什么—果实婚</p><p>尼泊尔有空军吗—没有</p><h3 id="印度"><a href="#印度" class="headerlink" title="印度"></a>印度</h3><p>第一个帝国式政权时哪个印度王朝建立的?—孔雀王朝</p><p>最后一个殖民印度的国家时哪个国家?—英国</p><p>印度的圣河叫什么—恒河</p><p>印度钟姓制度中代表僧侣贵族的姓氏是什么—婆罗门</p><p>印度是世界人口第几大国—第二大国</p><h3 id="巴基斯坦"><a href="#巴基斯坦" class="headerlink" title="巴基斯坦"></a>巴基斯坦</h3><p>巴基斯坦人口最多的民族是—旁遮普人</p><p>巴基斯坦第一大城市—卡拉奇</p><p>出于礼貌,在巴基斯坦吃饭一定要使用右手吗—是</p><p>巴基斯坦是一夫多妻制国家吗—是</p><p>伊斯兰堡是哪一年正式迁都成为新首都的—1967年迁都</p><h3 id="阿富汗"><a href="#阿富汗" class="headerlink" title="阿富汗"></a>阿富汗</h3><p>基地组织和塔利班早期成立的目的是什么—反抗前苏联入侵</p><p>对塔利班组织的另一个称呼是什么—伊斯兰学生军</p><p>美国对阿富汗的复仇战争是哪年开始的—2002年</p><p>前苏联曾对阿富汗发动过侵略战争吗—发动过</p><p>911事件是阿富汗哪个武装组织发动的—基地组织</p><h3 id="伊朗"><a href="#伊朗" class="headerlink" title="伊朗"></a>伊朗</h3><p>伊朗是政教合一的国家吗—是</p><p>伊朗的周末在哪天—周五</p><p>伊朗国旗上一共写着几句真主伟大—22</p><p>伊朗的前身曾是哪个古文明帝国—古波斯帝国</p><p>成吉思汗之孙在伊朗建立的王国叫什么—伊利汗国</p><h3 id="阿联酋"><a href="#阿联酋" class="headerlink" title="阿联酋"></a>阿联酋</h3><p>迪拜的政府机构几点下班—下午2点</p><p>迪拜市内公交车里可以吃东西吗—不可以</p><p>世界最高的摩天大楼迪拜塔有多高—828米</p><p>迪拜的帆船酒店是几星级酒店—七星级酒店</p><p>迪拜的帆船酒店里有没有水下套房—没有</p><h3 id="沙特阿拉伯"><a href="#沙特阿拉伯" class="headerlink" title="沙特阿拉伯"></a>沙特阿拉伯</h3><p>沙特阿拉伯是沙漠国家，沙漠占国土面积的百分之多少—0.9</p><p>伊斯兰教创始人默罕默德的诞生地在哪个城市—麦加</p><p>沙特阿拉伯夏季炎热干燥，最高气温可达多少度—50</p><p>沙特阿拉伯是世界上最大的大麦进口国吗—是</p><p>沙特阿拉伯拥有全球已勘探石油总量的百分之多少—0.24</p><h3 id="伊拉克"><a href="#伊拉克" class="headerlink" title="伊拉克"></a>伊拉克</h3><p>古巴比伦是四大文明古国之一吗—是</p><p>伊拉克有哪个古文明遗址—古巴比伦文明</p><p>古时住在这里的苏美尔人发明了了什么文字—楔形文字</p><p>伊拉克的国旗上的文字是什么意思—真主至大</p><p>伊拉克有过宵禁制度吗—有</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> walkup </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> walkup </tag>
             
         </tags>
       
